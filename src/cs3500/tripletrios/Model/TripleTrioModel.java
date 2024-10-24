@@ -14,7 +14,7 @@ public interface TripleTrioModel {
    * @throws IllegalArgumentException if the grid size is even
    * @throws IllegalStateException if the size of deck is less than the grid size
    */
-  void startGame(ArrayList<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid);
+  void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid);
 
 
   /**
@@ -30,11 +30,5 @@ public interface TripleTrioModel {
    * @throws IllegalStateException if the game has not started or the game is not over
    */
   boolean isGameWon();
-
-
-
-
-
-
 
 }

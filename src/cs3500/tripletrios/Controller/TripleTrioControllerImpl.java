@@ -5,18 +5,16 @@ import cs3500.tripletrios.View.TripleTrioView;
 
 import java.io.FileReader;
 
-public interface TripleTrioController {
-
+public class TripleTrioControllerImpl implements TripleTrioController{
     /**
-     *
      * Play a new game of Triple Trio with the given configurations.
      *
-     * @param model a triple trio model
-     * @param view a triple trio view
+     * @param model      a triple trio model
+     * @param view       a triple trio view
      * @param fileReader a file reader
      */
-    void playGame(TripleTrioModel model,
-                  TripleTrioView view,
-                  FileReader fileReader);
+    @Override
+    public void playGame(TripleTrioModel model, TripleTrioView view, FileReader fileReader) {
 
+    }
 }

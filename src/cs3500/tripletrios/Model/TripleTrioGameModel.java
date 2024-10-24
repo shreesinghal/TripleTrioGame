@@ -3,27 +3,17 @@ package cs3500.tripletrios.Model;
 import cs3500.tripletrios.Controller.TripleTrioController;
 import cs3500.tripletrios.View.TripleTrioView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TripleTrioGameModel implements TripleTrioModel{
 
   ArrayList<ArrayList<Cell>> grid;
-
   Player currPlayer;
-
   Player opposingPlayer;
-
   boolean gameOver;
-
   TripleTrioController controller;
-
   TripleTrioView view;
-
   boolean gameStarted;
-
 
   public TripleTrioGameModel() {
     this.grid = grid;
@@ -31,7 +21,6 @@ public class TripleTrioGameModel implements TripleTrioModel{
     this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
     this.opposingPlayer = new PlayerImpl(new ArrayList<Card>(), Color.BLUE);
   }
-
 
   /**
    * Starts the game with a given deck of cards. The deck is used
@@ -43,9 +32,10 @@ public class TripleTrioGameModel implements TripleTrioModel{
    * @throws IllegalStateException    if the size of deck is less than the grid size
    */
   @Override
-  public void startGame(ArrayList<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
+  public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
     
     int gridSize = 0;
+
     for (ArrayList<Cell> rows : grid ) {
       for (Cell cell : rows) {
         if (cell.cellType == Cell.CellType.CARDCELL) {
@@ -71,12 +61,13 @@ public class TripleTrioGameModel implements TripleTrioModel{
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
 
     this.gameStarted = true;
+    this.gameOver = false;
   }
 
-  private static ArrayList<Card> createHand(ArrayList<Card> deckOfCards, int gridSize) {
+  private static ArrayList<Card> createHand(Set<Card> deckOfCards, int gridSize) {
     ArrayList<Card> playerHand = new ArrayList<Card>();
     for (int i = 0; i < (gridSize + 1) / 2; i++) {
-      playerHand.add(deckOfCards.remove(0));
+      playerHand.add(deckOfCards.iterator().next());
     }
 
     return playerHand;
@@ -91,7 +82,14 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public boolean isGameOver() {
-    return false;
+    ensureGameStarted();
+    return gameOver;
+  }
+
+  private void ensureGameStarted() {
+    if (!gameStarted) {
+      throw new IllegalStateException("Game is not started");
+    }
   }
 
   /**
@@ -102,6 +100,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public boolean isGameWon() {
+    ensureGameStarted();
     return false;
   }
+
+
 }
