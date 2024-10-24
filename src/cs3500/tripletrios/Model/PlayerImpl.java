@@ -9,6 +9,18 @@ public class PlayerImpl implements Player {
     Color color;
 
     /**
+     * Creates a new player with a hand of cards.
+     * @param hand list of cards
+     * @param color color of player
+     */
+    public PlayerImpl(ArrayList<Card> hand, Color color) {
+        this.hand = hand;
+        this.color = color;
+
+    }
+
+
+    /**
      * Returns the color of the player.
      *
      * @return color of the player

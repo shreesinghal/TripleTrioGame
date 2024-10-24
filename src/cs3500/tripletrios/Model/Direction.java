@@ -10,7 +10,6 @@ public enum Direction {
   EAST,
   WEST;
 
-  private Direction() {}
 
 
 }
