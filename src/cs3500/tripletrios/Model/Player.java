@@ -9,4 +9,6 @@ public interface Player {
      * @return color of the player
      */
     Color getColor();
+
+
 }
