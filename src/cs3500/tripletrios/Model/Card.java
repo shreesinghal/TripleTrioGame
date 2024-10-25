@@ -51,6 +51,8 @@ public interface Card {
      */
     int getWest();
 
+    public void setCardColor(Color color);
+
 
 
 }

@@ -7,6 +7,7 @@ import cs3500.tripletrios.View.TripleTrioView;
 import cs3500.tripletrios.View.TripleTrioViewImpl;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -21,14 +22,16 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   private ArrayList<ArrayList<Cell>> grid;
   private Set<Card> deck;
 
-    /**
+  /**
+   *
    * Play a new game of Triple Trio with the given configurations.
    *
-   * @param model  a triple trio model
-   * @param fileReader a file reader
+   * @param model a triple trio model
+   * @param deckPath the path to the deck
+   * @param gridPath the path to the grid
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) {
+  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }
@@ -44,5 +47,12 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     CardDatabaseReader cardReader = new CardDatabaseReader();
     deck = cardReader.readDeckConfiguration(deckPath);
+
+    try {
+      model.startGame(deck, grid);
+    } catch (IllegalStateException | IllegalArgumentException e) {
+      output.append(e.getMessage());
+    }
+
   }
 }

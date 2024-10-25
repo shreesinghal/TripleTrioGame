@@ -9,9 +9,8 @@ public class CardImpl implements Card {
   Color cardColor;
   Map<Direction, Integer> attackValues = new HashMap<>();
 
-  public CardImpl(Color cardColor, String name, Map<Direction, Integer> attackValues) {
+  public CardImpl( String name, Map<Direction, Integer> attackValues) {
     this.name = name;
-    this.cardColor = cardColor;
     this.attackValues = attackValues;
   }
 
@@ -33,6 +32,10 @@ public class CardImpl implements Card {
   @Override
   public Color getColor() {
     return this.cardColor;
+  }
+
+  public void setCardColor(Color color) {
+    this.cardColor = color;
   }
 
   /**
