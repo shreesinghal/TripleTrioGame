@@ -1,0 +1,20 @@
+Bird 1 2 3 4
+Jaguar 9 8 9 4
+Cheetah 2 4 9 3
+Lion 2 4 9 3
+Dilophosaurus 4 6 3 5
+Dimetrodon 8 9 4 5
+Dingo 7 5 9 5
+Dipper 9 1 6 7
+Discus A 8 6 9
+Dodo 8 A 9 4
+Dog Salmon 9 5 8 4
+Dog Tick 8 5 9 4
+Dogfish 7 3 A 9
+Dolphin 1 2 3 4
+Donkey 8 4 8 4
+Dory 9 8 5 7
+Dove 3 5 7 3
+Drill 3 5 6 3
+Duck 3 7 4 9
+Dugong 8 5 9 5

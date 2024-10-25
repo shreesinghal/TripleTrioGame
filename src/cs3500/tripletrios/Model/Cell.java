@@ -1,6 +1,6 @@
 package cs3500.tripletrios.Model;
 
-public class Cell {
+public final class Cell {
 
     boolean hasCard;
     Card card;
@@ -39,5 +39,11 @@ public class Cell {
         hasCard = true;
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Cell
+            && this.cellType == ((Cell) obj).cellType
+            && this.hasCard == ((Cell) obj).hasCard
+            && this.card == ((Cell) obj).card;
+    }
 }

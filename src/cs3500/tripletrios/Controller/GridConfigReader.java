@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GridConfigReader {
+public final class GridConfigReader {
 
   public ArrayList<ArrayList<Cell>> readGridConfiguration(String filePath) {
     Scanner scanner;

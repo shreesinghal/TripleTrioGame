@@ -53,6 +53,11 @@ public interface Card {
 
     public void setCardColor(Color color);
 
-
+    /**
+     * Checks if the current card is equal to the input.
+     * @param o card to compare to
+     * @return true if the cards are equal
+     */
+    public boolean equals(Object o);
 
 }

@@ -2,6 +2,7 @@ package cs3500.tripletrios.Model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CardImpl implements Card {
 
@@ -105,4 +106,15 @@ public class CardImpl implements Card {
     return attackValues.get(Direction.WEST);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CardImpl card)) return false;
+    return Objects.equals(name, card.name) && cardColor == card.cardColor && Objects.equals(attackValues, card.attackValues);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, cardColor, attackValues);
+  }
 }
