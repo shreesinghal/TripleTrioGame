@@ -27,6 +27,4 @@ public interface Card {
      */
     Map<Direction, Integer> getAttackValues();
 
-
-
 }

@@ -12,11 +12,8 @@ public interface TripleTrioController {
      * Play a new game of Triple Trio with the given configurations.
      *
      * @param model a triple trio model
-     * @param view a triple trio view
      * @param fileReader a file reader
      */
-    void playGame(TripleTrioModel model,
-                  TripleTrioView view,
-                  FileReader fileReader);
+    void playGame(TripleTrioModel model, FileReader fileReader);
 
 }
