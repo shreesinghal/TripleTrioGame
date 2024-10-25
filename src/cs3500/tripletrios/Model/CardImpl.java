@@ -58,4 +58,44 @@ public class CardImpl implements Card {
     return this.attackValues;
   }
 
+  /**
+   * Returns the north attack value.
+   *
+   * @return attack value as an int
+   */
+  @Override
+  public int getNorth() {
+    return attackValues.get(Direction.NORTH);
+  }
+
+  /**
+   * Returns the south attack value.
+   *
+   * @return attack value as an int
+   */
+  @Override
+  public int getSouth() {
+    return attackValues.get(Direction.SOUTH);
+  }
+
+  /**
+   * Returns the east attack value.
+   *
+   * @return attack value as an int
+   */
+  @Override
+  public int getEast() {
+    return attackValues.get(Direction.EAST);
+  }
+
+  /**
+   * Returns the west attack value.
+   *
+   * @return attack value as an int
+   */
+  @Override
+  public int getWest() {
+    return attackValues.get(Direction.WEST);
+  }
+
 }
