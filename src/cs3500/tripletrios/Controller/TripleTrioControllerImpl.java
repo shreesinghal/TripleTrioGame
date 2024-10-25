@@ -31,8 +31,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
    * @param gridPath the path to the grid
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
-    if (model == null) {
+  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {    if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }
 

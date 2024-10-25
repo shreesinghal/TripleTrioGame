@@ -34,6 +34,10 @@ public class CardImpl implements Card {
     return this.cardColor;
   }
 
+  /**
+   * Sets the current color of the card.
+   * @param color specified color to change card to
+   */
   public void setCardColor(Color color) {
     this.cardColor = color;
   }
