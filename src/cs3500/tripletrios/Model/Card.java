@@ -27,4 +27,30 @@ public interface Card {
      */
     Map<Direction, Integer> getAttackValues();
 
+    /**
+     * Returns the north attack value.
+     * @return attack value as an int
+     */
+    int getNorth();
+
+    /**
+     * Returns the south attack value.
+     * @return attack value as an int
+     */
+    int getSouth();
+
+    /**
+     * Returns the east attack value.
+     * @return attack value as an int
+     */
+    int getEast();
+
+    /**
+     * Returns the west attack value.
+     * @return attack value as an int
+     */
+    int getWest();
+
+
+
 }
