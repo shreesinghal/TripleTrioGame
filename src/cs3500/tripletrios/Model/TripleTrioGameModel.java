@@ -39,7 +39,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
     this.grid = grid;
     this.deck = deckOfCards;
-    
+
     int gridSize = 0;
 
     for (ArrayList<Cell> rows : grid ) {
@@ -53,8 +53,8 @@ public class TripleTrioGameModel implements TripleTrioModel{
     if (gridSize % 2 == 0) {
       throw new IllegalArgumentException("The grid size must be odd");
     }
-    
-    
+
+
     if (deckOfCards.size() < gridSize) {
       throw new IllegalStateException("Deck size must be greater than grid size");
     }
@@ -202,7 +202,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
       this.grid.get(y_pos).get(x_pos - 1).getCard().flipOwnership();
       flippedCards.add(new Point(x_pos - 1, y_pos));
     }
-     return flippedCards;
+    return flippedCards;
   }
 
 
@@ -226,7 +226,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
     boolean ensured = true;
     ArrayList<Cell> row = grid.get(1);
     if (xPosition <= 0 || xPosition >= row.size()
-            || yPosition <= 0 || yPosition >= grid.size()) {
+        || yPosition <= 0 || yPosition >= grid.size()) {
       ensured = false;
     }
 

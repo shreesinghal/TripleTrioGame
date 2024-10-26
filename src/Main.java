@@ -17,8 +17,8 @@ public class Main {
         TripleTrioController controller = new TripleTrioControllerImpl(readable, System.out);
         try {
             controller.playGame(model, "Configurations"
-                + File.separator
-                + "20deckConfig.txt",
+                    + File.separator
+                    + "20deckConfig.txt",
                 "Configurations"
                     + File.separator
                     + "3x3sqrGrid.txt");

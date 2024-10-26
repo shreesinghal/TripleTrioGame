@@ -29,48 +29,48 @@ public class TripleTrioTextView implements TripleTrioView {
 
 
 
-    /**
-     * Display the current State of the game.
-     */
-    @Override
-    public String toString() {
-      StringBuilder output = new StringBuilder();
-      output.append("Player: ").append(model.getPlayer().getColor()).append("\n");
-      for (ArrayList<Cell> row : model.getGrid()) {
-        for (Cell cell : row) {
-          if (cell.getCellType() == Cell.CellType.HOLE) {
-            output.append(" ");
+  /**
+   * Display the current State of the game.
+   */
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("Player: ").append(model.getPlayer().getColor()).append("\n");
+    for (ArrayList<Cell> row : model.getGrid()) {
+      for (Cell cell : row) {
+        if (cell.getCellType() == Cell.CellType.HOLE) {
+          output.append(" ");
+        } else {
+          if (cell.getCard() == null) {
+            output.append("_");
+          } else if (cell.getCard().getColor() == Color.RED) {
+            output.append("R");
+          } else if (cell.getCard().getColor() == Color.BLUE) {
+            output.append("B");
           } else {
-            if (cell.getCard() == null) {
-              output.append("_");
-            } else if (cell.getCard().getColor() == Color.RED) {
-              output.append("R");
-            } else if (cell.getCard().getColor() == Color.BLUE) {
-              output.append("B");
-            } else {
-              throw new IllegalArgumentException("Invalid card color");
-            }
+            throw new IllegalArgumentException("Invalid card color");
           }
         }
-        output.append("\n");
       }
-
-      output.append("Hand: ").append("\n");
-      for (Card card : model.getDeck()) {
-        output.append(card.getName())
-                .append(" ")
-                .append(card.getNorth())
-                .append(" ")
-                .append(card.getSouth())
-                .append(" ")
-                .append(card.getEast())
-                .append(" ")
-                .append(card.getWest())
-                .append("\n");
-      }
-
-      return output.toString();
+      output.append("\n");
     }
+
+    output.append("Hand: ").append("\n");
+    for (Card card : model.getDeck()) {
+      output.append(card.getName())
+          .append(" ")
+          .append(card.getNorth())
+          .append(" ")
+          .append(card.getSouth())
+          .append(" ")
+          .append(card.getEast())
+          .append(" ")
+          .append(card.getWest())
+          .append("\n");
+    }
+
+    return output.toString();
+  }
 
   /**
    * Renders output to the screen.

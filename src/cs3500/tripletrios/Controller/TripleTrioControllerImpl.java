@@ -49,8 +49,8 @@ public class TripleTrioControllerImpl implements TripleTrioController {
    */
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {    if (model == null) {
-      throw new IllegalArgumentException("model cannot be null");
-    }
+    throw new IllegalArgumentException("model cannot be null");
+  }
 
     // sets MVC
     this.model = model;
@@ -74,16 +74,16 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     view.render();
 
     //try {
-      while (!model.isGameOver()  && model.isGameStarted()) {
-        output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
+    while (!model.isGameOver()  && model.isGameStarted()) {
+      output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
 
-        String[] inputText = scanner.next().split(" ");
+      String[] inputText = scanner.next().split(" ");
 
-        playMove(inputText);
+      playMove(inputText);
 
-      }
+    }
     //} catch (IllegalStateException | IllegalArgumentException e) {
-      //throw new IllegalStateException("Error in playing the game.");
+    //throw new IllegalStateException("Error in playing the game.");
     //}
 
   }
@@ -101,11 +101,11 @@ public class TripleTrioControllerImpl implements TripleTrioController {
         cardToPlace = card;
       }
     }
-    
+
     model.placeCard(x_position, y_position, (CardImpl) cardToPlace);
 
     model.executeBattlePhase(x_position, y_position);
-    
+
 
   }
 
