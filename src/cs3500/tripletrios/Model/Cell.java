@@ -22,6 +22,10 @@ public final class Cell {
         this.cellType = type;
     }
 
+    public CellType getCellType() {
+        return cellType;
+    }
+
     /**
      * Returns if the cell has a card or not.
      * @return true if has card and vice versa
@@ -34,10 +38,15 @@ public final class Cell {
      * Puts a card into the cell.
      * @param card card to put in cell
      */
-    void placeCard(Card card) {
+    public void placeCard(Card card) {
         this.card = card;
         hasCard = true;
     }
+
+    public Card getCard() {
+        return this.card;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

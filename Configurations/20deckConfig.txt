@@ -8,8 +8,8 @@ Dingo 7 5 9 5
 Dipper 9 1 6 7
 Discus A 8 6 9
 Dodo 8 A 9 4
-Dog Salmon 9 5 8 4
-Dog Tick 8 5 9 4
+DogSalmon 9 5 8 4
+DogTick 8 5 9 4
 Dogfish 7 3 A 9
 Dolphin 1 2 3 4
 Donkey 8 4 8 4
