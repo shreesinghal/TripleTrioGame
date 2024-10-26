@@ -3,10 +3,8 @@ package cs3500.tripletrios.Controller;
 import cs3500.tripletrios.Model.Card;
 import cs3500.tripletrios.Model.Cell;
 import cs3500.tripletrios.Model.TripleTrioModel;
-import cs3500.tripletrios.View.TripleTrioView;
-import cs3500.tripletrios.View.TripleTrioViewImpl;
+import cs3500.tripletrios.View.TripleTrioTextView;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +13,7 @@ import java.util.Set;
 public class TripleTrioControllerImpl implements TripleTrioController {
 
   private TripleTrioModel model;
-  private TripleTrioViewImpl view;
+  private TripleTrioTextView view;
   private Appendable output;
   private Scanner gameScanner;
   private Readable userInput;
@@ -37,7 +35,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     // sets MVC
     this.model = model;
-    this.view = new TripleTrioViewImpl(model, this.output);
+    this.view = new TripleTrioTextView(model, this.output);
     this.gameScanner = new Scanner(userInput);
 
     // read from config files
@@ -46,6 +44,9 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     CardDatabaseReader cardReader = new CardDatabaseReader();
     deck = cardReader.readDeckConfiguration(deckPath);
+
+    model.startGame(deck, grid);
+    view.displayCurrState();
 
     try {
       model.startGame(deck, grid);
