@@ -25,11 +25,10 @@ public interface TripleTrioModel {
   boolean isGameOver();
 
   /**
-   * Returns if the game is won by the player as specified by the implementation.
-   * @return true if the game has been won or false if the game has not
-   * @throws IllegalStateException if the game has not started or the game is not over
+   * Returns if the game started.
+   * @return true if game started, else false
    */
-  boolean isGameWon();
+  boolean isGameStarted();
 
   /**
    * Returns the current player of the game.

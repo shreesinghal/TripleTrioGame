@@ -12,10 +12,10 @@ public class TripleTrioGameModel implements TripleTrioModel{
   Set<Card> deck;
   Player currPlayer;
   Player opposingPlayer;
-  boolean gameOver;
   TripleTrioController controller;
   TripleTrioView view;
   boolean gameStarted;
+  boolean gameOver;
 
   public TripleTrioGameModel() {
     this.gameOver = false;
@@ -90,22 +90,20 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return gameOver;
   }
 
+  /**
+   * Returns if the game started.
+   *
+   * @return true if game started, else false
+   */
+  @Override
+  public boolean isGameStarted() {
+    return this.gameStarted;
+  }
+
   private void ensureGameStarted() {
     if (!gameStarted) {
       throw new IllegalStateException("Game is not started");
     }
-  }
-
-  /**
-   * Returns if the game is won by the player as specified by the implementation.
-   *
-   * @return true if the game has been won or false if the game has not
-   * @throws IllegalStateException if the game has not started or the game is not over
-   */
-  @Override
-  public boolean isGameWon() {
-    ensureGameStarted();
-    return false;
   }
 
   /**

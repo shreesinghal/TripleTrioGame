@@ -7,6 +7,7 @@ import cs3500.tripletrios.View.TripleTrioTextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -26,6 +27,11 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   private Set<Card> deck;
 
+  private boolean gameStarted;
+  private boolean gameOver;
+  private boolean quit;
+  private Scanner scanner;
+
   public TripleTrioControllerImpl(Readable userInput, Appendable output) {
     if (userInput == null || output == null) {
       throw new IllegalArgumentException("User input or output cannot be null");
@@ -33,7 +39,8 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     this.userInput = userInput;
     this.output = output;
-
+    this.quit = false;
+    this.scanner = new Scanner(this.userInput.toString());
   }
 
   /**
@@ -61,15 +68,64 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     CardDatabaseReader cardReader = new CardDatabaseReader();
     deck = cardReader.readDeckConfiguration(deckPath);
 
-
     try {
       model.startGame(deck, grid);
     } catch (IllegalStateException | IllegalArgumentException e) {
       output.append(e.getMessage());
     }
+    gameStarted = true;
 
     view.render();
 
+    try {
+      while (!model.isGameOver()
+      && model.isGameStarted()
+      && !quit) {
+        String inputText = scanner.next().toLowerCase();
 
+        playMove(inputText);
+
+      }
+    } catch (IllegalStateException | IllegalArgumentException e) {
+      throw new IllegalStateException("Error in playing the game.");
+    }
+
+  }
+
+  private void playMove(String inputText) {
+    if (inputText.equals("q")) {
+      quit = true;
+    }
+
+    int x_position;
+    int y_position;
+    try {
+      x_position = scanner.nextInt() - 1;
+      y_position = scanner.nextInt() - 1;
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid user input");
+    }
+
+
+    ensurePositionWithinBounds(x_position, y_position;
+    model.getPlayer().placeCard(x_position, y_position);
+
+
+  }
+
+  private void ensurePositionWithinBounds(int xPosition, int yPosition) {
+    ArrayList<Cell> row = grid.get(1);
+    if (xPosition <= 0 || xPosition >= row.size()
+        || yPosition <= 0 || yPosition >= grid.size()) {
+      throw new IllegalArgumentException("Index out of bounds");
+    }
+
+    if (Cell.CellType.HOLE == grid.get(yPosition).get(xPosition).getCellType()) {
+      throw new IllegalArgumentException("The cell at this index is a hole.");
+    }
+
+    if (grid.get(yPosition).get(xPosition).getCard() == null) {
+      throw new IllegalArgumentException("The cell at this index already has a card.");
+    }
   }
 }
