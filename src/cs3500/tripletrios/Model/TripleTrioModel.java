@@ -57,4 +57,10 @@ public interface TripleTrioModel {
   void placeCard(int x_pos, int y_pos, CardImpl card);
 
 
+  /**
+   *  Executes the battle phase on the card at specified location.
+   * @param x_pos x position of card
+   * @param y_pos y position of card
+   */
+  void executeBattlePhase(int x_pos, int y_pos);
 }

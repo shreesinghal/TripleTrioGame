@@ -7,10 +7,7 @@ import cs3500.tripletrios.Model.TripleTrioModel;
 import cs3500.tripletrios.View.TripleTrioTextView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class TripleTrioControllerImpl implements TripleTrioController {
 
@@ -30,7 +27,6 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   private boolean gameStarted;
   private boolean gameOver;
-  private boolean quit;
   private Scanner scanner;
 
   public TripleTrioControllerImpl(Readable userInput, Appendable output) {
@@ -40,8 +36,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     this.userInput = userInput;
     this.output = output;
-    this.quit = false;
-    this.scanner = new Scanner(this.userInput.toString());
+    this.scanner = new Scanner(this.userInput);
   }
 
   /**
@@ -78,25 +73,22 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     view.render();
 
-    try {
-      while (!model.isGameOver()
-      && model.isGameStarted()
-      && !quit) {
+    //try {
+      while (!model.isGameOver()  && model.isGameStarted()) {
         output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
 
-        String[] inputText = scanner.nextLine().split(" ");
+        String[] inputText = scanner.next().split(" ");
 
         playMove(inputText);
 
       }
-    } catch (IllegalStateException | IllegalArgumentException e) {
-      throw new IllegalStateException("Error in playing the game.");
-    }
+    //} catch (IllegalStateException | IllegalArgumentException e) {
+      //throw new IllegalStateException("Error in playing the game.");
+    //}
 
   }
 
   private void playMove(String[] inputText) {
-
     int x_position = Integer.parseInt(inputText[0]);
     int y_position = Integer.parseInt(inputText[1]);
     String cardName = inputText[2];
@@ -112,7 +104,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     
     model.placeCard(x_position, y_position, (CardImpl) cardToPlace);
 
-    model.executeBattlePhase();
+    model.executeBattlePhase(x_position, y_position);
     
 
   }

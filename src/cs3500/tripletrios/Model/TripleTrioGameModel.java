@@ -3,7 +3,9 @@ package cs3500.tripletrios.Model;
 import cs3500.tripletrios.Controller.TripleTrioController;
 import cs3500.tripletrios.View.TripleTrioView;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class TripleTrioGameModel implements TripleTrioModel{
 
@@ -144,24 +146,99 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public void placeCard(int x_pos, int y_pos, CardImpl card) {
-    ensurePositionWithinBounds(x_pos, y_pos);
-    this.grid.get(y_pos).get(x_pos).placeCard(card);
+    if (ensurePositionWithinBounds(x_pos, y_pos)) {
+      this.grid.get(y_pos).get(x_pos).placeCard(card);
+    } else {
+      throw new IllegalArgumentException("Invalid position entered.");
+    }
+
   }
 
-  private void ensurePositionWithinBounds(int xPosition, int yPosition) {
+  /**
+   * Executes the battle phase on the card at specified location.
+   *
+   * @param x_pos x position of card
+   * @param y_pos y position of card
+   */
+  @Override
+  public void executeBattlePhase(int x_pos, int y_pos) {
+    List<Point> flippedCards = battleAdjacentCards(x_pos, y_pos);
+    while (!flippedCards.isEmpty()) {
+      for (Point cardLocation : flippedCards) {
+        flippedCards.addAll(battleAdjacentCards(cardLocation.x, cardLocation.y));
+        flippedCards.remove(cardLocation);
+      }
+    }
+  }
+
+
+  private List<Point> battleAdjacentCards(int x_pos, int y_pos) {
+    List<Point> flippedCards = new ArrayList<>();
+    Card card = this.grid.get(y_pos).get(x_pos).getCard();
+
+    Point southLoc = new Point(x_pos, y_pos - 1);
+    Point northLoc = new Point(x_pos, y_pos + 1);
+    Point eastLoc = new Point(x_pos + 1, y_pos);
+    Point westLoc = new Point(x_pos - 1, y_pos);
+
+    if (cardCanBattle(southLoc) && card.getNorth() > this.grid.get(y_pos - 1).get(x_pos).getCard().getSouth()) {
+      this.grid.get(y_pos - 1).get(x_pos).getCard().flipOwnership();
+      flippedCards.add(new Point(x_pos, y_pos - 1));
+    }
+
+    if (cardCanBattle(westLoc) && card.getEast() > this.grid.get(y_pos).get(x_pos + 1).getCard().getWest()) {
+      this.grid.get(y_pos).get(x_pos + 1).getCard().flipOwnership();
+      flippedCards.add(new Point(x_pos + 1, y_pos));
+
+    }
+
+    if (cardCanBattle(northLoc) && card.getSouth() > this.grid.get(y_pos + 1).get(x_pos).getCard().getNorth()) {
+      this.grid.get(y_pos + 1).get(x_pos).getCard().flipOwnership();
+      flippedCards.add(new Point(x_pos, y_pos + 1));
+
+    }
+
+    if (cardCanBattle(eastLoc) && card.getWest() > this.grid.get(y_pos).get(x_pos - 1).getCard().getEast()) {
+      this.grid.get(y_pos).get(x_pos - 1).getCard().flipOwnership();
+      flippedCards.add(new Point(x_pos - 1, y_pos));
+    }
+     return flippedCards;
+  }
+
+
+  private boolean cardCanBattle(Point adjCardLoc) {
+    boolean canBattle = ensurePositionWithinBounds(adjCardLoc.x, adjCardLoc.y);
+    if (this.grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard() != null) {
+      if (this.grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard().getColor() != currPlayer.getColor()) {
+        canBattle = true;
+      } else {
+        canBattle = false;
+      }
+    } else {
+      canBattle = false;
+    }
+
+    return canBattle;
+
+  }
+
+  private boolean ensurePositionWithinBounds(int xPosition, int yPosition) {
+    boolean ensured = true;
     ArrayList<Cell> row = grid.get(1);
     if (xPosition <= 0 || xPosition >= row.size()
             || yPosition <= 0 || yPosition >= grid.size()) {
-      throw new IllegalArgumentException("Index out of bounds");
+      ensured = false;
     }
 
     if (Cell.CellType.HOLE == grid.get(yPosition).get(xPosition).getCellType()) {
-      throw new IllegalArgumentException("The cell at this index is a hole.");
+      ensured = false;
     }
 
     if (grid.get(yPosition).get(xPosition).getCard() == null) {
-      throw new IllegalArgumentException("The cell at this index already has a card.");
+      ensured = false;
     }
+
+    return ensured;
   }
 
 
