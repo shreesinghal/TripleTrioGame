@@ -2,8 +2,6 @@ package cs3500.tripletrios.View;
 
 import cs3500.tripletrios.Model.TripleTrioModel;
 
-import static jdk.internal.org.jline.utils.AttributedStringBuilder.append;
-
 public class TripleTrioTextView implements TripleTrioView {
   private TripleTrioModel model;
   private Appendable output;
