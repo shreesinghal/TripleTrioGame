@@ -49,5 +49,4 @@ public interface TripleTrioModel {
   Set<Card> getDeck();
 
 
-
 }

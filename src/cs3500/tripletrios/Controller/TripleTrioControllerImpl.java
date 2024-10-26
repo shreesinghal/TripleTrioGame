@@ -81,7 +81,9 @@ public class TripleTrioControllerImpl implements TripleTrioController {
       while (!model.isGameOver()
       && model.isGameStarted()
       && !quit) {
-        String inputText = scanner.next().toLowerCase();
+        output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
+
+        String[] inputText = scanner.nextLine().split(" ");
 
         playMove(inputText);
 
@@ -92,24 +94,25 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   }
 
-  private void playMove(String inputText) {
-    if (inputText.equals("q")) {
-      quit = true;
+  private void playMove(String[] inputText) {
+
+    int x_position = Integer.parseInt(inputText[0]);
+    int y_position = Integer.parseInt(inputText[1]);
+    String cardName = inputText[2];
+
+    ArrayList<Card> playerHand = model.getPlayer().getHand();
+    Card cardToPlace = null;
+    for (Card card : playerHand) {
+      if (card.getName().equals(cardName)) {
+        model.getPlayer().removeCardFromHand(card);
+        cardToPlace = card;
+      }
     }
+    
+    model.placeCard(x_position, y_position, cardToPlace);
 
-    int x_position;
-    int y_position;
-    try {
-      x_position = scanner.nextInt() - 1;
-      y_position = scanner.nextInt() - 1;
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Invalid user input");
-    }
-
-
-    ensurePositionWithinBounds(x_position, y_position;
-    model.getPlayer().placeCard(x_position, y_position);
-
+    model.executeBattlePhase();
+    
 
   }
 
