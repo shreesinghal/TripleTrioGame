@@ -136,5 +136,33 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return this.deck;
   }
 
+  /**
+   * Places the players card where desired.
+   * @param x_pos x coordinate of desired place
+   * @param y_pos y coordinate of desired place
+   * @param card card that is being placed
+   */
+  @Override
+  public void placeCard(int x_pos, int y_pos, CardImpl card) {
+    ensurePositionWithinBounds(x_pos, y_pos);
+    this.grid.get(y_pos).get(x_pos).placeCard(card);
+  }
+
+  private void ensurePositionWithinBounds(int xPosition, int yPosition) {
+    ArrayList<Cell> row = grid.get(1);
+    if (xPosition <= 0 || xPosition >= row.size()
+            || yPosition <= 0 || yPosition >= grid.size()) {
+      throw new IllegalArgumentException("Index out of bounds");
+    }
+
+    if (Cell.CellType.HOLE == grid.get(yPosition).get(xPosition).getCellType()) {
+      throw new IllegalArgumentException("The cell at this index is a hole.");
+    }
+
+    if (grid.get(yPosition).get(xPosition).getCard() == null) {
+      throw new IllegalArgumentException("The cell at this index already has a card.");
+    }
+  }
+
 
 }

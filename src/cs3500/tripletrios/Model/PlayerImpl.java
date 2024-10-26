@@ -7,6 +7,8 @@ public class PlayerImpl implements Player {
     ArrayList<Card> hand = new ArrayList<Card>();
     Color color;
 
+
+
     /**
      * Creates a new player with a hand of cards.
      * @param hand list of cards
@@ -15,6 +17,7 @@ public class PlayerImpl implements Player {
     public PlayerImpl(ArrayList<Card> hand, Color color) {
         this.hand = hand;
         this.color = color;
+
 
     }
 
@@ -28,5 +31,6 @@ public class PlayerImpl implements Player {
     public Color getColor() {
         return this.color;
     }
+
 
 }

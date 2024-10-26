@@ -113,19 +113,5 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   }
 
-  private void ensurePositionWithinBounds(int xPosition, int yPosition) {
-    ArrayList<Cell> row = grid.get(1);
-    if (xPosition <= 0 || xPosition >= row.size()
-        || yPosition <= 0 || yPosition >= grid.size()) {
-      throw new IllegalArgumentException("Index out of bounds");
-    }
 
-    if (Cell.CellType.HOLE == grid.get(yPosition).get(xPosition).getCellType()) {
-      throw new IllegalArgumentException("The cell at this index is a hole.");
-    }
-
-    if (grid.get(yPosition).get(xPosition).getCard() == null) {
-      throw new IllegalArgumentException("The cell at this index already has a card.");
-    }
-  }
 }

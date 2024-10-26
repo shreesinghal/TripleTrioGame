@@ -48,6 +48,14 @@ public interface TripleTrioModel {
    */
   Set<Card> getDeck();
 
+  /**
+   * Places the players card where desired.
+   * @param x_pos x coordinate of desired place
+   * @param y_pos y coordinate of desired place
+   * @param card card that is being placed
+   */
+  void placeCard(int x_pos, int y_pos, CardImpl card);
+
 
 
 }
