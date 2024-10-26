@@ -1,6 +1,7 @@
 package cs3500.tripletrios.Controller;
 
 import cs3500.tripletrios.Model.Card;
+import cs3500.tripletrios.Model.CardImpl;
 import cs3500.tripletrios.Model.Cell;
 import cs3500.tripletrios.Model.TripleTrioModel;
 import cs3500.tripletrios.View.TripleTrioTextView;
@@ -104,12 +105,12 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     Card cardToPlace = null;
     for (Card card : playerHand) {
       if (card.getName().equals(cardName)) {
-        model.getPlayer().removeCardFromHand(card);
+        model.getPlayer().removeCardFromHand((CardImpl) card);
         cardToPlace = card;
       }
     }
     
-    model.placeCard(x_position, y_position, cardToPlace);
+    model.placeCard(x_position, y_position, (CardImpl) cardToPlace);
 
     model.executeBattlePhase();
     
