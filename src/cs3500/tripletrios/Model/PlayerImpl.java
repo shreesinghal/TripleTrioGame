@@ -32,5 +32,14 @@ public class PlayerImpl implements Player {
         return this.color;
     }
 
+    /**
+     * Returns the players hand.
+     * @return players hand
+     */
+    @Override
+    public ArrayList<Card> getHand() {
+        return this.hand;
+    }
+
 
 }

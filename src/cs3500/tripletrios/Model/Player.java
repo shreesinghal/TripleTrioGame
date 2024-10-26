@@ -10,6 +10,11 @@ public interface Player {
      */
     Color getColor();
 
+    /**
+     * Returns the players hand.
+     * @return players hand
+     */
+    ArrayList<Card> getHand();
 
 
 
