@@ -57,4 +57,4 @@ public interface TripleTrioModel {
   void placeCard(int x_pos, int y_pos, CardImpl card);
 
 
-}
+ }
