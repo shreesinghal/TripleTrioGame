@@ -41,5 +41,14 @@ public class PlayerImpl implements Player {
         return this.hand;
     }
 
+    /**
+     * Removes a card from the hand.
+     * @param card the card wanting to be removed
+     */
+    @Override
+    public void removeCardFromHand(CardImpl card) {
+        this.hand.remove(card);
+    }
+
 
 }

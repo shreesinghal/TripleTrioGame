@@ -16,6 +16,12 @@ public interface Player {
      */
     ArrayList<Card> getHand();
 
+    /**
+     * Removes a card from the hand.
+     * @param card the card wanting to be removed
+     */
+    void removeCardFromHand(CardImpl card);
+
 
 
 }
