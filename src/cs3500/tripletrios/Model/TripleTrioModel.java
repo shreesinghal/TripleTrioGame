@@ -31,6 +31,24 @@ public interface TripleTrioModel {
    */
   boolean isGameWon();
 
+  /**
+   * Returns the current player of the game.
+   * @return player
+   */
+  Player getPlayer();
+
+  /**
+   * Returns the grid in its current status.
+   * @return the grid
+   */
+  ArrayList<ArrayList<Cell>> getGrid();
+
+  /**
+   * Returns the deck of the game.
+   * @return a set of decks(each unqiue)
+   */
+  Set<Card> getDeck();
+
 
 
 }

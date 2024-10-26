@@ -8,6 +8,8 @@ import java.util.*;
 public class TripleTrioGameModel implements TripleTrioModel{
 
   ArrayList<ArrayList<Cell>> grid;
+
+  Set<Card> deck;
   Player currPlayer;
   Player opposingPlayer;
   boolean gameOver;
@@ -16,7 +18,6 @@ public class TripleTrioGameModel implements TripleTrioModel{
   boolean gameStarted;
 
   public TripleTrioGameModel() {
-    this.grid = grid;
     this.gameOver = false;
     this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
     this.opposingPlayer = new PlayerImpl(new ArrayList<Card>(), Color.BLUE);
@@ -33,6 +34,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
+
+    this.grid = grid;
+    this.deck = deckOfCards;
     
     int gridSize = 0;
 
@@ -104,6 +108,35 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return false;
   }
 
+  /**
+   * Returns the current player of the game.
+   *
+   * @return player
+   */
+  @Override
+  public Player getPlayer() {
+    return this.currPlayer;
+  }
+
+  /**
+   * Returns the grid in its current status.
+   *
+   * @return the grid
+   */
+  @Override
+  public ArrayList<ArrayList<Cell>> getGrid() {
+    return this.grid;
+  }
+
+  /**
+   * Returns the deck of the game.
+   *
+   * @return a set of decks(each unqiue)
+   */
+  @Override
+  public Set<Card> getDeck() {
+    return this.deck;
+  }
 
 
 }

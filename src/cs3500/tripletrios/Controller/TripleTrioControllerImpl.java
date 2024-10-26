@@ -13,12 +13,28 @@ import java.util.Set;
 public class TripleTrioControllerImpl implements TripleTrioController {
 
   private TripleTrioModel model;
+
   private TripleTrioTextView view;
-  private Appendable output;
-  private Scanner gameScanner;
+
   private Readable userInput;
+
+  private Appendable output;
+
+  private Scanner gameScanner;
+
   private ArrayList<ArrayList<Cell>> grid;
+
   private Set<Card> deck;
+
+  public TripleTrioControllerImpl(Readable userInput, Appendable output) {
+    if (userInput == null || output == null) {
+      throw new IllegalArgumentException("User input or output cannot be null");
+    }
+
+    this.userInput = userInput;
+    this.output = output;
+
+  }
 
   /**
    *
@@ -45,14 +61,15 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     CardDatabaseReader cardReader = new CardDatabaseReader();
     deck = cardReader.readDeckConfiguration(deckPath);
 
-    model.startGame(deck, grid);
-    view.displayCurrState();
 
     try {
       model.startGame(deck, grid);
     } catch (IllegalStateException | IllegalArgumentException e) {
       output.append(e.getMessage());
     }
+
+    view.render();
+
 
   }
 }

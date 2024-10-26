@@ -11,7 +11,9 @@ import cs3500.tripletrios.Model.Direction;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -21,9 +23,12 @@ public class TTConfigTest {
   CardDatabaseReader cardReader;
   GridConfigReader gridReader;
 
+  Appendable output = new StringBuilder();
+  Readable reader = new BufferedReader(new InputStreamReader(System.in));
+
   @Before
   public void setUp() throws Exception {
-    controller = new TripleTrioControllerImpl();
+    controller = new TripleTrioControllerImpl(reader, output);
     cardReader = new CardDatabaseReader();
     gridReader = new GridConfigReader();
   }
