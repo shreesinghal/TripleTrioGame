@@ -77,7 +77,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     while (!model.isGameOver()  && model.isGameStarted()) {
       output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
 
-      String[] inputText = scanner.next().split(" ");
+      String[] inputText = scanner.nextLine().split(" ");
 
       playMove(inputText);
 
@@ -99,10 +99,11 @@ public class TripleTrioControllerImpl implements TripleTrioController {
       if (card.getName().equals(cardName)) {
         model.getPlayer().removeCardFromHand((CardImpl) card);
         cardToPlace = card;
+        break;
       }
     }
 
-    model.placeCard(x_position, y_position, (CardImpl) cardToPlace);
+    model.placeCard(x_position , y_position , (CardImpl) cardToPlace);
 
     model.executeBattlePhase(x_position, y_position);
 

@@ -102,6 +102,22 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return this.gameStarted;
   }
 
+  /**
+   * Returns whether the game has been won.
+   *
+   * @return true is game has been won, else false
+   */
+//  @Override
+//  public boolean isGameWon() {
+//    this.ensureGameStarted();
+//
+//
+//  }
+//
+//  private PlayerImpl returnWinner() {
+//    for (Cards card : )
+//  }
+
   private void ensureGameStarted() {
     if (!gameStarted) {
       throw new IllegalStateException("Game is not started");

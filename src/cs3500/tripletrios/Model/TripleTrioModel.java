@@ -30,6 +30,12 @@ public interface TripleTrioModel {
    */
   boolean isGameStarted();
 
+//  /**
+//   * Returns whether the game has been won.
+//   * @return true is game has been won, else false
+//   */
+//  boolean isGameWon();
+
   /**
    * Returns the current player of the game.
    * @return player
