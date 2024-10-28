@@ -9,15 +9,15 @@ import java.util.List;
 
 public class TripleTrioGameModel implements TripleTrioModel{
 
-  ArrayList<ArrayList<Cell>> grid;
+  private ArrayList<ArrayList<Cell>> grid;
 
-  Set<Card> deck;
-  Player currPlayer;
-  Player opposingPlayer;
-  TripleTrioController controller;
-  TripleTrioView view;
-  boolean gameStarted;
-  boolean gameOver;
+  private Set<Card> deck;
+  private Player currPlayer;
+  private Player opposingPlayer;
+  private TripleTrioController controller;
+  private TripleTrioView view;
+  private boolean gameStarted;
+  private boolean gameOver;
 
   public TripleTrioGameModel() {
     this.gameOver = false;
@@ -102,21 +102,52 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return this.gameStarted;
   }
 
-  /**
-   * Returns whether the game has been won.
-   *
-   * @return true is game has been won, else false
-   */
+//  /**
+//   * Returns whether the game has been won.
+//   *
+//   * @return true is game has been won, else false
+//   */
 //  @Override
 //  public boolean isGameWon() {
 //    this.ensureGameStarted();
+//    //check if the grid is full
+//
 //
 //
 //  }
-//
-//  private PlayerImpl returnWinner() {
-//    for (Cards card : )
-//  }
+
+  private Player determineWinner() {
+    /**
+     * do we have to account for - 1 in size?
+     * need to account for draw -->
+     * 1) player enum(Player Red, Player Blue, No Player)
+     * 2) edit the color class and return a color instead and account for player in a separate function
+     */
+    ArrayList<Card> cardsInGrid = new ArrayList<>();
+    for (int i = 0; i < this.grid.size(); i++) {
+      for (int j = 0; j < this.grid.get(i).size(); j++ ) {
+        cardsInGrid.add(this.grid.get(j).get(i).getCard());
+      }
+    }
+
+    int currPlayerCards = currPlayer.getHand().size();
+    int opposingPlayerCards = opposingPlayer.getHand().size();
+
+    for (Card card : cardsInGrid) {
+      if (card.getColor() == currPlayer.getColor()) {
+        currPlayerCards++;
+      } else {
+        opposingPlayerCards++;
+      }
+    }
+
+    //checks the winner based on cards on grid and in hand
+    if (currPlayerCards > opposingPlayerCards) {
+      return currPlayer;
+    } else {
+      return opposingPlayer;
+    }
+  }
 
   private void ensureGameStarted() {
     if (!gameStarted) {

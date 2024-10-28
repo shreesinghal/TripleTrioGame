@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class PlayerImpl implements Player {
 
-    ArrayList<Card> hand = new ArrayList<Card>();
-    Color color;
+    private ArrayList<Card> hand = new ArrayList<Card>();
+    private final Color color;
 
 
 
