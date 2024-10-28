@@ -126,7 +126,10 @@ public class TripleTrioGameModel implements TripleTrioModel{
     ArrayList<Card> cardsInGrid = new ArrayList<>();
     for (int i = 0; i < this.grid.size(); i++) {
       for (int j = 0; j < this.grid.get(i).size(); j++ ) {
-        cardsInGrid.add(this.grid.get(j).get(i).getCard());
+        if (this.grid.get(j).get(i).getCellType().equals(Cell.CellType.CARDCELL)) {
+          cardsInGrid.add(this.grid.get(j).get(i).getCard());
+        }
+        //what happens if it is a hole, do I need this if statement?
       }
     }
 
