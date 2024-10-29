@@ -54,9 +54,22 @@ public class TripleTrioGameModel implements TripleTrioModel{
       throw new IllegalStateException("Deck size must be greater than grid size");
     }
 
-    ArrayList<Card> playerAHand = createHand(deckOfCards, gridSize);
-    ArrayList<Card> playerBHand = createHand(deckOfCards, gridSize);
+    ArrayList<Card> playerAHand = new ArrayList<>();
+    ArrayList<Card> playerBHand = new ArrayList<>();
 
+    ArrayList<Card> deckList = new ArrayList<>();
+    deckList.addAll(deckOfCards);
+    for (int i = 1; i <= deckOfCards.size() / 2 - 1; i++) {
+      Card currRedCard = deckList.remove(0);
+      currRedCard.setCardColor(Color.RED);
+      playerAHand.add(currRedCard);
+    }
+
+    for (int i = deckOfCards.size() / 2; i <= deckOfCards.size() - 1; i++) {
+      Card currBlueCard = deckList.remove(0);
+      currBlueCard.setCardColor(Color.BLUE);
+      playerBHand.add(currBlueCard);
+    }
 
     this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
@@ -64,14 +77,6 @@ public class TripleTrioGameModel implements TripleTrioModel{
     this.gameStarted = true;
   }
 
-  private static ArrayList<Card> createHand(Set<Card> deckOfCards, int gridSize) {
-    ArrayList<Card> playerHand = new ArrayList<Card>();
-    for (int i = 0; i < (gridSize + 1) / 2; i++) {
-      playerHand.add(deckOfCards.iterator().next());
-    }
-
-    return playerHand;
-  }
 
 
   /**
@@ -152,6 +157,16 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return WinningState.Tie;
   }
 
+  /**
+   * Switches the current player.
+   */
+  @Override
+  public void switchTruns() {
+    Player temp = opposingPlayer;
+    opposingPlayer = currPlayer;
+    currPlayer = temp;
+  }
+
   private void ensureGameStarted() {
     if (!gameStarted) {
       throw new IllegalStateException("Game is not started");
@@ -196,7 +211,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public void placeCard(int x_pos, int y_pos, CardImpl card) {
-    if (ensurePositionWithinBounds(x_pos, y_pos)) {
+    if (ensurePositionWithinBounds(new Point(x_pos, y_pos))) {
       this.grid.get(y_pos).get(x_pos).placeCard(card);
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
@@ -225,6 +240,10 @@ public class TripleTrioGameModel implements TripleTrioModel{
   private List<Point> battleAdjacentCards(int x_pos, int y_pos) {
     List<Point> flippedCards = new ArrayList<>();
     Card card = this.grid.get(y_pos).get(x_pos).getCard();
+
+    if (card == null) {
+      return Collections.emptyList();
+    }
 
     Point southLoc = new Point(x_pos, y_pos - 1);
     Point northLoc = new Point(x_pos, y_pos + 1);
@@ -257,7 +276,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
 
   private boolean cardCanBattle(Point adjCardLoc) {
-    boolean canBattle = ensurePositionWithinBounds(adjCardLoc.x, adjCardLoc.y);
+    boolean canBattle = ensurePositionWithinBounds(new Point(adjCardLoc.x, adjCardLoc.y));
     if (this.grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard() != null) {
       if (this.grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard().getColor() != currPlayer.getColor()) {
         canBattle = true;
@@ -272,23 +291,12 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
   }
 
-  private boolean ensurePositionWithinBounds(int xPosition, int yPosition) {
-    boolean ensured = true;
-    ArrayList<Cell> row = grid.get(1);
-    if (xPosition <= 0 || xPosition >= row.size()
-        || yPosition <= 0 || yPosition >= grid.size()) {
-      ensured = false;
-    }
-
-    if (Cell.CellType.HOLE == grid.get(yPosition).get(xPosition).getCellType()) {
-      ensured = false;
-    }
-
-    if (grid.get(yPosition).get(xPosition).getCard() == null) {
-      ensured = false;
-    }
-
-    return ensured;
+  private boolean ensurePositionWithinBounds(Point point) {
+    return point.x >= 0
+        && point.x <= grid.get(0).size() - 1
+        && point.y >= 0
+        && point.y <= grid.size() - 1
+        && grid.get(point.y).get(point.x).getCellType() != Cell.CellType.HOLE;
   }
 
 

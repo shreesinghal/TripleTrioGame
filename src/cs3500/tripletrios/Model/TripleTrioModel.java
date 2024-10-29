@@ -70,4 +70,9 @@ public interface TripleTrioModel {
    * @return the winner of the game
    */
   WinningState determineWinner();
+
+  /**
+   * Switches the current player.
+   */
+  void switchTruns();
 }

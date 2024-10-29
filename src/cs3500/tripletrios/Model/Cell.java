@@ -31,7 +31,7 @@ public final class Cell {
      * @return true if has card and vice versa
      */
     public boolean isEmpty() {
-        return hasCard;
+        return !hasCard;
     }
 
     /**

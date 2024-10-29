@@ -45,7 +45,7 @@ public class TripleTrioTextView implements TripleTrioView {
           } else if (cell.getCard().getColor() == Color.BLUE) {
             output.append("B");
           } else {
-            throw new IllegalArgumentException("Invalid card color");
+            throw new IllegalArgumentException("Invalid card color: " + cell.getCard().getColor());
           }
         }
       }
@@ -53,7 +53,7 @@ public class TripleTrioTextView implements TripleTrioView {
     }
 
     output.append("Hand: ").append("\n");
-    for (Card card : model.getDeck()) {
+    for (Card card : model.getPlayer().getHand()) {
       output.append(card.getName())
           .append(" ")
           .append(card.getNorth())

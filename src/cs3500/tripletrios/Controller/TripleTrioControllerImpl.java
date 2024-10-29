@@ -69,12 +69,16 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     view.render();
 
     //try {
-    while (!model.isGameOver()  && model.isGameStarted()) {
-      output.append("\nEnter your next move in the format [x-position] [y-position] [card name]: \n");
+    while (!model.isGameOver()) {
+      output.append("\n" + "Player ")
+          .append(this.model.getPlayer().getColor().toString())
+          .append(", enter your next move in the format [x-position] [y-position] [card name]: \n");
 
       String[] inputText = scanner.nextLine().split(" ");
 
       playMove(inputText);
+      this.view.render();
+      this.model.switchTruns();
 
     }
 
