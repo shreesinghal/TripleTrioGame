@@ -30,11 +30,6 @@ public interface TripleTrioModel {
    */
   boolean isGameStarted();
 
-//  /**
-//   * Returns whether the game has been won.
-//   * @return true is game has been won, else false
-//   */
-//  boolean isGameWon();
 
   /**
    * Returns the current player of the game.
@@ -69,4 +64,10 @@ public interface TripleTrioModel {
    * @param y_pos y position of card
    */
   void executeBattlePhase(int x_pos, int y_pos);
+
+  /**
+   * Determines the winner of the game once the game has ended.
+   * @return the winner of the game
+   */
+  WinningState determineWinner();
 }

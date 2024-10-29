@@ -1,7 +1,6 @@
 package cs3500.tripletrios.Model;
 
-import cs3500.tripletrios.Controller.TripleTrioController;
-import cs3500.tripletrios.View.TripleTrioView;
+
 
 import java.awt.*;
 import java.util.*;
@@ -14,13 +13,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
   private Set<Card> deck;
   private Player currPlayer;
   private Player opposingPlayer;
-  private TripleTrioController controller;
-  private TripleTrioView view;
   private boolean gameStarted;
-  private boolean gameOver;
 
   public TripleTrioGameModel() {
-    this.gameOver = false;
     this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
     this.opposingPlayer = new PlayerImpl(new ArrayList<Card>(), Color.BLUE);
   }
@@ -67,7 +62,6 @@ public class TripleTrioGameModel implements TripleTrioModel{
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
 
     this.gameStarted = true;
-    this.gameOver = false;
   }
 
   private static ArrayList<Card> createHand(Set<Card> deckOfCards, int gridSize) {
@@ -89,7 +83,16 @@ public class TripleTrioGameModel implements TripleTrioModel{
   @Override
   public boolean isGameOver() {
     ensureGameStarted();
-    return gameOver;
+    boolean isGridFilled = true;
+    for (ArrayList<Cell> row : this.grid) {
+      for (Cell cell : row) {
+        if (cell.isEmpty()) {
+          isGridFilled = false;
+        }
+      }
+    }
+
+    return isGridFilled;
   }
 
   /**
@@ -102,27 +105,22 @@ public class TripleTrioGameModel implements TripleTrioModel{
     return this.gameStarted;
   }
 
-//  /**
-//   * Returns whether the game has been won.
-//   *
-//   * @return true is game has been won, else false
-//   */
-//  @Override
-//  public boolean isGameWon() {
-//    this.ensureGameStarted();
-//    //check if the grid is full
-//
-//
-//
-//  }
 
-  private Player determineWinner() {
+
+
+  /**
+   * Determines the winner of the game once the game has ended.
+   * @return the winner of the game
+   */
+  @Override
+  public WinningState determineWinner() {
     /**
      * do we have to account for - 1 in size?
      * need to account for draw -->
      * 1) player enum(Player Red, Player Blue, No Player)
      * 2) edit the color class and return a color instead and account for player in a separate function
      */
+
     ArrayList<Card> cardsInGrid = new ArrayList<>();
     for (int i = 0; i < this.grid.size(); i++) {
       for (int j = 0; j < this.grid.get(i).size(); j++ ) {
@@ -146,10 +144,12 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
     //checks the winner based on cards on grid and in hand
     if (currPlayerCards > opposingPlayerCards) {
-      return currPlayer;
-    } else {
-      return opposingPlayer;
+      return WinningState.RedWins;
+    } else if (opposingPlayerCards > currPlayerCards){
+      return WinningState.BlueWins;
     }
+
+    return WinningState.Tie;
   }
 
   private void ensureGameStarted() {

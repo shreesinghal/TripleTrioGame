@@ -1,9 +1,6 @@
 package cs3500.tripletrios.Controller;
 
-import cs3500.tripletrios.Model.Card;
-import cs3500.tripletrios.Model.CardImpl;
-import cs3500.tripletrios.Model.Cell;
-import cs3500.tripletrios.Model.TripleTrioModel;
+import cs3500.tripletrios.Model.*;
 import cs3500.tripletrios.View.TripleTrioTextView;
 
 import java.io.IOException;
@@ -19,14 +16,10 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   private Appendable output;
 
-  private Scanner gameScanner;
-
   private ArrayList<ArrayList<Cell>> grid;
 
   private Set<Card> deck;
 
-  private boolean gameStarted;
-  private boolean gameOver;
   private Scanner scanner;
 
   public TripleTrioControllerImpl(Readable userInput, Appendable output) {
@@ -48,14 +41,16 @@ public class TripleTrioControllerImpl implements TripleTrioController {
    * @param gridPath the path to the grid
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {    if (model == null) {
+  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
+
+    if (model == null) {
     throw new IllegalArgumentException("model cannot be null");
   }
 
     // sets MVC
     this.model = model;
     this.view = new TripleTrioTextView(model, this.output);
-    this.gameScanner = new Scanner(userInput);
+    this.scanner = new Scanner(userInput);
 
     // read from config files
     GridConfigReader gridReader = new GridConfigReader();
@@ -69,7 +64,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     } catch (IllegalStateException | IllegalArgumentException e) {
       output.append(e.getMessage());
     }
-    gameStarted = true;
+
 
     view.render();
 
@@ -82,16 +77,19 @@ public class TripleTrioControllerImpl implements TripleTrioController {
       playMove(inputText);
 
     }
+
+    view.dispalyFinalMessage(model.determineWinner());
     //} catch (IllegalStateException | IllegalArgumentException e) {
     //throw new IllegalStateException("Error in playing the game.");
     //}
 
   }
 
-  private void playMove(String[] inputText) {
+  private void playMove(String[] inputText) throws IOException {
     int x_position = Integer.parseInt(inputText[0]);
     int y_position = Integer.parseInt(inputText[1]);
     String cardName = inputText[2];
+
 
     ArrayList<Card> playerHand = model.getPlayer().getHand();
     Card cardToPlace = null;

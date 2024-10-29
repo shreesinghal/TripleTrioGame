@@ -1,9 +1,6 @@
 package cs3500.tripletrios.View;
 
-import cs3500.tripletrios.Model.Card;
-import cs3500.tripletrios.Model.Cell;
-import cs3500.tripletrios.Model.Color;
-import cs3500.tripletrios.Model.TripleTrioModel;
+import cs3500.tripletrios.Model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,6 +80,32 @@ public class TripleTrioTextView implements TripleTrioView {
       this.output.append(this.toString());
     } else {
       throw new IOException("No proper object to render");
+    }
+
+  }
+
+  /**
+   * Displays the winner along with a final message.
+   * @param winner the winner of the game
+   */
+  @Override
+  public void dispalyFinalMessage(WinningState winner) throws IOException {
+
+    switch (winner) {
+      case WinningState.RedWins:
+        this.output.append("\nPlayer Red wins!");
+        break;
+
+      case WinningState.BlueWins:
+        this.output.append("\nPlayer Blue wins!");
+        break;
+
+      case WinningState.Tie:
+        this.output.append("\nThere has been a tie!");
+        break;
+
+      default:
+        throw new IOException("Winner can not be determined");
     }
 
   }
