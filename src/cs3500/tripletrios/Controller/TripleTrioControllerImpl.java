@@ -66,18 +66,12 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     }
 
 
-    view.render();
-
     //try {
     while (!model.isGameOver()) {
-      output.append("\n" + "Player ")
-          .append(this.model.getPlayer().getColor().toString())
-          .append(", enter your next move in the format [x-position] [y-position] [card name]: \n");
 
-      String[] inputText = scanner.nextLine().split(" ");
-
-      playMove(inputText);
       this.view.render();
+      String[] inputText = scanner.nextLine().split(" ");
+      playMove(inputText);
       this.model.switchTruns();
 
     }
@@ -105,9 +99,13 @@ public class TripleTrioControllerImpl implements TripleTrioController {
       }
     }
 
-    model.placeCard(x_position , y_position , (CardImpl) cardToPlace);
+    try {
+      model.placeCard(x_position - 1, y_position - 1, (CardImpl) cardToPlace);
+      model.executeBattlePhase(x_position - 1, y_position - 1);
+    } catch (IllegalStateException | IllegalArgumentException e) {
+      output.append(e.getMessage());
+    }
 
-    model.executeBattlePhase(x_position, y_position);
 
 
   }

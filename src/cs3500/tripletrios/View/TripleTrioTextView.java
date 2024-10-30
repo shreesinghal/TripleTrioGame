@@ -33,6 +33,30 @@ public class TripleTrioTextView implements TripleTrioView {
   public String toString() {
     StringBuilder output = new StringBuilder();
     output.append("Player: ").append(model.getPlayer().getColor()).append("\n");
+    displayBoard(output);
+
+    output.append("Hand: ").append("\n");
+    for (Card card : model.getPlayer().getHand()) {
+      output.append(card.getName())
+          .append(" ")
+          .append(card.getNorth() == 10 ? "A" : card.getNorth())
+          .append(" ")
+          .append(card.getSouth() == 10 ? "A" : card.getSouth())
+          .append(" ")
+          .append(card.getEast() == 10 ? "A" : card.getEast())
+          .append(" ")
+          .append(card.getWest() == 10 ? "A" : card.getWest())
+          .append("\n");
+    }
+
+    output.append("\n" + "Player ")
+      .append(this.model.getPlayer().getColor().toString())
+      .append(", enter your next move in the format [x-position] [y-position] [card name]: \n");
+
+    return output.toString();
+  }
+
+  private void displayBoard(StringBuilder output) {
     for (ArrayList<Cell> row : model.getGrid()) {
       for (Cell cell : row) {
         if (cell.getCellType() == Cell.CellType.HOLE) {
@@ -51,22 +75,6 @@ public class TripleTrioTextView implements TripleTrioView {
       }
       output.append("\n");
     }
-
-    output.append("Hand: ").append("\n");
-    for (Card card : model.getPlayer().getHand()) {
-      output.append(card.getName())
-          .append(" ")
-          .append(card.getNorth())
-          .append(" ")
-          .append(card.getSouth())
-          .append(" ")
-          .append(card.getEast())
-          .append(" ")
-          .append(card.getWest())
-          .append("\n");
-    }
-
-    return output.toString();
   }
 
   /**
@@ -107,6 +115,8 @@ public class TripleTrioTextView implements TripleTrioView {
       default:
         throw new IOException("Winner can not be determined");
     }
+
+    displayBoard((StringBuilder) output);
 
   }
 }
