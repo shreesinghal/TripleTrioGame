@@ -24,7 +24,7 @@ public final class CardDatabaseReader {
     while (scanner.hasNext()) {
       String cardDetails = scanner.nextLine();
       String[] details = cardDetails.split(" ");
-      Map<Direction, Integer> attackVal = new HashMap<Direction, Integer>();
+      Map<Direction, Integer> attackVal = new HashMap<>();
       attackVal.put(Direction.NORTH, (Objects.equals(details[1], "A")) ? 10 : Integer.parseInt(details[1]));
       attackVal.put(Direction.SOUTH, (Objects.equals(details[2], "A")) ? 10 : Integer.parseInt(details[2]));
       attackVal.put(Direction.EAST, (Objects.equals(details[3], "A")) ? 10 : Integer.parseInt(details[3]));
