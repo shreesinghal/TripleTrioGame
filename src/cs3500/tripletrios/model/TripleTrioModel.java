@@ -1,8 +1,11 @@
-package cs3500.tripletrios.Model;
+package cs3500.tripletrios.model;
 
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Interface to represents the TripleTrioGame functionality.
+ */
 public interface TripleTrioModel {
 
 
@@ -51,19 +54,19 @@ public interface TripleTrioModel {
 
   /**
    * Places the players card where desired.
-   * @param x_pos x coordinate of desired place
-   * @param y_pos y coordinate of desired place
+   * @param xPos x coordinate of desired place
+   * @param yPos y coordinate of desired place
    * @param card card that is being placed
    */
-  void placeCard(int x_pos, int y_pos, CardImpl card);
+  void placeCard(int xPos, int yPos, CardImpl card);
 
 
   /**
    *  Executes the battle phase on the card at specified location.
-   * @param x_pos x position of card
-   * @param y_pos y position of card
+   * @param xPos x position of card
+   * @param yPos y position of card
    */
-  void executeBattlePhase(int x_pos, int y_pos);
+  void executeBattlePhase(int xPos, int yPos);
 
   /**
    * Determines the winner of the game once the game has ended.
@@ -74,5 +77,5 @@ public interface TripleTrioModel {
   /**
    * Switches the current player.
    */
-  void switchTruns();
+  void switchTurns();
 }

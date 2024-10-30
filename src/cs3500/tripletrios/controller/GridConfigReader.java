@@ -1,14 +1,25 @@
-package cs3500.tripletrios.Controller;
+package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.Model.Cell;
+import cs3500.tripletrios.model.Cell;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class which reads the grid files to create a grid for the game.
+ */
+
 public final class GridConfigReader {
 
+  /**
+   * Method which reads a grid configuration file and returns a new grid
+   * based on that for the game.
+   * @param filePath grid configuration file
+   * @return a new grid for the game
+   * @throws IllegalArgumentException if the configurations has an illegal character.\
+   */
   public ArrayList<ArrayList<Cell>> readGridConfiguration(String filePath) {
     Scanner scanner;
     try {
@@ -26,7 +37,7 @@ public final class GridConfigReader {
 
       String line = scanner.nextLine();
       if (line.length() != cols) {
-        throw new IllegalArgumentException("Grid row length does not match the specified number of columns.");
+        throw new IllegalArgumentException("Grid row length does not match the number of columns.");
       }
 
       for (char value : line.toCharArray()) {

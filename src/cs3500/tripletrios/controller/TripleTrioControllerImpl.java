@@ -1,13 +1,20 @@
-package cs3500.tripletrios.Controller;
+package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.Model.*;
-import cs3500.tripletrios.View.TripleTrioTextView;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardImpl;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.view.TripleTrioTextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Controller class that implements the controller interface and takes user input
+ * and communicates it to the TripleTrioGame mode.
+ */
 public class TripleTrioControllerImpl implements TripleTrioController {
 
   private TripleTrioModel model;
@@ -20,6 +27,11 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   private Scanner scanner;
 
+  /**
+   * Constructor that instantiates a controller with user input and output.
+   * @param userInput user input.
+   * @param output output for the view.
+   */
   public TripleTrioControllerImpl(Readable userInput, Appendable output) {
     if (userInput == null || output == null) {
       throw new IllegalArgumentException("User input or output cannot be null");
@@ -30,8 +42,8 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     this.scanner = new Scanner(this.userInput);
   }
 
+
   /**
-   *
    * Play a new game of Triple Trio with the given configurations.
    *
    * @param model a triple trio model
@@ -41,9 +53,9 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
 
-    if (model == null) {
-    throw new IllegalArgumentException("model cannot be null");
-  }
+      if (model == null) {
+        throw new IllegalArgumentException("model cannot be null");
+      }
 
     // sets MVC
     this.model = model;

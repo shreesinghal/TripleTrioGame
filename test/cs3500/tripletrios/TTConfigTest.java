@@ -1,13 +1,13 @@
 package cs3500.tripletrios;
 
-import cs3500.tripletrios.Controller.CardDatabaseReader;
-import cs3500.tripletrios.Controller.GridConfigReader;
-import cs3500.tripletrios.Controller.TripleTrioController;
-import cs3500.tripletrios.Controller.TripleTrioControllerImpl;
-import cs3500.tripletrios.Model.Card;
-import cs3500.tripletrios.Model.CardImpl;
-import cs3500.tripletrios.Model.Cell;
-import cs3500.tripletrios.Model.Direction;
+import cs3500.tripletrios.controller.CardDatabaseReader;
+import cs3500.tripletrios.controller.GridConfigReader;
+import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioControllerImpl;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardImpl;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Direction;
 import org.junit.Before;
 import org.junit.Test;
 

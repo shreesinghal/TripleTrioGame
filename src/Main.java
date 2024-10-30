@@ -1,7 +1,7 @@
-import cs3500.tripletrios.Controller.TripleTrioController;
-import cs3500.tripletrios.Controller.TripleTrioControllerImpl;
-import cs3500.tripletrios.Model.TripleTrioGameModel;
-import cs3500.tripletrios.Model.TripleTrioModel;
+import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioControllerImpl;
+import cs3500.tripletrios.model.TripleTrioGameModel;
+import cs3500.tripletrios.model.TripleTrioModel;
 
 import java.io.BufferedReader;
 import java.io.File;

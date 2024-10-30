@@ -1,21 +1,25 @@
-package cs3500.tripletrios.View;
+package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.Model.WinningState;
+import cs3500.tripletrios.model.WinningState;
 
 import java.io.IOException;
 
+/**
+ *Behaviors needed for a view of the TripleTrioGame implementation
+ * that transmits information to the user.
+ */
 public interface TripleTrioView {
 
     /**
      * Display the current State of the game.
      */
-    String toString();
+  String toString();
 
     /**
      * Renders output to the screen.
      * @throws IOException if output is improper.
      */
-    void render() throws IOException;
+  void render() throws IOException;
 
 
   /**

@@ -1,4 +1,4 @@
-package cs3500.tripletrios.Model;
+package cs3500.tripletrios.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -160,7 +160,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
    * Switches the current player.
    */
   @Override
-  public void switchTruns() {
+  public void switchTurns() {
     Player temp = this.opposingPlayer;
     this.opposingPlayer = this.currPlayer;
     this.currPlayer = temp;

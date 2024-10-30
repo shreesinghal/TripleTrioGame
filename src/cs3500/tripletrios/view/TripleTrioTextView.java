@@ -1,16 +1,27 @@
-package cs3500.tripletrios.View;
+package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.Model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-
+/**
+ * View that presents to the user the state of the game.
+ */
 public class TripleTrioTextView implements TripleTrioView {
   private TripleTrioModel model;
   private Appendable output;
 
+  /**
+   * Instantiates a view by taking a model and an output.
+   * @param model TripleTrio game model
+   * @param output output for the viewer
+   */
   public TripleTrioTextView(TripleTrioModel model, Appendable output) {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");

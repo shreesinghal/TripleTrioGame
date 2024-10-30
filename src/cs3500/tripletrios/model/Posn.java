@@ -1,10 +1,11 @@
-package cs3500.tripletrios.Model;
+package cs3500.tripletrios.model;
 
 /**
  * This class represents a position with an x and y value.
  */
 public class Posn {
-  private int x, y;
+  private final int x;
+  private final int y;
 
   public Posn(int x, int y) {
     this.x = x;
