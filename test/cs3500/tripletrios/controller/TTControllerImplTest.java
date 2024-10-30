@@ -1,6 +1,5 @@
-package cs3500.tripletrios.Controller;
+package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.controller.TripleTrioControllerImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +8,9 @@ import java.io.StringReader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test class for TripleTrio controller.
+ */
 public class TTControllerImplTest {
 
   private Appendable output;
