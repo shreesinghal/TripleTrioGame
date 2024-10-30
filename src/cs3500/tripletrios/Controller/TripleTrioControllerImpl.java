@@ -4,7 +4,9 @@ import cs3500.tripletrios.Model.*;
 import cs3500.tripletrios.View.TripleTrioTextView;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Set;
 
 public class TripleTrioControllerImpl implements TripleTrioController {
 
@@ -15,10 +17,6 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   private Readable userInput;
 
   private Appendable output;
-
-  private ArrayList<ArrayList<Cell>> grid;
-
-  private Set<Card> deck;
 
   private Scanner scanner;
 
@@ -54,10 +52,10 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     // read from config files
     GridConfigReader gridReader = new GridConfigReader();
-    grid = gridReader.readGridConfiguration(gridPath);
+    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
 
     CardDatabaseReader cardReader = new CardDatabaseReader();
-    deck = cardReader.readDeckConfiguration(deckPath);
+    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
 
     try {
       model.startGame(deck, grid);
@@ -65,22 +63,20 @@ public class TripleTrioControllerImpl implements TripleTrioController {
       output.append(e.getMessage());
     }
 
-
-    //try {
     while (!model.isGameOver()) {
 
       this.view.render();
       String[] inputText = scanner.nextLine().split(" ");
-      playMove(inputText);
-      this.model.switchTruns();
+      try {
+        playMove(inputText);
+        this.model.switchTruns();
+      } catch (IllegalArgumentException e) {
+        output.append(e.getMessage()).append("\nTry again.\n\n");
+      }
 
     }
 
     view.dispalyFinalMessage(model.determineWinner());
-    //} catch (IllegalStateException | IllegalArgumentException e) {
-    //throw new IllegalStateException("Error in playing the game.");
-    //}
-
   }
 
   private void playMove(String[] inputText) throws IOException {
@@ -88,27 +84,24 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     int y_position = Integer.parseInt(inputText[1]);
     String cardName = inputText[2];
 
-
+    boolean found = false;
     ArrayList<Card> playerHand = model.getPlayer().getHand();
     Card cardToPlace = null;
     for (Card card : playerHand) {
       if (card.getName().equals(cardName)) {
         model.getPlayer().removeCardFromHand((CardImpl) card);
         cardToPlace = card;
+        found = true;
         break;
       }
     }
 
-    try {
-      model.placeCard(x_position - 1, y_position - 1, (CardImpl) cardToPlace);
-      model.executeBattlePhase(x_position - 1, y_position - 1);
-    } catch (IllegalStateException | IllegalArgumentException e) {
-      output.append(e.getMessage());
+    if (!found) {
+      throw new IllegalArgumentException("Card not found.");
     }
 
-
-
+    model.placeCard(x_position - 1, y_position - 1, (CardImpl) cardToPlace);
+    model.executeBattlePhase(x_position - 1, y_position - 1);
   }
-
 
 }

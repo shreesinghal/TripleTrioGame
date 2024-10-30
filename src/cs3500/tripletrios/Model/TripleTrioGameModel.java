@@ -1,8 +1,5 @@
 package cs3500.tripletrios.Model;
 
-
-
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -213,7 +210,7 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public void placeCard(int x_pos, int y_pos, CardImpl card) {
-    if (ensurePositionWithinBounds(new Point(x_pos, y_pos))) {
+    if (ensurePositionWithinBounds(new Posn(x_pos, y_pos))) {
       this.grid.get(y_pos).get(x_pos).placeCard(card);
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
@@ -229,10 +226,10 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public void executeBattlePhase(int x_pos, int y_pos) {
-    List<Point> flippedCards = battleAdjacentCards(x_pos, y_pos);
+    List<Posn> flippedCards = battleAdjacentCards(x_pos, y_pos);
     while (!flippedCards.isEmpty()) {
       for (int i = flippedCards.size() - 1; i >= 0; i--) {
-        List<Point> cardsToBeAdded = battleAdjacentCards(flippedCards.get(i).x, flippedCards.get(i).y);
+        List<Posn> cardsToBeAdded = battleAdjacentCards(flippedCards.get(i).getX(), flippedCards.get(i).getY());
         flippedCards.addAll(cardsToBeAdded);
         i += cardsToBeAdded.size();
         flippedCards.remove(flippedCards.get(i));
@@ -242,62 +239,62 @@ public class TripleTrioGameModel implements TripleTrioModel{
   }
 
 
-  private List<Point> battleAdjacentCards(int x_pos, int y_pos) {
-    List<Point> flippedCards = new ArrayList<>();
+  private List<Posn> battleAdjacentCards(int x_pos, int y_pos) {
+    List<Posn> flippedCards = new ArrayList<>();
     Card card = this.grid.get(y_pos).get(x_pos).getCard();
 
     if (card == null) {
       return Collections.emptyList();
     }
 
-    Point southLoc = new Point(x_pos, y_pos + 1);
-    Point northLoc = new Point(x_pos, y_pos - 1);
-    Point eastLoc = new Point(x_pos + 1, y_pos);
-    Point westLoc = new Point(x_pos - 1, y_pos);
+    Posn southLoc = new Posn(x_pos, y_pos + 1);
+    Posn northLoc = new Posn(x_pos, y_pos - 1);
+    Posn eastLoc = new Posn(x_pos + 1, y_pos);
+    Posn westLoc = new Posn(x_pos - 1, y_pos);
 
     // this South vs bottom
     if (cardCanBattle(southLoc)
       && card.getSouth() > this.grid.get(y_pos + 1).get(x_pos).getCard().getNorth()) {
       this.grid.get(y_pos + 1).get(x_pos).getCard().flipOwnership();
-      flippedCards.add(new Point(x_pos, y_pos + 1));
+      flippedCards.add(new Posn(x_pos, y_pos + 1));
     }
 
     // this West vs right
     if (cardCanBattle(westLoc)
       && card.getWest() > this.grid.get(y_pos).get(x_pos - 1).getCard().getEast()) {
       this.grid.get(y_pos).get(x_pos - 1).getCard().flipOwnership();
-      flippedCards.add(new Point(x_pos - 1, y_pos));
+      flippedCards.add(new Posn(x_pos - 1, y_pos));
     }
 
     // this North vs top
     if (cardCanBattle(northLoc)
       && card.getNorth() > this.grid.get(y_pos - 1).get(x_pos).getCard().getSouth()) {
       this.grid.get(y_pos - 1).get(x_pos).getCard().flipOwnership();
-      flippedCards.add(new Point(x_pos, y_pos - 1));
+      flippedCards.add(new Posn(x_pos, y_pos - 1));
     }
 
     // this East vs right
     if (cardCanBattle(eastLoc)
       && card.getEast() > this.grid.get(y_pos).get(x_pos + 1).getCard().getWest()) {
       this.grid.get(y_pos).get(x_pos + 1).getCard().flipOwnership();
-      flippedCards.add(new Point(x_pos + 1, y_pos));
+      flippedCards.add(new Posn(x_pos + 1, y_pos));
     }
 
     return flippedCards;
   }
 
-  private boolean cardCanBattle(Point adjCardLoc) {
-    return ensurePositionWithinBounds(new Point(adjCardLoc.x, adjCardLoc.y))
-      && grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard() != null
-      && this.grid.get(adjCardLoc.y).get(adjCardLoc.x).getCard().getColor() == opposingPlayer.getColor();
+  private boolean cardCanBattle(Posn adjCardLoc) {
+    return ensurePositionWithinBounds(new Posn(adjCardLoc.getX(), adjCardLoc.getY()))
+      && grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard() != null
+      && this.grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard().getColor() == opposingPlayer.getColor();
   }
 
-  private boolean ensurePositionWithinBounds(Point point) {
-    return point.x >= 0
-      && point.x < grid.get(0).size()
-      && point.y >= 0
-      && point.y < grid.size()
-      && grid.get(point.y).get(point.x).getCellType() != Cell.CellType.HOLE;
+  private boolean ensurePositionWithinBounds(Posn Posn) {
+    return Posn.getX() >= 0
+      && Posn.getX() < grid.get(0).size()
+      && Posn.getY() >= 0
+      && Posn.getY() < grid.size()
+      && grid.get(Posn.getY()).get(Posn.getX()).getCellType() != Cell.CellType.HOLE;
   }
 
 }
