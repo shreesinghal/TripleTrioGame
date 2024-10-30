@@ -3,6 +3,9 @@ package cs3500.tripletrios.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Card Implementation to represent a singular card used in the game.
+ */
 public class CardImpl implements Card {
 
   String name;
@@ -43,7 +46,7 @@ public class CardImpl implements Card {
   }
 
   /**
-   * Switch ownership of the card from current to opposing player
+   * Switch ownership of the card from current to opposing player.
    */
   @Override
   public void flipOwnership() {

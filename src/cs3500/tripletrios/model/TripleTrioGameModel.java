@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class TripleTrioGameModel implements TripleTrioModel{
+/**
+ * Implementation of the behaviors for the TripleTrioModel functionality. 
+ */
+public class TripleTrioGameModel implements TripleTrioModel {
 
   private ArrayList<ArrayList<Cell>> grid;
 
@@ -38,9 +41,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
     for (ArrayList<Cell> rows : grid ) {
       for (Cell cell : rows) {
-      if (cell.cellType == Cell.CellType.CARDCELL) {
-        gridSize++;
-      }
+        if (cell.cellType == Cell.CellType.CARDCELL) {
+          gridSize++;
+        }
       }
     }
 
@@ -90,9 +93,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
     boolean isGridFilled = true;
     for (ArrayList<Cell> row : this.grid) {
       for (Cell cell : row) {
-      if (cell.isEmpty()) {
-        isGridFilled = false;
-      }
+        if (cell.isEmpty()) {
+          isGridFilled = false;
+        }
       }
     }
 
@@ -118,20 +121,13 @@ public class TripleTrioGameModel implements TripleTrioModel{
    */
   @Override
   public WinningState determineWinner() {
-    /**
-     * do we have to account for - 1 in size?
-     * need to account for draw -->
-     * 1) player enum(Player Red, Player Blue, No Player)
-     * 2) edit the color class and return a color instead and account for player in a separate function
-     */
-
+    
     ArrayList<Card> cardsInGrid = new ArrayList<>();
     for (int i = 0; i < this.grid.size(); i++) {
       for (int j = 0; j < this.grid.get(i).size(); j++ ) {
-      if (this.grid.get(j).get(i).getCellType().equals(Cell.CellType.CARDCELL)) {
-        cardsInGrid.add(this.grid.get(j).get(i).getCard());
-      }
-      //what happens if it is a hole, do I need this if statement?
+        if (this.grid.get(j).get(i).getCellType().equals(Cell.CellType.CARDCELL)) {
+          cardsInGrid.add(this.grid.get(j).get(i).getCard());
+        }
       }
     }
 
@@ -140,16 +136,16 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
     for (Card card : cardsInGrid) {
       if (card.getColor() == currPlayer.getColor()) {
-      currPlayerCards++;
+        currPlayerCards++;
       } else {
-      opposingPlayerCards++;
+        opposingPlayerCards++;
       }
     }
 
     //checks the winner based on cards on grid and in hand
     if (currPlayerCards > opposingPlayerCards) {
       return WinningState.RedWins;
-    } else if (opposingPlayerCards > currPlayerCards){
+    } else if (opposingPlayerCards > currPlayerCards) {
       return WinningState.BlueWins;
     }
 
@@ -167,9 +163,9 @@ public class TripleTrioGameModel implements TripleTrioModel{
   }
 
   private void ensureGameStarted() {
-  if (!gameStarted) {
-    throw new IllegalStateException("Game is not started");
-  }
+    if (!gameStarted) {
+      throw new IllegalStateException("Game is not started");
+    }
   }
 
   /**
@@ -204,14 +200,14 @@ public class TripleTrioGameModel implements TripleTrioModel{
 
   /**
    * Places the players card where desired.
-   * @param x_pos x coordinate of desired place
-   * @param y_pos y coordinate of desired place
+   * @param xPos x coordinate of desired place
+   * @param yPos y coordinate of desired place
    * @param card card that is being placed
    */
   @Override
-  public void placeCard(int x_pos, int y_pos, CardImpl card) {
-    if (ensurePositionWithinBounds(new Posn(x_pos, y_pos))) {
-      this.grid.get(y_pos).get(x_pos).placeCard(card);
+  public void placeCard(int xPos, int yPos, CardImpl card) {
+    if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
+      this.grid.get(yPos).get(xPos).placeCard(card);
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
     }
@@ -221,15 +217,16 @@ public class TripleTrioGameModel implements TripleTrioModel{
   /**
    * Executes the battle phase on the card at specified location.
    *
-   * @param x_pos x position of card
-   * @param y_pos y position of card
+   * @param xPos x position of card
+   * @param yPos y position of card
    */
   @Override
-  public void executeBattlePhase(int x_pos, int y_pos) {
-    List<Posn> flippedCards = battleAdjacentCards(x_pos, y_pos);
+  public void executeBattlePhase(int xPos, int yPos) {
+    List<Posn> flippedCards = battleAdjacentCards(xPos, yPos);
     while (!flippedCards.isEmpty()) {
       for (int i = flippedCards.size() - 1; i >= 0; i--) {
-        List<Posn> cardsToBeAdded = battleAdjacentCards(flippedCards.get(i).getX(), flippedCards.get(i).getY());
+        List<Posn> cardsToBeAdded = battleAdjacentCards(flippedCards.get(i).getX(),
+                flippedCards.get(i).getY());
         flippedCards.addAll(cardsToBeAdded);
         i += cardsToBeAdded.size();
         flippedCards.remove(flippedCards.get(i));
@@ -239,45 +236,45 @@ public class TripleTrioGameModel implements TripleTrioModel{
   }
 
 
-  private List<Posn> battleAdjacentCards(int x_pos, int y_pos) {
+  private List<Posn> battleAdjacentCards(int xPos, int yPos) {
     List<Posn> flippedCards = new ArrayList<>();
-    Card card = this.grid.get(y_pos).get(x_pos).getCard();
+    Card card = this.grid.get(yPos).get(xPos).getCard();
 
     if (card == null) {
       return Collections.emptyList();
     }
 
-    Posn southLoc = new Posn(x_pos, y_pos + 1);
-    Posn northLoc = new Posn(x_pos, y_pos - 1);
-    Posn eastLoc = new Posn(x_pos + 1, y_pos);
-    Posn westLoc = new Posn(x_pos - 1, y_pos);
+    Posn southLoc = new Posn(xPos, yPos + 1);
+    Posn northLoc = new Posn(xPos, yPos - 1);
+    Posn eastLoc = new Posn(xPos + 1, yPos);
+    Posn westLoc = new Posn(xPos - 1, yPos);
 
     // this South vs bottom
     if (cardCanBattle(southLoc)
-      && card.getSouth() > this.grid.get(y_pos + 1).get(x_pos).getCard().getNorth()) {
-      this.grid.get(y_pos + 1).get(x_pos).getCard().flipOwnership();
-      flippedCards.add(new Posn(x_pos, y_pos + 1));
+        && card.getSouth() > this.grid.get(yPos + 1).get(xPos).getCard().getNorth()) {
+      this.grid.get(yPos + 1).get(xPos).getCard().flipOwnership();
+      flippedCards.add(new Posn(xPos, yPos + 1));
     }
 
     // this West vs right
     if (cardCanBattle(westLoc)
-      && card.getWest() > this.grid.get(y_pos).get(x_pos - 1).getCard().getEast()) {
-      this.grid.get(y_pos).get(x_pos - 1).getCard().flipOwnership();
-      flippedCards.add(new Posn(x_pos - 1, y_pos));
+        && card.getWest() > this.grid.get(yPos).get(xPos - 1).getCard().getEast()) {
+      this.grid.get(yPos).get(xPos - 1).getCard().flipOwnership();
+      flippedCards.add(new Posn(xPos - 1, yPos));
     }
 
     // this North vs top
     if (cardCanBattle(northLoc)
-      && card.getNorth() > this.grid.get(y_pos - 1).get(x_pos).getCard().getSouth()) {
-      this.grid.get(y_pos - 1).get(x_pos).getCard().flipOwnership();
-      flippedCards.add(new Posn(x_pos, y_pos - 1));
+        && card.getNorth() > this.grid.get(yPos - 1).get(xPos).getCard().getSouth()) {
+      this.grid.get(yPos - 1).get(xPos).getCard().flipOwnership();
+      flippedCards.add(new Posn(xPos, yPos - 1));
     }
 
     // this East vs right
     if (cardCanBattle(eastLoc)
-      && card.getEast() > this.grid.get(y_pos).get(x_pos + 1).getCard().getWest()) {
-      this.grid.get(y_pos).get(x_pos + 1).getCard().flipOwnership();
-      flippedCards.add(new Posn(x_pos + 1, y_pos));
+        && card.getEast() > this.grid.get(yPos).get(xPos + 1).getCard().getWest()) {
+      this.grid.get(yPos).get(xPos + 1).getCard().flipOwnership();
+      flippedCards.add(new Posn(xPos + 1, yPos));
     }
 
     return flippedCards;
@@ -286,15 +283,16 @@ public class TripleTrioGameModel implements TripleTrioModel{
   private boolean cardCanBattle(Posn adjCardLoc) {
     return ensurePositionWithinBounds(new Posn(adjCardLoc.getX(), adjCardLoc.getY()))
       && grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard() != null
-      && this.grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard().getColor() == opposingPlayer.getColor();
+      && this.grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard().getColor()
+            == opposingPlayer.getColor();
   }
 
-  private boolean ensurePositionWithinBounds(Posn Posn) {
-    return Posn.getX() >= 0
-      && Posn.getX() < grid.get(0).size()
-      && Posn.getY() >= 0
-      && Posn.getY() < grid.size()
-      && grid.get(Posn.getY()).get(Posn.getX()).getCellType() != Cell.CellType.HOLE;
+  private boolean ensurePositionWithinBounds(Posn posn) {
+    return posn.getX() >= 0
+      && posn.getX() < grid.get(0).size()
+      && posn.getY() >= 0
+      && posn.getY() < grid.size()
+      && grid.get(posn.getY()).get(posn.getX()).getCellType() != Cell.CellType.HOLE;
   }
 
 }

@@ -5,6 +5,7 @@ import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TripleTrioTextView;
+import cs3500.tripletrios.view.TripleTrioView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
   private TripleTrioModel model;
 
-  private TripleTrioTextView view;
 
   private Readable userInput;
 
@@ -53,13 +53,13 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
 
-      if (model == null) {
-        throw new IllegalArgumentException("model cannot be null");
-      }
+    if (model == null) {
+      throw new IllegalArgumentException("model cannot be null");
+    }
 
     // sets MVC
     this.model = model;
-    this.view = new TripleTrioTextView(model, this.output);
+    TripleTrioView view = new TripleTrioTextView(model, this.output);
     this.scanner = new Scanner(userInput);
 
     // read from config files
@@ -77,11 +77,11 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     while (!model.isGameOver()) {
 
-      this.view.render();
+      view.render();
       String[] inputText = scanner.nextLine().split(" ");
       try {
         playMove(inputText);
-        this.model.switchTruns();
+        this.model.switchTurns();
       } catch (IllegalArgumentException e) {
         output.append(e.getMessage()).append("\nTry again.\n\n");
       }
