@@ -26,5 +26,5 @@ public interface TripleTrioView {
    * Displays the winner along with a final message.
    * @param winner the winner of the game
    */
-  void dispalyFinalMessage(WinningState winner) throws IOException;
+  void displayFinalMessage(WinningState winner) throws IOException;
 }

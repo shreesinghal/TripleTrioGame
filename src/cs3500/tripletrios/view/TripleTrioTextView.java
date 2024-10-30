@@ -108,7 +108,7 @@ public class TripleTrioTextView implements TripleTrioView {
    * @param winner the winner of the game
    */
   @Override
-  public void dispalyFinalMessage(WinningState winner) throws IOException {
+  public void displayFinalMessage(WinningState winner) throws IOException {
 
     switch (winner) {
       case WinningState.RedWins:

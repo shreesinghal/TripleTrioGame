@@ -88,7 +88,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     }
 
-    view.dispalyFinalMessage(model.determineWinner());
+    view.displayFinalMessage(model.determineWinner());
   }
 
   private void playMove(String[] inputText) throws IOException {
