@@ -1,9 +1,6 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardImpl;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Direction;
+import cs3500.tripletrios.model.*;
 import org.junit.Before;
 import org.junit.Test;
 

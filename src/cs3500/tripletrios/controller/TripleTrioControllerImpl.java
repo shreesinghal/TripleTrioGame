@@ -1,9 +1,6 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardImpl;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
 
@@ -62,15 +59,8 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     TripleTrioView view = new TripleTrioTextView(model, this.output);
     this.scanner = new Scanner(userInput);
 
-    // read from config files
-    GridConfigReader gridReader = new GridConfigReader();
-    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
-
-    CardDatabaseReader cardReader = new CardDatabaseReader();
-    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
-
     try {
-      model.startGame(deck, grid);
+      model.startGame(deckPath, gridPath);
     } catch (IllegalStateException | IllegalArgumentException e) {
       output.append(e.getMessage());
     }

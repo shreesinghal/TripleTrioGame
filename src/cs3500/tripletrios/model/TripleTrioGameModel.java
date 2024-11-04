@@ -10,6 +10,12 @@ import java.util.Set;
  */
 public class TripleTrioGameModel implements TripleTrioModel {
 
+  /**
+   * In our codebase, we used a 2D arraylist of cells to
+   * implement our grid. To get a cell from the grid, call it using
+   * grid.get(y-value).get(x-value). Where both x and y values are using
+   * an index system starting at 0.
+   */
   private ArrayList<ArrayList<Cell>> grid;
 
   private Set<Card> deck;
@@ -26,16 +32,21 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * Starts the game with a given deck of cards. The deck is used
    * to set up the player hands. We also instantiate the grid.
    *
-   * @param deckOfCards a set of cards all unique
-   * @param grid    2D arraylist of cells
+   * @param deckPath a string of set of cards all unique read from the path
+   * @param gridPath string of cells read from the path
    * @throws IllegalArgumentException if the grid size is even
    * @throws IllegalStateException  if the size of deck is less than the grid size
    */
   @Override
-  public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
+  public void startGame(String deckPath, String gridPath) {
 
-    this.grid = grid;
-    this.deck = deckOfCards;
+    // read from config files
+    GridConfigReader gridReader = new GridConfigReader();
+    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
+
+    CardDatabaseReader cardReader = new CardDatabaseReader();
+    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
+
 
     int gridSize = 0;
 
@@ -52,7 +63,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
     }
 
 
-    if (deckOfCards.size() < gridSize) {
+    if (deck.size() < gridSize) {
       throw new IllegalStateException("Deck size must be greater than grid size");
     }
 
@@ -60,14 +71,14 @@ public class TripleTrioGameModel implements TripleTrioModel {
     ArrayList<Card> playerBHand = new ArrayList<>();
 
     ArrayList<Card> deckList = new ArrayList<>();
-    deckList.addAll(deckOfCards);
-    for (int i = 1; i <= deckOfCards.size() / 2; i++) {
+    deckList.addAll(deck);
+    for (int i = 1; i <= deck.size() / 2; i++) {
       Card currRedCard = deckList.remove(0);
       currRedCard.setCardColor(Color.RED);
       playerAHand.add(currRedCard);
     }
 
-    for (int i = deckOfCards.size() / 2 + 1; i <= deckOfCards.size(); i++) {
+    for (int i = deck.size() / 2 + 1; i <= deck.size(); i++) {
       Card currBlueCard = deckList.remove(0);
       currBlueCard.setCardColor(Color.BLUE);
       playerBHand.add(currBlueCard);
@@ -121,7 +132,26 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public WinningState determineWinner() {
-    
+
+    int currPlayerScore = getPlayerScore(currPlayer);
+    int opposingPlayerScore = getPlayerScore(opposingPlayer);
+
+    //checks the winner based on cards on grid and in hand
+    if (currPlayerScore > opposingPlayerScore) {
+      return WinningState.RedWins;
+    } else if (opposingPlayerScore > currPlayerScore) {
+      return WinningState.BlueWins;
+    }
+
+    return WinningState.Tie;
+  }
+
+  /**
+   * Gets the current score of a player during the game.
+   * @param player player whose score we want to check
+   * @return the score at the current point of game
+   */
+  public int getPlayerScore(Player player) {
     ArrayList<Card> cardsInGrid = new ArrayList<>();
     for (int i = 0; i < this.grid.size(); i++) {
       for (int j = 0; j < this.grid.get(i).size(); j++ ) {
@@ -142,14 +172,12 @@ public class TripleTrioGameModel implements TripleTrioModel {
       }
     }
 
-    //checks the winner based on cards on grid and in hand
-    if (currPlayerCards > opposingPlayerCards) {
-      return WinningState.RedWins;
-    } else if (opposingPlayerCards > currPlayerCards) {
-      return WinningState.BlueWins;
+    if (player == currPlayer) {
+      return currPlayerCards;
+    } else {
+      return opposingPlayerCards;
     }
 
-    return WinningState.Tie;
   }
 
   /**
@@ -189,14 +217,15 @@ public class TripleTrioGameModel implements TripleTrioModel {
   }
 
   /**
-   * Returns the deck of the game.
+   * Returns the full deck of cards.
    *
-   * @return a set of decks(each unqiue)
+   * @return set of cards
    */
   @Override
   public Set<Card> getDeck() {
     return this.deck;
   }
+
 
   /**
    * Places the players card where desired.

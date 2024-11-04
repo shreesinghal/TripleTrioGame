@@ -6,18 +6,19 @@ import java.util.Set;
 /**
  * Interface to represents the TripleTrioGame functionality.
  */
-public interface TripleTrioModel {
+public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
 
 
   /**
    * Starts the game with a given deck of cards. The deck is used
    * to set up the player hands. We also instantiate the grid.
-   * @param deckOfCards a set of cards all unique
-   * @param grid 2D arraylist of cells
+   *
+   * @param deckPath a set of cards all unique read from the path
+   * @param gridPath 2D arraylist of cells read from the path
    * @throws IllegalArgumentException if the grid size is even
-   * @throws IllegalStateException if the size of deck is less than the grid size
+   * @throws IllegalStateException  if the size of deck is less than the grid size
    */
-  void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid);
+  void startGame(String deckPath, String gridPath);
 
 
   /**
@@ -46,11 +47,13 @@ public interface TripleTrioModel {
    */
   ArrayList<ArrayList<Cell>> getGrid();
 
+
   /**
-   * Returns the deck of the game.
-   * @return a set of decks(each unqiue)
+   * Returns the full deck of cards.
+   * @return set of cards
    */
   Set<Card> getDeck();
+
 
   /**
    * Places the players card where desired.
@@ -73,6 +76,13 @@ public interface TripleTrioModel {
    * @return the winner of the game
    */
   WinningState determineWinner();
+
+  /**
+  * Gets the current score of a player during the game.
+  * @param player player whose score we want to check
+  * @return the score at the current point of game
+  */
+  int getPlayerScore(Player player);
 
   /**
    * Switches the current player.

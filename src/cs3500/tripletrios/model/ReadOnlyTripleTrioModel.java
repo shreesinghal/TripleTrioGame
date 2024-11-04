@@ -1,0 +1,42 @@
+package cs3500.tripletrios.model;
+
+import java.util.ArrayList;
+
+public interface ReadOnlyTripleTrioModel {
+
+
+  /**
+   * Returns if the game is over as specified by the implementation.
+   * @return true if the game has ended and false otherwise
+   * @throws IllegalStateException if the game has not started
+   */
+  boolean isGameOver();
+
+  /**
+  * Returns if the game started.
+  * @return true if game started, else false
+  */
+  boolean isGameStarted();
+
+
+  /**
+  * Returns the current player of the game.
+  * @return player
+  */
+  Player getPlayer();
+
+  /**
+  * Returns the grid in its current status.
+  * @return the grid
+  */
+  ArrayList<ArrayList<Cell>> getGrid();
+
+
+  /**
+  * Determines the winner of the game once the game has ended.
+  * @return the winner of the game
+  */
+  WinningState determineWinner();
+
+
+}
