@@ -1,5 +1,8 @@
 package cs3500.tripletrios.model;
 
+import cs3500.tripletrios.controller.CardDatabaseReader;
+import cs3500.tripletrios.controller.GridConfigReader;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,21 +35,16 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * Starts the game with a given deck of cards. The deck is used
    * to set up the player hands. We also instantiate the grid.
    *
-   * @param deckPath a string of set of cards all unique read from the path
-   * @param gridPath string of cells read from the path
+   * @param deckOfCards a set of cards all unique
+   * @param grid    2D arraylist of cells
    * @throws IllegalArgumentException if the grid size is even
    * @throws IllegalStateException  if the size of deck is less than the grid size
    */
   @Override
-  public void startGame(String deckPath, String gridPath) {
+  public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
 
-    // read from config files
-    GridConfigReader gridReader = new GridConfigReader();
-    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
-
-    CardDatabaseReader cardReader = new CardDatabaseReader();
-    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
-
+    this.grid = grid;
+    this.deck = deckOfCards;
 
     int gridSize = 0;
 
@@ -63,7 +61,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
     }
 
 
-    if (deck.size() < gridSize) {
+    if (deckOfCards.size() < gridSize) {
       throw new IllegalStateException("Deck size must be greater than grid size");
     }
 
@@ -71,14 +69,14 @@ public class TripleTrioGameModel implements TripleTrioModel {
     ArrayList<Card> playerBHand = new ArrayList<>();
 
     ArrayList<Card> deckList = new ArrayList<>();
-    deckList.addAll(deck);
-    for (int i = 1; i <= deck.size() / 2; i++) {
+    deckList.addAll(deckOfCards);
+    for (int i = 1; i <= deckOfCards.size() / 2; i++) {
       Card currRedCard = deckList.remove(0);
       currRedCard.setCardColor(Color.RED);
       playerAHand.add(currRedCard);
     }
 
-    for (int i = deck.size() / 2 + 1; i <= deck.size(); i++) {
+    for (int i = deckOfCards.size() / 2 + 1; i <= deckOfCards.size(); i++) {
       Card currBlueCard = deckList.remove(0);
       currBlueCard.setCardColor(Color.BLUE);
       playerBHand.add(currBlueCard);
@@ -89,6 +87,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     this.gameStarted = true;
   }
+
 
 
 

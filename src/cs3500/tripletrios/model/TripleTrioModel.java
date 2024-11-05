@@ -12,13 +12,12 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   /**
    * Starts the game with a given deck of cards. The deck is used
    * to set up the player hands. We also instantiate the grid.
-   *
-   * @param deckPath a set of cards all unique read from the path
-   * @param gridPath 2D arraylist of cells read from the path
+   * @param deckOfCards a set of cards all unique
+   * @param grid 2D arraylist of cells
    * @throws IllegalArgumentException if the grid size is even
-   * @throws IllegalStateException  if the size of deck is less than the grid size
+   * @throws IllegalStateException if the size of deck is less than the grid size
    */
-  void startGame(String deckPath, String gridPath);
+  void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid);
 
 
   /**

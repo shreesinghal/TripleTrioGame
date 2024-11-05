@@ -59,8 +59,15 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     TripleTrioView view = new TripleTrioTextView(model, this.output);
     this.scanner = new Scanner(userInput);
 
+    // read from config files
+    GridConfigReader gridReader = new GridConfigReader();
+    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
+
+    CardDatabaseReader cardReader = new CardDatabaseReader();
+    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
+
     try {
-      model.startGame(deckPath, gridPath);
+      model.startGame(deck, grid);
     } catch (IllegalStateException | IllegalArgumentException e) {
       output.append(e.getMessage());
     }
@@ -80,6 +87,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     view.displayFinalMessage(model.determineWinner());
   }
+
 
   private void playMove(String[] inputText) throws IOException {
     int x_position = Integer.parseInt(inputText[0]);

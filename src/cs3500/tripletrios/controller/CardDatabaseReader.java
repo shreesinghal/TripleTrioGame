@@ -1,4 +1,4 @@
-package cs3500.tripletrios.model;
+package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
