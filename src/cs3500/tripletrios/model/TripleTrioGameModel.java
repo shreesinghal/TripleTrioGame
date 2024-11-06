@@ -254,7 +254,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
     if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
       if (!this.deckList.isEmpty()) {
-        this.currPlayer.addCardToHand(this.deckList.remove(0));
+        Card newCard = this.deckList.remove(0);
+        newCard.setCardColor(this.currPlayer.getColor());
+        this.currPlayer.addCardToHand(newCard);
       }
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
