@@ -39,7 +39,7 @@ public class PlayerImpl implements Player {
   */
   @Override
   public ArrayList<Card> getHand() {
-    return this.hand;
+    return (ArrayList<Card>) this.hand.clone();
   }
 
   /**
@@ -47,8 +47,18 @@ public class PlayerImpl implements Player {
   * @param card the card wanting to be removed
   */
   @Override
-  public void removeCardFromHand(CardImpl card) {
+  public void removeCardFromHand(Card card) {
     this.hand.remove(card);
+  }
+
+  /**
+   * Adds a card to the hand.
+   *
+   * @param card the card being added to hand
+   */
+  @Override
+  public void addCardToHand(Card card) {
+    this.hand.add(card);
   }
 
 

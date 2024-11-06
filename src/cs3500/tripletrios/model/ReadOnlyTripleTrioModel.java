@@ -29,7 +29,13 @@ public interface ReadOnlyTripleTrioModel {
   * Returns the grid in its current status.
   * @return the grid
   */
-  ArrayList<ArrayList<Cell>> getGrid();
+  ArrayList<ArrayList<Cell>> getCurrentGrid();
+
+  /**
+   * Returns the original grid from the config file.
+   * @return the original grid at start game.
+   */
+  ArrayList<ArrayList<Cell>> getOriginalGrid();
 
 
   /**
@@ -37,6 +43,7 @@ public interface ReadOnlyTripleTrioModel {
   * @return the winner of the game
   */
   WinningState determineWinner();
+
 
 
 }

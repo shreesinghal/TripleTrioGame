@@ -99,7 +99,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     Card cardToPlace = null;
     for (Card card : playerHand) {
       if (card.getName().equals(cardName)) {
-        model.getPlayer().removeCardFromHand((CardImpl) card);
+        model.getPlayer().removeCardFromHand(card);
         cardToPlace = card;
         found = true;
         break;

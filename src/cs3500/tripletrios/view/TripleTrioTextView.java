@@ -68,7 +68,7 @@ public class TripleTrioTextView implements TripleTrioView {
   }
 
   private void displayBoard(StringBuilder output) {
-    for (ArrayList<Cell> row : model.getGrid()) {
+    for (ArrayList<Cell> row : model.getCurrentGrid()) {
       for (Cell cell : row) {
         if (cell.getCellType() == Cell.CellType.HOLE) {
           output.append(" ");

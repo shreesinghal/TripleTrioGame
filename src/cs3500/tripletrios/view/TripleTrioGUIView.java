@@ -1,14 +1,8 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-
-public class TripleTrioGUIView {
-
-  public TripleTrioGUIView(ReadOnlyTripleTrioModel model) {
-
-  }
-
-
-
+/**
+ * Interface which represents the overall GUI view.
+ */
+public interface TripleTrioGUIView {
 
 }

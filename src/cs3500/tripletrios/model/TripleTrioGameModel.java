@@ -20,11 +20,15 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * an index system starting at 0.
    */
   private ArrayList<ArrayList<Cell>> grid;
+  private ArrayList<ArrayList<Cell>> originalGrid;
 
   private Set<Card> deck;
   private Player currPlayer;
   private Player opposingPlayer;
   private boolean gameStarted;
+  private ArrayList<Card> deckList;
+
+
 
   public TripleTrioGameModel() {
     this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
@@ -44,10 +48,10 @@ public class TripleTrioGameModel implements TripleTrioModel {
   public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
 
     this.grid = grid;
+    this.originalGrid = grid;
     this.deck = deckOfCards;
 
     int gridSize = 0;
-
     for (ArrayList<Cell> rows : grid ) {
       for (Cell cell : rows) {
         if (cell.cellType == Cell.CellType.CARDCELL) {
@@ -68,15 +72,18 @@ public class TripleTrioGameModel implements TripleTrioModel {
     ArrayList<Card> playerAHand = new ArrayList<>();
     ArrayList<Card> playerBHand = new ArrayList<>();
 
-    ArrayList<Card> deckList = new ArrayList<>();
+    int handSize = (gridSize + 1) / 2;
+
+    this.deckList = new ArrayList<>();
     deckList.addAll(deckOfCards);
-    for (int i = 1; i <= deckOfCards.size() / 2; i++) {
+
+    for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
       currRedCard.setCardColor(Color.RED);
       playerAHand.add(currRedCard);
     }
 
-    for (int i = deckOfCards.size() / 2 + 1; i <= deckOfCards.size(); i++) {
+    for (int i = 1; i <= handSize; i++) {
       Card currBlueCard = deckList.remove(0);
       currBlueCard.setCardColor(Color.BLUE);
       playerBHand.add(currBlueCard);
@@ -211,8 +218,18 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * @return the grid
    */
   @Override
-  public ArrayList<ArrayList<Cell>> getGrid() {
+  public ArrayList<ArrayList<Cell>> getCurrentGrid() {
     return this.grid;
+  }
+
+  /**
+   * Returns the original grid from the config file.
+   *
+   * @return the original grid at start game.
+   */
+  @Override
+  public ArrayList<ArrayList<Cell>> getOriginalGrid() {
+    return this.originalGrid;
   }
 
   /**
@@ -236,6 +253,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
   public void placeCard(int xPos, int yPos, CardImpl card) {
     if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
+      if (!this.deckList.isEmpty()) {
+        this.currPlayer.addCardToHand(this.deckList.remove(0));
+      }
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
     }

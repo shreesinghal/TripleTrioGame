@@ -44,7 +44,9 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * Returns the grid in its current status.
    * @return the grid
    */
-  ArrayList<ArrayList<Cell>> getGrid();
+  ArrayList<ArrayList<Cell>> getCurrentGrid();
+
+
 
 
   /**

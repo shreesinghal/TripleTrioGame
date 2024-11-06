@@ -23,7 +23,13 @@ public interface Player {
   * Removes a card from the hand.
   * @param card the card wanting to be removed
   */
-  void removeCardFromHand(CardImpl card);
+  void removeCardFromHand(Card card);
+
+  /**
+   * Adds a card to the hand.
+   * @param card the card being added to hand
+   */
+  void addCardToHand(Card card);
 
 
 
