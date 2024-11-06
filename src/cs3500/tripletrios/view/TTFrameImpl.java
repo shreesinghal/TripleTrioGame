@@ -12,9 +12,9 @@ public class TTFrameImpl extends JFrame implements TTFrame {
 
   public TTFrameImpl(ReadOnlyTripleTrioModel model) {
     this.panel = new TTPanel();
-    this.setTitle("Current player: " + model.getPlayer());
+    this.setTitle("Triple Trio"); //change tp say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
-    this.setSize(600, 600); //allows us to set the size of the window
+    this.setSize(800, 800); //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.add(this.panel);
 
@@ -26,7 +26,7 @@ public class TTFrameImpl extends JFrame implements TTFrame {
    */
   @Override
   public void makeVisible() {
-
+    this.setVisible(true);
 
   }
 

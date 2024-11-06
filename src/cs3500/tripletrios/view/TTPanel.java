@@ -1,5 +1,7 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
+
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,8 +12,11 @@ import java.awt.event.MouseListener;
  */
 public class TTPanel extends JPanel {
 
-  public TTPanel() {
+//  private final ReadOnlyTripleTrioModel model;
 
+  public TTPanel(ReadOnlyTripleTrioModel model) {
+
+    JPanel p = new JPanel(new BorderLayout());
   }
 
 
@@ -26,6 +31,9 @@ public class TTPanel extends JPanel {
   private void drawGrid(Graphics2D g2d, int x, int y) {
 
   }
+  //draw the grid and hand inside the panel
+
+
 
 
 
