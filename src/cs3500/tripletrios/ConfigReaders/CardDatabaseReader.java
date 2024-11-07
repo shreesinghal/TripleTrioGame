@@ -1,4 +1,4 @@
-package cs3500.tripletrios.controller;
+package cs3500.tripletrios.ConfigReaders;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Class that reads cards from  card configuration files.
  */
-public final class CardDatabaseReader {
+public class CardDatabaseReader {
 
 
   /**
@@ -25,7 +25,7 @@ public final class CardDatabaseReader {
    * @param deckPath the path to the deck
    * @return returns a set of cards
    */
-  public Set<Card> readDeckConfiguration(String deckPath) {
+  public static Set<Card> readDeckConfiguration(String deckPath) {
     Scanner scanner;
     try {
       scanner = new Scanner(new FileReader(deckPath));

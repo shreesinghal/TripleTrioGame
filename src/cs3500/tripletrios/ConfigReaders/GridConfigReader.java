@@ -1,4 +1,4 @@
-package cs3500.tripletrios.controller;
+package cs3500.tripletrios.ConfigReaders;
 
 import cs3500.tripletrios.model.Cell;
 
@@ -20,7 +20,7 @@ public final class GridConfigReader {
    * @return a new grid for the game
    * @throws IllegalArgumentException if the configurations has an illegal character.\
    */
-  public ArrayList<ArrayList<Cell>> readGridConfiguration(String filePath) {
+  public static ArrayList<ArrayList<Cell>> readGridConfiguration(String filePath) {
     Scanner scanner;
     try {
       scanner = new Scanner(new FileReader(filePath));
