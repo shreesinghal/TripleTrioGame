@@ -1,8 +1,6 @@
 package cs3500.tripletrios.model;
 
-import cs3500.tripletrios.controller.CardDatabaseReader;
-import cs3500.tripletrios.controller.GridConfigReader;
-
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,10 +27,32 @@ public class TripleTrioGameModel implements TripleTrioModel {
   private ArrayList<Card> deckList;
 
 
-
+  /**
+   * This creates a triple trio game model to store game data.
+   */
   public TripleTrioGameModel() {
     this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
     this.opposingPlayer = new PlayerImpl(new ArrayList<Card>(), Color.BLUE);
+  }
+
+  /**
+   * This contstructor is for testing purposes to create a model at a specific state.
+   * @param grid
+   * @param originalGrid
+   */
+  public TripleTrioGameModel(ArrayList<ArrayList<Cell>> grid,
+                             ArrayList<ArrayList<Cell>> originalGrid,
+                             Set<Card> deck, Player currPlayer,
+                             Player opposingPlayer,
+                             boolean gameStarted,
+                             ArrayList<Card> deckList) {
+    this.grid = grid;
+    this.originalGrid = originalGrid;
+    this.deck = deck;
+    this.currPlayer = currPlayer;
+    this.opposingPlayer = opposingPlayer;
+    this.gameStarted = gameStarted;
+    this.deckList = deckList;
   }
 
   /**
@@ -262,6 +282,24 @@ public class TripleTrioGameModel implements TripleTrioModel {
       throw new IllegalArgumentException("Invalid position entered.");
     }
 
+  }
+
+  /**
+   * Returns the height of the grid. For view purposes.
+   *
+   * @return dimensions
+   */
+  public int getGridHeight() {
+    return this.grid.size();
+  }
+
+  /**
+   * Returns the width of the grid. For view purposes.
+   *
+   * @return dimensions
+   */
+  public int getGridWidth() {
+    return this.grid.get(0).size();
   }
 
   /**

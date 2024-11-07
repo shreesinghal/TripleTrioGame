@@ -44,6 +44,18 @@ public interface ReadOnlyTripleTrioModel {
   */
   WinningState determineWinner();
 
+  /**
+   * Returns the height of the grid. For view purposes.
+   *
+   * @return dimensions
+   */
+  public int getGridHeight();
 
+  /**
+   * Returns the width of the grid. For view purposes.
+   *
+   * @return dimensions
+   */
+  public int getGridWidth();
 
 }
