@@ -46,17 +46,27 @@ public class TTPanel extends JPanel {
     Graphics2D g2d = (Graphics2D) g;
     g2d.transform(getLogicalToPhysical());
 
-
+    //drawing the grid
     drawGrid(g2d, model.getGridWidth(), model.getGridHeight());
+    //drawing hands
     drawHands(g2d, model.getPlayer().getHand().size());
 
+    //drawing on the hands
+
+
+    //drawing on the grid
+    ArrayList<CardView> deckViewListCopy = new ArrayList<CardView>(deckViewList);
     for (int y = 0; y < this.model.getCurrentGrid().size(); y++ ) {
       for (int x = 0; x < this.model.getCurrentGrid().get(0).size(); x++) {
         if (!this.model.getCurrentGrid().get(y).get(x).isEmpty()) {
-
+          deckViewListCopy.get(0).draw(g2d, x, y);
+          deckViewListCopy.remove(0);
         }
       }
     }
+
+    //create a helper method for when we want to draw a card on the panel that paint component calls
+    //REPAINT() --> calls paintComponent to redraw WITH the new changes added
   }
 
   private void drawGrid(Graphics2D g2d, int rows, int cols) {
@@ -131,7 +141,8 @@ public class TTPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-
+      //call a handlecellclick in the controller
+      //this is a method which will then highlight the
     }
 
     /**
