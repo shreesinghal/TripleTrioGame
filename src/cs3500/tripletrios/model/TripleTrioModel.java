@@ -37,7 +37,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   boolean isGameStarted();
 
-
   /**
    * Returns the current player of the game.
    *
@@ -58,14 +57,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * @return the grid
    */
   ArrayList<ArrayList<Cell>> getCurrentGrid();
-
-
-  /**
-   * Returns the full deck of cards.
-   *
-   * @return set of cards
-   */
-  Set<Card> getDeck();
 
 
   /**

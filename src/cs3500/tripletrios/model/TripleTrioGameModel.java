@@ -31,22 +31,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * This creates a triple trio game model to store game data.
    */
   public TripleTrioGameModel() {
-    this.currPlayer = new PlayerImpl(new ArrayList<Card>(), Color.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<Card>(), Color.BLUE);
-  }
-
-  /**
-   * This contstructor is for testing purposes to create a model at a specific state.
-   *
-   */
-      public TripleTrioGameModel(ArrayList<ArrayList<Cell>> grid,
-                             ArrayList<ArrayList<Cell>> originalGrid,
-                             Set<Card> deck, Player currPlayer,
-                             Player opposingPlayer,
-                             ArrayList<Card> deckList) {
-
-    this.currPlayer = currPlayer;
-    this.opposingPlayer = opposingPlayer;
+    this.currPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
+    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), Color.BLUE);
   }
 
   /**
@@ -108,9 +94,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     this.gameStarted = true;
   }
-
-
-
 
   /**
    * Returns if the game is over as specified by the implementation.
@@ -233,7 +216,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public Player getOppPlayer() {
-    return null;
+    return this.opposingPlayer;
   }
 
   /**

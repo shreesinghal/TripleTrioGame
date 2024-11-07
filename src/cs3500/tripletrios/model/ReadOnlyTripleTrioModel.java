@@ -1,6 +1,7 @@
 package cs3500.tripletrios.model;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface ReadOnlyTripleTrioModel {
 
@@ -58,4 +59,9 @@ public interface ReadOnlyTripleTrioModel {
    */
   public int getGridWidth();
 
-}
+  /**
+   * Returns the full deck of cards.
+   *
+   * @return set of cards
+   */
+  Set<Card> getDeck();}

@@ -42,6 +42,7 @@ public final class ThreeTrios {
     TTFrame view = new TTFrameImpl(model);
 
     TripleTrioController controller = new TripleTrioGUIController(view);
+    view.makeVisible();
 
   }
 

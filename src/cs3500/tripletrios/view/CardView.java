@@ -8,8 +8,8 @@ import java.awt.geom.Path2D;
 
 public class CardView extends Path2D.Double {
 
-  static int cardWidth = 20;
-  static int cardHeight = 20;
+  static int cardWidth = 150;
+  static int cardHeight = 150;
 
   private Card card;
 
