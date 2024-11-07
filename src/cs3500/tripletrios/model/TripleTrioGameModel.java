@@ -37,22 +37,16 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
   /**
    * This contstructor is for testing purposes to create a model at a specific state.
-   * @param grid
-   * @param originalGrid
+   *
    */
-  public TripleTrioGameModel(ArrayList<ArrayList<Cell>> grid,
-                             ArrayList<ArrayList<Cell>> originalGrid,
-                             Set<Card> deck, Player currPlayer,
+  public TripleTrioGameModel(Player currPlayer,
                              Player opposingPlayer,
-                             boolean gameStarted,
-                             ArrayList<Card> deckList) {
-    this.grid = grid;
-    this.originalGrid = originalGrid;
-    this.deck = deck;
+                             boolean gameStarted) {
+
     this.currPlayer = currPlayer;
     this.opposingPlayer = opposingPlayer;
     this.gameStarted = gameStarted;
-    this.deckList = deckList;
+
   }
 
   /**

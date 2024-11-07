@@ -1,13 +1,19 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class TripleTrioGUIController implements TripleTrioController {
   TripleTrioModel model;
   TTFrame view;
+
+
 
   public TripleTrioGUIController(TTFrame view) {
     if (view == null) {
@@ -29,7 +35,18 @@ public class TripleTrioGUIController implements TripleTrioController {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }
+
     this.model = model;
+
+    // read from config files
+    GridConfigReader gridReader = new GridConfigReader();
+    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
+
+    CardDatabaseReader cardReader = new CardDatabaseReader();
+    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
+
+    model.startGame(deck, grid);
+
     view.makeVisible();
   }
 }

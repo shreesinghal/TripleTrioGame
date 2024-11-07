@@ -1,5 +1,6 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
@@ -11,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Interface to represent a single panel in the GUI view.
@@ -20,8 +23,15 @@ public class TTPanel extends JPanel {
   private ReadOnlyTripleTrioModel model;
   final int panelWidth, panelHeight;
 
+  private ArrayList<CardView> deckViewList;
+
   public TTPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
+    Set<Card> deck = model.getDeck();
+    ArrayList<CardView> deckViewList = new ArrayList<>();
+    for (Card card : deck) {
+      deckViewList.add(new CardView(card));
+    }
 
     this.panelWidth = model.getGridWidth() + 2;
     this.panelHeight = model.getGridHeight() + 2;
@@ -38,6 +48,15 @@ public class TTPanel extends JPanel {
 
 
     drawGrid(g2d, model.getGridWidth(), model.getGridHeight());
+    drawHands(g2d, model.getPlayer().getHand().size());
+
+    for (int y = 0; y < this.model.getCurrentGrid().size(); y++ ) {
+      for (int x = 0; x < this.model.getCurrentGrid().get(0).size(); x++) {
+        if (!this.model.getCurrentGrid().get(y).get(x).isEmpty()) {
+
+        }
+      }
+    }
   }
 
   private void drawGrid(Graphics2D g2d, int rows, int cols) {
@@ -54,6 +73,23 @@ public class TTPanel extends JPanel {
         new Point(CardView.cardWidth * x, 0),
         new Point(CardView.cardWidth * x, panelHeight));
     }
+  }
+
+  private void drawHands(Graphics2D g2d, int numCards) {
+    // draw the hand on the left side of the grid
+    for (int i = 0; i <= numCards; i++) {
+      drawLine(g2d,
+              new Point(0, CardView.cardHeight * i),
+              new Point(CardView.cardWidth, CardView.cardHeight * i));
+    }
+
+    // draw the hand on the left side of the grid
+    for (int i = 0; i <= numCards; i++) {
+      drawLine(g2d,
+              new Point(panelWidth -  CardView.cardWidth, CardView.cardHeight * i),
+              new Point(panelWidth, CardView.cardHeight * i));
+    }
+
   }
 
   private void drawLine(Graphics2D g2d, Point2D start, Point2D end) {
@@ -80,7 +116,6 @@ public class TTPanel extends JPanel {
 
 
 
-  //draw the grid and hand inside the panel
 
 
 

@@ -1,6 +1,7 @@
 package cs3500.tripletrios.model;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface ReadOnlyTripleTrioModel {
 
@@ -37,7 +38,12 @@ public interface ReadOnlyTripleTrioModel {
    */
   ArrayList<ArrayList<Cell>> getOriginalGrid();
 
-
+  /**
+   * Returns the full deck of cards.
+   *
+   * @return set of cards
+   */
+  Set<Card> getDeck();
   /**
   * Determines the winner of the game once the game has ended.
   * @return the winner of the game
