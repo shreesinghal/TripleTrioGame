@@ -1,5 +1,6 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
@@ -23,6 +24,8 @@ public class TTPanel extends JPanel {
   private ReadOnlyTripleTrioModel model;
   final int panelWidth, panelHeight;
 
+  TripleTrioGUIController features;
+
   private ArrayList<CardView> deckViewList;
 
   public TTPanel(ReadOnlyTripleTrioModel model) {
@@ -38,6 +41,11 @@ public class TTPanel extends JPanel {
     this.addMouseListener(new ThreeTriosClick());
   }
 
+
+  public void addClickListener(TripleTrioGUIController features) {
+    this.features = features;
+    this.addMouseListener(new ThreeTriosClick());
+  }
 
   @Override
   public void paintComponent(Graphics g) {
@@ -133,6 +141,8 @@ public class TTPanel extends JPanel {
 
   private class ThreeTriosClick implements MouseListener {
 
+    private boolean cardSelected = false;
+
     /**
      * Invoked when the mouse button has been clicked (pressed
      * and released) on a component.
@@ -141,8 +151,19 @@ public class TTPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+
+
+      cardSelected = true;
       //call a handlecellclick in the controller
       //this is a method which will then highlight the
+    }
+
+
+
+    private void cardDeselected(MouseEvent e) {
+
+
+      cardSelected = false;
     }
 
     /**
@@ -184,6 +205,8 @@ public class TTPanel extends JPanel {
     public void mouseExited(MouseEvent e) {
 
     }
+
+
   }
 
 

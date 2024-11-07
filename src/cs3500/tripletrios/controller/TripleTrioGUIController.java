@@ -49,4 +49,15 @@ public class TripleTrioGUIController implements TripleTrioController {
 
     view.makeVisible();
   }
+
+  /**
+   * Handle an action in a single cell of the board, such as to make a move.
+   *
+   * @param row the row of the clicked cell
+   * @param col the column of the clicked cell
+   */
+  public void handleCellClick(int row, int col) {
+
+    view.refresh();
+  }
 }
