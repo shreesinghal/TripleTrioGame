@@ -2,7 +2,6 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioControllerImpl;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-
 import javax.swing.JFrame;
 
 public class TTFrameImpl extends JFrame implements TTFrame {

@@ -38,12 +38,7 @@ public interface ReadOnlyTripleTrioModel {
    */
   ArrayList<ArrayList<Cell>> getOriginalGrid();
 
-  /**
-   * Returns the full deck of cards.
-   *
-   * @return set of cards
-   */
-  Set<Card> getDeck();
+
   /**
   * Determines the winner of the game once the game has ended.
   * @return the winner of the game
@@ -64,4 +59,9 @@ public interface ReadOnlyTripleTrioModel {
    */
   public int getGridWidth();
 
-}
+  /**
+   * Returns the full deck of cards.
+   *
+   * @return set of cards
+   */
+  Set<Card> getDeck();}

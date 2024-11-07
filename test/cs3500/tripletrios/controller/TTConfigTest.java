@@ -1,5 +1,7 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
+import cs3500.tripletrios.ConfigReaders.GridConfigReader;
 import cs3500.tripletrios.model.*;
 import org.junit.Before;
 import org.junit.Test;

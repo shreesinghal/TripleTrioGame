@@ -1,6 +1,11 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
+import cs3500.tripletrios.ConfigReaders.GridConfigReader;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardImpl;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
 

@@ -37,7 +37,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   boolean isGameStarted();
 
-
   /**
    * Returns the current player of the game.
    *
@@ -46,19 +45,18 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   Player getPlayer();
 
   /**
+   * Returns the opposing player of the game.
+   *
+   * @return player
+   */
+  Player getOppPlayer();
+
+  /**
    * Returns the grid in its current status.
    *
    * @return the grid
    */
   ArrayList<ArrayList<Cell>> getCurrentGrid();
-
-
-  /**
-   * Returns the full deck of cards.
-   *
-   * @return set of cards
-   */
-  Set<Card> getDeck();
 
 
   /**
@@ -98,4 +96,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * Switches the current player.
    */
   void switchTurns();
+
+
 }

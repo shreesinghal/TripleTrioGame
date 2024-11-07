@@ -1,6 +1,5 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
@@ -24,14 +23,11 @@ public class TTPanel extends JPanel {
   private ReadOnlyTripleTrioModel model;
   final int panelWidth, panelHeight;
 
-  TripleTrioGUIController features;
-
-  private ArrayList<CardView> deckViewList;
+  private ArrayList<CardView> deckViewList = new ArrayList<>();
 
   public TTPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
     Set<Card> deck = model.getDeck();
-    ArrayList<CardView> deckViewList = new ArrayList<>();
     for (Card card : deck) {
       deckViewList.add(new CardView(card));
     }
@@ -41,11 +37,6 @@ public class TTPanel extends JPanel {
     this.addMouseListener(new ThreeTriosClick());
   }
 
-
-  public void addClickListener(TripleTrioGUIController features) {
-    this.features = features;
-    this.addMouseListener(new ThreeTriosClick());
-  }
 
   @Override
   public void paintComponent(Graphics g) {
@@ -63,7 +54,7 @@ public class TTPanel extends JPanel {
 
 
     //drawing on the grid
-    ArrayList<CardView> deckViewListCopy = new ArrayList<CardView>(deckViewList);
+    ArrayList<CardView> deckViewListCopy = new ArrayList<>(deckViewList);
     for (int y = 0; y < this.model.getCurrentGrid().size(); y++ ) {
       for (int x = 0; x < this.model.getCurrentGrid().get(0).size(); x++) {
         if (!this.model.getCurrentGrid().get(y).get(x).isEmpty()) {
@@ -141,8 +132,6 @@ public class TTPanel extends JPanel {
 
   private class ThreeTriosClick implements MouseListener {
 
-    private boolean cardSelected = false;
-
     /**
      * Invoked when the mouse button has been clicked (pressed
      * and released) on a component.
@@ -151,19 +140,8 @@ public class TTPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-
-
-      cardSelected = true;
       //call a handlecellclick in the controller
       //this is a method which will then highlight the
-    }
-
-
-
-    private void cardDeselected(MouseEvent e) {
-
-
-      cardSelected = false;
     }
 
     /**
@@ -205,8 +183,6 @@ public class TTPanel extends JPanel {
     public void mouseExited(MouseEvent e) {
 
     }
-
-
   }
 
 
