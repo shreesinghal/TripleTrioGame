@@ -14,9 +14,9 @@ public class TTPanel extends JPanel {
 
 //  private final ReadOnlyTripleTrioModel model;
 
-  public TTPanel(ReadOnlyTripleTrioModel model) {
+  public TTPanel() {
 
-    JPanel p = new JPanel(new BorderLayout());
+
   }
 
 
