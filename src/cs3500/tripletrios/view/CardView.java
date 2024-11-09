@@ -1,5 +1,6 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.Card;
 
 import java.awt.*;
@@ -10,6 +11,7 @@ public class CardView extends Path2D.Double {
   static int cardWidth = 150;
   static int cardHeight = 150;
 
+  private TripleTrioController features;
 
   private Card card;
 
@@ -23,6 +25,8 @@ public class CardView extends Path2D.Double {
     closePath();
 
   }
+
+
 
   /**
    * We are adding a multiplier so that each cell

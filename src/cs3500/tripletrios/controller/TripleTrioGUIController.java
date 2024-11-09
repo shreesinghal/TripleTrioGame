@@ -22,7 +22,10 @@ public class TripleTrioGUIController implements TripleTrioController {
       throw new IllegalArgumentException("view cannot be null");
     }
     this.view = view;
+    view.addClickListener(this);
   }
+
+
 
   /**
    * Play a new game of Triple Trio with the given configurations.
@@ -53,13 +56,20 @@ public class TripleTrioGUIController implements TripleTrioController {
   }
 
   /**
-   * Handle an action in a single cell of the board, such as to make a move.
-   *
-   * @param row the row of the clicked cell
-   * @param col the column of the clicked cell
+   * Handles an action when a player presses a card on the hand.
    */
-  public void handleCellClick(int row, int col) {
-//    model.placeCard();
-    view.refresh();
+  @Override
+  public void handleCellClickForHand() {
+
   }
+
+  /**
+   * Handles an action when a player presses a grid cell.
+   */
+  @Override
+  public void handleCellClickForGrid() {
+
+  }
+
+
 }

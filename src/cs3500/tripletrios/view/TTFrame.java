@@ -1,6 +1,8 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.controller.TripleTrioControllerImpl;
+import cs3500.tripletrios.controller.TripleTrioGUIController;
 
 public interface TTFrame {
 
@@ -10,11 +12,9 @@ public interface TTFrame {
    */
   void makeVisible();
 
-  /**
-   * Sets the controller to handle the clicks on view.
-   * @param listener the controller
-   */
-  void addClickListener(TripleTrioControllerImpl listener);
+
+
+  void addClickListener(TripleTrioController listener);
 
   /**
    * Refresh the view to reflect any changes in the game state.

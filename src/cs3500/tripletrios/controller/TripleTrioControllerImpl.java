@@ -93,6 +93,24 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     view.displayFinalMessage(model.determineWinner());
   }
 
+  /**
+   * Handles an action when a player presses a card on the hand.
+   */
+  @Override
+  public void handleCellClickForHand() {
+    //nothing implemented for the console controller
+  }
+
+  /**
+   * Handles an action when a player presses a grid cell.
+   */
+  @Override
+  public void handleCellClickForGrid() {
+    //nothing implemented for the console controller
+  }
+
+
+
 
   private void playMove(String[] inputText) throws IOException {
     int x_position = Integer.parseInt(inputText[0]);

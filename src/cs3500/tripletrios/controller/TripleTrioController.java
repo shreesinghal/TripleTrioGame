@@ -18,4 +18,16 @@ public interface TripleTrioController {
    * @throws IOException if something in the game is displayed wrong.
    */
   void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException;
+
+
+  /**
+   *  Handles an action when a player presses a card on the hand.
+   */
+  public void handleCellClickForHand();
+
+  /**
+   * Handles an action when a player presses a grid cell.
+   */
+  public void handleCellClickForGrid();
+
 }

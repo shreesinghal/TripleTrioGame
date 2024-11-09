@@ -1,11 +1,16 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.controller.TripleTrioControllerImpl;
+import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This is our view class for our GUI implementation.
+ */
 public class TTFrameImpl extends JFrame implements TTFrame {
 
 
@@ -30,8 +35,7 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.add(gridPanel, BorderLayout.CENTER);
     redHand.setPreferredSize(redHand.getDimensions());
     blueHand.setPreferredSize(blueHand.getDimensions());
-    //think of getPreferredSize
-    this.add(redHand, BorderLayout.LINE_END);
+    this.add(redHand, BorderLayout.LINE_END); //paintComponent called instantly
     this.add(blueHand, BorderLayout.LINE_START);
 
     this.setResizable(true);
@@ -47,15 +51,14 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.setVisible(true);
   }
 
-  /**
-   * Sets the controller to handle the clicks on view.
-   *
-   * @param listener the controller
-   */
   @Override
-  public void addClickListener(TripleTrioControllerImpl listener) {
+  public void addClickListener(TripleTrioController listener) {
+    this.blueHand.addClickListener(listener);
+    this.redHand.addClickListener(listener);
+    this.gridPanel.addClickListener(listener);
 
   }
+
 
   /**
    * Refresh the view to reflect any changes in the game state.

@@ -79,25 +79,23 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.deckList = new ArrayList<>();
     deckList.addAll(deckOfCards);
 
-    for (Card card : deckList){
-      System.out.println(card.getName());
-    }
+
 
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
       currRedCard.setCardColor(Color.RED);
       playerAHand.add(currRedCard);
     }
-    System.out.println("The size of the playerA hand is: " + playerAHand.size());
+
 
     for (int i = 1; i <= handSize; i++) {
       Card currBlueCard = deckList.remove(0);
       currBlueCard.setCardColor(Color.BLUE);
       playerBHand.add(currBlueCard);
     }
-    System.out.println("The size of the playerB hand is: " + playerBHand.size());
 
-    this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
+
+     this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
 
     this.gameStarted = true;

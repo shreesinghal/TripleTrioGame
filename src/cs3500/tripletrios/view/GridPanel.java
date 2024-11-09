@@ -1,19 +1,29 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GridPanel extends JPanel {
 
   private ReadOnlyTripleTrioModel model;
 
+  private TripleTrioController feature;
+
 
   public GridPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
+  }
+
+  public void addClickListener(TripleTrioController feature) {
+    this.feature = feature;
+    this.addMouseListener(new TTGridPanelClick());
   }
 
   @Override
@@ -77,7 +87,62 @@ public class GridPanel extends JPanel {
 
 
 
-  //mouse listener class --> moving from teh hand to the grid
+  private class TTGridPanelClick implements MouseListener {
+
+    /**
+     * Invoked when the mouse button has been clicked (pressed
+     * and released) on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+
+
+      feature.handleCellClickForGrid();
+    }
+
+    /**
+     * Invoked when a mouse button has been pressed on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when a mouse button has been released on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the mouse enters a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the mouse exits a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+  }
 
 }
 
