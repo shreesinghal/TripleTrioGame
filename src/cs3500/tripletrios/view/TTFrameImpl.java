@@ -16,7 +16,7 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   public TTFrameImpl(ReadOnlyTripleTrioModel model) {
     this.redHand = new HandPanel(model, model.getPlayer());
     this.blueHand = new HandPanel(model, model.getOppPlayer());
-    this.gridPanel = new GridPanel(model, (int) redHand.getDimensions().getHeight());
+    this.gridPanel = new GridPanel(model);
     this.createVisual();
   }
 

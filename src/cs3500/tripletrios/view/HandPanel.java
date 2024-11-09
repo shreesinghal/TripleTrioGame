@@ -24,8 +24,12 @@ public class HandPanel extends JPanel {
 
     Graphics2D g2d = (Graphics2D) g;
 
+
     for (int i = 0; i < this.player.getHand().size(); i++) {
-      CardView cardView = new CardView(this.player.getHand().get(i), i);
+      CardView cardView = new CardView(this.player.getHand().get(i),
+        i,
+        this.getHeight() / this.model.getPlayer().getHand().size());
+      // ^^ make the card height dependent on the panel height (this.height) ^^
       g2d.setColor(player.getColor().getColor());
       g2d.fill(cardView);
       g2d.setColor(Color.BLACK);
