@@ -2,7 +2,6 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.Card;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Path2D;
 
@@ -15,8 +14,9 @@ public class CardView extends Path2D.Double {
 
   private Card card;
 
-  public CardView(Card card, int y) {
+  public CardView(Card card, int y, int cardHeight) {
     this.card = card;
+    this.cardHeight = cardHeight;
     moveTo(0,logicalToPixel(y));
     lineTo(cardWidth, logicalToPixel(y));
     lineTo(cardWidth, cardHeight + logicalToPixel(y));
@@ -36,6 +36,10 @@ public class CardView extends Path2D.Double {
     return logical * CardView.cardHeight;
   }
 
+  /**
+   * Gets the logical Size of the card.
+   * @return Dimension of the card
+   */
   static public Dimension getLogicalSizeOfCard() {
     return new Dimension(cardWidth, cardHeight);
   }

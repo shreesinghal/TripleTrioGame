@@ -11,36 +11,34 @@ public class GridPanel extends JPanel {
 
   private ReadOnlyTripleTrioModel model;
 
-  private int gridHeight;
 
-
-
-  public GridPanel(ReadOnlyTripleTrioModel model, int height) {
-    this.gridHeight = height;
+  public GridPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
-    CardView.cardHeight = (this.gridHeight / this.model.getPlayer().getHand().size());
   }
 
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-
     Graphics2D g2d = (Graphics2D) g;
+
+    // make the cell width/height dependent on the panel width/height (this.width/height)
+    int cellWidth = this.getWidth() / model.getGridWidth();
+    int cellHeight = this.getHeight() / model.getGridHeight();
 
     ArrayList<ArrayList<Cell>> grid = this.model.getOriginalGrid();
     for (int y = 0; y < grid.size(); y++) {
       for (int x = 0; x < grid.get(0).size(); x++) {
+        // set the color
         if (grid.get(y).get(x).getCellType() == Cell.CellType.CARDCELL) {
           g2d.setColor(Color.YELLOW);
         } else {
           g2d.setColor(Color.GRAY);
         }
 
-        g2d.fillRect(this.logicalToPixelWidth(x), this.logicalToPixelHeight(y), CardView.cardWidth,
-                CardView.cardHeight);
+        // set the size and draw the border
+        g2d.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
         g2d.setColor(Color.BLACK);
-        g2d.drawRect(this.logicalToPixelWidth(x), this.logicalToPixelHeight(y), CardView.cardWidth,
-                CardView.cardHeight);
+        g2d.drawRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
       }
     }
 
