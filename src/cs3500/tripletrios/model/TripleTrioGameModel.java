@@ -60,6 +60,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
       }
     }
 
+
+
     if (gridSize % 2 == 0) {
       throw new IllegalArgumentException("The grid size must be odd");
     }
@@ -77,17 +79,23 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.deckList = new ArrayList<>();
     deckList.addAll(deckOfCards);
 
+    for (Card card : deckList){
+      System.out.println(card.getName());
+    }
+
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
       currRedCard.setCardColor(Color.RED);
       playerAHand.add(currRedCard);
     }
+    System.out.println("The size of the playerA hand is: " + playerAHand.size());
 
     for (int i = 1; i <= handSize; i++) {
       Card currBlueCard = deckList.remove(0);
       currBlueCard.setCardColor(Color.BLUE);
       playerBHand.add(currBlueCard);
     }
+    System.out.println("The size of the playerB hand is: " + playerBHand.size());
 
     this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
@@ -206,7 +214,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public Player getPlayer() {
-    return this.opposingPlayer;
+    return this.currPlayer;
   }
 
   /**
@@ -260,11 +268,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
   public void placeCard(int xPos, int yPos, CardImpl card) {
     if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
-      if (!this.deckList.isEmpty()) {
-        Card newCard = this.deckList.remove(0);
-        newCard.setCardColor(this.currPlayer.getColor());
-        this.currPlayer.addCardToHand(newCard);
-      }
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
     }

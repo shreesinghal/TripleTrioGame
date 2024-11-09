@@ -2,23 +2,39 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioControllerImpl;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-import javax.swing.JFrame;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class TTFrameImpl extends JFrame implements TTFrame {
 
-  private final TTPanel panel;
+
+  private final GridPanel gridPanel;
+  private final HandPanel redHand;
+  private final HandPanel blueHand;
 
   public TTFrameImpl(ReadOnlyTripleTrioModel model) {
-    this.panel = new TTPanel(model);
+    this.redHand = new HandPanel(model, model.getPlayer());
+    this.blueHand = new HandPanel(model, model.getOppPlayer());
+    this.gridPanel = new GridPanel(model, (int) redHand.getDimensions().getHeight());
     this.createVisual();
   }
 
   private void createVisual() {
     this.setTitle("Triple Trio"); //change tp say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
-    this.setSize(800, 800); //allows us to set the size of the window
+    this.setSize(new Dimension((int) (gridPanel.getDimensions().getWidth() + redHand.getDimensions().getWidth() + blueHand.getDimensions().getWidth()),
+            (int) (gridPanel.getDimensions().getHeight() + redHand.getDimensions().getHeight() + blueHand.getDimensions().getHeight()))); //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
-    this.add(panel);
+    this.setLayout(new BorderLayout());
+    this.add(gridPanel, BorderLayout.CENTER);
+    redHand.setPreferredSize(redHand.getDimensions());
+    blueHand.setPreferredSize(blueHand.getDimensions());
+    this.add(redHand, BorderLayout.EAST);
+    this.add(blueHand, BorderLayout.WEST);
+
+    this.setResizable(true);
+    this.setVisible(true);
   }
 
   /**
@@ -48,5 +64,9 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.repaint();
   }
 
+//  @Override
+//  public void mouseClick() {
+//
+//  }
 
 }

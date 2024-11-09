@@ -27,6 +27,13 @@ public interface ReadOnlyTripleTrioModel {
   Player getPlayer();
 
   /**
+   * Returns the opposing player of the game.
+   *
+   * @return player
+   */
+  Player getOppPlayer();
+
+  /**
   * Returns the grid in its current status.
   * @return the grid
   */

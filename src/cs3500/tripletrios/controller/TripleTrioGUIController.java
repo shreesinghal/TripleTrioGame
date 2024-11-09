@@ -59,7 +59,7 @@ public class TripleTrioGUIController implements TripleTrioController {
    * @param col the column of the clicked cell
    */
   public void handleCellClick(int row, int col) {
-
+//    model.placeCard();
     view.refresh();
   }
 }
