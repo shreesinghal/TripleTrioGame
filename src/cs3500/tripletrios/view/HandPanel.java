@@ -23,6 +23,8 @@ public class HandPanel extends JPanel {
     super.paintComponent(g);
 
     Graphics2D g2d = (Graphics2D) g;
+    //going to have to scale graphic2D based on the dimension width and height
+    //.scale function --> get dimensions of the current size and scale the
 
     for (int i = 0; i < this.player.getHand().size(); i++) {
       CardView cardView = new CardView(this.player.getHand().get(i), i);

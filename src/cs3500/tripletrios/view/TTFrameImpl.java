@@ -30,8 +30,9 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.add(gridPanel, BorderLayout.CENTER);
     redHand.setPreferredSize(redHand.getDimensions());
     blueHand.setPreferredSize(blueHand.getDimensions());
-    this.add(redHand, BorderLayout.EAST);
-    this.add(blueHand, BorderLayout.WEST);
+    //think of getPreferredSize
+    this.add(redHand, BorderLayout.LINE_END);
+    this.add(blueHand, BorderLayout.LINE_START);
 
     this.setResizable(true);
     this.setVisible(true);
