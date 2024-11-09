@@ -30,9 +30,9 @@ public class GridPanel extends JPanel {
       for (int x = 0; x < grid.get(0).size(); x++) {
         // set the color
         if (grid.get(y).get(x).getCellType() == Cell.CellType.CARDCELL) {
-          g2d.setColor(Color.YELLOW);
+          g2d.setColor(new Color(212, 200, 0, 255));
         } else {
-          g2d.setColor(Color.GRAY);
+          g2d.setColor(new Color(192,192,192,255));
         }
 
         // set the size and draw the border

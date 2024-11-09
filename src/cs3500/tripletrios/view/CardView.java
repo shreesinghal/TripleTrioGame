@@ -9,8 +9,7 @@ public class CardView extends Path2D.Double {
 
   static int cardWidth = 150;
   static int cardHeight = 150;
-  //don't give them a value and take a value into the constructor
-  //either don't make it static or have updater method to change the value
+
 
   private Card card;
 
@@ -45,7 +44,12 @@ public class CardView extends Path2D.Double {
   }
 
   public void draw(Graphics2D g2d, int x, int y) {
-    g2d.setColor(this.card.getColor().getColor());
+    if (this.card.getColor().getColor() == Color.RED) {
+      g2d.setColor(new Color(255,171,173,255));
+    } else {
+      g2d.setColor(new Color(72, 172, 255, 255));
+    }
+
     g2d.fill(this);
 
     g2d.setColor(Color.black);
