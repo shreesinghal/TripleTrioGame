@@ -1,8 +1,6 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.controller.TripleTrioControllerImpl;
-import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.*;
@@ -17,8 +15,10 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   private final GridPanel gridPanel;
   private final HandPanel redHand;
   private final HandPanel blueHand;
+  private final ReadOnlyTripleTrioModel model;
 
   public TTFrameImpl(ReadOnlyTripleTrioModel model) {
+    this.model = model;
     this.redHand = new HandPanel(model, model.getPlayer());
     this.blueHand = new HandPanel(model, model.getOppPlayer());
     this.gridPanel = new GridPanel(model);
@@ -26,10 +26,14 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   }
 
   private void createVisual() {
-    this.setTitle("Triple Trio"); //change tp say the current player
+    this.setTitle("Current Player: " + this.model.getPlayer().getColor()); //change tp say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
-    this.setSize(new Dimension((int) (gridPanel.getDimensions().getWidth() + redHand.getDimensions().getWidth() + blueHand.getDimensions().getWidth()),
-            (int) (gridPanel.getDimensions().getHeight() + redHand.getDimensions().getHeight() + blueHand.getDimensions().getHeight()))); //allows us to set the size of the window
+    this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
+      + redHand.getDimensions().getWidth()
+      + blueHand.getDimensions().getWidth()),
+            (int) (getToolkit().getScreenSize().getHeight()
+              + redHand.getDimensions().getHeight()
+              + blueHand.getDimensions().getHeight()))); //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.setLayout(new BorderLayout());
     this.add(gridPanel, BorderLayout.CENTER);
@@ -67,10 +71,5 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   public void refresh() {
     this.repaint();
   }
-
-//  @Override
-//  public void mouseClick() {
-//
-//  }
 
 }

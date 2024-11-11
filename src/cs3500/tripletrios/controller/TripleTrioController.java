@@ -1,7 +1,9 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 /**
@@ -23,7 +25,7 @@ public interface TripleTrioController {
   /**
    *  Handles an action when a player presses a card on the hand.
    */
-  public void handleCellClickForHand();
+  public void handleCellClickForHand(MouseEvent e, Color color);
 
   /**
    * Handles an action when a player presses a grid cell.
