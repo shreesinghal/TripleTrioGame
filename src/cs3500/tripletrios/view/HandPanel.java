@@ -81,6 +81,11 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+      //card selected and highlighted --> should print the coordinates of chosen card
+      
+
+      //card deselected
+
       features.handleCellClickForHand();
     }
 
@@ -91,7 +96,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -101,7 +106,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -111,7 +116,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -121,7 +126,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
+      //no implementation
     }
   }
 
