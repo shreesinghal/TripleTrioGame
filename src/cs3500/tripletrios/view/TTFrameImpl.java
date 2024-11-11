@@ -3,8 +3,9 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 /**
  * This is our view class for our GUI implementation.
@@ -29,16 +30,16 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.setTitle("Current Player: " + this.model.getPlayer().getColor()); //change tp say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
-      + redHand.getDimensions().getWidth()
-      + blueHand.getDimensions().getWidth()),
+      + redHand.getPixelDimensions().getWidth()
+      + blueHand.getPixelDimensions().getWidth()),
             (int) (getToolkit().getScreenSize().getHeight()
-              + redHand.getDimensions().getHeight()
-              + blueHand.getDimensions().getHeight()))); //allows us to set the size of the window
+              + redHand.getPixelDimensions().getHeight()
+              + blueHand.getPixelDimensions().getHeight()))); //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.setLayout(new BorderLayout());
     this.add(gridPanel, BorderLayout.CENTER);
-    redHand.setPreferredSize(redHand.getDimensions());
-    blueHand.setPreferredSize(blueHand.getDimensions());
+    redHand.setPreferredSize(redHand.getPixelDimensions());
+    blueHand.setPreferredSize(blueHand.getPixelDimensions());
     this.add(redHand, BorderLayout.LINE_END); //paintComponent called instantly
     this.add(blueHand, BorderLayout.LINE_START);
 
