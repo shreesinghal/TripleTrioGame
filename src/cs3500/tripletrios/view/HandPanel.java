@@ -1,13 +1,10 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -77,7 +74,7 @@ public class HandPanel extends JPanel {
    * Gets the dimensions needed to make a hand on GUI view.
    * @return dimensions of the hand
    */
-  public Dimension getDimensions() {
+  public Dimension getPixelDimensions() {
     return new Dimension(CardView.cardWidth, CardView.cardHeight * this.model.getPlayer().getHand().size());
   }
 
