@@ -14,7 +14,7 @@ public class GridPanel extends JPanel {
 
   private ReadOnlyTripleTrioModel model;
 
-  private TripleTrioController feature;
+  private TripleTrioController features;
 
 
   public GridPanel(ReadOnlyTripleTrioModel model) {
@@ -22,7 +22,7 @@ public class GridPanel extends JPanel {
   }
 
   public void addClickListener(TripleTrioController feature) {
-    this.feature = feature;
+    this.features = feature;
     this.addMouseListener(new TTGridPanelClick());
   }
 
@@ -61,8 +61,8 @@ public class GridPanel extends JPanel {
    * @return dimensions of the grid
    */
   public Dimension getDimensions() {
-    return new Dimension(CardView.cardWidth * model.getGridWidth(),
-            CardView.cardHeight * model.getGridHeight());
+    return new Dimension(this.getWidth() / model.getGridWidth(),
+      this.getHeight() / model.getGridHeight());
   }
 
   /**
@@ -97,10 +97,17 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+      System.out.println("You clicked at " + pixelToCellHoriz(e.getX()) + " " + pixelToCellVert(e.getY()) + " of the grid.");
+      features.handleCellClickForGrid();
+    }
 
 
+    private String pixelToCellHoriz(int Coord) {
+      return String.valueOf(Coord / getDimensions().width + 1);
+    }
 
-      feature.handleCellClickForGrid();
+    private String pixelToCellVert(int Coord) {
+      return String.valueOf(Coord / getDimensions().height + 1);
     }
 
     /**

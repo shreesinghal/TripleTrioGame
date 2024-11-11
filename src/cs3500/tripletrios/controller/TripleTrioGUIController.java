@@ -3,11 +3,13 @@ package cs3500.tripletrios.controller;
 import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
 import cs3500.tripletrios.ConfigReaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
@@ -60,8 +62,8 @@ public class TripleTrioGUIController implements TripleTrioController {
    * Handles an action when a player presses a card on the hand.
    */
   @Override
-  public void handleCellClickForHand() {
-    view.refresh();
+  public void handleCellClickForHand(MouseEvent e, Color color) {
+
   }
 
   /**
@@ -69,9 +71,9 @@ public class TripleTrioGUIController implements TripleTrioController {
    */
   @Override
   public void handleCellClickForGrid() {
-    //controller has to get the row and column of the cell the player just clicked on
 
   }
+
 
 
 }
