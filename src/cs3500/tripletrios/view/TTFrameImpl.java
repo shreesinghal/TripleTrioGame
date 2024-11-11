@@ -26,7 +26,7 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   }
 
   private void createVisual() {
-    this.setTitle("Current Player: " + this.model.getPlayer().getColor()); //change tp say the current player
+    this.setTitle("Current Player: " + this.model.getPlayer().getColor()); //change to say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
       + redHand.getDimensions().getWidth()
