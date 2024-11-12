@@ -1,17 +1,12 @@
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.controller.TripleTrioControllerImpl;
 import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Color;
-import cs3500.tripletrios.model.Direction;
-import cs3500.tripletrios.model.Player;
-import cs3500.tripletrios.model.PlayerImpl;
 import cs3500.tripletrios.model.TripleTrioGameModel;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
-import cs3500.tripletrios.view.TTFrameImpl;
+import cs3500.tripletrios.view.TTFrameViewImpl;
 import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
 import cs3500.tripletrios.ConfigReaders.GridConfigReader;
 
@@ -39,10 +34,10 @@ public final class ThreeTrios {
     model.placeCard(0,0, (CardImpl) redPlayerHand.get(0));
     model.placeCard(2,2, (CardImpl) bluePlayerHand.get(0));
 
-    TTFrame view = new TTFrameImpl(model);
+    TTFrame view = new TTFrameViewImpl(model);
 
     TripleTrioController controller = new TripleTrioGUIController(view);
-    view.makeVisible();
+    controller.playGame(model);
 
   }
 

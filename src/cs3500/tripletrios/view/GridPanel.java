@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GridPanel extends JPanel {
@@ -40,7 +41,7 @@ public class GridPanel extends JPanel {
       for (int x = 0; x < grid.get(0).size(); x++) {
         // set the color
         if (grid.get(y).get(x).getCellType() == Cell.CellType.CARDCELL) {
-          g2d.setColor(new Color(212, 200, 0, 255));
+          g2d.setColor(new Color(212, 200, 50, 255));
         } else {
           g2d.setColor(new Color(192,192,192,255));
         }
@@ -98,16 +99,20 @@ public class GridPanel extends JPanel {
     @Override
     public void mouseClicked(MouseEvent e) {
       System.out.println("You clicked at " + pixelToCellHoriz(e.getX()) + " " + pixelToCellVert(e.getY()) + " of the grid.");
-      features.handleCellClickForGrid();
+      try {
+        features.handleCellClickForGrid(pixelToCellHoriz(e.getX()), pixelToCellVert(e.getY()));
+      } catch (IOException ex) {
+        System.out.print("Card couldn't be placed in grid.");
+      }
     }
 
 
-    private String pixelToCellHoriz(int Coord) {
-      return String.valueOf(Coord / getDimensions().width + 1);
+    private int pixelToCellHoriz(int Coord) {
+      return (Coord / getDimensions().width + 1);
     }
 
-    private String pixelToCellVert(int Coord) {
-      return String.valueOf(Coord / getDimensions().height + 1);
+    private int pixelToCellVert(int Coord) {
+      return (Coord / getDimensions().height + 1);
     }
 
     /**

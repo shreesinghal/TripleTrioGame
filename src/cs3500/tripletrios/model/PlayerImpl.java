@@ -51,15 +51,6 @@ public class PlayerImpl implements Player {
     this.hand.remove(card);
   }
 
-  /**
-   * Adds a card to the hand.
-   *
-   * @param card the card being added to hand
-   */
-  @Override
-  public void addCardToHand(Card card) {
-    this.hand.add(card);
-  }
 
 
 }
