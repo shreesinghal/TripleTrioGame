@@ -11,7 +11,7 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
    * @return the card chosen to play
    */
   @Override
-  public Card chooseCard() {
+  public Card chooseCardFromHand() {
     return null;
   }
 
@@ -19,7 +19,7 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
    * A method that allows for placing a card strategically on the grid.
    */
   @Override
-  public void placeCard() {
+  public void placeCardToGrid() {
 
   }
 }
