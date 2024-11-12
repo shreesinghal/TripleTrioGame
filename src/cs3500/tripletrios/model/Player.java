@@ -25,12 +25,4 @@ public interface Player {
   */
   void removeCardFromHand(Card card);
 
-  /**
-   * Adds a card to the hand.
-   * @param card the card being added to hand
-   */
-  void addCardToHand(Card card);
-
-
-
 }

@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ import java.awt.Dimension;
 /**
  * This is our view class for our GUI implementation.
  */
-public class TTFrameImpl extends JFrame implements TTFrame {
+public class TTFrameViewImpl extends JFrame implements TTFrame {
 
 
   private final GridPanel gridPanel;
@@ -18,7 +19,7 @@ public class TTFrameImpl extends JFrame implements TTFrame {
   private final HandPanel blueHand;
   private final ReadOnlyTripleTrioModel model;
 
-  public TTFrameImpl(ReadOnlyTripleTrioModel model) {
+  public TTFrameViewImpl(ReadOnlyTripleTrioModel model) {
     this.model = model;
     this.redHand = new HandPanel(model, model.getPlayer());
     this.blueHand = new HandPanel(model, model.getOppPlayer());
@@ -56,8 +57,22 @@ public class TTFrameImpl extends JFrame implements TTFrame {
     this.setVisible(true);
   }
 
+  /**
+   * Gets the handview of the player
+   *
+   * @param color red or blue
+   * @return
+   */
   @Override
-  public void addClickListener(TripleTrioController listener) {
+  public HandPanel getHandView(Color color) {
+    if (color == Color.BLUE) {
+      return blueHand;
+    }
+    return redHand;
+  }
+
+  @Override
+  public void addClickListeners(TripleTrioController listener) {
     this.blueHand.addClickListener(listener);
     this.redHand.addClickListener(listener);
     this.gridPanel.addClickListener(listener);

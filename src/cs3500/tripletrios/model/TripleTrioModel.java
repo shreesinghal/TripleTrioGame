@@ -65,7 +65,7 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * @param yPos y coordinate of desired place
    * @param card card that is being placed
    */
-  void placeCard(int xPos, int yPos, CardImpl card);
+  void placeCard(int xPos, int yPos, Card card);
 
 
   /**

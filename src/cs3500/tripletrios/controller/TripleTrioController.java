@@ -1,9 +1,10 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.view.CardView;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 /**
@@ -25,11 +26,24 @@ public interface TripleTrioController {
   /**
    *  Handles an action when a player presses a card on the hand.
    */
-  public void handleCellClickForHand(MouseEvent e, Color color);
+  public void handleCellClickForHand(int cardNum, Color color);
 
   /**
    * Handles an action when a player presses a grid cell.
    */
-  public void handleCellClickForGrid();
+  public void handleCellClickForGrid(int i, int pixelToCellVert) throws IOException;
 
+  /**
+   * Play a game of Triple Trios given a model with initial conditions.
+   * @param model a triple trio model
+   */
+  void playGame(TripleTrioModel model) throws IOException;
+
+  /**
+   * Play a game of Triple Trios given a model with initial conditions.
+   * @param xPos
+   * @param yPos
+   * @param card
+   *
+   */
 }

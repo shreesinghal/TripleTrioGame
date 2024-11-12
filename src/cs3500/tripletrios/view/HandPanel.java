@@ -5,7 +5,11 @@ import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -16,9 +20,8 @@ public class HandPanel extends JPanel {
 
   private ReadOnlyTripleTrioModel model;
   private final Player player;
-  private Graphics2D g2d;
   private ArrayList<CardView> cardViewsInHand;
-  private int highlightedCard = -1;
+  private int highlightedCardNum = -1;
 
 
   public HandPanel(ReadOnlyTripleTrioModel model, Player player) {
@@ -38,7 +41,7 @@ public class HandPanel extends JPanel {
     super.paintComponent(g);
     //clears the panel, makes sure any old drawings on it are removed
 
-    g2d = (Graphics2D) g;
+    Graphics2D g2d = (Graphics2D) g;
 
 
     for (int i = 0; i < this.player.getHand().size(); i++) {
@@ -57,7 +60,7 @@ public class HandPanel extends JPanel {
       g2d.fill(cardView);
 
       g2d.setColor(Color.BLACK);
-      if (i == highlightedCard - 1) {
+      if (i == highlightedCardNum) {
         g2d.setStroke(new BasicStroke(10));
       }
       cardView.draw(g2d,0,i * CardView.cardHeight);
@@ -78,6 +81,13 @@ public class HandPanel extends JPanel {
     return new Dimension(CardView.cardWidth, CardView.cardHeight * this.model.getPlayer().getHand().size());
   }
 
+  /**
+   * Unhighlights the highlighted card.
+   */
+  public void unHighlight() {
+    highlightedCardNum = -1;
+  }
+
 
   /**
    * Private class to handle clicks to hand.
@@ -94,23 +104,24 @@ public class HandPanel extends JPanel {
     public void mouseClicked(MouseEvent e) {
       System.out.println("You clicked at " + 1 + " " + pixelToCell(e.getY()) + " in the "
         + player.getColor() + " hand.");
-      features.handleCellClickForHand(e, player.getColor());
+      features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
       if (player.getColor() == model.getPlayer().getColor()) {
         highlightHandCard(pixelToCell(e.getY()));
       }
     }
 
     private void highlightHandCard(int cardNumber) {
-      if (highlightedCard == cardNumber) {
-        highlightedCard = -1;
+      if (highlightedCardNum == cardNumber) {
+        highlightedCardNum = -1;
       } else {
-        highlightedCard = cardNumber;
+        highlightedCardNum = cardNumber;
       }
       repaint();
     }
 
     private int pixelToCell(int Coord) {
-      return Coord / CardView.getLogicalSizeOfCard().height + 1;
+
+      return Coord / CardView.getLogicalSizeOfCard().height;
     }
 
     /**

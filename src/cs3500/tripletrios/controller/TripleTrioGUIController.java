@@ -6,17 +6,16 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
-import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
 public class TripleTrioGUIController implements TripleTrioController {
-  TripleTrioModel model;
-  TTFrame view;
+  private TripleTrioModel model;
+  private TTFrame view;
+  private Card selectedCard = null;
 
 
 
@@ -25,7 +24,7 @@ public class TripleTrioGUIController implements TripleTrioController {
       throw new IllegalArgumentException("view cannot be null");
     }
     this.view = view;
-    view.addClickListener(this);
+    view.addClickListeners(this);
   }
 
 
@@ -62,18 +61,50 @@ public class TripleTrioGUIController implements TripleTrioController {
    * Handles an action when a player presses a card on the hand.
    */
   @Override
-  public void handleCellClickForHand(MouseEvent e, Color color) {
-
+  public void handleCellClickForHand(int cardNum, Color color) {
+    selectedCard = model.getPlayer().getHand().get(cardNum);
   }
 
   /**
    * Handles an action when a player presses a grid cell.
    */
   @Override
-  public void handleCellClickForGrid() {
-
+  public void handleCellClickForGrid(int xGridLoc, int yGridLoc) throws IOException {
+    if (selectedCard != null) {
+      this.playMove(xGridLoc, yGridLoc);
+      view.getHandView(this.model.getPlayer().getColor()).unHighlight();
+    }
   }
 
+  /**
+   * Play a game of Triple Trios given a model with initial conditions.
+   *
+   * @param model a triple trio model
+   */
+  @Override
+  public void playGame(TripleTrioModel model) {
+    if (model == null) {
+      throw new IllegalArgumentException("model cannot be null");
+    }
+
+    this.model = model;
+
+    ArrayList<ArrayList<Cell>> grid = model.getOriginalGrid();
+
+    Set<Card> deck = model.getDeck();
+
+    model.startGame(deck, grid);
+
+    view.makeVisible();
+  }
+
+  private void playMove(int xPos, int yPos) throws IOException {
+    System.out.println("Reached controller play move");
+    model.getPlayer().removeCardFromHand(selectedCard);
+    System.out.println(model.getPlayer().getHand().size());
+    model.placeCard(xPos - 1, yPos - 1, selectedCard);
+    model.executeBattlePhase(xPos - 1, yPos - 1);
+  }
 
 
 }

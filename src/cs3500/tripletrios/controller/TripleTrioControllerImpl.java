@@ -6,7 +6,6 @@ import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -69,6 +68,51 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     CardDatabaseReader cardReader = new CardDatabaseReader();
     Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
 
+    tryStartGame(model, view, grid, deck);
+  }
+
+  /**
+   * Handles an action when a player presses a card on the hand.
+   */
+  @Override
+  public void handleCellClickForHand(int cardNum, Color color) {
+    //nothing implemented for the console controller
+  }
+
+  /**
+   * Handles an action when a player presses a grid cell.
+   */
+  @Override
+  public void handleCellClickForGrid(int i, int pixelToCellVert) {
+    //nothing implemented for the console controller
+  }
+
+  /**
+   * Play a game of Triple Trios given a model with initial conditions.
+   *
+   * @param model a triple trio model
+   */
+  @Override
+  public void playGame(TripleTrioModel model) throws IOException {
+    if (model == null) {
+      throw new IllegalArgumentException("model cannot be null");
+    }
+
+    // sets MVC
+    this.model = model;
+    TripleTrioView view = new TripleTrioTextView(model, this.output);
+    this.scanner = new Scanner(userInput);
+
+    // read from config files
+    ArrayList<ArrayList<Cell>> grid = model.getOriginalGrid();
+
+    Set<Card> deck = model.getDeck();
+
+    tryStartGame(model, view, grid, deck);
+  }
+
+
+  private void tryStartGame(TripleTrioModel model, TripleTrioView view, ArrayList<ArrayList<Cell>> grid, Set<Card> deck) throws IOException {
     try {
       model.startGame(deck, grid);
     } catch (IllegalStateException | IllegalArgumentException e) {
@@ -90,24 +134,6 @@ public class TripleTrioControllerImpl implements TripleTrioController {
 
     view.displayFinalMessage(model.determineWinner());
   }
-
-  /**
-   * Handles an action when a player presses a card on the hand.
-   */
-  @Override
-  public void handleCellClickForHand(MouseEvent e, Color color) {
-    //nothing implemented for the console controller
-  }
-
-  /**
-   * Handles an action when a player presses a grid cell.
-   */
-  @Override
-  public void handleCellClickForGrid() {
-    //nothing implemented for the console controller
-  }
-
-
 
 
   private void playMove(String[] inputText) throws IOException {

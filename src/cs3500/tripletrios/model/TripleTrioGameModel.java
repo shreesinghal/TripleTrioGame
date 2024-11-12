@@ -1,6 +1,5 @@
 package cs3500.tripletrios.model;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -263,7 +262,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * @param card card that is being placed
    */
   @Override
-  public void placeCard(int xPos, int yPos, CardImpl card) {
+  public void placeCard(int xPos, int yPos, Card card) {
     if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
     } else {

@@ -1,8 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.controller.TripleTrioControllerImpl;
-import cs3500.tripletrios.controller.TripleTrioGUIController;
+import cs3500.tripletrios.model.Color;
 
 public interface TTFrame {
 
@@ -12,9 +11,14 @@ public interface TTFrame {
    */
   void makeVisible();
 
+  /**
+   * Gets the handview of the player
+   *
+   * @return
+   */
+  HandPanel getHandView(Color color);
 
-
-  void addClickListener(TripleTrioController listener);
+  void addClickListeners(TripleTrioController listener);
 
   /**
    * Refresh the view to reflect any changes in the game state.
