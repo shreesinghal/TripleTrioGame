@@ -30,8 +30,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * This creates a triple trio game model to store game data.
    */
   public TripleTrioGameModel() {
-    this.currPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), Color.BLUE);
+    this.currPlayer = new PlayerImpl(new ArrayList<>(), Color.BLUE);
+    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
   }
 
   /**

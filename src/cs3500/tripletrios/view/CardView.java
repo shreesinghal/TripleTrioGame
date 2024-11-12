@@ -15,6 +15,8 @@ public class CardView extends Path2D.Double {
 
   private Card card;
 
+
+
   public CardView(Card card, int y, int cardHeight) {
     this.card = card;
     this.cardHeight = cardHeight;
@@ -38,6 +40,10 @@ public class CardView extends Path2D.Double {
     //logical to physical
     return logical * CardView.cardHeight;
   }
+
+
+
+
 
   /**
    * Gets the logical Size of the card.
@@ -64,6 +70,8 @@ public class CardView extends Path2D.Double {
     g2d.drawString(String.valueOf(this.card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
     g2d.drawString(String.valueOf(this.card.getWest()), x + 5, y + cardHeight / 2);
   }
+
+
 
 
 }
