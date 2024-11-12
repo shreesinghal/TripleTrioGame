@@ -98,7 +98,7 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      System.out.println("You clicked at " + pixelToCellHoriz(e.getX()) + " " + pixelToCellVert(e.getY()) + " of the grid.");
+      //System.out.println("You clicked at " + pixelToCellHoriz(e.getX()) + " " + pixelToCellVert(e.getY()) + " of the grid.");
       try {
         features.handleCellClickForGrid(pixelToCellHoriz(e.getX()), pixelToCellVert(e.getY()));
       } catch (IOException ex) {

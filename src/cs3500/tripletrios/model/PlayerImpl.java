@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class PlayerImpl implements Player {
 
-  private ArrayList<Card> hand = new ArrayList<Card>();
+  private ArrayList<Card> hand;
   private final Color color;
 
 

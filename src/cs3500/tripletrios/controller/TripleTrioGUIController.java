@@ -14,10 +14,9 @@ import java.util.Set;
 
 public class TripleTrioGUIController implements TripleTrioController {
   private TripleTrioModel model;
-  private TTFrame view;
+  private final TTFrame view;
   private Card selectedCard = null;
-
-
+  private boolean hasBeenPlaced = false;
 
   public TripleTrioGUIController(TTFrame view) {
     if (view == null) {
@@ -63,6 +62,7 @@ public class TripleTrioGUIController implements TripleTrioController {
   @Override
   public void handleCellClickForHand(int cardNum, Color color) {
     selectedCard = model.getPlayer().getHand().get(cardNum);
+    hasBeenPlaced = false;
   }
 
   /**
@@ -70,9 +70,10 @@ public class TripleTrioGUIController implements TripleTrioController {
    */
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) throws IOException {
-    if (selectedCard != null) {
+    if (selectedCard != null || !hasBeenPlaced) {
       this.playMove(xGridLoc, yGridLoc);
-      view.getHandView(this.model.getPlayer().getColor()).unHighlight();
+      selectedCard = null;
+      hasBeenPlaced = true;
     }
   }
 
@@ -99,11 +100,16 @@ public class TripleTrioGUIController implements TripleTrioController {
   }
 
   private void playMove(int xPos, int yPos) throws IOException {
-    System.out.println("Reached controller play move");
     model.getPlayer().removeCardFromHand(selectedCard);
-    System.out.println(model.getPlayer().getHand().size());
+    view.getHandView(this.model.getPlayer().getColor()).unHighlight();
+    view.refresh();
+
     model.placeCard(xPos - 1, yPos - 1, selectedCard);
-    model.executeBattlePhase(xPos - 1, yPos - 1);
+    //model.executeBattlePhase(xPos - 1, yPos - 1);
+    model.switchTurns();
+    view.refresh();
+
+    System.out.println("You have placed a " + selectedCard.getColor() + " card at " + xPos + " " + yPos);
   }
 
 

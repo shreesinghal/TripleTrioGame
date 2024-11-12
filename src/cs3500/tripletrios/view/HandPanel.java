@@ -60,6 +60,7 @@ public class HandPanel extends JPanel {
       g2d.fill(cardView);
 
       g2d.setColor(Color.BLACK);
+
       if (i == highlightedCardNum) {
         g2d.setStroke(new BasicStroke(10));
       }
@@ -86,7 +87,6 @@ public class HandPanel extends JPanel {
    */
   public void unHighlight() {
     highlightedCardNum = -1;
-    repaint();
   }
 
 
@@ -103,7 +103,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      System.out.println("You clicked at " + 1 + " " + pixelToCell(e.getY()) + " in the "
+      System.out.println("You clicked at " + 1 + " " + (1 + pixelToCell(e.getY())) + " in the "
         + player.getColor() + " hand.");
       features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
       if (player.getColor() == model.getPlayer().getColor()) {

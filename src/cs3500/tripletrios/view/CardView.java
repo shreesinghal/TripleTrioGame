@@ -65,10 +65,10 @@ public class CardView extends Path2D.Double {
     g2d.setColor(Color.black);
     Font font = new Font("Arial", Font.BOLD, 18);
     g2d.setFont(font);
-    g2d.drawString(String.valueOf(this.card.getNorth()), x + cardWidth / 2, y + 18);
-    g2d.drawString(String.valueOf(this.card.getSouth()), x + cardWidth / 2, cardHeight + y - 5);
-    g2d.drawString(String.valueOf(this.card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
-    g2d.drawString(String.valueOf(this.card.getWest()), x + 5, y + cardHeight / 2);
+    g2d.drawString(String.valueOf(card.getNorth() == 10 ? "A" : card.getNorth()), x + cardWidth / 2, y + 18);
+    g2d.drawString(String.valueOf(card.getSouth() == 10 ? "A" : card.getSouth()), x + cardWidth / 2, cardHeight + y - 5);
+    g2d.drawString(String.valueOf(card.getEast() == 10 ? "A" : card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
+    g2d.drawString(String.valueOf(card.getWest() == 10 ? "A" : card.getWest()), x + 5, y + cardHeight / 2);
   }
 
 
