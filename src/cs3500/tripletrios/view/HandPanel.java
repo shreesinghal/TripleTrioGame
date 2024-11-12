@@ -86,6 +86,7 @@ public class HandPanel extends JPanel {
    */
   public void unHighlight() {
     highlightedCardNum = -1;
+    repaint();
   }
 
 
