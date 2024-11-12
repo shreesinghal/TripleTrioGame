@@ -5,12 +5,12 @@ import cs3500.tripletrios.model.Card;
 public class CornerStrategy implements TripleTrioStrategy {
 
   @Override
-  public Card chooseCard() {
+  public Card chooseCardFromHand() {
     return null;
   }
 
   @Override
-  public void placeCard() {
+  public void placeCardToGrid() {
 
   }
 }

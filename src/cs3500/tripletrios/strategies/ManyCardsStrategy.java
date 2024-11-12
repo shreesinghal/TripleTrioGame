@@ -6,12 +6,12 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
 
 
   @Override
-  public Card chooseCard() {
+  public Card chooseCardFromHand() {
     return null;
   }
 
   @Override
-  public void placeCard() {
+  public void placeCardToGrid() {
 
   }
 }
