@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
-import cs3500.tripletrios.ConfigReaders.GridConfigReader;
+import cs3500.tripletrios.configReaders.CardDatabaseReader;
+import cs3500.tripletrios.configReaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Color;
@@ -64,7 +64,7 @@ public class TripleTrioGUIController implements TripleTrioController {
   @Override
   public void handleCellClickForHand(int cardNum, Color color) {
     System.out.println("You clicked on the card at index " + cardNum + " in the "
-      + model.getPlayer().getColor() + " hand.");
+        + model.getPlayer().getColor() + " hand.");
     selectedCard = model.getPlayer().getHand().get(cardNum);
     hasBeenPlaced = false;
   }
@@ -84,7 +84,7 @@ public class TripleTrioGUIController implements TripleTrioController {
   public void playAI() {
     PlayerMove aiMove = cornerStrategy.moveCard();
     model.placeCard(aiMove.getX(), aiMove.getY(),
-      this.model.getPlayer().getHand().get(aiMove.getCardInd()));
+        this.model.getPlayer().getHand().get(aiMove.getCardInd()));
     model.switchTurns();
   }
 
@@ -120,7 +120,8 @@ public class TripleTrioGUIController implements TripleTrioController {
     model.switchTurns();
     view.refresh();
 
-    System.out.println("You have placed a " + selectedCard.getColor() + " card at " + xPos + " " + yPos);
+    System.out.println("You have placed a " +
+            selectedCard.getColor() + " card at " + xPos + " " + yPos);
   }
 
 

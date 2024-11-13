@@ -5,12 +5,12 @@ package cs3500.tripletrios.model;
  * This can be used as a coordinate for the grid.
  */
 public class Posn {
-  private final int x_coord;
-  private final int y_coord;
+  private final int x_Coord;
+  private final int y_Coord;
 
-  public Posn(int x_coord, int y_coord) {
-    this.x_coord = x_coord;
-    this.y_coord = y_coord;
+  public Posn(int x_Coord, int y_Coord) {
+    this.x_Coord = x_Coord;
+    this.y_Coord = y_Coord;
   }
 
   /**
@@ -18,7 +18,7 @@ public class Posn {
    * @return int x
    */
   public int getX() {
-    return x_coord;
+    return x_Coord;
   }
 
   /**
@@ -26,6 +26,6 @@ public class Posn {
    * @return int y
    */
   public int getY() {
-    return y_coord;
+    return y_Coord;
   }
 }

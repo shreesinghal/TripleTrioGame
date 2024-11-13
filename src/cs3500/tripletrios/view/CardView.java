@@ -3,12 +3,15 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.Card;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
 /**
  * Implements the GUI view for the Triple Trios game, displaying the main game board,
- * player hands, and managing visual updates based on the current game stat
+ * player hands, and managing visual updates based on the current game state.
  */
 public class CardView extends Path2D.Double {
 
@@ -60,7 +63,7 @@ public class CardView extends Path2D.Double {
    * Gets the logical Size of the card.
    * @return Dimension of the card
    */
-  static public Dimension getLogicalSizeOfCard() {
+  public static Dimension getLogicalSizeOfCard() {
     return new Dimension(cardWidth, cardHeight);
   }
 
@@ -82,10 +85,14 @@ public class CardView extends Path2D.Double {
     g2d.setColor(Color.black);
     Font font = new Font("Arial", Font.BOLD, 18);
     g2d.setFont(font);
-    g2d.drawString(String.valueOf(card.getNorth() == 10 ? "A" : card.getNorth()), x + cardWidth / 2, y + 18);
-    g2d.drawString(String.valueOf(card.getSouth() == 10 ? "A" : card.getSouth()), x + cardWidth / 2, cardHeight + y - 5);
-    g2d.drawString(String.valueOf(card.getEast() == 10 ? "A" : card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
-    g2d.drawString(String.valueOf(card.getWest() == 10 ? "A" : card.getWest()), x + 5, y + cardHeight / 2);
+    g2d.drawString(String.valueOf(card.getNorth() == 10 ? "A" :
+            card.getNorth()), x + cardWidth / 2, y + 18);
+    g2d.drawString(String.valueOf(card.getSouth() == 10 ? "A" :
+            card.getSouth()), x + cardWidth / 2, cardHeight + y - 5);
+    g2d.drawString(String.valueOf(card.getEast() == 10 ? "A" :
+            card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
+    g2d.drawString(String.valueOf(card.getWest() == 10 ? "A" :
+            card.getWest()), x + 5, y + cardHeight / 2);
   }
 
 

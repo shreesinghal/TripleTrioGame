@@ -1,8 +1,11 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
-import cs3500.tripletrios.ConfigReaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.configReaders.CardDatabaseReader;
+import cs3500.tripletrios.configReaders.GridConfigReader;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardImpl;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Direction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,9 +24,9 @@ import static org.junit.Assert.assertEquals;
  * Test class for configuration files.
  */
 public class TTConfigTest {
-  TripleTrioController controller;
-  CardDatabaseReader cardReader;
-  GridConfigReader gridReader;
+  private TripleTrioController controller;
+  private CardDatabaseReader cardReader;
+  private GridConfigReader gridReader;
 
   Appendable output = new StringBuilder();
   Readable reader = new BufferedReader(new InputStreamReader(System.in));

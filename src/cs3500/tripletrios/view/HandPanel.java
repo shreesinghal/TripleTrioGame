@@ -69,8 +69,8 @@ public class HandPanel extends JPanel {
       //we are looping through the players hand to draw each card in hand as a cardView object
 
       CardView cardView = new CardView(this.player.getHand().get(i),
-        i,
-        this.getHeight() / this.model.getPlayer().getHand().size());
+          i,
+this.getHeight() / this.model.getPlayer().getHand().size());
       // ^^ make the card height dependent on the panel height (this.height) ^^
 
       if (player.getColor().getColor() == Color.RED) {
@@ -99,7 +99,8 @@ public class HandPanel extends JPanel {
    * @return dimensions of the hand
    */
   public Dimension getPixelDimensions() {
-    return new Dimension(CardView.cardWidth, CardView.cardHeight * this.model.getPlayer().getHand().size());
+    return new Dimension(CardView.cardWidth,
+            CardView.cardHeight * this.model.getPlayer().getHand().size());
   }
 
   /**
@@ -150,7 +151,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -160,7 +161,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -170,7 +171,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-
+      //no implementation
     }
 
     /**
@@ -180,7 +181,7 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
+      //no implementation
     }
   }
 

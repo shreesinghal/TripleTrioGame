@@ -1,6 +1,6 @@
 package strategiestest;
-import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
-import cs3500.tripletrios.ConfigReaders.GridConfigReader;
+import cs3500.tripletrios.configReaders.CardDatabaseReader;
+import cs3500.tripletrios.configReaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Posn;

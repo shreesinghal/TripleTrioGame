@@ -1,6 +1,13 @@
 package cs3500.tripletrios.strategies;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.PlayerImpl;
+import cs3500.tripletrios.model.Posn;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 
 import java.util.ArrayList;
 import java.util.HashMap;

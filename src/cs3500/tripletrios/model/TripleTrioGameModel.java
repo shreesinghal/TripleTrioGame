@@ -92,7 +92,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
     }
 
 
-     this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
+    this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
     this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
 
     this.gameStarted = true;

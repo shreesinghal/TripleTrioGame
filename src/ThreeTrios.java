@@ -7,8 +7,8 @@ import cs3500.tripletrios.model.TripleTrioGameModel;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
 import cs3500.tripletrios.view.TTFrameViewImpl;
-import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
-import cs3500.tripletrios.ConfigReaders.GridConfigReader;
+import cs3500.tripletrios.configReaders.CardDatabaseReader;
+import cs3500.tripletrios.configReaders.GridConfigReader;
 
 import java.io.File;
 import java.io.IOException;
