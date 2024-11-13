@@ -17,7 +17,7 @@ public class Posn {
    * Gives the x value of posn.
    * @return int x
    */
-  int getX() {
+  public int getX() {
     return x_coord;
   }
 
@@ -25,7 +25,7 @@ public class Posn {
    * Gives the y value of posn.
    * @return int y
    */
-  int getY() {
+  public int getY() {
     return y_coord;
   }
 }

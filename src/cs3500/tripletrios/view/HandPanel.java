@@ -71,7 +71,6 @@ public class HandPanel extends JPanel {
       cardViewsInHand.add(cardView);
     }
 
-
   }
 
   /**
