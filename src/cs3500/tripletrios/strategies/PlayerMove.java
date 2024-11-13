@@ -5,7 +5,7 @@ import cs3500.tripletrios.model.Posn;
 
 /**
  * This class represents a move that a player can make. It is to be used by the AI player to
- * indidcate both the card chosen from the hand and the location it is placed at.
+ * indicate both the card chosen from the hand and the location it is placed at.
  */
 public class PlayerMove {
   private int cardInHandInd;
