@@ -51,4 +51,20 @@ public class MaximizeFlippedCardsTest {
 
     assertEquals(new PlayerMove(new Posn(2, 2), 1), bestMove);
   }
+
+  @Test
+  public void testMoveCardFindsBestPlacementWhenSameFlipScore() {
+
+
+    strategy.setFlipCountForMove(new Posn(1, 1),
+      0,
+      0);
+    strategy.setFlipCountForMove(new Posn(2, 2),
+      1,
+      0);
+
+    PlayerMove bestMove = strategy.moveCard();
+
+    assertEquals(new PlayerMove(new Posn(1,1), 0), bestMove);
+  }
 }

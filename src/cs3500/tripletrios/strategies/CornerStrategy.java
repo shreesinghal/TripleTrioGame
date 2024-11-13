@@ -29,6 +29,7 @@ public class CornerStrategy implements TripleTrioStrategy {
   @Override
   public PlayerMove moveCard() {
     for (Posn corner : cornerPositions) {
+      model.documentCheckOnGrid(corner);
       if (model.getCurrentGrid().get(corner.getY()).get(corner.getX()).isEmpty()) {
         Card chosenCard = selectBestCardForCorner(corner);
         return new PlayerMove(corner, this.model.getPlayer().getHand().indexOf(chosenCard));
@@ -62,8 +63,7 @@ public class CornerStrategy implements TripleTrioStrategy {
     for (Card card : hand) {
       int cornerScore = 0;
 
-
-      if (corner.getX() == 0) {     // left side
+      if (corner.getX() == 0) {       // left side
         if (corner.getY() == 0) {
           // Top-left: prioritize South and East
           cornerScore = card.getSouth() + card.getEast();

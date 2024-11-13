@@ -126,8 +126,8 @@ public class MockModel implements TripleTrioModel {
 
   @Override
   public boolean isGameOver() {
-    // Return true only if the grid is full (for simplicity).
-    return grid.stream().allMatch(row -> row.stream().allMatch(cell -> !cell.isEmpty()));
+    // Return true if the grid is full
+    return grid.stream().allMatch(row -> row.stream().noneMatch(Cell::isEmpty));
   }
 
   @Override
@@ -174,6 +174,14 @@ public class MockModel implements TripleTrioModel {
   public boolean isLegalMove(Posn pos) {
     transcript.add(pos);
     return legalSpaces.getOrDefault(pos, true);
+  }
+
+  /**
+   * Documents checking a cell by a strategy by adding it to the transcript.
+   * @param pos
+   */
+  public void documentCheckOnGrid(Posn pos) {
+    transcript.add(pos);
   }
 
   /**

@@ -23,7 +23,8 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
   private Map<Posn, Map<Integer, Integer>> flipCounts = new HashMap<>();
 
   /**
-   * Creates an instance of the strategy.
+   * This represents one type of strategy.
+   * This strategy maximizes the number of flipped cards. This will be used by the AI player.
    * @param model representation of game state
    */
   public MaximizeFlippedCardsStrat(TripleTrioModel model) {
@@ -35,7 +36,6 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
     PlayerMove bestMove = null;
     int maxScore = 0;
 
-
     // for every card in the hand
     for (int cardIndex = 0; cardIndex < model.getPlayer().getHand().size(); cardIndex++) {
       Card currentCard = model.getPlayer().getHand().get(cardIndex);
@@ -43,6 +43,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
       // check every cell in the grid
       for (int y = 0; y < model.getCurrentGrid().size(); y++) {
         for (int x = 0; x < model.getCurrentGrid().get(y).size(); x++) {
+          model.documentCheckOnGrid(new Posn(x, y));
 
           if (!isValidPlacement(x, y)) {
             continue;
