@@ -1,7 +1,7 @@
 package strategiestest;
 
-import cs3500.tripletrios.ConfigReaders.CardDatabaseReader;
-import cs3500.tripletrios.ConfigReaders.GridConfigReader;
+import cs3500.tripletrios.configReaders.CardDatabaseReader;
+import cs3500.tripletrios.configReaders.GridConfigReader;
 import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.MockModel;

@@ -1,6 +1,6 @@
 package cs3500.tripletrios.strategies;
 
-import cs3500.tripletrios.model.Card;
+
 import cs3500.tripletrios.model.Posn;
 
 /**

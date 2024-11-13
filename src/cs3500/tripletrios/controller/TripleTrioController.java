@@ -1,9 +1,9 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.Card;
+
 import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
-import cs3500.tripletrios.view.CardView;
+
 
 import java.io.IOException;
 

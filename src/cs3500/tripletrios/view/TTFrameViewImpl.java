@@ -20,6 +20,11 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   private final HandPanel blueHand;
   private final ReadOnlyTripleTrioModel model;
 
+  /**
+   * Creates a frame for the game in a GUI style.
+   * This uses both the Hand panel and grid panel.
+   * @param model the instance of the game
+   */
   public TTFrameViewImpl(ReadOnlyTripleTrioModel model) {
     this.model = model;
     this.redHand = new HandPanel(model, model.getPlayer());
@@ -29,14 +34,16 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   private void createVisual() {
-    this.setTitle("Current Player: " + this.model.getPlayer().getColor()); //change to say the current player
+    this.setTitle("Current Player: " + this.model.getPlayer().getColor());
+    //change to say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
-      + redHand.getPixelDimensions().getWidth()
-      + blueHand.getPixelDimensions().getWidth()),
+        + redHand.getPixelDimensions().getWidth()
+        + blueHand.getPixelDimensions().getWidth()),
             (int) (getToolkit().getScreenSize().getHeight()
               + redHand.getPixelDimensions().getHeight()
-              + blueHand.getPixelDimensions().getHeight()))); //allows us to set the size of the window
+              + blueHand.getPixelDimensions().getHeight())));
+             //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.setLayout(new BorderLayout());
     this.add(gridPanel, BorderLayout.CENTER);
@@ -59,10 +66,9 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   /**
-   * Gets the handview of the player
-   *
+   * Gets the handview of the player.
    * @param color red or blue
-   * @return
+   * @return a handpanel object
    */
   @Override
   public HandPanel getHandView(Color color) {

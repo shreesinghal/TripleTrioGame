@@ -5,7 +5,10 @@ import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -118,7 +121,6 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      //System.out.println("You clicked at " + pixelToCellHoriz(e.getX()) + " " + pixelToCellVert(e.getY()) + " of the grid.");
       try {
         features.handleCellClickForGrid(pixelToCellHoriz(e.getX()), pixelToCellVert(e.getY()));
       } catch (IOException ex) {
@@ -142,7 +144,7 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+      //no implementation needed
     }
 
     /**
@@ -152,7 +154,7 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+      //no implementation needed
     }
 
     /**
@@ -162,7 +164,7 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-
+      //no implementation needed
     }
 
     /**
@@ -172,7 +174,7 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
+      //no implementation needed
     }
   }
 

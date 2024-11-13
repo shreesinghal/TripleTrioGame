@@ -1,4 +1,4 @@
-package cs3500.tripletrios.ConfigReaders;
+package cs3500.tripletrios.configReaders;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
