@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Implementation of the behaviors for the TripleTrioModel functionality. 
+ * Implementation of the behaviors for the TripleTrioModel functionality.
+ * This demonstrates how the TripleTrio game works when played.
  */
 public class TripleTrioGameModel implements TripleTrioModel {
 

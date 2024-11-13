@@ -3,6 +3,12 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.Color;
 
+/**
+ * The `TTFrame` interface defines the basic requirements for any graphical frame
+ * that displays the Triple Trios game, including methods for making the frame visible,
+ * accessing the player's hand view, adding click listeners, and refreshing the view
+ * to reflect changes in the game state.
+ */
 public interface TTFrame {
 
   /**
@@ -12,12 +18,17 @@ public interface TTFrame {
   void makeVisible();
 
   /**
-   * Gets the handview of the player
+   * Gets the handview of the player based on the color given.
    *
-   * @return
+   * @return the HandPanel for the specific player
    */
   HandPanel getHandView(Color color);
 
+  /**
+   * Set up the controller to handle click events in this view.
+   * Only reacts to clicks.
+   * @param listener the controller
+   */
   void addClickListeners(TripleTrioController listener);
 
   /**

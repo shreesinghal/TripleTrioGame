@@ -6,6 +6,10 @@ import cs3500.tripletrios.model.Card;
 import java.awt.*;
 import java.awt.geom.Path2D;
 
+/**
+ * Implements the GUI view for the Triple Trios game, displaying the main game board,
+ * player hands, and managing visual updates based on the current game stat
+ */
 public class CardView extends Path2D.Double {
 
   static int cardWidth = 150;
@@ -16,7 +20,14 @@ public class CardView extends Path2D.Double {
   private Card card;
 
 
-
+  /**
+   * Constructs a new `CardView` object, representing the card's shape and
+   * position within the game's layout, based on the card's
+   * logical coordinates and height.
+   * @param card card that is being drawn
+   * @param y the logical y-coordinate
+   * @param cardHeight the height of the card
+   */
   public CardView(Card card, int y, int cardHeight) {
     this.card = card;
     this.cardHeight = cardHeight;
@@ -53,6 +64,12 @@ public class CardView extends Path2D.Double {
     return new Dimension(cardWidth, cardHeight);
   }
 
+  /**
+   * Renders the `CardView` on the screen at the specified coordinates.
+   * @param g2d a graphics object
+   * @param x the x-coordinate of the card's top-left corner
+   * @param y the y-coordinate of the card's top-left corner
+   */
   public void draw(Graphics2D g2d, int x, int y) {
     if (this.card.getColor().getColor() == Color.RED) {
       g2d.setColor(new Color(255,171,173,255));

@@ -11,6 +11,12 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A JPanel subclass that represents the main grid in the Triple Trios game.
+ * This panel is responsible for displaying the grid based on the current game state
+ * as provided by a read-only model, which provides the necessary grid dimensions
+ * and cell details.
+ */
 public class GridPanel extends JPanel {
 
   private ReadOnlyTripleTrioModel model;
@@ -18,15 +24,29 @@ public class GridPanel extends JPanel {
   private TripleTrioController features;
 
 
+  /**
+   * Creating an instance of the grid panel.
+   * @param model a readonly model
+   */
   public GridPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
   }
 
-  public void addClickListener(TripleTrioController feature) {
-    this.features = feature;
+  /**
+   * Set up the controller to handle click events in this view.
+   * Only reacts to clicks.
+   * @param features the controller
+   */
+  public void addClickListener(TripleTrioController features) {
+    this.features = features;
     this.addMouseListener(new TTGridPanelClick());
   }
 
+  /**
+   * Renders a grid panel on the screen according to dimensions from the model.
+   * Panel is resizeable, adjusting to the height and width of the current frame size.
+   * @param g the <code>Graphics</code> object to protect
+   */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -83,10 +103,10 @@ public class GridPanel extends JPanel {
   }
 
 
-
-
-
-
+  /**
+   * Mouselistener class to account for what actions happen when a user clicks their mouse.
+   * This is so when a user clicks on the GUI view, and action occurs.
+   */
 
   private class TTGridPanelClick implements MouseListener {
 
