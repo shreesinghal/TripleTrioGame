@@ -7,8 +7,8 @@ import java.util.Objects;
 */
 public final class Cell {
 
-  boolean hasCard;
-  Card card;
+  private boolean hasCard;
+  private Card card;
 
   /**
   * Enum for the type of cell.

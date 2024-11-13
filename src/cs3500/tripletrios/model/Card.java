@@ -3,7 +3,8 @@ package cs3500.tripletrios.model;
 import java.util.Map;
 
 /**
- * Card interface for the game. 
+ * Card interface for the game.
+ * This represents the behavior for a single card which will be used during the game.
  */
 public interface Card {
 

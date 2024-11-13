@@ -2,14 +2,15 @@ package cs3500.tripletrios.model;
 
 /**
  * This class represents a position with an x and y value.
+ * This can be used as a coordinate for the grid.
  */
 public class Posn {
-  private final int x;
-  private final int y;
+  private final int x_coord;
+  private final int y_coord;
 
-  public Posn(int x, int y) {
-    this.x = x;
-    this.y = y;
+  public Posn(int x_coord, int y_coord) {
+    this.x_coord = x_coord;
+    this.y_coord = y_coord;
   }
 
   /**
@@ -17,7 +18,7 @@ public class Posn {
    * @return int x
    */
   int getX() {
-    return x;
+    return x_coord;
   }
 
   /**
@@ -25,6 +26,6 @@ public class Posn {
    * @return int y
    */
   int getY() {
-    return y;
+    return y_coord;
   }
 }

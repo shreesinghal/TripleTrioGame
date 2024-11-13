@@ -8,9 +8,9 @@ import java.util.Map;
  */
 public class CardImpl implements Card {
 
-  String name;
-  Color cardColor;
-  Map<Direction, Integer> attackValues = new HashMap<>();
+  private final String name;
+  private Color cardColor;
+  private Map<Direction, Integer> attackValues = new HashMap<>();
 
   public CardImpl( String name, Map<Direction, Integer> attackValues) {
     this.name = name;

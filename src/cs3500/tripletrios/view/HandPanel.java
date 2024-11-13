@@ -19,7 +19,7 @@ public class HandPanel extends JPanel {
   private TripleTrioController features;
 
   private ReadOnlyTripleTrioModel model;
-  private final Player player;
+  private Player player;
   private ArrayList<CardView> cardViewsInHand;
   private int highlightedCardNum = -1;
 
@@ -42,7 +42,7 @@ public class HandPanel extends JPanel {
     //clears the panel, makes sure any old drawings on it are removed
 
     Graphics2D g2d = (Graphics2D) g;
-
+    //this.player = this.model.getPlayer();
 
     for (int i = 0; i < this.player.getHand().size(); i++) {
       //we are looping through the players hand to draw each card in hand as a cardView object
