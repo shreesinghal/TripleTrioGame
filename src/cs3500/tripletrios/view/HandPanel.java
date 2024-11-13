@@ -73,7 +73,7 @@ public class HandPanel extends JPanel {
               this.getHeight() / this.model.getPlayer().getHand().size());
       // ^^ make the card height dependent on the panel height (this.height) ^^
 
-      if (player.getColor().getColor() == Color.RED) {
+      if (player.getColor() == cs3500.tripletrios.model.Color.RED) {
         g2d.setColor(new Color(255,171,173,255));
       } else {
         g2d.setColor(new Color(72, 172, 255, 255));
