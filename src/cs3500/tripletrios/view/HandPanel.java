@@ -124,9 +124,9 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      features.handleCellClickForHand(pixelToACell(e.getY()), player.getColor());
+      features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
       if (player.getColor() == model.getPlayer().getColor()) {
-        highlightHandCard(pixelToACell(e.getY()));
+        highlightHandCard(pixelToCell(e.getY()));
       }
     }
 
@@ -139,9 +139,9 @@ public class HandPanel extends JPanel {
       repaint();
     }
 
-    private int pixelToACell(int Coord) {
+    private int pixelToCell(int coordValue) {
 
-      return Coord / CardView.getLogicalSizeOfCard().height;
+      return coordValue / CardView.getLogicalSizeOfCard().height;
     }
 
     /**

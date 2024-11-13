@@ -47,7 +47,7 @@ public class TTControllerImplTest {
   @Test
   public void testPlayGameInvalidModel() {
     try {
-      controller.playGame(null, "deckPath", "gridPath");
+      controller.playGameWithModel(null, "deckPath", "gridPath");
       fail("Expected IllegalArgumentException for null model");
     } catch (IllegalArgumentException | IOException e) {
       assertEquals("model cannot be null", e.getMessage());
@@ -57,7 +57,7 @@ public class TTControllerImplTest {
   @Test
   public void testPlayGameThrowsNullModel() {
     try {
-      controller.playGame(null, "deckPath", "gridPath");
+      controller.playGameWithModel(null, "deckPath", "gridPath");
       fail("Expected IllegalArgumentException for null model");
     } catch (IllegalArgumentException | IOException e) {
       assertEquals("model cannot be null", e.getMessage());

@@ -116,7 +116,10 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   }
 
 
-  private void tryStartGame(TripleTrioModel model, TripleTrioView view, ArrayList<ArrayList<Cell>> grid, Set<Card> deck)
+  private void tryStartGame(TripleTrioModel model,
+                            TripleTrioView view,
+                            ArrayList<ArrayList<Cell>> grid,
+                            Set<Card> deck)
           throws IOException {
     try {
       model.startGame(deck, grid);

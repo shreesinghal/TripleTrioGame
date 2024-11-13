@@ -178,7 +178,7 @@ public class MockModel implements TripleTrioModel {
 
   /**
    * Documents checking a cell by a strategy by adding it to the transcript.
-   * @param pos
+   * @param pos takes in the position from grid that is being checked
    */
   public void documentCheckOnGrid(Posn pos) {
     transcript.add(pos);
@@ -268,6 +268,11 @@ public class MockModel implements TripleTrioModel {
     this.grid = newGrid;
   }
 
+  /**
+   * Sets the player score.
+   * @param player the player whose score is being set
+   * @param score the score we are using
+   */
   public void setPlayerScore(Player player, int score) {
     if (player.equals(currentPlayer)) {
       this.currentPlayerScore = score;

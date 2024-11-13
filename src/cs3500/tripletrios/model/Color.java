@@ -17,13 +17,13 @@ public enum Color {
      * @return Java Color object.
      */
   public java.awt.Color getColor() {
-      switch (this) {
-          case RED :
-              return java.awt.Color.RED;
-          case BLUE :
-              return java.awt.Color.BLUE;
-        }
+    if (this == Color.RED) {
+      return java.awt.Color.RED;
+    } else if (this == Color.BLUE) {
+      return java.awt.Color.BLUE;
+    } else {
+      throw new IllegalStateException("Color not found.");
+    }
 
-    throw new IllegalStateException("Color not found.");
     }
 }

@@ -48,7 +48,9 @@ public class TripleTrioGUIController implements TripleTrioController {
    * @throws IOException if something in the game is displayed wrong.
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
+  public void playGame(TripleTrioModel model,
+                       String deckPath,
+                       String gridPath) throws IOException {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }

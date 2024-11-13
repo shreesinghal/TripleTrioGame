@@ -197,7 +197,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
   }
 
   /**
-   * @param corner
+   * Documents the path that the strategy takes.
+   * @param corner takes in the position from grid that is being checked
    */
   @Override
   public void documentCheckOnGrid(Posn corner) {
