@@ -61,6 +61,8 @@ public class TripleTrioGUIController implements TripleTrioController {
    */
   @Override
   public void handleCellClickForHand(int cardNum, Color color) {
+    System.out.println("You clicked on the card at index " + cardNum + " in the "
+      + model.getPlayer().getColor() + " hand.");
     selectedCard = model.getPlayer().getHand().get(cardNum);
     hasBeenPlaced = false;
   }

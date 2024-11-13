@@ -103,8 +103,6 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      System.out.println("You clicked at " + 1 + " " + (1 + pixelToCell(e.getY())) + " in the "
-        + player.getColor() + " hand.");
       features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
       if (player.getColor() == model.getPlayer().getColor()) {
         highlightHandCard(pixelToCell(e.getY()));

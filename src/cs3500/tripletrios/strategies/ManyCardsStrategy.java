@@ -10,7 +10,6 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
    *
    * @return the card chosen to play
    */
-  @Override
   public Card chooseCardFromHand() {
     return null;
   }
@@ -18,8 +17,15 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
   /**
    * A method that allows for placing a card strategically on the grid.
    */
-  @Override
   public void placeCardToGrid() {
 
+  }
+
+  /**
+   * @return
+   */
+  @Override
+  public PlayerMove moveCard() {
+    return null;
   }
 }
