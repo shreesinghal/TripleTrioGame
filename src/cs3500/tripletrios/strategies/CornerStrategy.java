@@ -3,110 +3,106 @@ package cs3500.tripletrios.strategies;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Posn;
-import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-
+import cs3500.tripletrios.model.TripleTrioGameModel;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CornerStrategy implements TripleTrioStrategy {
+  private final TripleTrioGameModel model;
+  private final List<Posn> cornerPositions;
 
-  private ReadOnlyTripleTrioModel model;
-
-  private int chosenCardIndex;
-
-  private Posn chosenLocation;
-
-
-  private ArrayList<Cell> getOpenCorners() {
-
-    ArrayList<Cell> openCorners = new ArrayList<>();
-    Cell cell1 = model.getCurrentGrid().get(0).get(0);
-    Cell cell2 = model.getCurrentGrid().get(0).get(model.getGridWidth());
-    Cell cell3 = model.getCurrentGrid().get(model.getGridHeight()).get(0);
-    Cell cell4 = model.getCurrentGrid().get(model.getGridHeight()).get(model.getGridWidth());
-
-    if (isOpenToPlace(cell1)) {
-      openCorners.add(cell1);
-    }
-    if (isOpenToPlace(cell2)) {
-      openCorners.add(cell2);
-    }
-    if (isOpenToPlace(cell3)) {
-      openCorners.add(cell3);
-    }
-    if (isOpenToPlace(cell4)) {
-      openCorners.add(cell4);
-    }
-    return openCorners;
-  }
-
-  private static boolean isOpenToPlace(Cell cell1) {
-    return !cell1.isEmpty() && cell1.getCellType() != Cell.CellType.HOLE;
+  public CornerStrategy(TripleTrioGameModel model) {
+    this.model = model;
+    this.cornerPositions = calculateCornerPositions();
   }
 
   /**
-   * This shows a move by the AI player.
-   * It gives a reasonably calculated PlayerMove that can be made to the game.
-   *
-   * @return move
+   * Prioritizes placing a card in a corner, and if all corners are occupied, choses the top leftest card
    */
   @Override
   public PlayerMove moveCard() {
-    ArrayList<Cell> openCorners = getOpenCorners();
-
-    ArrayList<Integer> bestScores = new ArrayList<>(); // top left, top right, bottom left, bottom right
-    ArrayList<Card> bestCards = new ArrayList<>(); // top left, top right, bottom left, bottom right
-    // top left
-    int biggestTopLeftScore = 0;
-    for (Card card : this.model.getPlayer().getHand()) {
-      int cardScore = (card.getEast() + card.getSouth()) / 2;
-      if (cardScore > biggestTopLeftScore) {
-        biggestTopLeftScore = cardScore;
-        bestCards.add(card);
+    for (Posn corner : cornerPositions) {
+      if (model.getCurrentGrid().get(corner.getY()).get(corner.getX()).isEmpty()) {
+        Card chosenCard = selectBestCardForCorner(corner);
+        return new PlayerMove(corner, this.model.getPlayer().getHand().indexOf(chosenCard));
       }
     }
-    bestScores.add(biggestTopLeftScore);
+    return fallbackMove(); // Handle case if all corners are occupied
+  }
 
-    // top right
-    int biggestTopRightScore = 0;
-    for (Card card : this.model.getPlayer().getHand()) {
-      int cardScore = (card.getWest() + card.getSouth()) / 2;
-      if (cardScore > biggestTopRightScore) {
-        biggestTopRightScore = cardScore;
-        bestCards.add(card);
-      }
-    }
+  /**
+   * Calculates the positions of the corners based on grid dimensions.
+   */
+  private List<Posn> calculateCornerPositions() {
+    int width = model.getGridWidth();
+    int height = model.getGridHeight();
+    List<Posn> corners = new ArrayList<>();
+    corners.add(new Posn(0, 0)); // top-left
+    corners.add(new Posn(width - 1, 0)); // top-right
+    corners.add(new Posn(0, height - 1)); // bottom-left
+    corners.add(new Posn(width - 1, height - 1)); // bottom-right
+    return corners;
+  }
 
-    // Bottom left
-    int biggestBottomLeftScore = 0;
-    for (Card card : this.model.getPlayer().getHand()) {
-      int cardScore = (card.getEast() + card.getNorth()) / 2;
-      if (cardScore > biggestBottomLeftScore) {
-        biggestBottomLeftScore = cardScore;
-        bestCards.add(card);
-      }
-    }
+  /**
+   * Selects the best card for the given corner based on attack values for the correct direction.
+   */
+  private Card selectBestCardForCorner(Posn corner) {
+    List<Card> hand = model.getPlayer().getHand();
+    Card bestCard = null;
+    int maxScore = 0;
 
-    // Bottom right
-    int biggestBottomRightScore = 0;
-    for (Card card : this.model.getPlayer().getHand()) {
-      int cardScore = (card.getWest() + card.getNorth()) / 2;
-      if (cardScore > biggestBottomRightScore) {
-        biggestBottomRightScore = cardScore;
-        bestCards.add(card);
-      }
-    }
+    for (Card card : hand) {
+      int cornerScore = 0;
 
-    while (!openCorners.isEmpty()) {
-      int bestScore = bestScores.get(0);
-      for (Integer score : bestScores) {
-        if (score > bestScore) {
-          bestScore = score;
+
+      if (corner.getX() == 0) {     // left side
+        if (corner.getY() == 0) {
+          // Top-left: prioritize South and East
+          cornerScore = card.getSouth() + card.getEast();
+        } else if (corner.getY() == model.getGridHeight() - 1) {
+          // Bottom-left: prioritize North and East
+          cornerScore = card.getNorth() + card.getEast();
+        }
+      } else if (corner.getX() == model.getGridWidth() - 1) {   // right side
+        if (corner.getY() == 0) {
+          // Top-right: prioritize South and West
+          cornerScore = card.getSouth() + card.getWest();
+        } else if (corner.getY() == model.getGridHeight() - 1) {
+          // Bottom-right: prioritize North and West
+          cornerScore = card.getNorth() + card.getWest();
         }
       }
 
-
+      if (cornerScore > maxScore) {
+        bestCard = card;
+        maxScore = cornerScore;
+      }
     }
 
-    return new PlayerMove(new Posn(1,2), 3);
+    return bestCard != null ? bestCard : hand.get(0);   // first card if none possible
+  }
+
+  /**
+   * Chooses the uppermost, leftmost open position and the best card.
+   */
+  private PlayerMove fallbackMove() {
+    List<Posn> openPositions = new ArrayList<>();
+    int gridWidth = model.getGridWidth();
+    int gridHeight = model.getGridHeight();
+
+    for (int y = 0; y < gridHeight; y++) {
+      for (int x = 0; x < gridWidth; x++) {
+        if (model.getCurrentGrid().get(y).get(x).getCellType() == Cell.CellType.CARDCELL
+          && model.getCurrentGrid().get(y).get(x).isEmpty()) {
+          Card bestCard = model.getPlayer().getHand().get(0);
+          return new PlayerMove(new Posn (x, y),
+            this.model.getPlayer().getHand().indexOf(bestCard));
+
+        }
+      }
+    }
+
+    return null;    // this would be if there are no open cells at all to place a card at
   }
 }
