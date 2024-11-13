@@ -1,8 +1,10 @@
 package strategiestest;
 
-import cs3500.tripletrios.configReaders.CardDatabaseReader;
-import cs3500.tripletrios.configReaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Posn;
 import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.MockModel;
 import cs3500.tripletrios.strategies.PlayerMove;
@@ -16,6 +18,9 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Class to test the corner strategies.
+ */
 public class CornerStrategyTest {
   private MockModel mockModel;
   private CornerStrategy strategy;
@@ -24,12 +29,13 @@ public class CornerStrategyTest {
   @Before
   public void setup() {
 
+    ArrayList<ArrayList<Cell>> grid;
     Set<Card> deck = CardDatabaseReader.readDeckConfiguration("Configurations"
-      + File.separator
-      + "20deckConfig.txt");
+        + File.separator
+        + "20deckConfig.txt");
     grid = GridConfigReader.readGridConfiguration("Configurations"
-      + File.separator
-      + "3x3sqrGrid.txt");
+        + File.separator
+        + "3x3sqrGrid.txt");
 
     mockModel = new MockModel();
 
@@ -41,6 +47,9 @@ public class CornerStrategyTest {
   @Test
   public void testChecksAllCorners() {
     strategy.moveCard();
+    for (Posn pos : mockModel.getTranscript()) {
+      System.out.println(pos.getX() + " " + pos.getY());
+    }
     assertEquals(mockModel.getTranscript().get(0), (new Posn(0, 0)));
     assertEquals(mockModel.getTranscript().get(1), (new Posn(2, 0)));
     assertEquals(mockModel.getTranscript().get(2), (new Posn(0, 2)));

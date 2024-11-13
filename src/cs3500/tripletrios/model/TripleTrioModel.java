@@ -97,5 +97,9 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void switchTurns();
 
 
+  /**
+   * Documents the path that the strategy takes.
+   * @param corner takes in the position from grid that is being checked
+   */
   void documentCheckOnGrid(Posn corner);
 }

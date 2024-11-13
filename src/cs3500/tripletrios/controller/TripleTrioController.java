@@ -20,7 +20,9 @@ public interface TripleTrioController {
    * @param gridPath gridPath the path to the grid
    * @throws IOException if something in the game is displayed wrong.
    */
-  void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException;
+  void playGame(TripleTrioModel model,
+                String deckPath,
+                String gridPath) throws IOException;
 
 
   /**
@@ -37,13 +39,7 @@ public interface TripleTrioController {
    * Play a game of Triple Trios given a model with initial conditions.
    * @param model a triple trio model
    */
-  void playGame(TripleTrioModel model) throws IOException;
+  void playGameWithModel(TripleTrioModel model) throws IOException;
 
-  /**
-   * Play a game of Triple Trios given a model with initial conditions.
-   * @param xPos
-   * @param yPos
-   * @param card
-   *
-   */
+
 }

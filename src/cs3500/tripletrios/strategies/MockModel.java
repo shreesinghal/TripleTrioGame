@@ -55,7 +55,7 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
-   * Sets the number of flips the card makes if placed at this location
+   * Sets the number of flips the card makes if placed at this location.
    * @param posn location of card
    * @param cardIndex card index in hand
    * @param flips number of slips
@@ -178,7 +178,7 @@ public class MockModel implements TripleTrioModel {
 
   /**
    * Documents checking a cell by a strategy by adding it to the transcript.
-   * @param pos
+   * @param pos takes in the position from grid that is being checked
    */
   public void documentCheckOnGrid(Posn pos) {
     transcript.add(pos);
@@ -268,6 +268,11 @@ public class MockModel implements TripleTrioModel {
     this.grid = newGrid;
   }
 
+  /**
+   * Sets the player score.
+   * @param player the player whose score is being set
+   * @param score the score we are using
+   */
   public void setPlayerScore(Player player, int score) {
     if (player.equals(currentPlayer)) {
       this.currentPlayerScore = score;
@@ -276,6 +281,10 @@ public class MockModel implements TripleTrioModel {
     }
   }
 
+  /**
+   * Sets the winner using a WinningState object.
+   * @param winner the winner of the game
+   */
   public void setWinner(WinningState winner) {
     this.winner = winner;
   }

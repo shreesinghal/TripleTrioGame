@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configReaders.CardDatabaseReader;
-import cs3500.tripletrios.configReaders.GridConfigReader;
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
  * Test class for configuration files.
  */
 public class TTConfigTest {
-  private TripleTrioController controller;
+
   private CardDatabaseReader cardReader;
   private GridConfigReader gridReader;
 
@@ -37,7 +37,7 @@ public class TTConfigTest {
    */
   @Before
   public void setUp() throws Exception {
-    controller = new TripleTrioControllerImpl(reader, output);
+    TripleTrioController controller = new TripleTrioControllerImpl(reader, output);
     cardReader = new CardDatabaseReader();
     gridReader = new GridConfigReader();
   }
