@@ -55,7 +55,7 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
-   * Sets the number of flips the card makes if placed at this location
+   * Sets the number of flips the card makes if placed at this location.
    * @param posn location of card
    * @param cardIndex card index in hand
    * @param flips number of slips
@@ -268,6 +268,10 @@ public class MockModel implements TripleTrioModel {
     }
   }
 
+  /**
+   * Sets the winner using a WinningState object.
+   * @param winner the winner of the game
+   */
   public void setWinner(WinningState winner) {
     this.winner = winner;
   }

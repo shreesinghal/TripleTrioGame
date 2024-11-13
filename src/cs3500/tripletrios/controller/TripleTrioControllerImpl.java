@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configReaders.CardDatabaseReader;
-import cs3500.tripletrios.configReaders.GridConfigReader;
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * Controller class that implements the controller interface and takes user input
- * and communicates it to the TripleTrioGame mode.
+ * and communicates it to the TripleTrioGame model.
  */
 public class TripleTrioControllerImpl implements TripleTrioController {
 
@@ -97,7 +97,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
    * @param model a triple trio model
    */
   @Override
-  public void playGame(TripleTrioModel model) throws IOException {
+  public void playGameWithModel(TripleTrioModel model) throws IOException {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }
@@ -116,7 +116,8 @@ public class TripleTrioControllerImpl implements TripleTrioController {
   }
 
 
-  private void tryStartGame(TripleTrioModel model, TripleTrioView view, ArrayList<ArrayList<Cell>> grid, Set<Card> deck) throws IOException {
+  private void tryStartGame(TripleTrioModel model, TripleTrioView view, ArrayList<ArrayList<Cell>> grid, Set<Card> deck)
+          throws IOException {
     try {
       model.startGame(deck, grid);
     } catch (IllegalStateException | IllegalArgumentException e) {

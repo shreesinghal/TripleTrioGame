@@ -43,7 +43,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
             (int) (getToolkit().getScreenSize().getHeight()
               + redHand.getPixelDimensions().getHeight()
               + blueHand.getPixelDimensions().getHeight())));
-             //allows us to set the size of the window
+    //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.setLayout(new BorderLayout());
     this.add(gridPanel, BorderLayout.CENTER);

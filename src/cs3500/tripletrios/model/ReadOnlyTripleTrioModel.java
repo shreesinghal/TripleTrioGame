@@ -3,27 +3,34 @@ package cs3500.tripletrios.model;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Interface for the Read only TripleTrioModel. This interface
+ * contains the behaviors of the game that do not modify the game state.
+ */
 public interface ReadOnlyTripleTrioModel {
 
 
   /**
    * Returns if the game is over as specified by the implementation.
+   *
    * @return true if the game has ended and false otherwise
    * @throws IllegalStateException if the game has not started
    */
   boolean isGameOver();
 
   /**
-  * Returns if the game started.
-  * @return true if game started, else false
-  */
+   * Returns if the game started.
+   *
+   * @return true if game started, else false
+   */
   boolean isGameStarted();
 
 
   /**
-  * Returns the current player of the game.
-  * @return player
-  */
+   * Returns the current player of the game.
+   *
+   * @return player
+   */
   Player getPlayer();
 
   /**
@@ -34,22 +41,25 @@ public interface ReadOnlyTripleTrioModel {
   Player getOppPlayer();
 
   /**
-  * Returns the grid in its current status.
-  * @return the grid
-  */
+   * Returns the grid in its current status.
+   *
+   * @return the grid
+   */
   ArrayList<ArrayList<Cell>> getCurrentGrid();
 
   /**
    * Returns the original grid from the config file.
+   *
    * @return the original grid at start game.
    */
   ArrayList<ArrayList<Cell>> getOriginalGrid();
 
 
   /**
-  * Determines the winner of the game once the game has ended.
-  * @return the winner of the game
-  */
+   * Determines the winner of the game once the game has ended.
+   *
+   * @return the winner of the game
+   */
   WinningState determineWinner();
 
   /**
@@ -71,4 +81,6 @@ public interface ReadOnlyTripleTrioModel {
    *
    * @return set of cards
    */
-  Set<Card> getDeck();}
+  Set<Card> getDeck();
+
+}

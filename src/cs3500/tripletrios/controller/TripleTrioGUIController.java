@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configReaders.CardDatabaseReader;
-import cs3500.tripletrios.configReaders.GridConfigReader;
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Color;
@@ -14,6 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
+
+/**
+ * This is the controller implementation specific to the GUI. Implements the
+ * TripleTrioController interface and delegates input(clicks) from the GUI view to the
+ * model of the game. This controller also accounts for AI strategies.
+ */
 public class TripleTrioGUIController implements TripleTrioController {
   private TripleTrioModel model;
   private final TTFrame view;
@@ -21,6 +27,10 @@ public class TripleTrioGUIController implements TripleTrioController {
   private boolean hasBeenPlaced = false;
   private CornerStrategy cornerStrategy;
 
+  /**
+   * Constructor that instantiates a controller that takes in a GUI view.
+   * @param view a GUI view.
+   */
   public TripleTrioGUIController(TTFrame view) {
     if (view == null) {
       throw new IllegalArgumentException("view cannot be null");
@@ -81,6 +91,9 @@ public class TripleTrioGUIController implements TripleTrioController {
     }
   }
 
+  /**
+   * Handles actions from the AI and utilizes the strategies.
+   */
   public void playAI() {
     PlayerMove aiMove = cornerStrategy.moveCard();
     model.placeCard(aiMove.getX(), aiMove.getY(),
@@ -94,7 +107,7 @@ public class TripleTrioGUIController implements TripleTrioController {
    * @param model a triple trio model
    */
   @Override
-  public void playGame(TripleTrioModel model) {
+  public void playGameWithModel(TripleTrioModel model) {
     if (model == null) {
       throw new IllegalArgumentException("model cannot be null");
     }

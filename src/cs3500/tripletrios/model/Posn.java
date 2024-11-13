@@ -8,9 +8,9 @@ public class Posn {
   private final int x_Coord;
   private final int y_Coord;
 
-  public Posn(int x_Coord, int y_Coord) {
-    this.x_Coord = x_Coord;
-    this.y_Coord = y_Coord;
+  public Posn(int xPos, int yPos) {
+    this.x_Coord = xPos;
+    this.y_Coord = yPos;
   }
 
   /**

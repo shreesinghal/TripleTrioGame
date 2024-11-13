@@ -70,7 +70,7 @@ public class HandPanel extends JPanel {
 
       CardView cardView = new CardView(this.player.getHand().get(i),
           i,
-this.getHeight() / this.model.getPlayer().getHand().size());
+              this.getHeight() / this.model.getPlayer().getHand().size());
       // ^^ make the card height dependent on the panel height (this.height) ^^
 
       if (player.getColor().getColor() == Color.RED) {
@@ -124,9 +124,9 @@ this.getHeight() / this.model.getPlayer().getHand().size());
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
+      features.handleCellClickForHand(pixelToACell(e.getY()), player.getColor());
       if (player.getColor() == model.getPlayer().getColor()) {
-        highlightHandCard(pixelToCell(e.getY()));
+        highlightHandCard(pixelToACell(e.getY()));
       }
     }
 
@@ -139,7 +139,7 @@ this.getHeight() / this.model.getPlayer().getHand().size());
       repaint();
     }
 
-    private int pixelToCell(int Coord) {
+    private int pixelToACell(int Coord) {
 
       return Coord / CardView.getLogicalSizeOfCard().height;
     }

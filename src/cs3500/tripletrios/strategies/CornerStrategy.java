@@ -23,7 +23,8 @@ public class CornerStrategy implements TripleTrioStrategy {
   }
 
   /**
-   * Prioritizes placing a card in a corner, and if all corners are occupied, choses the top leftest card
+   * Prioritizes placing a card in a corner, and if all corners are occupied,
+   * chooses the top leftest card.
    */
   @Override
   public PlayerMove moveCard() {
@@ -100,9 +101,9 @@ public class CornerStrategy implements TripleTrioStrategy {
     for (int y = 0; y < gridHeight; y++) {
       for (int x = 0; x < gridWidth; x++) {
         if (model.getCurrentGrid().get(y).get(x).getCellType() == Cell.CellType.CARDCELL
-          && model.getCurrentGrid().get(y).get(x).isEmpty()) {
+            && model.getCurrentGrid().get(y).get(x).isEmpty()) {
           Card bestCard = model.getPlayer().getHand().get(0);
-          return new PlayerMove(new Posn (x, y),
+          return new PlayerMove(new Posn(x, y),
             this.model.getPlayer().getHand().indexOf(bestCard));
 
         }

@@ -1,7 +1,10 @@
 package cs3500.tripletrios.strategies;
 
 
-
+/**
+ * Interface which represents the common behaviors each strategy should have.
+ * This interface requires that every strategy have a moveCard method.
+ */
 public interface TripleTrioStrategy {
 
   /**

@@ -122,18 +122,18 @@ public class GridPanel extends JPanel {
     @Override
     public void mouseClicked(MouseEvent e) {
       try {
-        features.handleCellClickForGrid(pixelToCellHoriz(e.getX()), pixelToCellVert(e.getY()));
+        features.handleCellClickForGrid(pixelToCellHor(e.getX()), pixelToCellVer(e.getY()));
       } catch (IOException ex) {
         System.out.print("Card couldn't be placed in grid.");
       }
     }
 
 
-    private int pixelToCellHoriz(int Coord) {
+    private int pixelToCellHor(int Coord) {
       return (Coord / getDimensions().width + 1);
     }
 
-    private int pixelToCellVert(int Coord) {
+    private int pixelToCellVer(int Coord) {
       return (Coord / getDimensions().height + 1);
     }
 
