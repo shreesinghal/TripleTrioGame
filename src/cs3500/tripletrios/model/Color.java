@@ -11,11 +11,11 @@ public enum Color {
     RED,
     BLUE;
 
-    /**
-     * Returns the color as a Java Color object rather than
-     * a Color object.
-     * @return Java Color object.
-     */
+  /**
+   * Returns the color as a Java Color object rather than
+   * a Color object.
+   * @return Java Color object.
+   */
   public java.awt.Color getColor() {
     if (this == Color.RED) {
       return java.awt.Color.RED;
@@ -25,5 +25,5 @@ public enum Color {
       throw new IllegalStateException("Color not found.");
     }
 
-    }
+  }
 }

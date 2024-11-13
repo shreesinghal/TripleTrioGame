@@ -2,7 +2,9 @@ package strategiestest;
 
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Posn;
 import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.MockModel;
 import cs3500.tripletrios.strategies.PlayerMove;
@@ -11,27 +13,29 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Class to test the corner strategies.
+ */
 public class CornerStrategyTest {
   private MockModel mockModel;
   private CornerStrategy strategy;
-  private ArrayList<ArrayList<Cell>> grid;
 
   @Before
   public void setup() {
 
+    ArrayList<ArrayList<Cell>> grid;
     Set<Card> deck = CardDatabaseReader.readDeckConfiguration("Configurations"
-      + File.separator
-      + "20deckConfig.txt");
+        + File.separator
+        + "20deckConfig.txt");
     grid = GridConfigReader.readGridConfiguration("Configurations"
-      + File.separator
-      + "3x3sqrGrid.txt");
+        + File.separator
+        + "3x3sqrGrid.txt");
 
     mockModel = new MockModel();
 
@@ -47,9 +51,9 @@ public class CornerStrategyTest {
       System.out.println(pos.getX() + " " + pos.getY());
     }
     assertTrue(mockModel.getTranscript().contains(new Posn(0, 0)));
-//    assertTrue(mockModel.getTranscript().contains(new Posn(2, 0)));
-//    assertTrue(mockModel.getTranscript().contains(new Posn(0, 2)));
-//    assertTrue(mockModel.getTranscript().contains(new Posn(2, 2)));
+    //    assertTrue(mockModel.getTranscript().contains(new Posn(2, 0)));
+    //    assertTrue(mockModel.getTranscript().contains(new Posn(0, 2)));
+    //    assertTrue(mockModel.getTranscript().contains(new Posn(2, 2)));
   }
 
 
