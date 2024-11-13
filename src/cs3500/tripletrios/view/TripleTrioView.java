@@ -5,7 +5,7 @@ import cs3500.tripletrios.model.WinningState;
 import java.io.IOException;
 
 /**
- *Behaviors needed for a view of the TripleTrioGame implementation
+ * Behaviors needed for a view of the TripleTrioGame implementation
  * that transmits information to the user.
  */
 public interface TripleTrioView {

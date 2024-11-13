@@ -19,6 +19,10 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
   private TripleTrioModel model;
 
 
+  /**
+   * Creates an instance of the strategy.
+   * @param model representation of game state
+   */
   public ManyCardsStrategy (TripleTrioModel model) {
     this.model = model;
   }
@@ -31,31 +35,32 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
    */
   @Override
   public PlayerMove moveCard() {
-    ArrayList<ArrayList<Integer>> calculatedCardScores = checkCardScoreInGrid();
+    ArrayList<ArrayList<PlayerMove>> calculatedCardScores = checkCardScoreInGrid();
 
     int maxScore = 0;
+    int bestHandIdx = 0;
     for (int i = 0; i < calculatedCardScores.size(); i++) {
       for (int j = 0; j < calculatedCardScores.get(i).size(); j++) {
-        if (maxScore < calculatedCardScores.get(j).get(i)) {
-          maxScore = calculatedCardScores.get(j).get(i);
+        if (maxScore < calculatedCardScores.get(j).get(i).getCardInd()) {
+          maxScore = calculatedCardScores.get(j).get(i).getCardInd();
+          bestHandIdx = calculatedCardScores.get(j).get(i).getY();
         }
       }
     }
 
     for (int i = 0; i < calculatedCardScores.size(); i++) {
       if (calculatedCardScores.get(i).contains(maxScore)) {
-        return new PlayerMove(new Posn(calculatedCardScores.get(i).indexOf(maxScore), i),  );
+        return new PlayerMove(new Posn(calculatedCardScores.get(i).indexOf(maxScore), i), bestHandIdx );
       }
     }
 
-
-
+    return null; //should never reach here
   }
 
 
   /**
    * This finds how many cards are flipped for every card in hand placed in every cell.
-   * @return
+   * @return an 2D arraylist of PlayerMove objects
    */
   private ArrayList<ArrayList<PlayerMove>> checkCardScoreInGrid() {
     ArrayList<ArrayList<PlayerMove>> cardScoreInGrid = new ArrayList<>();
@@ -67,21 +72,21 @@ public class ManyCardsStrategy implements TripleTrioStrategy {
       }
     }
 
+
     for (int y = 0; y < this.model.getOriginalGrid().size(); y++) {
       for (int x = 0; x < this.model.getOriginalGrid().get(0).size(); x++) {
         if (this.model.getCurrentGrid().get(y).get(x).getCellType().equals(Cell.CellType.HOLE)
                 || !this.model.getCurrentGrid().get(y).get(x).isEmpty()) {
-          cardScoreInGrid.get(x).set(y, new PlayerMove());
+          cardScoreInGrid.get(x).set(y, new PlayerMove(new Posn(-1,-1), -1));
         } else {
           int bestCardScore = executeBattlePhase(0, 0, this.model.getPlayer().getHand().get(0));
-          Posn bestCardLocation = new Posn(0,0);
-          for (Card card : this.model.getPlayer().getHand()) {
-            int score = executeBattlePhase(x,y,card);
+          for (int c = 0; c < this.model.getPlayer().getHand().size(); c++) {
+            int score = executeBattlePhase(x,y,this.model.getPlayer().getHand().get(c));
             if (score > bestCardScore) {
               bestCardScore = score;
-              bestCardLocation = new Posn(x,y);
+
             }
-            cardScoreInGrid.get(y).set(y,bestCardScore);
+            cardScoreInGrid.get(y).set(y,new PlayerMove(new Posn(0, c), bestCardScore ));
           }
         }
       }

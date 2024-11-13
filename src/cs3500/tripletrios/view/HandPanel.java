@@ -14,6 +14,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * A JPanel subclass representing the player's hand in the Triple Trios game.
+ * This panel displays a visual representation of the cards in a player's hand
+ * in the GUI view.
+ */
 public class HandPanel extends JPanel {
 
   private TripleTrioController features;
@@ -24,18 +29,34 @@ public class HandPanel extends JPanel {
   private int highlightedCardNum = -1;
 
 
+  /**
+   * Creates a hand panel for a specified player by displaying
+   * the players hand of cards.
+   * @param model the representation of the game
+   * @param player the player owning the hand
+   */
   public HandPanel(ReadOnlyTripleTrioModel model, Player player) {
     this.player = player;
     this.model = model;
     this.cardViewsInHand = new ArrayList<>();
   }
 
+  /**
+   * Set up the controller to handle click events in this view.
+   * Only reacts to clicks.
+   * @param features the controller
+   */
   public void addClickListener(TripleTrioController features) {
     this.features = features;
     this.addMouseListener(new TTHandClick());
   }
 
 
+  /**
+   * Renders a hand panel on the screen according to dimensions from the model.
+   * Panel is resizeable, adjusting to the height and width of the current frame size.
+   * @param g the <code>Graphics</code> object to protect
+   */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);

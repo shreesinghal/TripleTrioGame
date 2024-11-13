@@ -9,7 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 /**
- * This is our view class for our GUI implementation.
+ * Implements the GUI view for the Triple Trios game, displaying the main game board,
+ * player hands, and managing visual updates based on the current game state.
  */
 public class TTFrameViewImpl extends JFrame implements TTFrame {
 
@@ -71,6 +72,11 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     return redHand;
   }
 
+  /**
+   * Set up the controller to handle click events in this view.
+   * Only reacts to clicks.
+   * @param listener the controller
+   */
   @Override
   public void addClickListeners(TripleTrioController listener) {
     this.blueHand.addClickListener(listener);
