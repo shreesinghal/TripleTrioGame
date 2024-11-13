@@ -21,7 +21,6 @@ public class TripleTrioGUIController implements TripleTrioController {
   private boolean hasBeenPlaced = false;
   private CornerStrategy cornerStrategy;
 
-
   public TripleTrioGUIController(TTFrame view) {
     if (view == null) {
       throw new IllegalArgumentException("view cannot be null");
@@ -29,8 +28,6 @@ public class TripleTrioGUIController implements TripleTrioController {
     this.view = view;
     view.addClickListeners(this);
   }
-
-
 
   /**
    * Play a new game of Triple Trio with the given configurations.

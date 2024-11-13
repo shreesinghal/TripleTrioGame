@@ -38,13 +38,11 @@ public class TTGameModelTest {
     Appendable output = new StringBuilder();
     Readable userInput = new StringReader("1 1 Bird\n");
     TripleTrioControllerImpl controller = new TripleTrioControllerImpl(userInput, output);
-    CardDatabaseReader cardReader = new CardDatabaseReader();
-    GridConfigReader gridReader = new GridConfigReader();
 
-    deck = cardReader.readDeckConfiguration("Configurations"
+    deck = CardDatabaseReader.readDeckConfiguration("Configurations"
       + File.separator
       + "20deckConfig.txt");
-    grid = gridReader.readGridConfiguration("Configurations"
+    grid = GridConfigReader.readGridConfiguration("Configurations"
       + File.separator
       + "3x3sqrGrid.txt");
 

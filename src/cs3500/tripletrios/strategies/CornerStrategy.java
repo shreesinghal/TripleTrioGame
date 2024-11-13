@@ -25,7 +25,7 @@ public class CornerStrategy implements TripleTrioStrategy {
         return new PlayerMove(corner, this.model.getPlayer().getHand().indexOf(chosenCard));
       }
     }
-    return fallbackMove(); // Handle case if all corners are occupied
+    return fallbackMove();
   }
 
   /**

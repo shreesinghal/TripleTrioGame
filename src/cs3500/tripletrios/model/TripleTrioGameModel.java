@@ -23,7 +23,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
   private Player currPlayer;
   private Player opposingPlayer;
   private boolean gameStarted;
-  private ArrayList<Card> deckList;
 
 
   /**
@@ -75,10 +74,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     int handSize = (gridSize + 1) / 2;
 
-    this.deckList = new ArrayList<>();
+    ArrayList<Card> deckList = new ArrayList<>();
     deckList.addAll(deckOfCards);
-
-
 
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
