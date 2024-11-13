@@ -31,8 +31,8 @@ public final class ThreeTrios {
     ArrayList<Card> redPlayerHand = model.getPlayer().getHand();
     ArrayList<Card> bluePlayerHand = model.getOppPlayer().getHand();
 
-    model.placeCard(0,0, (CardImpl) redPlayerHand.get(0));
-    model.placeCard(2,2, (CardImpl) bluePlayerHand.get(0));
+    model.placeCard(0,0, redPlayerHand.get(0));
+    model.placeCard(2,2, bluePlayerHand.get(0));
 
     TTFrame view = new TTFrameViewImpl(model);
 
