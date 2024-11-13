@@ -196,6 +196,14 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.currPlayer = temp;
   }
 
+  /**
+   * @param corner
+   */
+  @Override
+  public void documentCheckOnGrid(Posn corner) {
+    // not needed
+  }
+
   private void ensureGameStarted() {
     if (!gameStarted) {
       throw new IllegalStateException("Game is not started");

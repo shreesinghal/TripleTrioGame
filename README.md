@@ -1,3 +1,5 @@
+Overview:
+
 Our TripleTrios codebase implements a grid-based card game which is designed to support multiple players, cards with 
 attack values, and configurable game setups. Our codebase was designed to create an interactive, card-based grid game 
 that manages player interactions with a grid layout. Players can interact with cards(with a color corresponding to 
@@ -7,8 +9,10 @@ move. We assume that the set up of the game is a text view setup. This project i
 for customization of card configurations, grid sizes, and game rules via the model, controller, and configurations. 
 The scope of the project doesn’t include GUI or AI so that limits it to text based interface.
 
+Quick start:
 
-To get started using this code base, create a controller and model object and call the controller in the following manner:
+To get started using this code base, create a controller and model object and 
+call the controller in the following manner:
 TripleTrioModel model = new TripleTrioGameModel();
 BufferedReader readable = new BufferedReader(new InputStreamReader(System.in));
 TripleTrioController controller = new TripleTrioControllerImpl(readable, System.out);
@@ -17,6 +21,7 @@ controller.playGame(model, deckPath, gridPath);
 Here, deckPath points to a .txt deckConfiguration file and gridPath points to a similar grid configuration file. 
 The playGame method of the controller will call all supporting classes necessary to run and play the game.
 
+Key components and subcomponents:
 
 The way we implemented our codebase is around the Model-View-Controller pattern. 
 Our Model is for the game logic of TripleTrios, the Controller is for user interaction and gameplay flow, and the View 
@@ -35,15 +40,16 @@ custom card setups. The TripleTrioTextView class is the view and it displays the
 to the current state that is maintained by the model. It is a “passive” component which is driven by updates from the 
 Controller and has no control over the game logic. The view has a toString and render function which represents the 
 current state of the game to the user in the format required. The view is crucial because it continuously reflects 
-changes to the game based on player actions and system responses.
+changes to the game based on player actions and system responses. 
+For our AI player, we made multiple strategies the AI player can use. In our controller, we call these strategy classes.
 
+Source organization:
 
 Our codebase is organized into directories by component so that its navigation through the MVC is straightforward.
 We have a model directory containing all key components/subcomponents of the model, controller directory for its own, 
 view directory for its own, and test directory for its own.
 
-
-
+Invariant:
 
 One invariant that is enforced in our implementation is that the input must be given in the form 
 [x position] [y position] [card name]. The user should enter using this format to tell the computer what card is placed 

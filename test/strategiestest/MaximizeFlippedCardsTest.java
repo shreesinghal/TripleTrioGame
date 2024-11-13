@@ -4,7 +4,6 @@ import cs3500.tripletrios.ConfigReaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Posn;
-import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.strategies.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,5 +50,21 @@ public class MaximizeFlippedCardsTest {
     PlayerMove bestMove = strategy.moveCard();
 
     assertEquals(new PlayerMove(new Posn(2, 2), 1), bestMove);
+  }
+
+  @Test
+  public void testMoveCardFindsBestPlacementWhenSameFlipScore() {
+
+
+    strategy.setFlipCountForMove(new Posn(1, 1),
+      0,
+      0);
+    strategy.setFlipCountForMove(new Posn(2, 2),
+      1,
+      0);
+
+    PlayerMove bestMove = strategy.moveCard();
+
+    assertEquals(new PlayerMove(new Posn(1,1), 0), bestMove);
   }
 }

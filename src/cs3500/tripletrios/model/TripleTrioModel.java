@@ -97,4 +97,5 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void switchTurns();
 
 
+  void documentCheckOnGrid(Posn corner);
 }
