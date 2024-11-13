@@ -23,23 +23,49 @@ public class CornerStrategy implements TripleTrioStrategy {
   }
 
   /**
-   * Prioritizes placing a card in a corner, and if all corners are occupied, choses the top leftest card
+   * MOves a card by prioritizing placing the best card in the best available corner.
    */
   @Override
   public PlayerMove moveCard() {
+    Posn bestCorner = null;
+    Card bestCard = null;
+
     for (Posn corner : cornerPositions) {
       model.documentCheckOnGrid(corner);
+
+      // Check if the corner position is empty
       if (model.getCurrentGrid().get(corner.getY()).get(corner.getX()).isEmpty()) {
+        // select the best card
         Card chosenCard = selectBestCardForCorner(corner);
-        return new PlayerMove(corner, this.model.getPlayer().getHand().indexOf(chosenCard));
+
+        // set as new best card if chosen
+        if (bestCorner == null || isBetterCard(chosenCard, bestCard, corner)) {
+          bestCorner = corner;
+          bestCard = chosenCard;
+        }
       }
     }
+
+    if (bestCorner != null && bestCard != null) {
+      return new PlayerMove(bestCorner, this.model.getPlayer().getHand().indexOf(bestCard));
+    }
+
+    // If all corners are occupied or no beneficial move was found, fall back to the alternative strategy
     return fallbackMove();
   }
 
   /**
-   * Calculates the positions of the corners based on grid dimensions.
+   * Determines if the chosen card is better than the current best card for the strategy's purposes.
+   * This can be based on criteria such as attack values, defense potential, or other relevant metrics.
    */
+  private boolean isBetterCard(Card chosenCard, Card bestCard, Posn corner) {
+    int chosenCardScore = chosenCard.getNorth() + chosenCard.getSouth() + chosenCard.getEast() + chosenCard.getWest();
+    int bestCardScore = bestCard.getNorth() + bestCard.getSouth() + bestCard.getEast() + bestCard.getWest();
+
+    return chosenCardScore > bestCardScore;
+  }
+
+
   private List<Posn> calculateCornerPositions() {
     int width = model.getGridWidth();
     int height = model.getGridHeight();
