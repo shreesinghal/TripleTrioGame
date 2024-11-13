@@ -2,7 +2,7 @@ package cs3500.tripletrios.strategies;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.PlayerImpl;
 import cs3500.tripletrios.model.Posn;
@@ -40,8 +40,8 @@ public class MockModel implements TripleTrioModel {
    * Creates a mock of the model for testing purposes. It can mimic and keep track of moves.
    */
   public MockModel() {
-    this.currentPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
+    this.currentPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
+    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
     this.grid = new ArrayList<>();
     this.legalSpaces = new HashMap<>();
     this.scoreSpaces = new HashMap<>();
@@ -106,20 +106,20 @@ public class MockModel implements TripleTrioModel {
 
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
-      currRedCard.setCardColor(Color.RED);
+      currRedCard.setCardColor(CardColor.RED);
       playerAHand.add(currRedCard);
     }
 
 
     for (int i = 1; i <= handSize; i++) {
       Card currBlueCard = deckList.remove(0);
-      currBlueCard.setCardColor(Color.BLUE);
+      currBlueCard.setCardColor(CardColor.BLUE);
       playerBHand.add(currBlueCard);
     }
 
 
-    this.currentPlayer = new PlayerImpl(playerAHand, Color.RED);
-    this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
+    this.currentPlayer = new PlayerImpl(playerAHand, CardColor.RED);
+    this.opposingPlayer = new PlayerImpl(playerBHand, CardColor.BLUE);
 
     this.gameStarted = true;
   }

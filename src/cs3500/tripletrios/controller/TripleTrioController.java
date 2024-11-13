@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
 
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 
 
@@ -28,7 +28,7 @@ public interface TripleTrioController {
   /**
    *  Handles an action when a player presses a card on the hand.
    */
-  public void handleCellClickForHand(int cardNum, Color color);
+  public void handleCellClickForHand(int cardNum, CardColor color);
 
   /**
    * Handles an action when a player presses a grid cell.

@@ -4,7 +4,7 @@ import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.PlayerMove;
@@ -74,7 +74,7 @@ public class TripleTrioGUIController implements TripleTrioController {
    * Handles an action when a player presses a card on the hand.
    */
   @Override
-  public void handleCellClickForHand(int cardNum, Color color) {
+  public void handleCellClickForHand(int cardNum, CardColor color) {
     System.out.println("You clicked on the card at index " + cardNum + " in the "
         + model.getPlayer().getColor() + " hand.");
     selectedCard = model.getPlayer().getHand().get(cardNum);

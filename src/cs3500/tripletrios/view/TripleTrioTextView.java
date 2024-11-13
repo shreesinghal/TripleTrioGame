@@ -2,7 +2,7 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
 
@@ -75,9 +75,9 @@ public class TripleTrioTextView implements TripleTrioView {
         } else {
           if (cell.getCard() == null) {
             output.append("_");
-          } else if (cell.getCard().getColor() == Color.RED) {
+          } else if (cell.getCard().getColor() == CardColor.RED) {
             output.append("R");
-          } else if (cell.getCard().getColor() == Color.BLUE) {
+          } else if (cell.getCard().getColor() == CardColor.BLUE) {
             output.append("B");
           } else {
             throw new IllegalArgumentException("Invalid card color: " + cell.getCard().getColor());

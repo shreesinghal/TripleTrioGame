@@ -2,6 +2,7 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -74,7 +75,7 @@ public class CardView extends Path2D.Double {
    * @param y the y-coordinate of the card's top-left corner
    */
   public void draw(Graphics2D g2d, int x, int y) {
-    if (this.card.getColor() == cs3500.tripletrios.model.Color.RED) {
+    if (this.card.getColor() == CardColor.RED) {
       g2d.setColor(new Color(255,171,173,255));
     } else {
       g2d.setColor(new Color(72, 172, 255, 255));

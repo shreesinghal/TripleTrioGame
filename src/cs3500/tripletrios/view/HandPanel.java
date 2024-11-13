@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
@@ -73,7 +74,7 @@ public class HandPanel extends JPanel {
               this.getHeight() / this.model.getPlayer().getHand().size());
       // ^^ make the card height dependent on the panel height (this.height) ^^
 
-      if (player.getColor() == cs3500.tripletrios.model.Color.RED) {
+      if (player.getColor() == CardColor.RED) {
         g2d.setColor(new Color(255,171,173,255));
       } else {
         g2d.setColor(new Color(72, 172, 255, 255));

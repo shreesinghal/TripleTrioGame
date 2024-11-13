@@ -1,7 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JFrame;
@@ -71,8 +71,8 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * @return a handpanel object
    */
   @Override
-  public HandPanel getHandView(Color color) {
-    if (color == Color.BLUE) {
+  public HandPanel getHandView(CardColor color) {
+    if (color == CardColor.BLUE) {
       return blueHand;
     }
     return redHand;

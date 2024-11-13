@@ -9,7 +9,7 @@ import java.util.Map;
 public class CardImpl implements Card {
 
   private final String name;
-  private Color cardColor;
+  private CardColor cardColor;
   private Map<Direction, Integer> attackValues = new HashMap<>();
 
   public CardImpl( String name, Map<Direction, Integer> attackValues) {
@@ -33,7 +33,7 @@ public class CardImpl implements Card {
    * @return the Player
    */
   @Override
-  public Color getColor() {
+  public CardColor getColor() {
     return this.cardColor;
   }
 
@@ -41,7 +41,7 @@ public class CardImpl implements Card {
    * Sets the current color of the card.
    * @param color specified color to change card to
    */
-  public void setCardColor(Color color) {
+  public void setCardColor(CardColor color) {
     this.cardColor = color;
   }
 
@@ -50,11 +50,11 @@ public class CardImpl implements Card {
    */
   @Override
   public void flipOwnership() {
-    if (cardColor == Color.RED) {
-      this.cardColor = Color.BLUE;
+    if (cardColor == CardColor.RED) {
+      this.cardColor = CardColor.BLUE;
     }
     else {
-      this.cardColor = Color.RED;
+      this.cardColor = CardColor.RED;
     }
   }
 
