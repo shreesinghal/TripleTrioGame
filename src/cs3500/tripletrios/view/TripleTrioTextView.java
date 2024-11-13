@@ -111,15 +111,15 @@ public class TripleTrioTextView implements TripleTrioView {
   public void displayFinalMessage(WinningState winner) throws IOException {
 
     switch (winner) {
-      case WinningState.RedWins:
+      case RedWins:
         this.output.append("\nPlayer Red wins!");
         break;
 
-      case WinningState.BlueWins:
+      case BlueWins:
         this.output.append("\nPlayer Blue wins!");
         break;
 
-      case WinningState.Tie:
+      case Tie:
         this.output.append("\nThere has been a tie!");
         break;
 
