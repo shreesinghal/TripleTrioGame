@@ -28,6 +28,7 @@ public class MockModel implements TripleTrioModel {
   private final Map<Posn, Integer> scoreSpaces;
 
 
+
   /**
    * Creates a mock of the model for testing purposes. It can mimic and keep track of moves.
    */
@@ -44,6 +45,16 @@ public class MockModel implements TripleTrioModel {
     this.oppPlayerScore = 0;
     
 
+  }
+
+  /**
+   * Sets the number of flips the card makes if placed at this location
+   * @param posn location of card
+   * @param cardIndex card index in hand
+   * @param flips number of slips
+   */
+  public void setFlipCountForMove(Posn posn, int cardIndex, int flips) {
+    scoreSpaces.putIfAbsent(posn, flips);
   }
 
   /**

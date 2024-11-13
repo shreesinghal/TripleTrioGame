@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Interface to define behaviors of the player.
+ * A player plays the game, has a hand of cards, and a color.
  */
 public interface Player {
 

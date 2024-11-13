@@ -49,7 +49,7 @@ public class CornerStrategyTest {
   }
 
   @Test
-  public void testChoosesHighValueCorner() {
+  public void testChoosesSpecificCorner() {
     // prioritize bottom-right corner
     mockModel.setCellValue(new Posn(0, 0), 5);
     mockModel.setCellValue(new Posn(2, 2), 10);  // High-value corner

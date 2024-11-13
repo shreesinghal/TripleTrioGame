@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Player implementation to represent a player in the game.
+ * This can be used to interact with the game and play moves.
  */
 public class PlayerImpl implements Player {
 
