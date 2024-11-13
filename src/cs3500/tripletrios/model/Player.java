@@ -12,7 +12,7 @@ public interface Player {
   * Returns the color of the player.
   * @return color of the player
   */
-  Color getColor();
+  CardColor getColor();
 
   /**
   * Returns the players hand.

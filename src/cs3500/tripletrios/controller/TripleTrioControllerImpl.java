@@ -5,7 +5,7 @@ import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
@@ -79,7 +79,7 @@ public class TripleTrioControllerImpl implements TripleTrioController {
    * Handles an action when a player presses a card on the hand.
    */
   @Override
-  public void handleCellClickForHand(int cardNum, Color color) {
+  public void handleCellClickForHand(int cardNum, CardColor color) {
     //nothing implemented for the console controller
   }
 

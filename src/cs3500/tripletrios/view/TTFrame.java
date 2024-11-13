@@ -1,7 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.model.Color;
+import cs3500.tripletrios.model.CardColor;
 
 /**
  * The `TTFrame` interface defines the basic requirements for any graphical frame
@@ -22,7 +22,7 @@ public interface TTFrame {
    *
    * @return the HandPanel for the specific player
    */
-  HandPanel getHandView(Color color);
+  HandPanel getHandView(CardColor color);
 
   /**
    * Set up the controller to handle click events in this view.

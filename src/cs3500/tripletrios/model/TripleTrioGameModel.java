@@ -30,8 +30,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * This creates a triple trio game model to store game data.
    */
   public TripleTrioGameModel() {
-    this.currPlayer = new PlayerImpl(new ArrayList<>(), Color.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), Color.BLUE);
+    this.currPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
+    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), CardColor.BLUE);
   }
 
   /**
@@ -80,20 +80,20 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
-      currRedCard.setCardColor(Color.RED);
+      currRedCard.setCardColor(CardColor.RED);
       playerAHand.add(currRedCard);
     }
 
 
     for (int i = 1; i <= handSize; i++) {
       Card currBlueCard = deckList.remove(0);
-      currBlueCard.setCardColor(Color.BLUE);
+      currBlueCard.setCardColor(CardColor.BLUE);
       playerBHand.add(currBlueCard);
     }
 
 
-    this.currPlayer = new PlayerImpl(playerAHand, Color.RED);
-    this.opposingPlayer = new PlayerImpl(playerBHand, Color.BLUE);
+    this.currPlayer = new PlayerImpl(playerAHand, CardColor.RED);
+    this.opposingPlayer = new PlayerImpl(playerBHand, CardColor.BLUE);
 
     this.gameStarted = true;
   }

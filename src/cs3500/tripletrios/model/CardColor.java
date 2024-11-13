@@ -7,7 +7,7 @@ package cs3500.tripletrios.model;
  * The colors are Red for Player Red
  * and Blue for Player Blue.
  */
-public enum Color {
+public enum CardColor {
     RED,
     BLUE;
 

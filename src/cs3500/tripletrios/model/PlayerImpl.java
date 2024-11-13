@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class PlayerImpl implements Player {
 
   private ArrayList<Card> hand;
-  private final Color color;
+  private final CardColor color;
 
 
 
@@ -18,7 +18,7 @@ public class PlayerImpl implements Player {
   * @param hand list of cards
   * @param color color of player
   */
-  public PlayerImpl(ArrayList<Card> hand, Color color) {
+  public PlayerImpl(ArrayList<Card> hand, CardColor color) {
     this.hand = hand;
     this.color = color;
   }
@@ -30,7 +30,7 @@ public class PlayerImpl implements Player {
   * @return color of the player
   */
   @Override
-  public Color getColor() {
+  public CardColor getColor() {
     return this.color;
   }
 

@@ -18,7 +18,7 @@ public interface Card {
    * Returns the player that the Card belongs to.
    * @return the Player
    */
-  Color getColor();
+  CardColor getColor();
 
   /**
    * Switch ownership of the card from current to opposing player.
@@ -55,7 +55,7 @@ public interface Card {
    */
   int getWest();
 
-  public void setCardColor(Color color);
+  public void setCardColor(CardColor color);
 
   /**
    * Checks if the current card is equal to the input.
