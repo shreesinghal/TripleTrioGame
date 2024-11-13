@@ -7,6 +7,11 @@ import cs3500.tripletrios.model.TripleTrioGameModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *A strategy for the Triple Trio game that prioritizes placing cards in the corners of the grid.
+ *This "corner-first" approach is based on the advantage that cards in corner positions.
+ *Only expose two of their four attack values, making them more challenging for opponents to flip.
+ */
 public class CornerStrategy implements TripleTrioStrategy {
   private final TripleTrioGameModel model;
   private final List<Posn> cornerPositions;
