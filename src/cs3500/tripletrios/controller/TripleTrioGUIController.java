@@ -6,6 +6,8 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Color;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.strategies.CornerStrategy;
+import cs3500.tripletrios.strategies.PlayerMove;
 import cs3500.tripletrios.view.TTFrame;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ public class TripleTrioGUIController implements TripleTrioController {
   private final TTFrame view;
   private Card selectedCard = null;
   private boolean hasBeenPlaced = false;
+  private CornerStrategy cornerStrategy;
+
 
   public TripleTrioGUIController(TTFrame view) {
     if (view == null) {
@@ -43,13 +47,14 @@ public class TripleTrioGUIController implements TripleTrioController {
     }
 
     this.model = model;
+    this.cornerStrategy = new CornerStrategy(model);
 
     // read from config files
     GridConfigReader gridReader = new GridConfigReader();
-    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
+    ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
 
     CardDatabaseReader cardReader = new CardDatabaseReader();
-    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
+    Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
 
     model.startGame(deck, grid);
 
@@ -77,6 +82,13 @@ public class TripleTrioGUIController implements TripleTrioController {
       selectedCard = null;
       hasBeenPlaced = true;
     }
+  }
+
+  public void playAI() {
+    PlayerMove aiMove = cornerStrategy.moveCard();
+    model.placeCard(aiMove.getX(), aiMove.getY(),
+      this.model.getPlayer().getHand().get(aiMove.getCardInd()));
+    model.switchTurns();
   }
 
   /**
@@ -107,7 +119,7 @@ public class TripleTrioGUIController implements TripleTrioController {
     view.refresh();
 
     model.placeCard(xPos - 1, yPos - 1, selectedCard);
-    //model.executeBattlePhase(xPos - 1, yPos - 1);
+    model.executeBattlePhase(xPos - 1, yPos - 1);
     model.switchTurns();
     view.refresh();
 

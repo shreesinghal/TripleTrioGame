@@ -1,5 +1,6 @@
 package cs3500.tripletrios.strategies;
 
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Posn;
 
 /**
@@ -13,5 +14,29 @@ public class PlayerMove {
   public PlayerMove(Posn gridLocation, int cardInHandInd) {
     this.gridLocation = gridLocation;
     this.cardInHandInd = cardInHandInd;
+  }
+
+  /**
+   * Returns the x coordinate of the place the card should be placed.
+   * @return x coord
+   */
+  public int getX() {
+    return gridLocation.getX();
+  }
+
+  /**
+   * Returns the Y coordinate of the place the card should be placed.
+   * @return y coord
+   */
+  public int getY() {
+    return gridLocation.getY();
+  }
+
+  /**
+   * Gets the card calculated to play by the ai.
+   * @return the card to play
+   */
+  public int getCardInd() {
+    return this.cardInHandInd;
   }
 }
