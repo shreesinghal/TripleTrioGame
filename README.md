@@ -76,5 +76,6 @@ calculate a single players score.
 
 In our controller, we made some additions so that our controller interface, TripleTrioController, would be able to 
 account for both the text view and the GUI view. We added methods like playGameWithModel, handleCellClickForHand, and
-handleCellClickForGrid. 
+handleCellClickForGrid. These are methods that account for the GUI view, and when implemented into the controller for 
+the textViewController, we do not have a implementation for it. 
 
