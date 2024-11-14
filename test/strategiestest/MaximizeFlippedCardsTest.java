@@ -62,7 +62,7 @@ public class MaximizeFlippedCardsTest {
   }
 
   @Test
-  public void testMoveCardFindsBestPlacementWhenSameFlipScore() {
+  public void testMoveCardFindsBestPlacementWhenRollbackShouldBeCalled() {
 
 
     strategy.setFlipCountForMove(new Posn(1, 1),
