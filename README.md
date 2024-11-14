@@ -59,3 +59,22 @@ do not match the order/type indicated - then the user is prompted again with the
 model. The model would throw an exception which would then be caught in the controller. The controller would then tell
 the view to display a message to the user indicating that the input format was incorrect and that they should 
 try again.
+
+
+Changes for part 2:
+In part 2 we made some changes to our initial design from homework 5. In this project, we added some methods into our 
+model to ensure that it worked well with our GUI view and strategies. First, we created a ReadOnlyTripleTrioModel 
+which is a interface that is like our original model interface, but it only includes the methods that do not change the 
+state of our game. This interface is used in our TTFrameImpl, HandPanel, and GridPanel. This is so that these classes 
+don't have the ability to even accidentally change our model therefore changing the state of the game. In our model, we
+added methods getGridHeight and getGridWidth to be able to get the height and width of the grid so that when we are 
+creating the GUI, we need to be able to see what our grid width and height is so that we can a) draw the grid and 
+b) make it resizable. We ensured that we had the methods getCurrentGrid and getOriginalGrid that gets the grid 
+respectively. This was so that we could have a copy of the original grid before changes were applied just in case
+we could go back and make changes. While we already had the logic implemented, we added a getPlayerScore method to just 
+calculate a single players score. 
+
+In our controller, we made some additions so that our controller interface, TripleTrioController, would be able to 
+account for both the text view and the GUI view. We added methods like playGameWithModel, handleCellClickForHand, and
+handleCellClickForGrid. 
+
