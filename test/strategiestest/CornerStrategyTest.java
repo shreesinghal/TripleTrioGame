@@ -47,9 +47,6 @@ public class CornerStrategyTest {
   @Test
   public void testChecksAllCorners() {
     strategy.moveCard();
-    for (Posn pos : mockModel.getTranscript()) {
-      System.out.println(pos.getX() + " " + pos.getY());
-    }
     assertEquals(mockModel.getTranscript().get(0), (new Posn(0, 0)));
     assertEquals(mockModel.getTranscript().get(1), (new Posn(2, 0)));
     assertEquals(mockModel.getTranscript().get(2), (new Posn(0, 2)));
