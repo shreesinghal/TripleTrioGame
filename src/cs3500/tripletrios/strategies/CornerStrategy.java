@@ -51,17 +51,25 @@ public class CornerStrategy implements TripleTrioStrategy {
       return new PlayerMove(bestCorner, this.model.getPlayer().getHand().indexOf(bestCard));
     }
 
-    // If all corners are occupied or no beneficial move was found, fall back to the alternative strategy
+    // If all corners are occupied or no beneficial move was found,
+    // fall back to the alternative strategy
     return fallbackMove();
   }
 
   /**
    * Determines if the chosen card is better than the current best card for the strategy's purposes.
-   * This can be based on criteria such as attack values, defense potential, or other relevant metrics.
+   * This can be based on criteria such as attack values, defense potential,
+   * or other relevant metrics.
    */
   private boolean isBetterCard(Card chosenCard, Card bestCard, Posn corner) {
-    int chosenCardScore = chosenCard.getNorth() + chosenCard.getSouth() + chosenCard.getEast() + chosenCard.getWest();
-    int bestCardScore = bestCard.getNorth() + bestCard.getSouth() + bestCard.getEast() + bestCard.getWest();
+    int chosenCardScore = chosenCard.getNorth()
+            + chosenCard.getSouth()
+            + chosenCard.getEast()
+            + chosenCard.getWest();
+    int bestCardScore = bestCard.getNorth()
+            + bestCard.getSouth()
+            + bestCard.getEast()
+            + bestCard.getWest();
 
     return chosenCardScore > bestCardScore;
   }
