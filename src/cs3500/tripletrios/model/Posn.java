@@ -44,4 +44,13 @@ public class Posn {
     Posn posn =  (Posn) pos;
     return this.x_Coord == posn.x_Coord && this.y_Coord == posn.y_Coord;
   }
+
+  /**
+   * Provides hash of obj.
+   * @return hash
+   */
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 }

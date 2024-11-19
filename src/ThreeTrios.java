@@ -1,7 +1,6 @@
 import cs3500.tripletrios.controller.TripleTrioController;
 import cs3500.tripletrios.controller.TripleTrioGUIController;
 import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioGameModel;
 import cs3500.tripletrios.model.TripleTrioModel;
