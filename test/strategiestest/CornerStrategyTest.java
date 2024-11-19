@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Class to test the corner strategies.
