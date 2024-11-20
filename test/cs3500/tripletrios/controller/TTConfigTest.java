@@ -37,7 +37,7 @@ public class TTConfigTest {
    */
   @Before
   public void setUp() throws Exception {
-    TripleTrioController controller = new TripleTrioControllerImpl(reader, output);
+    TripleTrioFeatureController controller = new TripleTrioControllerImpl(reader, output);
     cardReader = new CardDatabaseReader();
     gridReader = new GridConfigReader();
   }

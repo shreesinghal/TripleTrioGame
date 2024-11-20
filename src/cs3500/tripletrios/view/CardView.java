@@ -1,6 +1,6 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 
@@ -19,7 +19,7 @@ public class CardView extends Path2D.Double {
   static int cardWidth = 150;
   static int cardHeight = 150;
 
-  private TripleTrioController features;
+  private TripleTrioFeatureController features;
 
   private Card card;
 

@@ -1,4 +1,4 @@
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioControllerImpl;
 import cs3500.tripletrios.model.TripleTrioGameModel;
 import cs3500.tripletrios.model.TripleTrioModel;
@@ -21,7 +21,7 @@ public class Main {
 
     TripleTrioModel model = new TripleTrioGameModel();
     BufferedReader readable = new BufferedReader(new InputStreamReader(System.in));
-    TripleTrioController controller = new TripleTrioControllerImpl(readable, System.out);
+    TripleTrioFeatureController controller = new TripleTrioControllerImpl(readable, System.out);
     try {
       controller.playGame(model, "Configurations"
                       + File.separator

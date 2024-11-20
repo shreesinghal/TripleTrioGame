@@ -1,6 +1,8 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
@@ -11,7 +13,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -22,16 +23,16 @@ import java.util.ArrayList;
  */
 public class GridPanel extends JPanel {
 
-  private ReadOnlyTripleTrioModel model;
+  private final ReadOnlyTripleTrioModel model;
 
-  private TripleTrioController features;
-
+  private TripleTrioAbstractGUIController features;
 
   /**
    * Creating an instance of the grid panel.
    * @param model a readonly model
    */
   public GridPanel(ReadOnlyTripleTrioModel model) {
+
     this.model = model;
   }
 
@@ -40,9 +41,17 @@ public class GridPanel extends JPanel {
    * Only reacts to clicks.
    * @param features the controller
    */
-  public void addClickListener(TripleTrioController features) {
+  public void addClickListener(TripleTrioHumanPlayerContr features) {
     this.features = features;
     this.addMouseListener(new TTGridPanelClick());
+  }
+
+  /**
+   * This sets the controller to be either the AI or the human player.
+   * @param features AI or human player
+   */
+  public void setController(TripleTrioHumanPlayerContr features) {
+    this.features = features;
   }
 
   /**
@@ -107,7 +116,7 @@ public class GridPanel extends JPanel {
 
 
   /**
-   * Mouselistener class to account for what actions happen when a user clicks their mouse.
+   * Mouse listener class to account for what actions happen when a user clicks their mouse.
    * This is so when a user clicks on the GUI view, and action occurs.
    */
 
@@ -121,12 +130,8 @@ public class GridPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      try {
-        features.handleCellClickForGrid(pixelToCellHorizontal(e.getX()),
-                pixelToCellVertical(e.getY()));
-      } catch (IOException ex) {
-        System.out.print("Card couldn't be placed in grid.");
-      }
+      features.handleCellClickForGrid(pixelToCellHorizontal(e.getX()),
+              pixelToCellVertical(e.getY()));
     }
 
 

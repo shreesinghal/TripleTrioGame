@@ -1,6 +1,8 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioAIPlayer;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
@@ -84,8 +86,8 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * @param listener the controller
    */
   @Override
-  public void addClickListeners(TripleTrioController listener) {
-    this.blueHand.addClickListener(listener);
+  public void addClickListeners(TripleTrioHumanPlayerContr listener) {
+    this.blueHand.addClickListener(new TripleTrioAIPlayer(this));
     this.redHand.addClickListener(listener);
     this.gridPanel.addClickListener(listener);
 

@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
  */
 public class HandPanel extends JPanel {
 
-  private TripleTrioController features;
-
+  private TripleTrioAbstractGUIController features;
   private ReadOnlyTripleTrioModel model;
   private Player player;
   private ArrayList<CardView> cardViewsInHand;
@@ -47,7 +47,7 @@ public class HandPanel extends JPanel {
    * Only reacts to clicks.
    * @param features the controller
    */
-  public void addClickListener(TripleTrioController features) {
+  public void addClickListener(TripleTrioFeatureController features) {
     this.features = features;
     this.addMouseListener(new TTHandClick());
   }

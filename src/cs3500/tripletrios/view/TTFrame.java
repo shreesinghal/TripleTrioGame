@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 
 /**
@@ -29,7 +30,7 @@ public interface TTFrame {
    * Only reacts to clicks.
    * @param listener the controller
    */
-  void addClickListeners(TripleTrioController listener);
+  void addClickListeners(TripleTrioHumanPlayerContr listener);
 
   /**
    * Refresh the view to reflect any changes in the game state.

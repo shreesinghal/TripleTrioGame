@@ -1,5 +1,7 @@
 package cs3500.tripletrios.model;
 
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

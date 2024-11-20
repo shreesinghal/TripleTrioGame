@@ -1,5 +1,5 @@
-import cs3500.tripletrios.controller.TripleTrioController;
-import cs3500.tripletrios.controller.TripleTrioGUIController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioGameModel;
@@ -48,8 +48,8 @@ public final class ThreeTrios {
 
     TTFrame view = new TTFrameViewImpl(model);
 
-    TripleTrioController controller = new TripleTrioGUIController(view);
-    controller.playGameWithModel(model);
+    TripleTrioFeatureController controller = new TripleTrioHumanPlayerContr(view);
+    //controller.playGameWithModel(model);
 
   }
 

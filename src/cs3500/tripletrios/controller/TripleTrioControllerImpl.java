@@ -5,7 +5,6 @@ import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
@@ -19,7 +18,7 @@ import java.util.Set;
  * Controller class that implements the controller interface and takes user input
  * and communicates it to the TripleTrioGame model.
  */
-public class TripleTrioControllerImpl implements TripleTrioController {
+public class TripleTrioControllerImpl implements TripleTrioFeatureController {
 
   private TripleTrioModel model;
 
@@ -66,55 +65,12 @@ public class TripleTrioControllerImpl implements TripleTrioController {
     this.scanner = new Scanner(userInput);
 
     // read from config files
-    GridConfigReader gridReader = new GridConfigReader();
-    ArrayList<ArrayList<Cell>> grid = gridReader.readGridConfiguration(gridPath);
+    ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
 
-    CardDatabaseReader cardReader = new CardDatabaseReader();
-    Set<Card> deck = cardReader.readDeckConfiguration(deckPath);
+    Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
 
     tryStartGame(model, view, grid, deck);
   }
-
-  /**
-   * Handles an action when a player presses a card on the hand.
-   */
-  @Override
-  public void handleCellClickForHand(int cardNum, CardColor color) {
-    //nothing implemented for the console controller
-  }
-
-  /**
-   * Handles an action when a player presses a grid cell.
-   */
-  @Override
-  public void handleCellClickForGrid(int i, int pixelToCellVert) {
-    //nothing implemented for the console controller
-  }
-
-  /**
-   * Play a game of Triple Trios given a model with initial conditions.
-   *
-   * @param model a triple trio model
-   */
-  @Override
-  public void playGameWithModel(TripleTrioModel model) throws IOException {
-    if (model == null) {
-      throw new IllegalArgumentException("model cannot be null");
-    }
-
-    // sets MVC
-    this.model = model;
-    TripleTrioView view = new TripleTrioTextView(model, this.output);
-    this.scanner = new Scanner(userInput);
-
-    // read from config files
-    ArrayList<ArrayList<Cell>> grid = model.getOriginalGrid();
-
-    Set<Card> deck = model.getDeck();
-
-    tryStartGame(model, view, grid, deck);
-  }
-
 
   private void tryStartGame(TripleTrioModel model,
                             TripleTrioView view,
