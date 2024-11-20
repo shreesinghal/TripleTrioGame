@@ -2,13 +2,8 @@ package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.CardColor;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.view.TTFrame;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -18,7 +13,7 @@ import java.util.Set;
  * TripleTrioController interface and delegates input(clicks) from the GUI view to the
  * model of the game. This controller also accounts for AI strategies.
  */
-public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController {
+public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   protected TripleTrioModel model;
   protected TTFrame view;
 
@@ -29,6 +24,14 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public TripleTrioHumanPlayerContr(TTFrame view) {
     super(view);
     view.addClickListeners(this);
+  }
+
+  @Override
+  protected void onTurnNotification() {
+    if (model.getPlayer().isHuman()) {
+      //System.out.println("It's your turn Player " + model.getPlayer().getColor());
+      view.enableInputs(); // Enables user interactions in the GUI
+    }
   }
 
   /**
@@ -49,6 +52,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
     model.startGame(deck, grid);
     view.makeVisible();
+    model.addListener(this);
   }
 
   /**
@@ -93,5 +97,21 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   }
 
 
+  @Override
+  public void onPlayerTurn(String playerName) {
+    System.out.println("It's " + playerName + "'s turn!");
+    view.updateTurn(playerName); // Hypothetical method in the view
+  }
 
+  @Override
+  public void onCardPlaced(int x, int y) {
+    System.out.println("Card placed at (" + x + ", " + y + ")");
+    view.refresh();
+  }
+
+  @Override
+  public void onGameStateUpdated() {
+    System.out.println("Game state updated.");
+    view.refresh();
+  }
 }

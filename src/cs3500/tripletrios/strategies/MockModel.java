@@ -4,7 +4,7 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
-import cs3500.tripletrios.model.PlayerImpl;
+import cs3500.tripletrios.model.PlayerHumanImpl;
 import cs3500.tripletrios.model.Posn;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
@@ -40,8 +40,8 @@ public class MockModel implements TripleTrioModel {
    * Creates a mock of the model for testing purposes. It can mimic and keep track of moves.
    */
   public MockModel() {
-    this.currentPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
+    this.currentPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.RED);
+    this.opposingPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.RED);
     this.grid = new ArrayList<>();
     this.legalSpaces = new HashMap<>();
     this.scoreSpaces = new HashMap<>();
@@ -118,8 +118,8 @@ public class MockModel implements TripleTrioModel {
     }
 
 
-    this.currentPlayer = new PlayerImpl(playerAHand, CardColor.RED);
-    this.opposingPlayer = new PlayerImpl(playerBHand, CardColor.BLUE);
+    this.currentPlayer = new PlayerHumanImpl(playerAHand, CardColor.RED);
+    this.opposingPlayer = new PlayerHumanImpl(playerBHand, CardColor.BLUE);
 
     this.gameStarted = true;
   }

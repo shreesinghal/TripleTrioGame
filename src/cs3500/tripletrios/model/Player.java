@@ -26,4 +26,5 @@ public interface Player {
   */
   void removeCardFromHand(Card card);
 
+  boolean isHuman();
 }

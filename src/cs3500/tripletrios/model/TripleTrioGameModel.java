@@ -1,6 +1,6 @@
 package cs3500.tripletrios.model;
 
-import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.controller.TripleTrioModelListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,28 +26,26 @@ public class TripleTrioGameModel implements TripleTrioModel {
   private Player currPlayer;
   private Player opposingPlayer;
   private boolean gameStarted;
+  private final List<TripleTrioModelListener> listeners = new ArrayList<>();
+
 
 
   /**
    * This creates a triple trio game model to store game data.
    */
   public TripleTrioGameModel() {
-    this.currPlayer = new PlayerImpl(new ArrayList<>(), CardColor.RED);
-    this.opposingPlayer = new PlayerImpl(new ArrayList<>(), CardColor.BLUE);
+    this.currPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.RED);
+    this.opposingPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.BLUE);
   }
 
   /**
-   * Starts the game with a given deck of cards. The deck is used
-   * to set up the player hands. We also instantiate the grid.
-   *
-   * @param deckOfCards a set of cards all unique
-   * @param grid    2D arraylist of cells
-   * @throws IllegalArgumentException if the grid size is even
-   * @throws IllegalStateException  if the size of deck is less than the grid size
+   * This creates a triple trio game model given a deck and grid.
+   * @param deckOfCards deck
+   * @param grid grid
    */
-  @Override
-  public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
-
+  public TripleTrioGameModel(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
+    this.currPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.RED);
+    this.opposingPlayer = new PlayerHumanImpl(new ArrayList<>(), CardColor.BLUE);
     this.grid = grid;
     this.originalGrid = grid;
     this.deck = deckOfCards;
@@ -94,9 +92,22 @@ public class TripleTrioGameModel implements TripleTrioModel {
     }
 
 
-    this.currPlayer = new PlayerImpl(playerAHand, CardColor.RED);
-    this.opposingPlayer = new PlayerImpl(playerBHand, CardColor.BLUE);
+    this.currPlayer = new PlayerHumanImpl(playerAHand, CardColor.RED);
+    this.opposingPlayer = new PlayerHumanImpl(playerBHand, CardColor.BLUE);
 
+  }
+
+  /**
+   * Starts the game with a given deck of cards. The deck is used
+   * to set up the player hands. We also instantiate the grid.
+   *
+   * @param deckOfCards a set of cards all unique
+   * @param grid    2D arraylist of cells
+   * @throws IllegalArgumentException if the grid size is even
+   * @throws IllegalStateException  if the size of deck is less than the grid size
+   */
+  @Override
+  public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
     this.gameStarted = true;
   }
 
@@ -196,7 +207,33 @@ public class TripleTrioGameModel implements TripleTrioModel {
     Player temp = this.opposingPlayer;
     this.opposingPlayer = this.currPlayer;
     this.currPlayer = temp;
+    notifyPlayerTurn(currPlayer.getColor().toString());
+
   }
+
+  @Override
+  public void removeListener(TripleTrioModelListener listener) {
+    listeners.remove(listener);
+  }
+
+  private void notifyPlayerTurn(String playerName) {
+    for (TripleTrioModelListener listener : listeners) {
+      listener.onPlayerTurn(playerName);
+    }
+  }
+
+  private void notifyCardPlaced(int x, int y) {
+    for (TripleTrioModelListener listener : listeners) {
+      listener.onCardPlaced(x, y);
+    }
+  }
+
+  private void notifyGameStateUpdated() {
+    for (TripleTrioModelListener listener : listeners) {
+      listener.onGameStateUpdated();
+    }
+  }
+
 
   /**
    * Documents the path that the strategy takes.
@@ -205,6 +242,15 @@ public class TripleTrioGameModel implements TripleTrioModel {
   @Override
   public void documentCheckOnGrid(Posn corner) {
     // not needed
+  }
+
+
+  @Override
+  public void addListener(TripleTrioModelListener listener) {
+    if (listener == null) {
+      throw new IllegalArgumentException("Listener cannot be null");
+    }
+    listeners.add(listener);
   }
 
   private void ensureGameStarted() {

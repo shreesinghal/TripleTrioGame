@@ -1,9 +1,6 @@
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.TripleTrioGameModel;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.view.TTFrame;
 import cs3500.tripletrios.view.TTFrameViewImpl;
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
@@ -37,19 +34,14 @@ public final class ThreeTrios {
         + File.separator
         + "3x3sqrGrid.txt");
 
-    TripleTrioModel model = new TripleTrioGameModel();
-    model.startGame(sampleDeck, sampleOrigGrid);
-
-    ArrayList<Card> redPlayerHand = model.getPlayer().getHand();
-    ArrayList<Card> bluePlayerHand = model.getOppPlayer().getHand();
-
-    model.placeCard(0,0, redPlayerHand.get(0));
-    model.placeCard(2,2, bluePlayerHand.get(0));
-
-    TTFrame view = new TTFrameViewImpl(model);
-
-    TripleTrioFeatureController controller = new TripleTrioHumanPlayerContr(view);
-    //controller.playGameWithModel(model);
+    TripleTrioModel model = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
+    TTFrame viewPlayer1 = new TTFrameViewImpl(model);
+    TTFrame viewPlayer2 = new TTFrameViewImpl(model);
+    Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
+    Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
+    TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model, player1, viewPlayer1);
+    TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
+    model.startGame();
 
   }
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Player implementation to represent a player in the game.
  * This can be used to interact with the game and play moves.
  */
-public class PlayerImpl implements Player {
+public class PlayerHumanImpl implements Player {
 
   private ArrayList<Card> hand;
   private final CardColor color;
@@ -18,7 +18,7 @@ public class PlayerImpl implements Player {
   * @param hand list of cards
   * @param color color of player
   */
-  public PlayerImpl(ArrayList<Card> hand, CardColor color) {
+  public PlayerHumanImpl(ArrayList<Card> hand, CardColor color) {
     this.hand = hand;
     this.color = color;
   }

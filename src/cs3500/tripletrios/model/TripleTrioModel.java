@@ -1,5 +1,7 @@
 package cs3500.tripletrios.model;
 
+import cs3500.tripletrios.controller.TripleTrioModelListener;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -35,6 +37,8 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * @return true if game started, else false
    */
   boolean isGameStarted();
+
+  void addListener(TripleTrioModelListener listener);
 
   /**
    * Returns the current player of the game.
@@ -97,9 +101,13 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void switchTurns();
 
 
+  void removeListener(TripleTrioModelListener listener);
+
   /**
    * Documents the path that the strategy takes.
    * @param corner takes in the position from grid that is being checked
    */
   void documentCheckOnGrid(Posn corner);
+
+  void addListener(Object onTurnNotification);
 }

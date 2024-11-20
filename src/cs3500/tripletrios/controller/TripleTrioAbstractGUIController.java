@@ -30,7 +30,15 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       throw new IllegalArgumentException("model cannot be null");
     }
     this.model = model;
+
+    // Subscribe to model notifications
+    //model.addListener(this::onTurnNotification);
   }
+
+  /**
+   * To be overridden by subclasses for handling their turn notifications
+   */
+  protected abstract void onTurnNotification();
 
   public void playMove(int xPos, int yPos) {
     model.getPlayer().removeCardFromHand(selectedCard);
