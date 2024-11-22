@@ -41,7 +41,7 @@ public final class ThreeTrios {
     Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model, player1, viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
-    model.startGame();
+    model.startGUIGame();
 
   }
 

@@ -16,23 +16,14 @@ import java.util.Set;
 public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   protected TripleTrioModel model;
   protected TTFrame view;
+  private Player player;
 
-  /**
-   * Constructor that instantiates a controller that takes in a GUI view.
-   * @param view a GUI view.
-   */
-  public TripleTrioHumanPlayerContr(TTFrame view) {
+  public TripleTrioHumanPlayerContr(Player player, TTFrame view) {
     super(view);
+    this.player = player;
     view.addClickListeners(this);
   }
 
-  @Override
-  protected void onTurnNotification() {
-    if (model.getPlayer().isHuman()) {
-      //System.out.println("It's your turn Player " + model.getPlayer().getColor());
-      view.enableInputs(); // Enables user interactions in the GUI
-    }
-  }
 
   /**
    * Play a new game of Triple Trio with the given configurations.
@@ -46,6 +37,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
                        String deckPath,
                        String gridPath) {
     super.playGame(model);
+    this.model = model;
 
     ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
     Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
@@ -58,7 +50,6 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   /**
    * Handles an action when a player presses a card on the hand.
    */
-  @Override
   public void handleCellClickForHand(int cardNum, CardColor color) {
     System.out.println("You clicked on the card at index " + cardNum + " in the "
         + model.getPlayer().getColor() + " hand.");
@@ -97,10 +88,10 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   }
 
 
-  @Override
-  public void onPlayerTurn(String playerName) {
-    System.out.println("It's " + playerName + "'s turn!");
-    view.updateTurn(playerName); // Hypothetical method in the view
+  public void onPlayerTurn(CardColor color) {
+    System.out.println("It's " + color.toString() + "'s turn!");
+    model.setTurn(color);
+    view.refresh();
   }
 
   @Override
@@ -113,5 +104,13 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public void onGameStateUpdated() {
     System.out.println("Game state updated.");
     view.refresh();
+  }
+
+  /**
+   * To be overridden by subclasses for handling their turn notifications
+   */
+  @Override
+  protected void onTurnNotification() {
+
   }
 }

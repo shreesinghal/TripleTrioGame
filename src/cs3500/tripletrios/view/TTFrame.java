@@ -38,6 +38,7 @@ public interface TTFrame {
   void refresh();
 
 
+  void updateTurn(String playerName);
 }
 
 

@@ -24,4 +24,5 @@ public interface TripleTrioFeatureController {
                 String gridPath) throws IOException;
 
 
+  void handleCellClickForGrid(int i, int i1);
 }

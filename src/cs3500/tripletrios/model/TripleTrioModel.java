@@ -73,6 +73,15 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
 
 
   /**
+   * Places the players card where desired.
+   *
+   * @param xPos x coordinate of desired place
+   * @param yPos y coordinate of desired place
+   * @param card card that is being placed
+   */
+  void placePlayerCard(Player player, int xPos, int yPos, Card card);
+
+  /**
    * Executes the battle phase on the card at specified location.
    *
    * @param xPos x position of card
@@ -101,6 +110,8 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void switchTurns();
 
 
+  void setTurn(CardColor color);
+
   void removeListener(TripleTrioModelListener listener);
 
   /**
@@ -110,4 +121,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void documentCheckOnGrid(Posn corner);
 
   void addListener(Object onTurnNotification);
+
+  void startGUIGame();
 }

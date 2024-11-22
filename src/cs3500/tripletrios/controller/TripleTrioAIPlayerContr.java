@@ -7,7 +7,7 @@ import cs3500.tripletrios.strategies.TripleTrioStrategy;
 import cs3500.tripletrios.view.TTFrame;
 
 
-public class TripleTrioAIPlayerContr extends TripleTrioHumanPlayerContr {
+public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   
   private TripleTrioStrategy strategy;
 

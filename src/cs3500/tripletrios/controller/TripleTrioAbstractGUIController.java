@@ -54,11 +54,4 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       selectedCard.getColor() + " card at " + xPos + " " + yPos);
   }
 
-
-  /**
-   * Handles an action when a player presses a grid cell.
-   */
-  public abstract void handleCellClickForGrid(int xGridLoc, int yGridLoc);
-
-  public abstract void handleCellClickForHand(int cardNum, CardColor color);
 }

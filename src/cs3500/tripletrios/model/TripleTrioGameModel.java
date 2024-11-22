@@ -207,8 +207,15 @@ public class TripleTrioGameModel implements TripleTrioModel {
     Player temp = this.opposingPlayer;
     this.opposingPlayer = this.currPlayer;
     this.currPlayer = temp;
-    notifyPlayerTurn(currPlayer.getColor().toString());
+    notifyPlayerTurn(currPlayer.getColor());
 
+  }
+
+  @Override
+  public void setTurn(CardColor color) {
+    if (this.currPlayer.getColor() != color) {
+      switchTurns();
+    };
   }
 
   @Override
@@ -216,9 +223,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
     listeners.remove(listener);
   }
 
-  private void notifyPlayerTurn(String playerName) {
+  private void notifyPlayerTurn(CardColor color) {
     for (TripleTrioModelListener listener : listeners) {
-      listener.onPlayerTurn(playerName);
+      listener.onPlayerTurn(color);
     }
   }
 
@@ -242,6 +249,22 @@ public class TripleTrioGameModel implements TripleTrioModel {
   @Override
   public void documentCheckOnGrid(Posn corner) {
     // not needed
+  }
+
+  /**
+   * @param onTurnNotification
+   */
+  @Override
+  public void addListener(Object onTurnNotification) {
+
+  }
+
+  /**
+   * Starts a GUI game.
+   */
+  @Override
+  public void startGUIGame() {
+    this.gameStarted = true;
   }
 
 
@@ -324,6 +347,26 @@ public class TripleTrioGameModel implements TripleTrioModel {
       throw new IllegalArgumentException("Invalid position entered.");
     }
 
+  }
+
+  /**
+   * Places the players card where desired.
+   *
+   * @param player
+   * @param xPos   x coordinate of desired place
+   * @param yPos   y coordinate of desired place
+   * @param card   card that is being placed
+   */
+  @Override
+  public void placePlayerCard(Player player, int xPos, int yPos, Card card) {
+    if (this.currPlayer != player) {
+      throw new IllegalStateException("It's not this player's turn!");
+    }
+    if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
+      this.grid.get(yPos).get(xPos).placeCard(card);
+    } else {
+      throw new IllegalArgumentException("Invalid position entered.");
+    }
   }
 
   /**

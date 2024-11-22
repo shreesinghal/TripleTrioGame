@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class HandPanel extends JPanel {
 
-  private TripleTrioAbstractGUIController features;
+  private TripleTrioHumanPlayerContr features;
   private ReadOnlyTripleTrioModel model;
   private Player player;
   private ArrayList<CardView> cardViewsInHand;
