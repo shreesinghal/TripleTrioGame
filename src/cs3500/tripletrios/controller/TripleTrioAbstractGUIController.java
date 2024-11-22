@@ -1,16 +1,21 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatureController {
 
   protected TripleTrioModel model;
   protected final TTFrame view;
   protected Card selectedCard = null;
-  protected boolean hasBeenPlaced = false;
 
   /**
    * Constructor that instantiates a controller that takes in a GUI view.
@@ -25,14 +30,13 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
 
-  public void playGame(TripleTrioModel model) {
-    if (model == null) {
-      throw new IllegalArgumentException("model cannot be null");
-    }
-    this.model = model;
+  public void playGame(String deckPath,
+                       String gridPath) {
+    ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
+    Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
 
-    // Subscribe to model notifications
-    //model.addListener(this::onTurnNotification);
+    model.startGame(deck, grid);
+    view.makeVisible();
   }
 
   /**

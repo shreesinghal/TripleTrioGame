@@ -1,11 +1,11 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configreaders.CardDatabaseReader;
-import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
-import java.util.ArrayList;
-import java.util.Set;
+
+import java.io.IOException;
 
 
 /**
@@ -14,13 +14,24 @@ import java.util.Set;
  * model of the game. This controller also accounts for AI strategies.
  */
 public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
-  protected TripleTrioModel model;
+  protected final TripleTrioModel model;
   protected TTFrame view;
-  private Player player;
+  private final Player player;
 
-  public TripleTrioHumanPlayerContr(Player player, TTFrame view) {
-    super(view);
+  public TripleTrioHumanPlayerContr(TripleTrioModel model, Player player, TTFrame viewPlayer) {
+    super(viewPlayer);
+
+    if (model == null) {
+      throw new NullPointerException("model cannot be null");
+    }
+
+    if (player == null) {
+      throw new NullPointerException("player cannot be null");
+    }
+
+    this.view = viewPlayer;
     this.player = player;
+    this.model = model;
     view.addClickListeners(this);
   }
 
@@ -28,22 +39,13 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   /**
    * Play a new game of Triple Trio with the given configurations.
    *
-   * @param model    a triple trio model
    * @param deckPath deckPath the path to the deck
    * @param gridPath gridPath the path to the grid
    */
   @Override
-  public void playGame(TripleTrioModel model,
-                       String deckPath,
+  public void playGame(String deckPath,
                        String gridPath) {
-    super.playGame(model);
-    this.model = model;
-
-    ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
-    Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
-
-    model.startGame(deck, grid);
-    view.makeVisible();
+    super.playGame(deckPath, gridPath);
     model.addListener(this);
   }
 
@@ -51,10 +53,37 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    * Handles an action when a player presses a card on the hand.
    */
   public void handleCellClickForHand(int cardNum, CardColor color) {
+    if (model.getPlayer().getColor() == color) {
+      selectedCard = model.getPlayer().getHand().get(cardNum);
+    } else {
+      view.printInvalidClickMessage("It's not your turn!");
+    }
+
     System.out.println("You clicked on the card at index " + cardNum + " in the "
         + model.getPlayer().getColor() + " hand.");
-    selectedCard = model.getPlayer().getHand().get(cardNum);
-    hasBeenPlaced = false;
+  }
+
+  /**
+   * Play a new game of Triple Trio with the given configurations.
+   *
+   * @param model    a triple trio model
+   * @param deckPath deckPath the path to the deck
+   * @param gridPath gridPath the path to the grid
+   * @throws IOException if something in the game is displayed wrong.
+   */
+  @Override
+  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
+    // never used in this impl
+  }
+
+  /**
+   * Returns if controller is human.
+   *
+   * @return true if controller is human
+   */
+  @Override
+  public boolean isHuman() {
+    return true;
   }
 
   /**
@@ -62,31 +91,13 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    */
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
-    if (selectedCard != null || !hasBeenPlaced) {
+    if (selectedCard == null) {
+      view.printInvalidClickMessage("It's not your turn!");
+    } else {
       super.playMove(xGridLoc, yGridLoc);
       selectedCard = null;
-      hasBeenPlaced = true;
     }
   }
-
-
-  /**
-   * Play a game of Triple Trios given a model with initial conditions.
-   *
-   * @param model a triple trio model
-   */
-  public void playGameWithModel(TripleTrioModel model) {
-    super.playGame(model);
-
-    ArrayList<ArrayList<Cell>> grid = model.getOriginalGrid();
-
-    Set<Card> deck = model.getDeck();
-
-    model.startGame(deck, grid);
-
-    view.makeVisible();
-  }
-
 
   public void onPlayerTurn(CardColor color) {
     System.out.println("It's " + color.toString() + "'s turn!");

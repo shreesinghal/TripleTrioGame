@@ -43,6 +43,14 @@ public class PlayerAIImpl implements Player {
   }
 
   /**
+   * @return
+   */
+  @Override
+  public boolean isHuman() {
+    return false;
+  }
+
+  /**
    * Computes the next move for the AI.
    * @return the card chosen by the AI to play
    */

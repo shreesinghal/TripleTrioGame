@@ -1,13 +1,11 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-import cs3500.tripletrios.model.TripleTrioModel;
-import cs3500.tripletrios.strategies.CornerStrategy;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -38,7 +36,6 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
 
   private void createVisual() {
     this.setTitle("Current Player: " + this.model.getPlayer().getColor());
-    //change to say the current player
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
         + redHand.getPixelDimensions().getWidth()
@@ -46,6 +43,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
             (int) (getToolkit().getScreenSize().getHeight()
               + redHand.getPixelDimensions().getHeight()
               + blueHand.getPixelDimensions().getHeight())));
+
     //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
     this.setLayout(new BorderLayout());
@@ -87,11 +85,12 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * @param listener the controller
    */
   @Override
-  public void addClickListeners(TripleTrioHumanPlayerContr listener) {
-    this.blueHand.addClickListener(new TripleTrioAIPlayerContr(this,
-      new CornerStrategy((TripleTrioModel) model)));
-    this.redHand.addClickListener(listener);
-    this.gridPanel.addClickListener(listener);
+  public void addClickListeners(TripleTrioFeatureController listener) {
+    if (listener.isHuman()) {
+      this.blueHand.addClickListener((TripleTrioHumanPlayerContr) listener);
+      this.redHand.addClickListener((TripleTrioHumanPlayerContr) listener);
+      this.gridPanel.addClickListener((TripleTrioHumanPlayerContr) listener);
+    }
   }
 
 
@@ -103,5 +102,15 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     this.repaint();
     this.setTitle("Current Player: " + this.model.getPlayer().getColor());
   }
+
+  /**
+   * @param s
+   */
+  @Override
+  public void printInvalidClickMessage(String s) {
+    JOptionPane.showMessageDialog(this, s, "Invalid Click", JOptionPane.ERROR_MESSAGE);
+
+  }
+
 
 }

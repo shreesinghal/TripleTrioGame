@@ -52,6 +52,13 @@ public class PlayerHumanImpl implements Player {
     this.hand.remove(card);
   }
 
+  /**
+   * @return
+   */
+  @Override
+  public boolean isHuman() {
+    return true;
+  }
 
 
 }

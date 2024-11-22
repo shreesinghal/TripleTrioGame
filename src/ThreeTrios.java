@@ -7,7 +7,6 @@ import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -21,9 +20,8 @@ public final class ThreeTrios {
   /**
    * Main method where we play the TripleTrio game.
    * @param args the arguments a user passes in
-   * @throws IOException if something goes wrong with the game
    */
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
 
     Set<Card> sampleDeck = CardDatabaseReader.readDeckConfiguration("Configurations"
         + File.separator
@@ -41,8 +39,9 @@ public final class ThreeTrios {
     Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model, player1, viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
+    viewPlayer1.addClickListeners(controller1);
+    viewPlayer2.addClickListeners(controller2);
     model.startGUIGame();
-
   }
 
 }

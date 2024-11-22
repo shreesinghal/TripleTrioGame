@@ -72,6 +72,16 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
     tryStartGame(model, view, grid, deck);
   }
 
+  /**
+   * Returns if controller is human.
+   *
+   * @return true if controller is human
+   */
+  @Override
+  public boolean isHuman() {
+    return true;
+  }
+
   private void tryStartGame(TripleTrioModel model,
                             TripleTrioView view,
                             ArrayList<ArrayList<Cell>> grid,
@@ -125,4 +135,12 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
     model.executeBattlePhase(x_position - 1, y_position - 1);
   }
 
+  /**
+   * @param i
+   * @param i1
+   */
+  @Override
+  public void handleCellClickForGrid(int i, int i1) {
+
+  }
 }

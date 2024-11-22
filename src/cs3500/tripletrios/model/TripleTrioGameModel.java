@@ -49,6 +49,13 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.grid = grid;
     this.originalGrid = grid;
     this.deck = deckOfCards;
+  }
+
+  /**
+   * Starts a GUI game.
+   */
+  @Override
+  public void startGUIGame() {
 
     int gridSize = 0;
     for (ArrayList<Cell> rows : grid ) {
@@ -59,14 +66,12 @@ public class TripleTrioGameModel implements TripleTrioModel {
       }
     }
 
-
-
     if (gridSize % 2 == 0) {
       throw new IllegalArgumentException("The grid size must be odd");
     }
 
 
-    if (deckOfCards.size() < gridSize) {
+    if (deck.size() < gridSize) {
       throw new IllegalStateException("Deck size must be greater than grid size");
     }
 
@@ -75,8 +80,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     int handSize = (gridSize + 1) / 2;
 
-    ArrayList<Card> deckList = new ArrayList<>();
-    deckList.addAll(deckOfCards);
+    ArrayList<Card> deckList = new ArrayList<>(deck);
 
     for (int i = 1; i <= handSize; i++) {
       Card currRedCard = deckList.remove(0);
@@ -95,7 +99,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.currPlayer = new PlayerHumanImpl(playerAHand, CardColor.RED);
     this.opposingPlayer = new PlayerHumanImpl(playerBHand, CardColor.BLUE);
 
+    this.gameStarted = true;
   }
+
 
   /**
    * Starts the game with a given deck of cards. The deck is used
@@ -218,11 +224,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
     };
   }
 
-  @Override
-  public void removeListener(TripleTrioModelListener listener) {
-    listeners.remove(listener);
-  }
-
   private void notifyPlayerTurn(CardColor color) {
     for (TripleTrioModelListener listener : listeners) {
       listener.onPlayerTurn(color);
@@ -259,13 +260,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
   }
 
-  /**
-   * Starts a GUI game.
-   */
-  @Override
-  public void startGUIGame() {
-    this.gameStarted = true;
-  }
 
 
   @Override
@@ -343,6 +337,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
   public void placeCard(int xPos, int yPos, Card card) {
     if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
+      this.notifyCardPlaced(xPos, yPos);
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
     }

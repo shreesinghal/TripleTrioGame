@@ -23,6 +23,11 @@ public interface TripleTrioFeatureController {
                 String deckPath,
                 String gridPath) throws IOException;
 
+  /**
+   * Returns if controller is human.
+   * @return true if controller is human
+   */
+  boolean isHuman();
 
   void handleCellClickForGrid(int i, int i1);
 }

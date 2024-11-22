@@ -1,10 +1,12 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
-import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.PlayerMove;
 import cs3500.tripletrios.strategies.TripleTrioStrategy;
 import cs3500.tripletrios.view.TTFrame;
+
+import java.io.IOException;
 
 
 public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
@@ -35,9 +37,70 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
 
 
   @Override
-  public void playGame(TripleTrioModel model) {
-    super.playGame(model);
-    view.makeVisible();
+  public void playGame(String deckPath,
+                       String gridPath) {
+    super.playGame(deckPath, gridPath);
+  }
+
+  /**
+   * Play a new game of Triple Trio with the given configurations.
+   *
+   * @param model    a triple trio model
+   * @param deckPath deckPath the path to the deck
+   * @param gridPath gridPath the path to the grid
+   * @throws IOException if something in the game is displayed wrong.
+   */
+  @Override
+  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
+
+  }
+
+  /**
+   * Returns if controller is human.
+   *
+   * @return true if controller is human
+   */
+  @Override
+  public boolean isHuman() {
+    return false;
+  }
+
+  /**
+   * @param i
+   * @param i1
+   */
+  @Override
+  public void handleCellClickForGrid(int i, int i1) {
+
+  }
+
+  /**
+   * Notifies that it's a player's turn.
+   *
+   * @param color the name of the current player
+   */
+  @Override
+  public void onPlayerTurn(CardColor color) {
+
+  }
+
+  /**
+   * Notifies that a card was placed.
+   *
+   * @param x the x-coordinate of the placed card
+   * @param y the y-coordinate of the placed card
+   */
+  @Override
+  public void onCardPlaced(int x, int y) {
+
+  }
+
+  /**
+   * Notifies that the game state has updated.
+   */
+  @Override
+  public void onGameStateUpdated() {
+
   }
 
 //  /**

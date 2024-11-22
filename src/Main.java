@@ -22,7 +22,7 @@ public class Main {
     TripleTrioModel model = new TripleTrioGameModel();
     BufferedReader readable = new BufferedReader(new InputStreamReader(System.in));
     TripleTrioFeatureController controller = new TripleTrioControllerImpl(readable, System.out);
-    try {
+    /*try {
       controller.playGame(model, "Configurations"
                       + File.separator
                       + "20deckConfig.txt",
@@ -31,6 +31,6 @@ public class Main {
                       + "3x3sqrGrid.txt");
     } catch (IOException e) {
       throw new IOException();
-    }
+    }*/
   }
 }

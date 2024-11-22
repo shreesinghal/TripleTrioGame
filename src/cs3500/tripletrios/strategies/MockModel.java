@@ -1,5 +1,6 @@
 package cs3500.tripletrios.strategies;
 
+import cs3500.tripletrios.controller.TripleTrioModelListener;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.CardColor;
@@ -135,6 +136,14 @@ public class MockModel implements TripleTrioModel {
     return gameStarted;
   }
 
+  /**
+   * @param listener
+   */
+  @Override
+  public void addListener(TripleTrioModelListener listener) {
+
+  }
+
   @Override
   public Player getPlayer() {
     return currentPlayer;
@@ -167,6 +176,19 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
+   * Places the players card where desired.
+   *
+   * @param player
+   * @param xPos   x coordinate of desired place
+   * @param yPos   y coordinate of desired place
+   * @param card   card that is being placed
+   */
+  @Override
+  public void placePlayerCard(Player player, int xPos, int yPos, Card card) {
+
+  }
+
+  /**
    *  Checks if placeing a card at the posn is legal.
    * @param pos location to place card
    * @return true if legal to place
@@ -182,6 +204,22 @@ public class MockModel implements TripleTrioModel {
    */
   public void documentCheckOnGrid(Posn pos) {
     transcript.add(pos);
+  }
+
+  /**
+   * @param onTurnNotification
+   */
+  @Override
+  public void addListener(Object onTurnNotification) {
+
+  }
+
+  /**
+   *
+   */
+  @Override
+  public void startGUIGame() {
+
   }
 
   /**
@@ -258,6 +296,14 @@ public class MockModel implements TripleTrioModel {
     Player temp = currentPlayer;
     currentPlayer = opposingPlayer;
     opposingPlayer = temp;
+  }
+
+  /**
+   * @param color
+   */
+  @Override
+  public void setTurn(CardColor color) {
+
   }
 
   /**

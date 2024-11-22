@@ -112,8 +112,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
 
   void setTurn(CardColor color);
 
-  void removeListener(TripleTrioModelListener listener);
-
   /**
    * Documents the path that the strategy takes.
    * @param corner takes in the position from grid that is being checked
