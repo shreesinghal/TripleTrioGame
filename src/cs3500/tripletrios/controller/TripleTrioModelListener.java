@@ -2,7 +2,14 @@ package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.model.CardColor;
 
+/**
+ * Behaviors needed for a controller that listens and
+ * works specifically with the TripleTrio model. Allows the
+ * model to know specifics to which player is playing, where a card
+ * was paced, and that the game state has been updated.
+ */
 public interface TripleTrioModelListener {
+
   /**
    * Notifies that it's a player's turn.
    * @param color the name of the current player

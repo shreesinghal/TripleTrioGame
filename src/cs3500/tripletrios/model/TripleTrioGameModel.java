@@ -217,6 +217,10 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
   }
 
+  /**
+   * Sets the turn of the player during the game.
+   * @param color color of the player
+   */
   @Override
   public void setTurn(CardColor color) {
     if (this.currPlayer.getColor() != color) {

@@ -15,11 +15,10 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
 
   protected TripleTrioModel model;
   protected final TTFrame view;
-  protected Card selectedCard = null;
+  protected Card selectedCard = null; //card which is selected to place on grid
 
   /**
    * Constructor that instantiates a controller that takes in a GUI view.
-   *
    * @param view a GUI view.
    */
   public TripleTrioAbstractGUIController(TTFrame view) {

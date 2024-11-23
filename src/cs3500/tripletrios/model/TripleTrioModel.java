@@ -109,7 +109,10 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   void switchTurns();
 
-
+  /**
+   * Sets the turn of the player during the game.
+   * @param color color of the player
+   */
   void setTurn(CardColor color);
 
   /**
@@ -120,5 +123,8 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
 
   void addListener(Object onTurnNotification);
 
+  /**
+   * Starts a GUI specific game.
+   */
   void startGUIGame();
 }

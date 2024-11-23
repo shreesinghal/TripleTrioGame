@@ -27,23 +27,37 @@ public class PlayerAIImpl implements Player {
     this.strategy = strategy;
   }
 
+
+  /**
+   * Returns the color of the player.
+   * @return color of the player
+   */
   @Override
   public CardColor getColor() {
     return this.color;
   }
 
+  /**
+   * Returns the players hand.
+   * @return players hand
+   */
   @Override
   public ArrayList<Card> getHand() {
     return (ArrayList<Card>) this.hand.clone();
   }
 
+  /**
+   * Removes a card from the hand.
+   * @param card the card wanting to be removed
+   */
   @Override
   public void removeCardFromHand(Card card) {
     this.hand.remove(card);
   }
 
   /**
-   * @return
+   * Checks if the Player is a human
+   * @return true or false is player is human
    */
   @Override
   public boolean isHuman() {

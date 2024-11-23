@@ -8,15 +8,20 @@ import cs3500.tripletrios.view.TTFrame;
 
 import java.io.IOException;
 
-
+/**
+ * Controller implementation that represents the AI player.
+ * This controller uses the abstract GUI controller class to represent
+ * a singular AI player in the game.
+ */
 public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   
   private TripleTrioStrategy strategy;
 
   /**
-   * Constructor that instantiates a controller that takes in a GUI view.
-   *
+   * Constructor that instantiates a controller that takes in a GUI view
+   * as well a strategy to use.
    * @param view a GUI view.
+   * @param strategy a strategy for the player
    */  
   public TripleTrioAIPlayerContr(TTFrame view, TripleTrioStrategy strategy) {
     super(view);
@@ -66,12 +71,13 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
   }
 
   /**
+   * Handles cell click when player clicks on grid
    * @param i
    * @param i1
    */
   @Override
   public void handleCellClickForGrid(int i, int i1) {
-
+    //no implementation for AI player
   }
 
   /**

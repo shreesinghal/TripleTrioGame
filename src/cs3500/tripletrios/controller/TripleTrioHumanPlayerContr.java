@@ -38,7 +38,6 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
   /**
    * Play a new game of Triple Trio with the given configurations.
-   *
    * @param deckPath deckPath the path to the deck
    * @param gridPath gridPath the path to the grid
    */
@@ -51,6 +50,8 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
   /**
    * Handles an action when a player presses a card on the hand.
+   * @param cardNum the number of the card that was clicked
+   * @param color the color of the card that was clicked
    */
   public void handleCellClickForHand(int cardNum, CardColor color) {
     if (model.getPlayer().getColor() == color) {
@@ -88,6 +89,8 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
   /**
    * Handles an action when a player presses a grid cell.
+   * @param xGridLoc the x coordinate of the click on grid
+   * @param yGridLoc the y coordinate of the click on grid
    */
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
@@ -99,18 +102,31 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
     }
   }
 
+
+  /**
+   * Notifies that it's a player's turn.
+   * @param color the name of the current player
+   */
   public void onPlayerTurn(CardColor color) {
     System.out.println("It's " + color.toString() + "'s turn!");
     model.setTurn(color);
     view.refresh();
   }
 
+  /**
+   * Notifies that a card was placed.
+   * @param x the x-coordinate of the placed card
+   * @param y the y-coordinate of the placed card
+   */
   @Override
   public void onCardPlaced(int x, int y) {
     System.out.println("Card placed at (" + x + ", " + y + ")");
     view.refresh();
   }
 
+  /**
+   * Notifies that the game state has been updated
+   */
   @Override
   public void onGameStateUpdated() {
     System.out.println("Game state updated.");

@@ -53,7 +53,8 @@ public class PlayerHumanImpl implements Player {
   }
 
   /**
-   * @return
+   * Checks if the Player is a human
+   * @return true or false is player is human
    */
   @Override
   public boolean isHuman() {
