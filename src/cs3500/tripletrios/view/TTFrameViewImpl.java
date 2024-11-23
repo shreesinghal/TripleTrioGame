@@ -104,11 +104,12 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   /**
-   * @param s
+   * Creates a popup error message to tell the user something specific.
+   * @param message the message to be shown
    */
   @Override
-  public void printInvalidClickMessage(String s) {
-    JOptionPane.showMessageDialog(this, s, "Invalid Click", JOptionPane.ERROR_MESSAGE);
+  public void printInvalidClickMessage(String message) {
+    JOptionPane.showMessageDialog(this, message, "Invalid Click", JOptionPane.ERROR_MESSAGE);
 
   }
 
