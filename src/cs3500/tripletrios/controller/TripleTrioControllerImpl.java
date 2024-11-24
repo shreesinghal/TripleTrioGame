@@ -135,11 +135,12 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
   }
 
   /**
-   * @param i
-   * @param i1
+   * Handles an action when a grid cell is clicked.
+   * @param xGridLoc xGridLoc the x-coordinate of the clicked cell
+   * @param yGridLoc yGridLoc the y-coordinate of the clicked cell
    */
   @Override
-  public void handleCellClickForGrid(int i, int i1) {
+  public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
 
   }
 }

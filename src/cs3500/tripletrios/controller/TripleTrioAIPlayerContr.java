@@ -13,7 +13,9 @@ import java.io.IOException;
  * This controller uses the abstract GUI controller class to represent
  * a singular AI player in the game.
  */
-public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
+public class TripleTrioAIPlayerContr
+        extends TripleTrioAbstractGUIController
+        implements TripleTrioModelListener {
   
   private TripleTrioStrategy strategy;
 
@@ -57,12 +59,11 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
-
+    //no implementation
   }
 
   /**
    * Returns if controller is human.
-   *
    * @return true if controller is human
    */
   @Override
@@ -72,22 +73,21 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
 
   /**
    * Handles cell click when player clicks on grid
-   * @param i
-   * @param i1
+   * @param xGridLoc
+   * @param yGridLoc
    */
   @Override
-  public void handleCellClickForGrid(int i, int i1) {
+  public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
     //no implementation for AI player
   }
 
   /**
    * Notifies that it's a player's turn.
-   *
    * @param color the name of the current player
    */
   @Override
   public void onPlayerTurn(CardColor color) {
-
+    //no implementation
   }
 
   /**
@@ -98,7 +98,7 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void onCardPlaced(int x, int y) {
-
+    //no implementation
   }
 
   /**
@@ -106,15 +106,7 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void onGameStateUpdated() {
-
+    //no implementation
   }
 
-//  /**
-//   * Play a game of Triple Trios given a model with initial conditions.
-//   * @param model a triple trio model
-//   */
-//  public void playGameWithModel(TripleTrioModel model) {
-//    super.playGame(model);
-//    view.makeVisible();
-//  }
 }
