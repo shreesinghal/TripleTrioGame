@@ -188,21 +188,22 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
-   * @param listener
-   * @param color
+   * Adds a listener to the Triple Trio model for a specific player color.
+   * @param listener the listener to be added, which will respond to model updates
+   * @param color color of card
    */
   @Override
   public void addListener(TripleTrioModelListener listener, CardColor color) {
-
+    //no implementation
   }
 
 
   /**
-   *
+   * Starts a GUI game.
    */
   @Override
   public void startGUIGame() {
-
+    //no implementation
   }
 
   /**

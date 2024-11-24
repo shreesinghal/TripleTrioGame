@@ -106,6 +106,7 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   void documentCheckOnGrid(Posn corner);
 
+
   void addListener(TripleTrioModelListener listener, CardColor color);
 
   /**
