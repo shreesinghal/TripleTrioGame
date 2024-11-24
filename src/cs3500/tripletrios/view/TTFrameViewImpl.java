@@ -3,7 +3,9 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
+import cs3500.tripletrios.model.TripleTrioModel;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,22 +23,24 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   private final HandPanel redHand;
   private final HandPanel blueHand;
   private final ReadOnlyTripleTrioModel model;
+  private final Player player;
 
   /**
    * Creates a frame for the game in a GUI style.
    * This uses both the Hand panel and grid panel.
    * @param model the instance of the game
    */
-  public TTFrameViewImpl(ReadOnlyTripleTrioModel model) {
+  public TTFrameViewImpl(ReadOnlyTripleTrioModel model, Player player) {
     this.model = model;
     this.redHand = new HandPanel(model, model.getPlayer());
     this.blueHand = new HandPanel(model, model.getOppPlayer());
     this.gridPanel = new GridPanel(model);
+    this.player = player;
     this.createVisual();
   }
 
   private void createVisual() {
-    this.setTitle("Current Player: " + this.model.getPlayer().getColor());
+    this.setTitle("[" + this.player.getColor() + "'s View]" + " Current Player: " + this.model.getPlayer().getColor());
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
         + redHand.getPixelDimensions().getWidth()
@@ -53,9 +57,6 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     blueHand.setPreferredSize(blueHand.getPixelDimensions());
     this.add(redHand, BorderLayout.LINE_END); //paintComponent called instantly
     this.add(blueHand, BorderLayout.LINE_START);
-
-
-
 
     this.setResizable(true);
     this.setVisible(true);
@@ -114,7 +115,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   @Override
   public void refresh() {
     this.repaint();
-    this.setTitle("Current Player: " + this.model.getPlayer().getColor());
+    this.setTitle("[" + this.player.getColor() + "'s View]" + " Current Player: " + this.model.getPlayer().getColor());
   }
 
   /**
@@ -125,6 +126,16 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   public void printInvalidClickMessage(String message) {
     JOptionPane.showMessageDialog(this, message, "Invalid Click", JOptionPane.ERROR_MESSAGE);
 
+  }
+
+  /**
+   * @param model
+   */
+  @Override
+  public void updateData(TripleTrioModel model) {
+//    this.redHand = new HandPanel(model, model.getPlayer());
+//    this.blueHand = new HandPanel(model, model.getOppPlayer());
+//    this.gridPanel = new GridPanel(model);
   }
 
 

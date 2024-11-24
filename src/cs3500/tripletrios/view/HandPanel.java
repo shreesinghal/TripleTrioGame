@@ -1,5 +1,7 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
@@ -106,8 +108,8 @@ public class HandPanel extends JPanel {
    * @return dimensions of the hand
    */
   public Dimension getPixelDimensions() {
-    //return new Dimension(cardViewsInHand.get(0).getCardWidth(), cardViewsInHand.
-    // get(0).getCardHeight() * this.model.getPlayer().getHand().size());
+//    return new Dimension(cardViewsInHand.get(0).getCardWidth(),
+//            cardViewsInHand.get(0).getCardHeight() * this.model.getPlayer().getHand().size());
     return new Dimension(sampleCardView.getCardWidth(),this.getHeight() / model.getPlayer().getHand().size());
   }
 
@@ -132,12 +134,12 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      //if (player.getColor() == features.getPlayerOfController().getColor()) {
-      features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
-      if (player.getColor() == model.getPlayer().getColor()) {
-        highlightHandCard(pixelToCell(e.getY()));
+//      if (player.getColor() == features.getPlayerOfController().getColor()) {
+        features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
+        if (player.getColor() == model.getPlayer().getColor()) {
+          highlightHandCard(pixelToCell(e.getY()));
+        }
       }
-    }
 
 
     private void highlightHandCard(int cardNumber) {

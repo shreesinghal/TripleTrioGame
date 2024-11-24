@@ -2,6 +2,7 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.TripleTrioModel;
 
 /**
  * The `TTFrame` interface defines the basic requirements for any graphical frame
@@ -39,6 +40,8 @@ public interface TTFrame {
   void refresh();
 
   void printInvalidClickMessage(String s);
+
+  void updateData(TripleTrioModel model);
 }
 
 

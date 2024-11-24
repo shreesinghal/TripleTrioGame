@@ -136,13 +136,6 @@ public class MockModel implements TripleTrioModel {
     return gameStarted;
   }
 
-  /**
-   * @param listener
-   */
-  @Override
-  public void addListener(TripleTrioModelListener listener) {
-
-  }
 
   @Override
   public Player getPlayer() {
@@ -175,18 +168,6 @@ public class MockModel implements TripleTrioModel {
     transcript.add(new Posn(xPos, yPos));
   }
 
-  /**
-   * Places the players card where desired.
-   *
-   * @param player
-   * @param xPos   x coordinate of desired place
-   * @param yPos   y coordinate of desired place
-   * @param card   card that is being placed
-   */
-  @Override
-  public void placePlayerCard(Player player, int xPos, int yPos, Card card) {
-
-  }
 
   /**
    *  Checks if placeing a card at the posn is legal.
@@ -207,12 +188,14 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
-   * @param onTurnNotification
+   * @param listener
+   * @param color
    */
   @Override
-  public void addListener(Object onTurnNotification) {
+  public void addListener(TripleTrioModelListener listener, CardColor color) {
 
   }
+
 
   /**
    *
@@ -298,13 +281,6 @@ public class MockModel implements TripleTrioModel {
     opposingPlayer = temp;
   }
 
-  /**
-   * @param color
-   */
-  @Override
-  public void setTurn(CardColor color) {
-
-  }
 
   /**
    * Sets the grid to a new grid.

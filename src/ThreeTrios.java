@@ -36,10 +36,10 @@ public final class ThreeTrios {
 
     TripleTrioModel model = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
     model.startGUIGame();
-    TTFrame viewPlayer1 = new TTFrameViewImpl(model);
-    TTFrame viewPlayer2 = new TTFrameViewImpl(model);
     Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
     Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
+    TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
+    TTFrame viewPlayer2 = new TTFrameViewImpl(model, player2);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model, player1, viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
     viewPlayer1.addClickListeners(controller1);
