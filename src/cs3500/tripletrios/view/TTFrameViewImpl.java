@@ -90,6 +90,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * @return the grid panel used in the game.
    */
   public GridPanel getGridPanel() {
+
     return this.gridPanel;
   }
 
@@ -131,15 +132,13 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   /**
-   * Updates the data in the view components based on the given Triple Trio game model.
-   * @param model model the current Triple Trio game model used to update the view
+   * @param model
    */
   @Override
-  public void updateData(TripleTrioModel model) {
-    //this.redHand = new HandPanel(model, model.getPlayer());
-    //this.blueHand = new HandPanel(model, model.getOppPlayer());
-    //this.gridPanel = new GridPanel(model);
+  public void updateTurn(TripleTrioModel model) {
+    this.gridPanel.updateCardsOnGrid();
   }
+
 
 
 }

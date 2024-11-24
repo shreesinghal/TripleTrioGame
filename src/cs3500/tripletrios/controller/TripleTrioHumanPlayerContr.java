@@ -126,7 +126,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public void onPlayerTurn(CardColor color) {
     System.out.println("It's " + color.toString() + "'s turn!");
     ourPlayerCanPlay = true;
-    //view.updateData(model);
+    view.updateTurn();
     view.refresh();
   }
 

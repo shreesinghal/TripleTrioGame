@@ -134,6 +134,7 @@ public class GridPanel extends JPanel {
    * @return dimensions of the grid
    */
   public Dimension getDimensions() {
+
     return new Dimension(this.getWidth() / model.getGridWidth(),
       this.getHeight() / model.getGridHeight());
   }
@@ -152,6 +153,29 @@ public class GridPanel extends JPanel {
   private int logicalToPixelHeight(int logical) {
     //logical to physical
     return logical * this.getCardHeightInGrid();
+  }
+
+  public void updateCardsOnGrid() {
+    int cellWidth = this.getWidth() / model.getGridWidth();
+    int cellHeight = this.getHeight() / model.getGridHeight();
+
+    placedCards.clear();
+    for (int y = 0; y < model.getCurrentGrid().size(); y++) {
+      for (int x = 0; x < model.getCurrentGrid().get(y).size(); x++) {
+        Cell cell = model.getCurrentGrid().get(y).get(x);
+        if (cell.getCellType() == Cell.CellType.CARDCELL
+        && !cell.isEmpty()) {
+          placedCards.put(new Point(x, y),
+            new CardView(cell.getCard(),
+              x,
+              y,
+              cellWidth,
+              cellHeight));
+        }
+      }
+    }
+    model.getCurrentGrid();
+    this.repaint();
   }
 
 
