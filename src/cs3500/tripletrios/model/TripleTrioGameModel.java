@@ -253,6 +253,12 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
 
 
+  /**
+   * Adds a listener to the Triple Trio model for a specific player color.
+   * @param listener the listener to be added, which will respond to model updates
+   * @param color color of card
+   * @throws IllegalArgumentException if the listener is null
+   */
   @Override
   public void addListener(TripleTrioModelListener listener, CardColor color) {
     if (listener == null) {

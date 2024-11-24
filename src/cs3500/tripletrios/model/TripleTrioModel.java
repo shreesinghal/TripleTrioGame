@@ -106,7 +106,12 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   void documentCheckOnGrid(Posn corner);
 
-
+  /**
+   * Adds a listener to the Triple Trio model for a specific player color.
+   * @param listener the listener to be added, which will respond to model updates
+   * @param color color of card
+   * @throws IllegalArgumentException if the listener is null
+   */
   void addListener(TripleTrioModelListener listener, CardColor color);
 
   /**
