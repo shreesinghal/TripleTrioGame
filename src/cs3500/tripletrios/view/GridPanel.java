@@ -103,6 +103,13 @@ public class GridPanel extends JPanel {
 
   }
 
+
+  /**
+   * Places a card on the grid at the specified coordinates.
+   * @param x the x-coordinate of the grid cell where the card is to be placed
+   * @param y the y-coordinate of the grid cell where the card is to be placed
+   * @param card the CardView representing the card to place on the grid
+   */
   public void placeCardOnGrid(int x, int y, CardView card) {
     placedCards.put(new Point(x, y), card); // Store card at the specified grid cell
     repaint(); // Trigger a repaint to show the updated grid
