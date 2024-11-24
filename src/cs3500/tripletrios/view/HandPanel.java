@@ -105,9 +105,8 @@ public class HandPanel extends JPanel {
    * @return dimensions of the hand
    */
   public Dimension getPixelDimensions() {
-    //return new Dimension(cardViewsInHand.get(0).getCardWidth(),
-            //cardViewsInHand.get(0).getCardHeight() * this.model.getPlayer().getHand().size());
-    return new Dimension(sampleCardView.getCardWidth(),this.getHeight() / model.getPlayer().getHand().size());
+    return new Dimension(sampleCardView.getCardWidth(),
+            this.getHeight() / model.getPlayer().getHand().size());
   }
 
   /**

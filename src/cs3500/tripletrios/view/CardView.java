@@ -3,7 +3,6 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
-import cs3500.tripletrios.model.Posn;
 
 import java.awt.Color;
 import java.awt.Dimension;
