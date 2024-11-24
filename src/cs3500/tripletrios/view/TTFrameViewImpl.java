@@ -40,7 +40,8 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   private void createVisual() {
-    this.setTitle("[" + this.player.getColor() + "'s View]" + " Current Player: " + this.model.getPlayer().getColor());
+    this.setTitle("[" + this.player.getColor() + "'s View]"
+            + " Current Player: " + this.model.getPlayer().getColor());
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // allows us to close the window
     this.setSize(new Dimension((int) (getToolkit().getScreenSize().getWidth()
         + redHand.getPixelDimensions().getWidth()
@@ -115,7 +116,8 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   @Override
   public void refresh() {
     this.repaint();
-    this.setTitle("[" + this.player.getColor() + "'s View]" + " Current Player: " + this.model.getPlayer().getColor());
+    this.setTitle("[" + this.player.getColor() + "'s View]"
+            + " Current Player: " + this.model.getPlayer().getColor());
   }
 
   /**
@@ -129,13 +131,14 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   /**
-   * @param model
+   * Updates the data in the view components based on the given Triple Trio game model.
+   * @param model model the current Triple Trio game model used to update the view
    */
   @Override
   public void updateData(TripleTrioModel model) {
-//    this.redHand = new HandPanel(model, model.getPlayer());
-//    this.blueHand = new HandPanel(model, model.getOppPlayer());
-//    this.gridPanel = new GridPanel(model);
+    //this.redHand = new HandPanel(model, model.getPlayer());
+    //this.blueHand = new HandPanel(model, model.getOppPlayer());
+    //this.gridPanel = new GridPanel(model);
   }
 
 

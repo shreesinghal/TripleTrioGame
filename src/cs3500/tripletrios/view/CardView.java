@@ -5,7 +5,10 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Posn;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
 /**
@@ -21,7 +24,7 @@ public class CardView extends Path2D.Double {
   private TripleTrioFeatureController features;
 
   private final Card card;
-  private final Posn location;
+
 
 
   /**
@@ -36,7 +39,6 @@ public class CardView extends Path2D.Double {
     this.card = card;
     this.cardWidth = cardWidth;
     this.cardHeight = cardHeight;
-    location = new Posn(x, y);
     drawRectangle(x, y, cardWidth, cardHeight);
   }
 
