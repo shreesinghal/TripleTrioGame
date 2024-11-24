@@ -13,7 +13,9 @@ import java.io.IOException;
  * This controller uses the abstract GUI controller class to represent
  * a singular AI player in the game.
  */
-public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
+public class TripleTrioAIPlayerContr
+        extends TripleTrioAbstractGUIController
+        implements TripleTrioModelListener {
   
   private TripleTrioStrategy strategy;
 
@@ -67,7 +69,7 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
-
+    //no implementation for this
   }
 
   /**
@@ -98,7 +100,7 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void onPlayerTurn(CardColor color) {
-
+    //no implementation for this
   }
 
   /**
@@ -109,7 +111,7 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void onCardPlaced(int x, int y) {
-
+    //no implementation for this
   }
 
   /**
@@ -117,15 +119,8 @@ public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController imp
    */
   @Override
   public void onGameStateUpdated() {
-
+    //no implementation for this
   }
 
-//  /**
-//   * Play a game of Triple Trios given a model with initial conditions.
-//   * @param model a triple trio model
-//   */
-//  public void playGameWithModel(TripleTrioModel model) {
-//    super.playGame(model);
-//    view.makeVisible();
-//  }
+
 }

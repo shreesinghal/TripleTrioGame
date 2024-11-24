@@ -13,22 +13,31 @@ import java.io.IOException;
  * TripleTrioController interface and delegates input(clicks) from the GUI view to the
  * model of the game. This controller also accounts for AI strategies.
  */
-public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
+public class TripleTrioHumanPlayerContr
+        extends TripleTrioAbstractGUIController
+        implements TripleTrioModelListener {
   protected TTFrame view;
   private final Player player;
 
+  /**
+   * Constructs a controller for a human player in the Triple Trio game.
+   * @param model model the Triple Trio game model to manage game logic
+   * @param player player the human player associated with this controller
+   * @param viewPlayer viewPlayer the GUI view for the player's interaction
+   * @throws IllegalArgumentException if the player is null
+   */
   public TripleTrioHumanPlayerContr(TripleTrioModel model, Player player, TTFrame viewPlayer) {
     super(viewPlayer);
     this.model = model;
 
 
     if (player == null) {
-      throw new NullPointerException("player cannot be null");
+      throw new IllegalArgumentException("player cannot be null");
     }
 
     this.view = viewPlayer;
     this.player = player;
-//    view.addClickListeners(this);
+    //view.addClickListeners(this);
   }
 
 
@@ -132,7 +141,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   }
 
   /**
-   * Notifies that the game state has been updated
+   * Notifies that the game state has been updated.
    */
   @Override
   public void onGameStateUpdated() {
@@ -145,6 +154,6 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    */
   @Override
   protected void onTurnNotification() {
-
+    //no implementation
   }
 }

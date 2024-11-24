@@ -1,14 +1,16 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
-import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;

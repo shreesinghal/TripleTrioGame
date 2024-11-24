@@ -5,7 +5,10 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Posn;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
 /**

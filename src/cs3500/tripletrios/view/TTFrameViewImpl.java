@@ -5,7 +5,8 @@ import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 

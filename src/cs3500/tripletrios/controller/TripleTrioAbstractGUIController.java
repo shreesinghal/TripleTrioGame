@@ -1,11 +1,14 @@
 package cs3500.tripletrios.controller;
+
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
-import javax.imageio.stream.IIOByteBuffer;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -52,7 +55,7 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
   /**
-   * To be overridden by subclasses for handling their turn notifications
+   * To be overridden by subclasses for handling their turn notifications.
    */
   protected abstract void onTurnNotification();
 
@@ -80,7 +83,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
     model.switchTurns();
     view.refresh();
 
-    System.out.println("You have placed a " + selectedCard.getColor() + " card at " + xPos + " " + yPos);
+    System.out.println("You have placed a " +
+            selectedCard.getColor() + " card at " + xPos + " " + yPos);
   }
 
 

@@ -226,7 +226,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
   public void setTurn(CardColor color) {
     if (this.currPlayer.getColor() != color) {
       switchTurns();
-    };
+    }
   }
 
   private void notifyPlayerTurn(CardColor color) {
@@ -258,11 +258,12 @@ public class TripleTrioGameModel implements TripleTrioModel {
   }
 
   /**
+   *
    * @param onTurnNotification
    */
   @Override
   public void addListener(Object onTurnNotification) {
-
+    //no implementation
   }
 
 
@@ -352,7 +353,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
   /**
    * Places the players card where desired.
    *
-   * @param player
+   * @param player player who owns card
    * @param xPos   x coordinate of desired place
    * @param yPos   y coordinate of desired place
    * @param card   card that is being placed

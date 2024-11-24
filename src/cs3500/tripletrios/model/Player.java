@@ -27,8 +27,8 @@ public interface Player {
   void removeCardFromHand(Card card);
 
   /**
-   *
-   * @return
+   * Checks if the player is human.
+   * @return true or false whether player is human
    */
   boolean isHuman();
 }
