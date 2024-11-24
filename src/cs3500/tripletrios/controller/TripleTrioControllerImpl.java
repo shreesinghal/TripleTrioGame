@@ -141,6 +141,6 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
    */
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
-
+    //no implementation
   }
 }

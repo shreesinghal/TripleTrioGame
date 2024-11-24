@@ -72,9 +72,9 @@ public class TripleTrioAIPlayerContr
   }
 
   /**
-   * Handles cell click when player clicks on grid
-   * @param xGridLoc
-   * @param yGridLoc
+   * Handles cell click when player clicks on grid.
+   * @param xGridLoc xGridLoc the x-coordinate of the clicked cell
+   * @param yGridLoc yGridLoc the y-coordinate of the clicked cell
    */
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {

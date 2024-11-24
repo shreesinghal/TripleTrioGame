@@ -49,7 +49,7 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
   /**
-   * To be overridden by subclasses for handling their turn notifications
+   * To be overridden by subclasses for handling their turn notifications.
    */
   protected abstract void onTurnNotification();
 
