@@ -69,7 +69,6 @@ public class HandPanel extends JPanel {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    //clears the panel, makes sure any old drawings on it are removed
 
     Graphics2D g2d = (Graphics2D) g;
     //this.player = this.model.getPlayer();

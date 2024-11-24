@@ -73,6 +73,7 @@ public class GridPanel extends JPanel {
     int cellWidth = this.getWidth() / model.getGridWidth();
     int cellHeight = this.getHeight() / model.getGridHeight();
 
+    // draw the grid
     ArrayList<ArrayList<Cell>> grid = this.model.getOriginalGrid();
     for (int y = 0; y < grid.size(); y++) {
       for (int x = 0; x < grid.get(0).size(); x++) {
@@ -88,14 +89,14 @@ public class GridPanel extends JPanel {
         g2d.setColor(Color.BLACK);
         g2d.drawRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
       }
+    }
 
-      // Draw the placed cards
-      for (Map.Entry<Point, CardView> entry : placedCards.entrySet()) {
-        Point point = entry.getKey();
-        CardView card = entry.getValue();
-//        card.setCardWidth(this.getWidth() / grid.size());
-        card.draw(g2d, point.x * cellWidth, point.y * cellHeight);
-      }
+    // Draw the placed cards
+    for (Map.Entry<Point, CardView> entry : placedCards.entrySet()) {
+      Point point = entry.getKey();
+      CardView card = entry.getValue();
+      card = new CardView(card.getCard(), point.x, point.y, cellWidth, cellHeight);
+      card.draw(g2d, point.x * cellWidth, point.y * cellHeight);
     }
 
     g2d.dispose();

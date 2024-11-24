@@ -3,11 +3,9 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Posn;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Path2D;
 
 /**
@@ -23,6 +21,7 @@ public class CardView extends Path2D.Double {
   private TripleTrioFeatureController features;
 
   private final Card card;
+  private final Posn location;
 
 
   /**
@@ -37,15 +36,24 @@ public class CardView extends Path2D.Double {
     this.card = card;
     this.cardWidth = cardWidth;
     this.cardHeight = cardHeight;
+    location = new Posn(x, y);
     drawRectangle(x, y, cardWidth, cardHeight);
   }
 
   private void drawRectangle(int x, int y,int cardWidth, int cardHeight) {
-    moveTo(logicalToPixel(x),logicalToPixel(y));
-    lineTo(cardWidth + logicalToPixel(x), logicalToPixel(y));
-    lineTo(cardWidth + logicalToPixel(x), cardHeight + logicalToPixel(y));
-    lineTo(logicalToPixel(x), cardHeight + logicalToPixel(y));
+    moveTo(logicalToPixelWidth(x),logicalToPixelHeight(y));
+    lineTo(cardWidth + logicalToPixelWidth(x), logicalToPixelHeight(y));
+    lineTo(cardWidth + logicalToPixelWidth(x), cardHeight + logicalToPixelHeight(y));
+    lineTo(logicalToPixelWidth(x), cardHeight + logicalToPixelHeight(y));
     closePath();
+  }
+
+  /**
+   * REturns the card this cardview displays.
+   * @return card
+   */
+  public Card getCard() {
+    return this.card;
   }
 
   /**
@@ -53,10 +61,9 @@ public class CardView extends Path2D.Double {
    * @return width of card as int
    */
   public int getCardWidth() {
+
     return this.cardWidth;
   }
-
-
 
 
   /**
@@ -65,7 +72,18 @@ public class CardView extends Path2D.Double {
    * @param logical the correct space between cells
    * @return the amount of pixels to offset it by
    */
-  private int logicalToPixel(int logical) {
+  private int logicalToPixelWidth(int logical) {
+    //logical to physical
+    return logical * this.cardWidth;
+  }
+
+  /**
+   * We are adding a multiplier so that each cell
+   * is offset by the correct amount.
+   * @param logical the correct space between cells
+   * @return the amount of pixels to offset it by
+   */
+  private int logicalToPixelHeight(int logical) {
     //logical to physical
     return logical * this.cardHeight;
   }
@@ -89,6 +107,8 @@ public class CardView extends Path2D.Double {
    * @param y the y-coordinate of the card's top-left corner
    */
   public void draw(Graphics2D g2d, int x, int y) {
+    drawRectangle(x, y, cardWidth, cardHeight);
+
     if (this.card.getColor() == CardColor.RED) {
       g2d.setColor(new Color(255,171,173,255));
     } else {
@@ -96,6 +116,8 @@ public class CardView extends Path2D.Double {
     }
 
     g2d.fill(this);
+    g2d.setColor(Color.black);
+    g2d.draw(this);
 
     g2d.setColor(Color.black);
     Font font = new Font("Arial", Font.BOLD, 18);
@@ -108,6 +130,7 @@ public class CardView extends Path2D.Double {
             card.getEast()), x + cardWidth - 18, y + cardHeight / 2);
     g2d.drawString(String.valueOf(card.getWest() == 10 ? "A" :
             card.getWest()), x + 5, y + cardHeight / 2);
+
   }
 
 

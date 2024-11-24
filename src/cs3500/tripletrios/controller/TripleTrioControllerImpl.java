@@ -110,7 +110,7 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
   }
 
 
-  private void playMove(String[] inputText) throws IOException {
+  private void playMove(String[] inputText) {
     int x_position = Integer.parseInt(inputText[0]);
     int y_position = Integer.parseInt(inputText[1]);
     String cardName = inputText[2];
@@ -131,7 +131,7 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
       throw new IllegalArgumentException("Card not found.");
     }
 
-    model.placeCard(x_position - 1, y_position - 1, (CardImpl) cardToPlace);
+    model.placeCard(x_position - 1, y_position - 1, cardToPlace);
     model.executeBattlePhase(x_position - 1, y_position - 1);
   }
 
