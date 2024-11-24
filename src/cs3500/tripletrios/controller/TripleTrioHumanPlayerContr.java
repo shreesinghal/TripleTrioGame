@@ -16,10 +16,15 @@ import java.io.IOException;
 public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   protected TTFrame view;
   private final Player player;
+  private boolean ourPlayerCanPlay = false;
 
   public TripleTrioHumanPlayerContr(TripleTrioModel model, Player player, TTFrame viewPlayer) {
     super(viewPlayer);
     this.model = model;
+
+    if (player.getColor() == CardColor.RED) {
+      ourPlayerCanPlay = true;
+    }
 
 
     if (player == null) {
@@ -41,7 +46,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public void playGame(String deckPath,
                        String gridPath) {
     super.playGame(deckPath, gridPath);
-    model.addListener(this);
+    model.addListener(this, this.player.getColor());
   }
 
   /**
@@ -50,10 +55,14 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    * @param color the color of the card that was clicked
    */
   public void handleCellClickForHand(int cardNum, CardColor color) {
-    if (model.getPlayer().getColor() == color) {
+    if (model.getPlayer().getColor() == color && ourPlayerCanPlay) {
       selectedCard = model.getPlayer().getHand().get(cardNum);
       System.out.println("[" + model.getPlayer().getHand() + "]");
       System.out.println("selected card is " + selectedCard);
+      view.getHandView(player.getColor()).highlightHandCard(cardNum);
+
+    } else if (!ourPlayerCanPlay && model.getPlayer().getColor() != color) {
+      view.printInvalidClickMessage("You're playing on the wrong view!");
     } else {
       view.printInvalidClickMessage("It's not your turn!");
     }
@@ -102,7 +111,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
     if (selectedCard == null) {
-      view.printInvalidClickMessage("It's not your turn!");
+      view.printInvalidClickMessage("Select a card first!");
     } else {
       super.playMove(xGridLoc, yGridLoc);
       selectedCard = null;
@@ -116,7 +125,8 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    */
   public void onPlayerTurn(CardColor color) {
     System.out.println("It's " + color.toString() + "'s turn!");
-    model.setTurn(color);
+    ourPlayerCanPlay = true;
+    //view.updateData(model);
     view.refresh();
   }
 

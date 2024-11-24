@@ -40,7 +40,7 @@ public class CardView extends Path2D.Double {
     drawRectangle(x, y, cardWidth, cardHeight);
   }
 
-  private void drawRectangle(int x, int y,int cardWidth, int cardHeight) {
+  private void drawRectangle(int x, int y, int cardWidth, int cardHeight) {
     moveTo(logicalToPixelWidth(x),logicalToPixelHeight(y));
     lineTo(cardWidth + logicalToPixelWidth(x), logicalToPixelHeight(y));
     lineTo(cardWidth + logicalToPixelWidth(x), cardHeight + logicalToPixelHeight(y));
