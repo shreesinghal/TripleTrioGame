@@ -52,6 +52,12 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     blueHand.setPreferredSize(blueHand.getPixelDimensions());
     this.add(redHand, BorderLayout.LINE_END); //paintComponent called instantly
     this.add(blueHand, BorderLayout.LINE_START);
+    System.out.println("Red hand dimensions: " + redHand.getPixelDimensions());
+    System.out.println("Blue hand dimensions: " + blueHand.getPixelDimensions());
+    System.out.println("Red hand cards: " + model.getPlayer().getHand());
+    System.out.println("Blue hand cards: " + model.getOppPlayer().getHand());
+
+
 
     this.setResizable(true);
     this.setVisible(true);

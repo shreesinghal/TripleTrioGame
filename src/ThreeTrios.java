@@ -32,7 +32,10 @@ public final class ThreeTrios {
         + File.separator
         + "3x3sqrGrid.txt");
 
+
+
     TripleTrioModel model = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
+    model.startGUIGame();
     TTFrame viewPlayer1 = new TTFrameViewImpl(model);
     TTFrame viewPlayer2 = new TTFrameViewImpl(model);
     Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
@@ -41,7 +44,11 @@ public final class ThreeTrios {
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
     viewPlayer1.addClickListeners(controller1);
     viewPlayer2.addClickListeners(controller2);
-    model.startGUIGame();
+
+//
+//    System.out.println("Loaded Deck: " + sampleDeck);
+//    System.out.println("Loaded Grid: " + sampleOrigGrid);
+
   }
 
 }
