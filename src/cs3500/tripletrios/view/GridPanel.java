@@ -27,7 +27,7 @@ public class GridPanel extends JPanel {
 
   private TripleTrioAbstractGUIController features;
 
-  private final Map<Point, Card> placedCards; // Tracks cards placed on the grid
+  private final Map<Point, CardView> placedCards; // Tracks cards placed on the grid
 
 
   /**
@@ -90,11 +90,11 @@ public class GridPanel extends JPanel {
       }
 
       // Draw the placed cards
-      for (Map.Entry<Point, Card> entry : placedCards.entrySet()) {
+      for (Map.Entry<Point, CardView> entry : placedCards.entrySet()) {
         Point point = entry.getKey();
-        Card card = entry.getValue();
-        CardView cardView = new CardView(card, point.y, cellHeight);
-        cardView.draw(g2d, point.x * cellWidth, point.y * cellHeight);
+        CardView card = entry.getValue();
+//        card.setCardWidth(this.getWidth() / grid.size());
+        card.draw(g2d, point.x * cellWidth, point.y * cellHeight);
       }
     }
 
@@ -102,11 +102,27 @@ public class GridPanel extends JPanel {
 
   }
 
-  public void placeCardOnGrid(int x, int y, Card card) {
+  public void placeCardOnGrid(int x, int y, CardView card) {
     placedCards.put(new Point(x, y), card); // Store card at the specified grid cell
     repaint(); // Trigger a repaint to show the updated grid
   }
 
+  /**
+   * Gets the width of the grid.
+   * @return width as an int
+   */
+  private int getCardWidthInGrid() {
+    return this.getWidth() / model.getGridWidth();
+  }
+
+
+  /**
+   * Gets the height of the grid.
+   * @return height as a int
+   */
+  private int getCardHeightInGrid() {
+    return this.getHeight() / model.getGridHeight();
+  }
 
 
 
@@ -127,12 +143,12 @@ public class GridPanel extends JPanel {
    */
   private int logicalToPixelWidth(int logical) {
     //logical to physical
-    return logical * CardView.cardWidth;
+    return logical * this.getCardWidthInGrid();
   }
 
   private int logicalToPixelHeight(int logical) {
     //logical to physical
-    return logical * CardView.cardHeight;
+    return logical * this.getCardHeightInGrid();
   }
 
 

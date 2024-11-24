@@ -62,6 +62,14 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
         + model.getPlayer().getColor() + " hand.");
   }
 
+  /**
+   * Returns the player of the controller.
+   * @return player
+   */
+  public Player getPlayerOfController() {
+    return this.player;
+  }
+
 
   /**
    * Play a new game of Triple Trio with the given configurations.

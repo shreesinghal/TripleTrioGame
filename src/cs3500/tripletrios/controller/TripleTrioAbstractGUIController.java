@@ -3,6 +3,7 @@ package cs3500.tripletrios.controller;
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
 import java.util.ArrayList;
@@ -25,22 +26,6 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
     this.view = view;
   }
 
-  /**
-   * Constructor that instantiates a controller that takes in a GUI view
-   * and a Triple Trio model.
-   * @param view a GUI view
-   * @param model a Triple Trio Model
-   */
-  public TripleTrioAbstractGUIController(TTFrame view, TripleTrioGameModel model) {
-    if (view == null) {
-      throw new IllegalArgumentException("view cannot be null");
-    }
-    if (model == null) {
-      throw new IllegalArgumentException("model cannot be null");
-    }
-    this.view = view;
-    this.model = model;
-  }
 
 
 
@@ -63,7 +48,11 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   public void playMove(int xPos, int yPos) {
     model.getPlayer().removeCardFromHand(selectedCard); // Remove card from hand
     view.getHandView(this.model.getPlayer().getColor()).unHighlight(); // Unhighlight card
-    view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, selectedCard); // Notify grid
+    view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
+            xPos - 1,
+            yPos - 1,
+            view.getGridPanel().getWidth() / model.getGridWidth(),
+            view.getGridPanel().getHeight() / model.getGridHeight())); // Notify grid
 
     view.refresh(); // Refresh view to reflect changes
 

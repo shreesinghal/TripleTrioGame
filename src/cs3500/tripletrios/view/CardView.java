@@ -16,12 +16,13 @@ import java.awt.geom.Path2D;
  */
 public class CardView extends Path2D.Double {
 
-  static int cardWidth = 150;
-  static int cardHeight = 150;
+
+  private int cardWidth = 150;
+  private int cardHeight = 150;
 
   private TripleTrioFeatureController features;
 
-  private Card card;
+  private final Card card;
 
 
   /**
@@ -32,16 +33,29 @@ public class CardView extends Path2D.Double {
    * @param y the logical y-coordinate
    * @param cardHeight the height of the card
    */
-  public CardView(Card card, int y, int cardHeight) {
+  public CardView(Card card, int x, int y, int cardWidth, int cardHeight) {
     this.card = card;
+    this.cardWidth = cardWidth;
     this.cardHeight = cardHeight;
-    moveTo(0,logicalToPixel(y));
-    lineTo(cardWidth, logicalToPixel(y));
-    lineTo(cardWidth, cardHeight + logicalToPixel(y));
-    lineTo(0, cardHeight + logicalToPixel(y));
-    closePath();
-
+    drawRectangle(x, y, cardWidth, cardHeight);
   }
+
+  private void drawRectangle(int x, int y,int cardWidth, int cardHeight) {
+    moveTo(logicalToPixel(x),logicalToPixel(y));
+    lineTo(cardWidth + logicalToPixel(x), logicalToPixel(y));
+    lineTo(cardWidth + logicalToPixel(x), cardHeight + logicalToPixel(y));
+    lineTo(logicalToPixel(x), cardHeight + logicalToPixel(y));
+    closePath();
+  }
+
+  /**
+   * Retrieves the card width.
+   * @return width of card as int
+   */
+  public int getCardWidth() {
+    return this.cardWidth;
+  }
+
 
 
 
@@ -53,7 +67,7 @@ public class CardView extends Path2D.Double {
    */
   private int logicalToPixel(int logical) {
     //logical to physical
-    return logical * CardView.cardHeight;
+    return logical * this.cardHeight;
   }
 
 
@@ -64,8 +78,8 @@ public class CardView extends Path2D.Double {
    * Gets the logical Size of the card.
    * @return Dimension of the card
    */
-  public static Dimension getLogicalSizeOfCard() {
-    return new Dimension(cardWidth, cardHeight);
+  public Dimension getLogicalSizeOfCard() {
+    return new Dimension(this.cardWidth, this.cardHeight);
   }
 
   /**

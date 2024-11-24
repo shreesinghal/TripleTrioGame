@@ -30,6 +30,8 @@ public class HandPanel extends JPanel {
   private ArrayList<CardView> cardViewsInHand;
   private int highlightedCardNum = -1;
 
+  private CardView sampleCardView;
+
 
   /**
    * Creates a hand panel for a specified player by displaying
@@ -41,6 +43,11 @@ public class HandPanel extends JPanel {
     this.player = player;
     this.model = model;
     this.cardViewsInHand = new ArrayList<>();
+    this.sampleCardView = new CardView(model.getPlayer().getHand().get(0),
+            1,
+            1,
+            150,
+            this.getHeight() / model.getGridHeight());
   }
 
   /**
@@ -70,8 +77,9 @@ public class HandPanel extends JPanel {
     for (int i = 0; i < this.player.getHand().size(); i++) {
       //we are looping through the players hand to draw each card in hand as a cardView object
 
-      CardView cardView = new CardView(this.player.getHand().get(i),
-          i,
+      CardView cardView = new CardView(this.player.getHand().get(i), 0,
+              i,
+              150,
               this.getHeight() / this.model.getPlayer().getHand().size());
       // ^^ make the card height dependent on the panel height (this.height) ^^
 
@@ -87,7 +95,7 @@ public class HandPanel extends JPanel {
       if (i == highlightedCardNum) {
         g2d.setStroke(new BasicStroke(10));
       }
-      cardView.draw(g2d,0,i * CardView.cardHeight);
+      cardView.draw(g2d,0,i * this.getHeight() / model.getPlayer().getHand().size());
       g2d.draw(cardView);
 
       g2d.setStroke(new BasicStroke(1));
@@ -101,8 +109,9 @@ public class HandPanel extends JPanel {
    * @return dimensions of the hand
    */
   public Dimension getPixelDimensions() {
-    return new Dimension(CardView.cardWidth,
-            CardView.cardHeight * this.model.getPlayer().getHand().size());
+//    return new Dimension(cardViewsInHand.get(0).getCardWidth(),
+//            cardViewsInHand.get(0).getCardHeight() * this.model.getPlayer().getHand().size());
+    return new Dimension(sampleCardView.getCardWidth(),this.getHeight() / model.getPlayer().getHand().size());
   }
 
   /**
@@ -126,11 +135,13 @@ public class HandPanel extends JPanel {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-      features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
-      if (player.getColor() == model.getPlayer().getColor()) {
-        highlightHandCard(pixelToCell(e.getY()));
+//      if (player.getColor() == features.getPlayerOfController().getColor()) {
+        features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
+        if (player.getColor() == model.getPlayer().getColor()) {
+          highlightHandCard(pixelToCell(e.getY()));
+        }
       }
-    }
+
 
     private void highlightHandCard(int cardNumber) {
       if (highlightedCardNum == cardNumber) {
@@ -146,7 +157,7 @@ public class HandPanel extends JPanel {
 
     private int pixelToCell(int coordValue) {
 
-      return coordValue / CardView.getLogicalSizeOfCard().height;
+      return coordValue / cardViewsInHand.get(0).getLogicalSizeOfCard().height;
     }
 
     /**
