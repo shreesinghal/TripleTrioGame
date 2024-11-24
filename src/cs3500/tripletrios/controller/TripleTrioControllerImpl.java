@@ -20,12 +20,8 @@ import java.util.Set;
 public class TripleTrioControllerImpl implements TripleTrioFeatureController {
 
   private TripleTrioModel model;
-
-
   private Readable userInput;
-
   private Appendable output;
-
   private Scanner scanner;
 
   /**

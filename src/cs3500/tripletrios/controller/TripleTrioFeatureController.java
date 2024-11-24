@@ -29,5 +29,10 @@ public interface TripleTrioFeatureController {
    */
   boolean isHuman();
 
-  void handleCellClickForGrid(int i, int i1);
+  /**
+   * Handles an action when a player presses a grid cell.
+   * @param xGridLoc the x coordinate of the click on grid
+   * @param yGridLoc the y coordinate of the click on grid
+   */
+  void handleCellClickForGrid(int xGridLoc, int yGridLoc);
 }
