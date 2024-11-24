@@ -56,7 +56,7 @@ public class PlayerAIImpl implements Player {
   }
 
   /**
-   * Checks if the Player is a human.
+   * Checks if the Player is a human
    * @return true or false is player is human
    */
   @Override

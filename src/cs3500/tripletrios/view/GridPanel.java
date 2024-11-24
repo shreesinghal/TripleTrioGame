@@ -1,16 +1,14 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -105,13 +103,6 @@ public class GridPanel extends JPanel {
 
   }
 
-
-  /**
-   * Places a card on the grid at the specified coordinates.
-   * @param x the x-coordinate of the grid cell where the card is to be placed
-   * @param y the y-coordinate of the grid cell where the card is to be placed
-   * @param card the CardView representing the card to place on the grid
-   */
   public void placeCardOnGrid(int x, int y, CardView card) {
     placedCards.put(new Point(x, y), card); // Store card at the specified grid cell
     repaint(); // Trigger a repaint to show the updated grid

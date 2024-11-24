@@ -2,23 +2,12 @@ package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
-
 import java.util.ArrayList;
 import java.util.Set;
-
-/**
- * An abstract GUI controller class for managing the game flow of Triple Trio
- * in a graphical user interface (GUI) environment. This class provides core
- * functionality to interact with the model and view components of the game
- * and allows subclasses to implement specific behavior for handling turn
- * notifications.
- */
 
 abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatureController {
 
@@ -38,13 +27,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
 
-  /**
-   * Play a game of Triple Trio by
-   * giving a deck and grid from configurations and calling start game
-   * from the model.
-   * @param deckPath path for the deck of cards
-   * @param gridPath path for the grid
-   */
+
+
   public void playGame(String deckPath,
                        String gridPath) {
     ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
@@ -55,18 +39,12 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
   /**
-   * To be overridden by subclasses for handling their turn notifications.
+   * To be overridden by subclasses for handling their turn notifications
    */
   protected abstract void onTurnNotification();
 
 
-  /**
-   * Plays a move in the game by removing selected card from hand and
-   * places it onto the grid. It then runs the battle phase following
-   * by switching turns of player.
-   * @param xPos x position of chosen cell on grid
-   * @param yPos y position of chosen cell on grid
-   */
+
   public void playMove(int xPos, int yPos) {
     model.getPlayer().removeCardFromHand(selectedCard); // Remove card from hand
     view.getHandView(this.model.getPlayer().getColor()).unHighlight(); // Unhighlight card
@@ -83,8 +61,7 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
     model.switchTurns();
     view.refresh();
 
-    System.out.println("You have placed a " +
-            selectedCard.getColor() + " card at " + xPos + " " + yPos);
+    System.out.println("You have placed a " + selectedCard.getColor() + " card at " + xPos + " " + yPos);
   }
 
 

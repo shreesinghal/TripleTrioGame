@@ -71,7 +71,6 @@ public class HandPanel extends JPanel {
     super.paintComponent(g);
 
     Graphics2D g2d = (Graphics2D) g;
-    //this.player = this.model.getPlayer();
 
     for (int i = 0; i < this.player.getHand().size(); i++) {
       //we are looping through the players hand to draw each card in hand as a cardView object
@@ -120,6 +119,22 @@ public class HandPanel extends JPanel {
     highlightedCardNum = -1;
   }
 
+  /**
+   * Highlights the specified card
+   * @param cardNum cardnumber to move
+   */
+  public void highlightHandCard(int cardNum) {
+    if (highlightedCardNum == cardNum) {
+      highlightedCardNum = -1;
+    } else {
+      highlightedCardNum = cardNum;
+    }
+    System.out.println("Highlighted card index: " + highlightedCardNum);
+    repaint();
+
+
+  }
+
 
   /**
    * Private class to handle clicks to hand.
@@ -136,23 +151,10 @@ public class HandPanel extends JPanel {
     public void mouseClicked(MouseEvent e) {
 //      if (player.getColor() == features.getPlayerOfController().getColor()) {
         features.handleCellClickForHand(pixelToCell(e.getY()), player.getColor());
-        if (player.getColor() == model.getPlayer().getColor()) {
-          highlightHandCard(pixelToCell(e.getY()));
-        }
+
       }
 
 
-    private void highlightHandCard(int cardNumber) {
-      if (highlightedCardNum == cardNumber) {
-        highlightedCardNum = -1;
-      } else {
-        highlightedCardNum = cardNumber;
-      }
-      System.out.println("Highlighted card index: " + highlightedCardNum);
-      repaint();
-
-
-    }
 
     private int pixelToCell(int coordValue) {
 

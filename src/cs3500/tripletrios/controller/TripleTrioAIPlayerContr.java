@@ -13,9 +13,7 @@ import java.io.IOException;
  * This controller uses the abstract GUI controller class to represent
  * a singular AI player in the game.
  */
-public class TripleTrioAIPlayerContr
-        extends TripleTrioAbstractGUIController
-        implements TripleTrioModelListener {
+public class TripleTrioAIPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
   
   private TripleTrioStrategy strategy;
 
@@ -33,10 +31,6 @@ public class TripleTrioAIPlayerContr
     this.strategy = strategy;
   }
 
-  /**
-   *Triggers the AI strategy to calculate and execute its move. The move
-   * is then played on the game grid based on the strategy's decision.
-   */
   @Override
   protected void onTurnNotification() {
     if (!model.getPlayer().isHuman()) {
@@ -47,11 +41,6 @@ public class TripleTrioAIPlayerContr
   }
 
 
-  /**
-   * Starts a game of Triple Trio using the specified deck and grid configurations.
-   * @param deckPath path for the deck of cards
-   * @param gridPath path for the grid
-   */
   @Override
   public void playGame(String deckPath,
                        String gridPath) {
@@ -59,8 +48,7 @@ public class TripleTrioAIPlayerContr
   }
 
   /**
-   * This method is intended to initialize and start a game with the specified files with a
-   * provided model to manage the game's state and logic.
+   * Play a new game of Triple Trio with the given configurations.
    *
    * @param model    a triple trio model
    * @param deckPath deckPath the path to the deck
@@ -69,7 +57,7 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
-    //no implementation for this
+
   }
 
   /**
@@ -82,14 +70,13 @@ public class TripleTrioAIPlayerContr
     return false;
   }
 
-
   /**
-   * Handles an action when a player presses a grid cell.
-   * @param xGridLoc the x coordinate of the click on grid
-   * @param yGridLoc the y coordinate of the click on grid
+   * Handles cell click when player clicks on grid
+   * @param i
+   * @param i1
    */
   @Override
-  public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
+  public void handleCellClickForGrid(int i, int i1) {
     //no implementation for AI player
   }
 
@@ -100,7 +87,7 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void onPlayerTurn(CardColor color) {
-    //no implementation for this
+
   }
 
   /**
@@ -111,7 +98,7 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void onCardPlaced(int x, int y) {
-    //no implementation for this
+
   }
 
   /**
@@ -119,8 +106,15 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void onGameStateUpdated() {
-    //no implementation for this
+
   }
 
-
+//  /**
+//   * Play a game of Triple Trios given a model with initial conditions.
+//   * @param model a triple trio model
+//   */
+//  public void playGameWithModel(TripleTrioModel model) {
+//    super.playGame(model);
+//    view.makeVisible();
+//  }
 }

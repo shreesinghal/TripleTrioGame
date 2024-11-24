@@ -2,6 +2,7 @@ package cs3500.tripletrios.model;
 
 import cs3500.tripletrios.controller.TripleTrioModelListener;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -38,8 +39,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   boolean isGameStarted();
 
-  void addListener(TripleTrioModelListener listener);
-
   /**
    * Returns the current player of the game.
    *
@@ -72,14 +71,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
   void placeCard(int xPos, int yPos, Card card);
 
 
-  /**
-   * Places the players card where desired.
-   *
-   * @param xPos x coordinate of desired place
-   * @param yPos y coordinate of desired place
-   * @param card card that is being placed
-   */
-  void placePlayerCard(Player player, int xPos, int yPos, Card card);
 
   /**
    * Executes the battle phase on the card at specified location.
@@ -109,11 +100,6 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   void switchTurns();
 
-  /**
-   * Sets the turn of the player during the game.
-   * @param color color of the player
-   */
-  void setTurn(CardColor color);
 
   /**
    * Documents the path that the strategy takes.
@@ -121,7 +107,7 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   void documentCheckOnGrid(Posn corner);
 
-  void addListener(Object onTurnNotification);
+  void addListener(TripleTrioModelListener listener, CardColor color);
 
   /**
    * Starts a GUI specific game.

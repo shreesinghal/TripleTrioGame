@@ -26,7 +26,8 @@ public class TripleTrioGameModel implements TripleTrioModel {
   private Player currPlayer;
   private Player opposingPlayer;
   private boolean gameStarted;
-  private final List<TripleTrioModelListener> listeners = new ArrayList<>();
+  // First listener is red, second is blue
+  private final List<TripleTrioModelListener> listeners = new ArrayList<>(2);
 
 
 
@@ -56,7 +57,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public void startGUIGame() {
-
     int gridSize = 0;
     for (ArrayList<Cell> rows : grid ) {
       for (Cell cell : rows) {
@@ -115,6 +115,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
+
     this.gameStarted = true;
   }
 
@@ -146,10 +147,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public boolean isGameStarted() {
+
     return this.gameStarted;
   }
-
-
 
 
   /**
@@ -211,23 +211,17 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public void switchTurns() {
+    //switch players
     Player temp = this.opposingPlayer;
     this.opposingPlayer = this.currPlayer;
     this.currPlayer = temp;
+
+    // update view settings
     notifyPlayerTurn(currPlayer.getColor());
 
   }
 
-  /**
-   * Sets the turn of the player during the game.
-   * @param color color of the player
-   */
-  @Override
-  public void setTurn(CardColor color) {
-    if (this.currPlayer.getColor() != color) {
-      switchTurns();
-    };
-  }
+
 
   private void notifyPlayerTurn(CardColor color) {
     for (TripleTrioModelListener listener : listeners) {
@@ -257,22 +251,19 @@ public class TripleTrioGameModel implements TripleTrioModel {
     // not needed
   }
 
-  /**
-   * @param onTurnNotification
-   */
-  @Override
-  public void addListener(Object onTurnNotification) {
-
-  }
-
 
 
   @Override
-  public void addListener(TripleTrioModelListener listener) {
+  public void addListener(TripleTrioModelListener listener, CardColor color) {
     if (listener == null) {
       throw new IllegalArgumentException("Listener cannot be null");
     }
-    listeners.add(listener);
+    if (color == CardColor.RED) {
+      listeners.add(0, listener);
+    } else {
+      listeners.add(1, listener);
+    }
+
   }
 
   private void ensureGameStarted() {
@@ -349,25 +340,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
   }
 
-  /**
-   * Places the players card where desired.
-   *
-   * @param player
-   * @param xPos   x coordinate of desired place
-   * @param yPos   y coordinate of desired place
-   * @param card   card that is being placed
-   */
-  @Override
-  public void placePlayerCard(Player player, int xPos, int yPos, Card card) {
-    if (this.currPlayer != player) {
-      throw new IllegalStateException("It's not this player's turn!");
-    }
-    if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
-      this.grid.get(yPos).get(xPos).placeCard(card);
-    } else {
-      throw new IllegalArgumentException("Invalid position entered.");
-    }
-  }
 
   /**
    * Returns the height of the grid. For view purposes.

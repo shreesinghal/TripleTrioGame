@@ -20,8 +20,12 @@ import java.util.Set;
 public class TripleTrioControllerImpl implements TripleTrioFeatureController {
 
   private TripleTrioModel model;
+
+
   private Readable userInput;
+
   private Appendable output;
+
   private Scanner scanner;
 
   /**
@@ -77,14 +81,6 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
     return true;
   }
 
-  /**
-   * Attempts to start and play a game of Triple Trio with the given model, view, grid, and deck.
-   * @param model model the Triple Trio game model to manage the game logic
-   * @param view view the Triple Trio game view to render the game state
-   * @param grid grid a 2D list of cells representing the game's grid
-   * @param deck deck a set of cards to use as the game's deck
-   * @throws IOException if an error occurs during rendering or input/output operations
-   */
   private void tryStartGame(TripleTrioModel model,
                             TripleTrioView view,
                             ArrayList<ArrayList<Cell>> grid,
@@ -112,14 +108,6 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
     view.displayFinalMessage(model.determineWinner());
   }
 
-  /**
-   * Executes a player's move by placing a specified card on the grid.
-   * @param inputText inputText an array of strings where:
-   *                - inputText[0] is the x-coordinate of the grid position (1-based index)
-   *                - inputText[1] is the y-coordinate of the grid position (1-based index)
-   *                - inputText[2] is the name of the card to place
-   * @throws IllegalArgumentException if the specified card is not found in the player's hand
-   */
 
   private void playMove(String[] inputText) {
     int x_position = Integer.parseInt(inputText[0]);
@@ -146,14 +134,12 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
     model.executeBattlePhase(x_position - 1, y_position - 1);
   }
 
-
   /**
-   * Handles an action when a player presses a grid cell.
-   * @param xGridLoc the x coordinate of the click on grid
-   * @param yGridLoc the y coordinate of the click on grid
+   * @param i
+   * @param i1
    */
   @Override
-  public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
-    //no implementation for this
+  public void handleCellClickForGrid(int i, int i1) {
+
   }
 }
