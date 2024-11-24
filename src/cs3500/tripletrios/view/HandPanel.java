@@ -138,7 +138,10 @@ public class HandPanel extends JPanel {
       } else {
         highlightedCardNum = cardNumber;
       }
+      System.out.println("Highlighted card index: " + highlightedCardNum);
       repaint();
+
+
     }
 
     private int pixelToCell(int coordValue) {

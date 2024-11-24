@@ -52,10 +52,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     blueHand.setPreferredSize(blueHand.getPixelDimensions());
     this.add(redHand, BorderLayout.LINE_END); //paintComponent called instantly
     this.add(blueHand, BorderLayout.LINE_START);
-    System.out.println("Red hand dimensions: " + redHand.getPixelDimensions());
-    System.out.println("Blue hand dimensions: " + blueHand.getPixelDimensions());
-    System.out.println("Red hand cards: " + model.getPlayer().getHand());
-    System.out.println("Blue hand cards: " + model.getOppPlayer().getHand());
+
 
 
 
@@ -86,6 +83,15 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   }
 
   /**
+   * Gets the GridPanel instance for the current view.
+   * @return the grid panel used in the game.
+   */
+  public GridPanel getGridPanel() {
+    return this.gridPanel;
+  }
+
+
+  /**
    * Set up the controller to handle click events in this view.
    * Only reacts to clicks.
    * @param listener the controller
@@ -98,6 +104,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
       this.gridPanel.addClickListener((TripleTrioHumanPlayerContr) listener);
     }
   }
+
 
 
   /**

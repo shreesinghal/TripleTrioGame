@@ -14,16 +14,13 @@ import java.io.IOException;
  * model of the game. This controller also accounts for AI strategies.
  */
 public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
-  protected final TripleTrioModel model;
   protected TTFrame view;
   private final Player player;
 
   public TripleTrioHumanPlayerContr(TripleTrioModel model, Player player, TTFrame viewPlayer) {
     super(viewPlayer);
+    this.model = model;
 
-    if (model == null) {
-      throw new NullPointerException("model cannot be null");
-    }
 
     if (player == null) {
       throw new NullPointerException("player cannot be null");
@@ -31,8 +28,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
     this.view = viewPlayer;
     this.player = player;
-    this.model = model;
-    view.addClickListeners(this);
+//    view.addClickListeners(this);
   }
 
 
@@ -56,6 +52,8 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public void handleCellClickForHand(int cardNum, CardColor color) {
     if (model.getPlayer().getColor() == color) {
       selectedCard = model.getPlayer().getHand().get(cardNum);
+      System.out.println("[" + model.getPlayer().getHand() + "]");
+      System.out.println("selected card is " + selectedCard);
     } else {
       view.printInvalidClickMessage("It's not your turn!");
     }
@@ -63,6 +61,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
     System.out.println("You clicked on the card at index " + cardNum + " in the "
         + model.getPlayer().getColor() + " hand.");
   }
+
 
   /**
    * Play a new game of Triple Trio with the given configurations.

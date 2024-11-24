@@ -24,6 +24,8 @@ public interface TTFrame {
    */
   HandPanel getHandView(CardColor color);
 
+  GridPanel getGridPanel();
+
   /**
    * Set up the controller to handle click events in this view.
    * Only reacts to clicks.

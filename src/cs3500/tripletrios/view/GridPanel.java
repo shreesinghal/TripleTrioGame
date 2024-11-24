@@ -3,17 +3,17 @@ package cs3500.tripletrios.view;
 import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A JPanel subclass that represents the main grid in the Triple Trios game.
@@ -27,6 +27,9 @@ public class GridPanel extends JPanel {
 
   private TripleTrioAbstractGUIController features;
 
+  private final Map<Point, Card> placedCards; // Tracks cards placed on the grid
+
+
   /**
    * Creating an instance of the grid panel.
    * @param model a readonly model
@@ -34,6 +37,8 @@ public class GridPanel extends JPanel {
   public GridPanel(ReadOnlyTripleTrioModel model) {
 
     this.model = model;
+    this.placedCards = new HashMap<>();
+
   }
 
   /**
@@ -83,11 +88,27 @@ public class GridPanel extends JPanel {
         g2d.setColor(Color.BLACK);
         g2d.drawRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
       }
+
+      // Draw the placed cards
+      for (Map.Entry<Point, Card> entry : placedCards.entrySet()) {
+        Point point = entry.getKey();
+        Card card = entry.getValue();
+        CardView cardView = new CardView(card, point.y, cellHeight);
+        cardView.draw(g2d, point.x * cellWidth, point.y * cellHeight);
+      }
     }
 
     g2d.dispose();
 
   }
+
+  public void placeCardOnGrid(int x, int y, Card card) {
+    placedCards.put(new Point(x, y), card); // Store card at the specified grid cell
+    repaint(); // Trigger a repaint to show the updated grid
+  }
+
+
+
 
   /**
    * Gets the dimensions needed to make the grid on GUI view.
