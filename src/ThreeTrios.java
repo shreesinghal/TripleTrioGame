@@ -1,6 +1,12 @@
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.PlayerHumanImpl;
+import cs3500.tripletrios.model.TripleTrioGameModel;
+import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
 import cs3500.tripletrios.view.TTFrameViewImpl;
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
@@ -40,14 +46,15 @@ public final class ThreeTrios {
     Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
     TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
     TTFrame viewPlayer2 = new TTFrameViewImpl(model, player2);
-    TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model, player1, viewPlayer1);
-    TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model, player2, viewPlayer2);
+    TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model,
+            player1,
+            viewPlayer1);
+    TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model,
+            player2,
+            viewPlayer2);
     viewPlayer1.addClickListeners(controller1);
     viewPlayer2.addClickListeners(controller2);
 
-//
-//    System.out.println("Loaded Deck: " + sampleDeck);
-//    System.out.println("Loaded Grid: " + sampleOrigGrid);
 
   }
 
