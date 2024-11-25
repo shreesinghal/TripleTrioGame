@@ -179,6 +179,9 @@ public class GridPanel extends JPanel {
     this.repaint();
   }
 
+  public void addAIListener(TripleTrioHumanPlayerContr controller2) {
+  }
+
 
   /**
    * Mouse listener class to account for what actions happen when a user clicks their mouse.

@@ -57,6 +57,11 @@ public interface TTFrame {
    */
   void displayGameOverMessage(WinningState finalState);
 
+  /**
+   * This listens for the ai olayers moves.
+   * @param controller2 controller for ai player
+   */
+  void addAIListener(TripleTrioFeatureController controller2);
 }
 
 

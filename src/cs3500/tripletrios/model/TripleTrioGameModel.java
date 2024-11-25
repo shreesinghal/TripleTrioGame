@@ -28,7 +28,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
   private boolean gameStarted;
   // First listener is red, second is blue
   private final List<TripleTrioModelListener> listeners = new ArrayList<>(2);
-  //two listeners, blue and red
 
 
 

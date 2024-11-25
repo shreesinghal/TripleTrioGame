@@ -1,6 +1,8 @@
 package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.PlayerAIImpl;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.strategies.PlayerMove;
 import cs3500.tripletrios.strategies.TripleTrioStrategy;
@@ -17,7 +19,10 @@ public class TripleTrioAIPlayerContr
         extends TripleTrioAbstractGUIController
         implements TripleTrioModelListener {
   
-  private TripleTrioStrategy strategy;
+  private final TripleTrioStrategy strategy;
+  private final Player player;
+  private boolean ourPlayerCanPlay = false;
+
 
   /**
    * Constructor that instantiates a controller that takes in a GUI view
@@ -25,21 +30,31 @@ public class TripleTrioAIPlayerContr
    * @param view a GUI view.
    * @param strategy a strategy for the player
    */  
-  public TripleTrioAIPlayerContr(TTFrame view, TripleTrioStrategy strategy) {
+  public TripleTrioAIPlayerContr(TripleTrioModel model, Player playerAI, 
+                                 TTFrame view, TripleTrioStrategy strategy) {
     super(view);
+    this.model = model;
+    
     if (strategy == null) {
       throw new IllegalArgumentException("strategy cannot be null");
     }
     this.strategy = strategy;
+
+    if (playerAI.getColor() == CardColor.RED) {
+      ourPlayerCanPlay = true;
+    }
+
+
+    this.view = view;
+    this.player = playerAI;
+    model.addListener(this, this.player.getColor());
   }
 
   @Override
   protected void onTurnNotification() {
-    if (!model.getPlayer().isHuman()) {
-      System.out.println("AI is calculating its move...");
-      PlayerMove move = strategy.moveCard();
-      playMove(move.getX(), move.getY());
-    }
+    System.out.println("AI is calculating its move...");
+    PlayerMove move = strategy.moveCard();
+    playMove(move.getX(), move.getY());
   }
 
 
@@ -90,7 +105,7 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void onPlayerTurn(CardColor color) {
-    //no implementation
+    onTurnNotification();
   }
 
   /**

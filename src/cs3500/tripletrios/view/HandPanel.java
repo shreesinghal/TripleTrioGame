@@ -24,12 +24,12 @@ import java.util.ArrayList;
 public class HandPanel extends JPanel {
 
   private TripleTrioHumanPlayerContr features;
-  private ReadOnlyTripleTrioModel model;
-  private Player player;
-  private ArrayList<CardView> cardViewsInHand;
+  private final ReadOnlyTripleTrioModel model;
+  private final Player player;
+  private final ArrayList<CardView> cardViewsInHand;
   private int highlightedCardNum = -1;
 
-  private CardView sampleCardView;
+  private final CardView sampleCardView;
 
 
   /**

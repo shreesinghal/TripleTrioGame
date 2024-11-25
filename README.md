@@ -43,6 +43,17 @@ current state of the game to the user in the format required. The view is crucia
 changes to the game based on player actions and system responses. 
 For our AI player, we made multiple strategies the AI player can use. In our controller, we call these strategy classes.
 
+How to Play:
+
+To play with two human players, use starter code from ThreeTrios. Each player has their own view that only they can
+play on. Red goes first, selecting a card from the red panel on their view and placing it on the grid. The blue then 
+does the same on their view. The views automatically update. The game prevents players from clicking on the wrong view/
+wrong panel/on the wrong tile. 
+
+Command Line:
+We document the progress of the game in the command line. Every click prints something - whether that be a player 
+taking their turn, placing a card, or clicking on an arbitrary point in the game. It also prints the winner.
+
 Source organization:
 
 Our codebase is organized into directories by component so that its navigation through the MVC is straightforward.

@@ -20,7 +20,7 @@ import java.util.Set;
 abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatureController {
 
   protected TripleTrioModel model;
-  protected final TTFrame view;
+  protected TTFrame view;
   protected Card selectedCard = null; //card which is selected to place on grid
 
   /**
@@ -88,10 +88,4 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       view.printInvalidClickMessage("You cannot place a card there.");
     }
   }
-
-
-
-
-
-
 }

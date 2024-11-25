@@ -157,5 +157,17 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     System.out.println(gameState.toString());
   }
 
+  /**
+   * This listens for the ai olayers moves.
+   *
+   * @param controller2 controller for ai player
+   */
+  @Override
+  public void addAIListener(TripleTrioFeatureController controller2) {
+    this.blueHand.addAIListener((TripleTrioHumanPlayerContr) controller2);
+    this.redHand.addAIListener((TripleTrioHumanPlayerContr) controller2);
+    this.gridPanel.addAIListener((TripleTrioHumanPlayerContr) controller2);
+  }
+
 
 }
