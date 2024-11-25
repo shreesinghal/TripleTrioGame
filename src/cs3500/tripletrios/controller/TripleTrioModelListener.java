@@ -8,7 +8,7 @@ import cs3500.tripletrios.model.CardColor;
  * Behaviors needed for a controller that listens and
  * works specifically with the TripleTrio model. Allows the
  * model to know specifics to which player is playing, where a card
- * was paced, and that the game state has been updated.
+ * was placed, and that the game state has been updated.
  */
 public interface TripleTrioModelListener {
 
