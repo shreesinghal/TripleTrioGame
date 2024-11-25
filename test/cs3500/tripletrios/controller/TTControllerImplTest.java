@@ -3,7 +3,6 @@ package cs3500.tripletrios.controller;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.StringReader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -15,13 +14,11 @@ public class TTControllerImplTest {
 
   private Appendable output;
   private Readable userInput;
-  private TripleTrioControllerImpl controller;
 
   @Before
   public void setUp() {
     output = new StringBuilder();
     userInput = new StringReader("1 1 Bird\n");
-    controller = new TripleTrioControllerImpl(userInput, output);
   }
 
   @Test
