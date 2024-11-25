@@ -112,4 +112,11 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * Starts a GUI specific game.
    */
   void startGUIGame();
+
+  /**
+   * Creates a copy of the grid.
+   * @return grid as 2D arraylist of cells
+   * @throws IllegalStateException if the game has not started
+   */
+  ArrayList<ArrayList<Cell>> createCopyOfGrid();
 }
