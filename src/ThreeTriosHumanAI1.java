@@ -39,7 +39,7 @@ public final class ThreeTriosHumanAI1 {
     model.startGUIGame();
     Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
     TripleTrioStrategy cornerStrategy = new CornerStrategy(model);
-    Player AIPlayer2 = new PlayerAIImpl(model.getOppPlayer().getHand(), CardColor.BLUE, cornerStrategy);
+    PlayerAIImpl AIPlayer2 = new PlayerAIImpl(model.getOppPlayer().getHand(), CardColor.BLUE, cornerStrategy);
     TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
     TTFrame viewAIPlayer2 = new TTFrameViewImpl(model, AIPlayer2);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model,
@@ -49,8 +49,8 @@ public final class ThreeTriosHumanAI1 {
       AIPlayer2,
       viewAIPlayer2,
       cornerStrategy);
-    viewPlayer1.addClickListeners(controller1);
-    viewAIPlayer2.addAIListener(controller2);
+    viewPlayer1.addListeners(controller1);
+    viewAIPlayer2.addListeners(controller2);
 
   }
 

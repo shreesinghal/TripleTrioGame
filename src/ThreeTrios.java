@@ -52,8 +52,8 @@ public final class ThreeTrios {
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model,
             player2,
             viewPlayer2);
-    viewPlayer1.addClickListeners(controller1);
-    viewPlayer2.addClickListeners(controller2);
+    viewPlayer1.addListeners(controller1);
+    viewPlayer2.addListeners(controller2);
 
 
   }

@@ -110,8 +110,17 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public ArrayList<ArrayList<Cell>> createCopyOfGrid() {
-    return (ArrayList<ArrayList<Cell>>) this.grid.clone();
+    ArrayList<ArrayList<Cell>> deepCopy = new ArrayList<>();
+    for (ArrayList<Cell> row : this.grid) {
+      ArrayList<Cell> copiedRow = new ArrayList<>();
+      for (Cell cell : row) {
+        copiedRow.add(new Cell(cell.getCellType()));
+      }
+      deepCopy.add(copiedRow);
+    }
+    return deepCopy;
   }
+
 
 
   /**

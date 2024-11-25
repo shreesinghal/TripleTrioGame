@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
-import cs3500.tripletrios.controller.TripleTrioAbstractGUIController;
+import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
@@ -27,7 +28,7 @@ public class GridPanel extends JPanel {
 
   private final ReadOnlyTripleTrioModel model;
 
-  private TripleTrioAbstractGUIController features;
+  private TripleTrioFeatureController features;
 
   private final Map<Point, CardView> placedCards; // Tracks cards placed on the grid
 
@@ -49,14 +50,6 @@ public class GridPanel extends JPanel {
   public void addClickListener(TripleTrioHumanPlayerContr features) {
     this.features = features;
     this.addMouseListener(new TTGridPanelClick());
-  }
-
-  /**
-   * This sets the controller to be either the AI or the human player.
-   * @param features AI or human player
-   */
-  public void setController(TripleTrioHumanPlayerContr features) {
-    this.features = features;
   }
 
   /**
@@ -179,7 +172,12 @@ public class GridPanel extends JPanel {
     this.repaint();
   }
 
-  public void addAIListener(TripleTrioHumanPlayerContr controller2) {
+  /**
+   * Adds a controller features to the grid
+   * @param controller2 features
+   */
+  public void addAIListener(TripleTrioAIPlayerContr controller2) {
+    this.features = controller2;
   }
 
 

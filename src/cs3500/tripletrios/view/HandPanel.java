@@ -1,5 +1,7 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
+import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  */
 public class HandPanel extends JPanel {
 
-  private TripleTrioHumanPlayerContr features;
+  private TripleTrioFeatureController features;
   private final ReadOnlyTripleTrioModel model;
   private final Player player;
   private final ArrayList<CardView> cardViewsInHand;
@@ -145,6 +147,14 @@ public class HandPanel extends JPanel {
     }
     cardViewsInHand.remove(cardViewToRemove);
     this.repaint();
+  }
+
+  /**
+   * Adds
+   * @param listener
+   */
+  public void addAIListener(TripleTrioAIPlayerContr listener) {
+    this.features = listener;
   }
 
 

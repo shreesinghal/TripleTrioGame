@@ -1,11 +1,9 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.CardColor;
-import cs3500.tripletrios.model.Player;
-import cs3500.tripletrios.model.PlayerAIImpl;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 import cs3500.tripletrios.strategies.PlayerMove;
 import cs3500.tripletrios.strategies.TripleTrioStrategy;
+import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
 import java.io.IOException;
@@ -20,7 +18,7 @@ public class TripleTrioAIPlayerContr
         implements TripleTrioModelListener {
   
   private final TripleTrioStrategy strategy;
-  private final Player player;
+  private final PlayerAIImpl player;
   private boolean ourPlayerCanPlay = false;
 
 
@@ -30,7 +28,7 @@ public class TripleTrioAIPlayerContr
    * @param view a GUI view.
    * @param strategy a strategy for the player
    */  
-  public TripleTrioAIPlayerContr(TripleTrioModel model, Player playerAI, 
+  public TripleTrioAIPlayerContr(TripleTrioModel model, PlayerAIImpl playerAI,
                                  TTFrame view, TripleTrioStrategy strategy) {
     super(view);
     this.model = model;
@@ -53,32 +51,36 @@ public class TripleTrioAIPlayerContr
   @Override
   protected void onTurnNotification() {
     System.out.println("AI is calculating its move...");
-    PlayerMove move = strategy.moveCard();
-    playMove(move.getX(), move.getY());
+
+    PlayerMove aiMove = player.makeMove();
+    Card selectedCard = player.getHand().get(aiMove.getCardInd());
+    model.placeCard(aiMove.getX(), aiMove.getY(), selectedCard); // Place the card
+    player.removeCardFromHand(player.getHand().get(aiMove.getCardInd())); // Remove the card from the hand
+    view.getHandView(player.getColor()).removeCard(selectedCard); // Update hand view
+    view.getHandView(player.getColor()).repaint();
+
+    view.getGridPanel().placeCardOnGrid(aiMove.getX() - 1,
+      aiMove.getY() - 1,
+      new CardView(selectedCard,
+        aiMove.getX() - 1,
+        aiMove.getY() - 1,
+        view.getGridPanel().getWidth() / model.getGridWidth(),
+        view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
+    model.executeBattlePhase(aiMove.getX() - 1, aiMove.getY() - 1);
+    model.switchTurns();
+    view.refresh();
+
+    if (model.getFinalState() != WinningState.GameNotDone) {
+      view.displayGameOverMessage(model.getFinalState());
+    }
+
+    System.out.println("You have placed a "
+      + selectedCard.getColor()
+      + " card at " + aiMove.getX()
+      + " "
+      + aiMove.getY());
   }
 
-
-  @Override
-  public void playGame(String deckPath,
-                       String gridPath) {
-    super.playGame(deckPath, gridPath);
-  }
-
-
-  /**
-   * Play a new game of Triple Trio with the given configurations.
-   *
-   * @param model    a triple trio model
-   * @param deckPath deckPath the path to the deck
-   * @param gridPath gridPath the path to the grid
-   * @throws IOException if something in the game is displayed wrong.
-   */
-  @Override
-  public void playGameWithModel(TripleTrioModel model,
-                                String deckPath,
-                                String gridPath) throws IOException {
-    //no implementation
-  }
 
   /**
    * Returns if controller is human.
@@ -97,6 +99,17 @@ public class TripleTrioAIPlayerContr
   @Override
   public void handleCellClickForGrid(int xGridLoc, int yGridLoc) {
     //no implementation for AI player
+  }
+
+  /**
+   * Handles an action when a player presses a card on the hand.
+   *
+   * @param i     the number of the card that was clicked
+   * @param color the color of the card that was clicked
+   */
+  @Override
+  public void handleCellClickForHand(int i, CardColor color) {
+    // no impementation for ai
   }
 
   /**

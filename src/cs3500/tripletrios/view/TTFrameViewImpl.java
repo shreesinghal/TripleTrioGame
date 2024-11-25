@@ -1,24 +1,25 @@
 package cs3500.tripletrios.view;
 
+import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
+
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
 
-
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 /**
  * Implements the GUI view for the Triple Trios game, displaying the main game board,
  * player hands, and managing visual updates based on the current game state.
  */
 public class TTFrameViewImpl extends JFrame implements TTFrame {
-
 
   private final GridPanel gridPanel;
   private final HandPanel redHand;
@@ -102,11 +103,15 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * @param listener the controller
    */
   @Override
-  public void addClickListeners(TripleTrioFeatureController listener) {
+  public void addListeners(TripleTrioFeatureController listener) {
     if (listener.isHuman()) {
       this.blueHand.addClickListener((TripleTrioHumanPlayerContr) listener);
       this.redHand.addClickListener((TripleTrioHumanPlayerContr) listener);
       this.gridPanel.addClickListener((TripleTrioHumanPlayerContr) listener);
+    } else {
+      this.blueHand.addAIListener((TripleTrioAIPlayerContr) listener);
+      this.redHand.addAIListener((TripleTrioAIPlayerContr) listener);
+      this.gridPanel.addAIListener((TripleTrioAIPlayerContr) listener);
     }
   }
 
@@ -157,17 +162,6 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     System.out.println(gameState.toString());
   }
 
-  /**
-   * This listens for the ai olayers moves.
-   *
-   * @param controller2 controller for ai player
-   */
-  @Override
-  public void addAIListener(TripleTrioFeatureController controller2) {
-    this.blueHand.addAIListener((TripleTrioHumanPlayerContr) controller2);
-    this.redHand.addAIListener((TripleTrioHumanPlayerContr) controller2);
-    this.gridPanel.addAIListener((TripleTrioHumanPlayerContr) controller2);
-  }
 
 
 }

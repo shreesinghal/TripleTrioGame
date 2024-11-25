@@ -55,6 +55,7 @@ public class TripleTrioHumanPlayerContr
    * @param cardNum the number of the card that was clicked
    * @param color the color of the card that was clicked
    */
+  @Override
   public void handleCellClickForHand(int cardNum, CardColor color) {
     if (model.getPlayer().getColor() == color && ourPlayerCanPlay) {
       if (cardNum >= 0 && cardNum < model.getPlayer().getHand().size()) {
@@ -88,20 +89,6 @@ public class TripleTrioHumanPlayerContr
   }
 
 
-  /**
-   * Play a new game of Triple Trio with the given configurations.
-   *
-   * @param model    a triple trio model
-   * @param deckPath deckPath the path to the deck
-   * @param gridPath gridPath the path to the grid
-   * @throws IOException if something in the game is displayed wrong.
-   */
-  @Override
-  public void playGameWithModel(TripleTrioModel model,
-                                String deckPath,
-                                String gridPath) throws IOException {
-    //no implementation
-  }
 
   /**
    * Returns if controller is human.

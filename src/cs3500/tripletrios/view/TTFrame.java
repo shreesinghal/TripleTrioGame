@@ -32,7 +32,7 @@ public interface TTFrame {
    * Only reacts to clicks.
    * @param listener the controller
    */
-  void addClickListeners(TripleTrioFeatureController listener);
+  void addListeners(TripleTrioFeatureController listener);
 
   /**
    * Refresh the view to reflect any changes in the game state.
@@ -56,12 +56,6 @@ public interface TTFrame {
    * @param finalState final state of game
    */
   void displayGameOverMessage(WinningState finalState);
-
-  /**
-   * This listens for the ai olayers moves.
-   * @param controller2 controller for ai player
-   */
-  void addAIListener(TripleTrioFeatureController controller2);
 }
 
 

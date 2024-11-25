@@ -208,6 +208,17 @@ public class MockModel implements TripleTrioModel {
   }
 
   /**
+   * Creates a copy of the grid.
+   *
+   * @return grid as 2D arraylist of cells
+   * @throws IllegalStateException if the game has not started
+   */
+  @Override
+  public ArrayList<ArrayList<Cell>> createCopyOfGrid() {
+    return null;
+  }
+
+  /**
    * Sets the value for a specific cell position.
    */
   public void setCellValue(Posn pos, int value) {
