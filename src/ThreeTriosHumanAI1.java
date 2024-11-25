@@ -1,7 +1,14 @@
 import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.PlayerAIImpl;
+import cs3500.tripletrios.model.PlayerHumanImpl;
+import cs3500.tripletrios.model.TripleTrioGameModel;
+import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.strategies.CornerStrategy;
 import cs3500.tripletrios.strategies.TripleTrioStrategy;
 import cs3500.tripletrios.view.TTFrame;
@@ -27,11 +34,11 @@ public final class ThreeTriosHumanAI1 {
   public static void main(String[] args) {
 
     Set<Card> sampleDeck = CardDatabaseReader.readDeckConfiguration("Configurations"
-      + File.separator
-      + "20deckConfig.txt");
+        + File.separator
+        + "20deckConfig.txt");
 
     ArrayList<ArrayList<Cell>> sampleOrigGrid = GridConfigReader
-      .readGridConfiguration("Configurations"
+        .readGridConfiguration("Configurations"
         + File.separator
         + "3x3sqrGrid.txt");
 
@@ -39,15 +46,16 @@ public final class ThreeTriosHumanAI1 {
     model.startGUIGame();
     Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
     TripleTrioStrategy cornerStrategy = new CornerStrategy(model);
-    PlayerAIImpl AIPlayer2 = new PlayerAIImpl(model.getOppPlayer().getHand(), CardColor.BLUE, cornerStrategy);
+    PlayerAIImpl aiPlayer2 = new PlayerAIImpl(model.getOppPlayer().getHand(),
+            CardColor.BLUE, cornerStrategy);
     TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
-    TTFrame viewAIPlayer2 = new TTFrameViewImpl(model, AIPlayer2);
+    TTFrame viewAIPlayer2 = new TTFrameViewImpl(model, aiPlayer2);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model,
-      player1,
-      viewPlayer1);
+        player1,
+        viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioAIPlayerContr(model,
-      AIPlayer2,
-      viewAIPlayer2);
+        aiPlayer2,
+        viewAIPlayer2);
     viewPlayer1.addListeners(controller1);
     viewAIPlayer2.addListeners(controller2);
 
