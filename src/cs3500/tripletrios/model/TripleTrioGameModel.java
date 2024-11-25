@@ -125,7 +125,6 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public void startGame(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid) {
-
     this.gameStarted = true;
   }
 

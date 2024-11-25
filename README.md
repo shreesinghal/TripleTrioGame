@@ -90,3 +90,44 @@ account for both the text view and the GUI view. We added methods like playGameW
 handleCellClickForGrid. These are methods that account for the GUI view, and when implemented into the controller for 
 the textViewController, we do not have a implementation for it. 
 
+
+
+Changes for part 3:
+Firstly, we would like to note that we updated our code base to include the feedback we received from homework 6. We 
+first made sure that our model had a method to retrieve a copy of the grid, as we had forgotten to implement this in 
+homework 6. This ensured that we adhered to encapsulation principles by avoiding direct access to the grid's state. 
+Additionally, we modified our strategies to accept only the ReadOnlyModel instead of the actual model, preventing
+accidental modifications to the model's state, which could disrupt the entire game flow.
+
+From the previous assignment, we introduced a feature to allow the model to start a GUI game 
+(line 114 in TripleTrioModel). We also added new methods, namely notifyPlayerTurn, notifyCardPlaced, 
+and notifyGameStateUpdated. These methods notify registered listeners about specific events in the game model, 
+such as changes in player turns, card placements, or updates to the game state. These changes enhanced the communication
+between the model and external components like the views and controllers.
+
+We updated our GUI view (TTTFrameViewImpl.java) to fix bugs and reflect changes to the game's overall functionality. 
+In the last assignment, players could not place cards onto the grid despite the presence of the underlying logic. This 
+issue was resolved in this assignment. We also ensured that our game supports two views created from the main method,
+both connected to the same model, enabling synchronized gameplay. Each view corresponds to one player, ensuring that
+players can only play during their turn and cannot interact with the other player’s view. These changes were primarily
+implemented in TTTFrameViewImpl and TripleTrioHumanPlayerController.
+
+To facilitate these updates, we adopted the observer design pattern to ensure communication between the model, views, 
+and controllers. By doing so, we decoupled the components, improving the modularity and maintainability of our code.
+
+
+Homework 7 additions: 
+I will now explain the new files that we added to our program. All classes in the view package remain the same. 
+We added two new classes in our model package, a PlayerHumanImpl and PlayerAIImpl, both which implement the Player
+interface we have had since homework 5. The purpose of creating these two classes were to have a way to keep track 
+of which player is human and which player is AI since we are now accounting for two different types of players. These 
+are used in the main class (ThreeTrios) and in the model. In our controller, we did add new classes/interfaces. 
+We first created two controllers, one for the AI player and one for the Human player. We realized that a lot of the 
+functionality was duplicated in both classes so in order to take care of the duplicated code, we created 
+TripleTrioAbstractGUIController and both the AI and Human controller are subclasses of that class. This is a use of 
+abstraction as we abstracted duplicated code into a separate class, creating for modularity and single responsibility. 
+We also created two new interfaces, TripleTrioModelListener and TripleTrioFeatureController. TripleTrioFeatureController
+is the interface that both the GUI view and text-based view use. It delegates between the model and view. 
+TripleTrioModelListener is for the behaviors needed for a controller that listens and works specifically with the
+TripleTrio model. It allows the model to know specifics to which player is playing, where a card was placed, 
+and that the game state has been updated.
