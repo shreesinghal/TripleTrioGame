@@ -55,11 +55,10 @@ public class TripleTrioAIPlayerContr
       PlayerMove aiMove = player.makeMove();
       Card selectedCard = player.getHand().get(aiMove.getCardInd());
       model.placeCard(aiMove.getX(), aiMove.getY(), selectedCard); // Place the card
-      player.removeCardFromHand(player.getHand()
-              .get(aiMove.getCardInd())); // Remove the card from the hand
-      view.getHandView(player.getColor())
-              .removeCard(selectedCard); // Update hand view
-      view.getHandView(player.getColor()).repaint();
+      player.removeCardFromHand(player.getHand().get(aiMove.getCardInd())); // Remove the card from the hand
+
+      view.getHandView(player.getColor()).removeCard(selectedCard); // Update the HandPanel
+      view.refresh(); // Refresh the view to reflect the updates
 
       view.getGridPanel().placeCardOnGrid(aiMove.getX(),
         aiMove.getY(),
