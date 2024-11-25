@@ -2,7 +2,11 @@ package cs3500.tripletrios.model;
 
 import java.util.ArrayList;
 
-public class PlayerAbstract implements Player{
+/**
+ * Abstract class for human and AI implementations
+ * of the Player interface.
+ */
+public class PlayerAbstract implements Player {
 
   protected ArrayList<Card> hand;
   protected final CardColor color;
@@ -28,7 +32,8 @@ public class PlayerAbstract implements Player{
    * @return players hand
    */
   @Override
-  public ArrayList<Card> getHand() {return (ArrayList<Card>) this.hand.clone();
+  public ArrayList<Card> getHand() {
+    return (ArrayList<Card>) this.hand.clone();
   }
 
   /**

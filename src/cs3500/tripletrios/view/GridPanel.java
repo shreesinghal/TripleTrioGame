@@ -97,7 +97,7 @@ public class GridPanel extends JPanel {
   }
 
   /**
-   * Places a card on the grid
+   * Places a card on the grid.
    * @param x x coord
    * @param y y coord
    * @param card card to place
