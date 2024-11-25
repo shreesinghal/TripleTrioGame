@@ -130,4 +130,6 @@ We also created two new interfaces, TripleTrioModelListener and TripleTrioFeatur
 is the interface that both the GUI view and text-based view use. It delegates between the model and view. 
 TripleTrioModelListener is for the behaviors needed for a controller that listens and works specifically with the
 TripleTrio model. It allows the model to know specifics to which player is playing, where a card was placed, 
-and that the game state has been updated.
+and that the game state has been updated. We ensured that the ai player only calculates the move, and all other
+functions of the ai player is the same as a human. This was achieved through the AbstractGUIController class, which
+both controllers use.
