@@ -14,6 +14,7 @@ public interface TripleTrioModelListener {
 
   /**
    * Notifies that it's a player's turn.
+   * Notifies which player is allowed to act next.
    * @param color the name of the current player
    */
   void onPlayerTurn(CardColor color);

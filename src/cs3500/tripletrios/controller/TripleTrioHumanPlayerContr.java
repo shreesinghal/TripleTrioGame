@@ -128,7 +128,7 @@ public class TripleTrioHumanPlayerContr
    */
   public void onPlayerTurn(CardColor color) {
     System.out.println("It's " + color.toString() + "'s turn!");
-    ourPlayerCanPlay = true;
+    ourPlayerCanPlay = (color == this.player.getColor());
     view.updateTurn();
     view.refresh();
   }
