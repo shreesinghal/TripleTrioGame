@@ -131,6 +131,9 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
 
   }
 
+  /**
+   * Updates the display of the grid with the current cards after a player's turn.
+   */
 
   @Override
   public void updateTurn() {

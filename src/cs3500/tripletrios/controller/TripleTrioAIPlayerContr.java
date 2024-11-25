@@ -49,6 +49,7 @@ public class TripleTrioAIPlayerContr
     super.playGame(deckPath, gridPath);
   }
 
+
   /**
    * Play a new game of Triple Trio with the given configurations.
    *
@@ -58,7 +59,9 @@ public class TripleTrioAIPlayerContr
    * @throws IOException if something in the game is displayed wrong.
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
+  public void playGameWithModel(TripleTrioModel model,
+                                String deckPath,
+                                String gridPath) throws IOException {
     //no implementation
   }
 

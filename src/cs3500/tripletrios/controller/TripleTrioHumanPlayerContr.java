@@ -13,11 +13,21 @@ import java.io.IOException;
  * TripleTrioController interface and delegates input(clicks) from the GUI view to the
  * model of the game. This controller also accounts for AI strategies.
  */
-public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController implements TripleTrioModelListener {
+public class TripleTrioHumanPlayerContr
+        extends TripleTrioAbstractGUIController
+        implements TripleTrioModelListener {
   protected TTFrame view;
   private final Player player;
   private boolean ourPlayerCanPlay = false;
 
+
+  /**
+   * Constructs a controller for a human player in the Triple Trio game.
+   * @param model  model the game model that contains the current state of the game.
+   * @param player player the player object representing the human player.
+   * @param viewPlayer viewPlayer the view associated with the player
+   * @throws IllegalArgumentException if the provided player is null.
+   */
   public TripleTrioHumanPlayerContr(TripleTrioModel model, Player player, TTFrame viewPlayer) {
     super(viewPlayer);
     this.model = model;
@@ -28,27 +38,17 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
 
     if (player == null) {
-      throw new NullPointerException("player cannot be null");
+      throw new IllegalArgumentException("player cannot be null");
     }
 
     this.view = viewPlayer;
     this.player = player;
     model.addListener(this, this.player.getColor());
 
-//    view.addClickListeners(this);
   }
 
 
-  /**
-   * Play a new game of Triple Trio with the given configurations.
-   * @param deckPath deckPath the path to the deck
-   * @param gridPath gridPath the path to the grid
-   */
-  @Override
-  public void playGame(String deckPath,
-                       String gridPath) {
-    super.playGame(deckPath, gridPath);
-  }
+
 
   /**
    * Handles an action when a player presses a card on the hand.
@@ -90,8 +90,10 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
    * @throws IOException if something in the game is displayed wrong.
    */
   @Override
-  public void playGame(TripleTrioModel model, String deckPath, String gridPath) throws IOException {
-    // never used in this impl
+  public void playGameWithModel(TripleTrioModel model,
+                                String deckPath,
+                                String gridPath) throws IOException {
+    //no implementation
   }
 
   /**
@@ -143,7 +145,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   }
 
   /**
-   * Notifies that the game state has been updated
+   * Notifies that the game state has been updated.
    */
   @Override
   public void onGameStateUpdated() {
@@ -152,7 +154,7 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   }
 
   /**
-   * To be overridden by subclasses for handling their turn notifications
+   * To be overridden by subclasses for handling their turn notifications.
    */
   @Override
   protected void onTurnNotification() {

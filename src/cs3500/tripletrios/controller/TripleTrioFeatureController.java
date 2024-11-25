@@ -19,9 +19,9 @@ public interface TripleTrioFeatureController {
    * @param gridPath gridPath the path to the grid
    * @throws IOException if something in the game is displayed wrong.
    */
-  void playGame(TripleTrioModel model,
-                String deckPath,
-                String gridPath) throws IOException;
+  void playGameWithModel(TripleTrioModel model,
+                         String deckPath,
+                         String gridPath) throws IOException;
 
   /**
    * Returns if controller is human.

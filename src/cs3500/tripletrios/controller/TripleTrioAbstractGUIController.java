@@ -35,9 +35,10 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
 
 
   /**
-   * Starts a new game with the given deck and grid configurations.
-   * @param deckPath the file path to the deck configuration.
-   * @param gridPath the file path to the grid configuration.
+   * Play a game of Triple Trio by
+   * giving a deck and grid from configurations and calling.
+   * @param deckPath path for the deck of cards
+   * @param gridPath path for the grid
    */
   public void playGame(String deckPath,
                        String gridPath) {
@@ -75,8 +76,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
     model.switchTurns();
     view.refresh();
 
-    System.out.println("You have placed a " +
-            selectedCard.getColor()
+    System.out.println("You have placed a "
+            + selectedCard.getColor()
             + " card at " + xPos + " " + yPos);
   }
 

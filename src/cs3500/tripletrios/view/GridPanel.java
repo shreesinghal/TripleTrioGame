@@ -155,6 +155,10 @@ public class GridPanel extends JPanel {
     return logical * this.getCardHeightInGrid();
   }
 
+  /**
+   * Updates the grid with the current placed cards by clearing existing cards and
+   * adding the new ones based on the current game state.
+   */
   public void updateCardsOnGrid() {
     int cellWidth = this.getWidth() / model.getGridWidth();
     int cellHeight = this.getHeight() / model.getGridHeight();
@@ -165,13 +169,13 @@ public class GridPanel extends JPanel {
       for (int x = 0; x < model.getCurrentGrid().get(y).size(); x++) {
         Cell cell = model.getCurrentGrid().get(y).get(x);
         if (cell.getCellType() == Cell.CellType.CARDCELL
-        && !cell.isEmpty()) {
+                && !cell.isEmpty()) {
           placedCards.put(new Point(x, y),
-            new CardView(cell.getCard(),
-              x,
-              y,
-              cellWidth,
-              cellHeight));
+                  new CardView(cell.getCard(),
+                          x,
+                          y,
+                          cellWidth,
+                          cellHeight));
         }
       }
     }
