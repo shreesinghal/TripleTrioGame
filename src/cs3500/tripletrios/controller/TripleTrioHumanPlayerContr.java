@@ -33,6 +33,8 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
 
     this.view = viewPlayer;
     this.player = player;
+    model.addListener(this, this.player.getColor());
+
 //    view.addClickListeners(this);
   }
 
@@ -46,7 +48,6 @@ public class TripleTrioHumanPlayerContr extends TripleTrioAbstractGUIController 
   public void playGame(String deckPath,
                        String gridPath) {
     super.playGame(deckPath, gridPath);
-    model.addListener(this, this.player.getColor());
   }
 
   /**

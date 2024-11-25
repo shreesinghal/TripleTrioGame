@@ -131,11 +131,9 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
 
   }
 
-  /**
-   * @param model
-   */
+
   @Override
-  public void updateTurn(TripleTrioModel model) {
+  public void updateTurn() {
     this.gridPanel.updateCardsOnGrid();
   }
 

@@ -41,10 +41,6 @@ public interface TTFrame {
 
   void printInvalidClickMessage(String s);
 
-  void updateData(TripleTrioModel model);
-
-  void updateTurn(TripleTrioModel model);
-
   void updateTurn();
 }
 

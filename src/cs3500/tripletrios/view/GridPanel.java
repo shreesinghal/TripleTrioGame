@@ -159,6 +159,7 @@ public class GridPanel extends JPanel {
     int cellWidth = this.getWidth() / model.getGridWidth();
     int cellHeight = this.getHeight() / model.getGridHeight();
 
+    // populated palced cards
     placedCards.clear();
     for (int y = 0; y < model.getCurrentGrid().size(); y++) {
       for (int x = 0; x < model.getCurrentGrid().get(y).size(); x++) {
@@ -174,7 +175,6 @@ public class GridPanel extends JPanel {
         }
       }
     }
-    model.getCurrentGrid();
     this.repaint();
   }
 
