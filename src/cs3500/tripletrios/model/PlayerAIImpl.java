@@ -9,10 +9,8 @@ import java.util.ArrayList;
  * AI player implementation for the Triple Trios game.
  * This player uses a strategy to compute its next move.
  */
-public class PlayerAIImpl implements Player {
+public class PlayerAIImpl extends PlayerAbstract {
 
-  private ArrayList<Card> hand;
-  private final CardColor color;
   private final TripleTrioStrategy strategy;
 
   /**
@@ -22,47 +20,10 @@ public class PlayerAIImpl implements Player {
    * @param strategy the strategy used to compute the AI's moves
    */
   public PlayerAIImpl(ArrayList<Card> hand, CardColor color, TripleTrioStrategy strategy) {
-    this.hand = hand;
-    this.color = color;
+    super(hand, color);
     this.strategy = strategy;
   }
 
-
-  /**
-   * Returns the color of the player.
-   * @return color of the player
-   */
-  @Override
-  public CardColor getColor() {
-    return this.color;
-  }
-
-  /**
-   * Returns the players hand.
-   * @return players hand
-   */
-  @Override
-  public ArrayList<Card> getHand() {
-    return (ArrayList<Card>) this.hand.clone();
-  }
-
-  /**
-   * Removes a card from the hand.
-   * @param card the card wanting to be removed
-   */
-  @Override
-  public void removeCardFromHand(Card card) {
-    this.hand.remove(card);
-  }
-
-  /**
-   * Checks if the Player is a human.
-   * @return true or false is player is human
-   */
-  @Override
-  public boolean isHuman() {
-    return false;
-  }
 
   /**
    * Computes the next move for the AI.
