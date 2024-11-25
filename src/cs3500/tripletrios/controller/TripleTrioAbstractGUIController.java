@@ -65,14 +65,15 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
     try {
       model.placeCard(xPos - 1, yPos - 1, selectedCard); // Place the card
       model.getPlayer().removeCardFromHand(selectedCard); // Remove the card from the hand
-      view.getHandView(this.model.getPlayer().getColor()).removeCard(selectedCard); // Update hand view
+      view.getHandView(this.model.getPlayer()
+              .getColor()).removeCard(selectedCard);
+      // Update hand view
       view.getHandView(this.model.getPlayer().getColor()).repaint();
 
       view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
-        xPos - 1,
-        yPos - 1,
-        view.getGridPanel().getWidth() / model.getGridWidth(),
-        view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
+          xPos - 1, yPos - 1,
+          view.getGridPanel().getWidth() / model.getGridWidth(),
+              view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
       model.executeBattlePhase(xPos - 1, yPos - 1);
       model.switchTurns();
       view.refresh();
@@ -82,8 +83,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       }
 
       System.out.println("You have placed a "
-        + selectedCard.getColor()
-        + " card at " + xPos + " " + yPos);
+          + selectedCard.getColor()
+          + " card at " + xPos + " " + yPos);
     } catch (Exception e) {
       view.printInvalidClickMessage("You cannot place a card there.");
     }

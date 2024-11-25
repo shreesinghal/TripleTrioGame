@@ -5,7 +5,6 @@ import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.view.TTFrame;
 
-import java.io.IOException;
 
 
 /**
@@ -76,7 +75,8 @@ public class TripleTrioHumanPlayerContr
       view.printInvalidClickMessage("It's not your turn!");
     }
 
-    System.out.println("You clicked on the card at index " + cardNum + " in the " + model.getPlayer().getColor() + " hand.");
+    System.out.println("You clicked on the card at index "
+            + cardNum + " in the " + model.getPlayer().getColor() + " hand.");
   }
 
 

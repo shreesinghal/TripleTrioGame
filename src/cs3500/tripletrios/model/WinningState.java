@@ -12,6 +12,10 @@ public enum WinningState {
   Tie;
 
 
+  /**
+   * Returns the string version of the state.
+   * @return string explaining the winning state.
+   */
   public String toString() {
     switch (this) {
       case RedWins:
@@ -22,8 +26,9 @@ public enum WinningState {
         return "Game in progress";
       case Tie:
         return "Tie!";
+      default:
+        return "Unspecified state";
     }
-    return "Unspecified state";
   }
 
 }

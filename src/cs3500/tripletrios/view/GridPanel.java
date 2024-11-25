@@ -173,7 +173,7 @@ public class GridPanel extends JPanel {
   }
 
   /**
-   * Adds a controller features to the grid
+   * Adds a controller features to the grid.
    * @param controller2 features
    */
   public void addAIListener(TripleTrioAIPlayerContr controller2) {
