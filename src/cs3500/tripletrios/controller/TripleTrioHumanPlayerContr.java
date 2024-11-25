@@ -1,5 +1,6 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.TripleTrioModel;
@@ -35,10 +36,6 @@ public class TripleTrioHumanPlayerContr
       ourPlayerCanPlay = true;
     }
 
-
-    if (player == null) {
-      throw new IllegalArgumentException("player cannot be null");
-    }
 
     this.view = viewPlayer;
     this.player = player;
@@ -129,11 +126,13 @@ public class TripleTrioHumanPlayerContr
 
   /**
    * Notifies that a card was placed.
-   * @param x the x-coordinate of the placed card
-   * @param y the y-coordinate of the placed card
+   *
+   * @param x    the x-coordinate of the placed card
+   * @param y    the y-coordinate of the placed card
+   * @param card
    */
   @Override
-  public void onCardPlaced(int x, int y) {
+  public void onCardPlaced(int x, int y, Card card) {
     System.out.println("Card placed at (" + x + ", " + y + ")");
     view.refresh();
   }

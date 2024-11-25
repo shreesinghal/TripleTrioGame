@@ -1,6 +1,7 @@
 package cs3500.tripletrios.model;
 
 import cs3500.tripletrios.controller.TripleTrioModelListener;
+import cs3500.tripletrios.view.CardView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -252,9 +253,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
     }
   }
 
-  private void notifyCardPlaced(int x, int y) {
+  private void notifyCardPlaced(int x, int y, Card card) {
     for (TripleTrioModelListener listener : listeners) {
-      listener.onCardPlaced(x, y);
+      listener.onCardPlaced(x, y, card);
     }
   }
 
@@ -363,7 +364,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
     if (this.grid.get(yPos).get(xPos).isEmpty()
             && ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
-      this.notifyCardPlaced(xPos, yPos);
+      this.notifyCardPlaced(xPos, yPos, card);
     } else {
       throw new IllegalArgumentException("Invalid position entered.");
     }

@@ -1,5 +1,6 @@
 package cs3500.tripletrios.controller;
 
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 
 
@@ -21,10 +22,12 @@ public interface TripleTrioModelListener {
 
   /**
    * Notifies that a card was placed.
-   * @param x the x-coordinate of the placed card
-   * @param y the y-coordinate of the placed card
+   *
+   * @param x    the x-coordinate of the placed card
+   * @param y    the y-coordinate of the placed card
+   * @param card
    */
-  void onCardPlaced(int x, int y);
+  void onCardPlaced(int x, int y, Card card);
 
   /**
    * Notifies that the game state has updated.

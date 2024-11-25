@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.WinningState;
 
@@ -60,7 +61,9 @@ public interface TTFrame {
   /**
    * Updates the Grid with cards placed.
    */
-  void updateGrid();
+  void updateGrid(CardView cardView);
+
+  void addCardToGrid(int x, int y, Card card);
 }
 
 

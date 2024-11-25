@@ -4,10 +4,7 @@ import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 
-import cs3500.tripletrios.model.CardColor;
-import cs3500.tripletrios.model.Player;
-import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
-import cs3500.tripletrios.model.WinningState;
+import cs3500.tripletrios.model.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -168,7 +165,15 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    * Updates the Grid with cards placed.
    */
   @Override
-  public void updateGrid() {
+  public void updateGrid(CardView cardView) {
     refresh();
+  }
+
+
+  @Override
+  public void addCardToGrid(int x, int y, Card card) {
+    this.getGridPanel().placeCardOnGrid(x, y, new CardView(card, x, y,
+      this.getGridPanel().getWidth() / model.getGridWidth(),
+      this.getGridPanel().getHeight() / model.getGridHeight()));
   }
 }

@@ -58,7 +58,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       view.getHandView(this.model.getPlayer().getColor()).repaint();
 
       view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
-          xPos - 1, yPos - 1,
+        xPos - 1,
+        yPos - 1,
           view.getGridPanel().getWidth() / model.getGridWidth(),
               view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
       model.executeBattlePhase(xPos - 1, yPos - 1);
