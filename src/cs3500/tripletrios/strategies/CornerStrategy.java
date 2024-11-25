@@ -18,7 +18,7 @@ public class CornerStrategy implements TripleTrioStrategy {
   private final ReadOnlyTripleTrioModel model;
   private final List<Posn> cornerPositions;
 
-  public CornerStrategy(TripleTrioModel model) {
+  public CornerStrategy(ReadOnlyTripleTrioModel model) {
     this.model = model;
     this.cornerPositions = calculateCornerPositions();
   }

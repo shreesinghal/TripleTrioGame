@@ -28,7 +28,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
    * This strategy maximizes the number of flipped cards. This will be used by the AI player.
    * @param model representation of game state
    */
-  public MaximizeFlippedCardsStrat(TripleTrioModel model) {
+  public MaximizeFlippedCardsStrat(ReadOnlyTripleTrioModel model) {
     this.model = model;
   }
 
