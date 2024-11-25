@@ -50,7 +50,8 @@ public class TripleTrioAIPlayerContr
 
   @Override
   protected void onTurnNotification() {
-    if (model.getPlayer().getColor() == player.getColor()) {
+    if (model.getFinalState() == WinningState.GameNotDone
+      && model.getPlayer().getColor() == player.getColor()) {
       System.out.println("AI is calculating its move...");
 
       PlayerMove aiMove = player.makeMove();
@@ -71,15 +72,13 @@ public class TripleTrioAIPlayerContr
       model.switchTurns();
       view.refresh();
 
-      if (model.getFinalState() != WinningState.GameNotDone) {
-        view.displayGameOverMessage(model.getFinalState());
-      }
-
       System.out.println("You have placed a "
         + selectedCard.getColor()
         + " card at " + aiMove.getX()
         + " "
         + aiMove.getY());
+    } else {
+      view.displayGameOverMessage(model.getFinalState());
     }
   }
 

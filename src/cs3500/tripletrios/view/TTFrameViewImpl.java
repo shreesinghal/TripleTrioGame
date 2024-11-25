@@ -155,11 +155,13 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    */
   @Override
   public void displayGameOverMessage(WinningState gameState) {
-    JOptionPane.showMessageDialog(this,
-            gameState.toString(),
-            "Game Over",
-            JOptionPane.PLAIN_MESSAGE);
-    System.out.println(gameState.toString());
+    if (gameState != WinningState.GameNotDone) {
+      JOptionPane.showMessageDialog(this,
+        gameState.toString(),
+        "Game Over",
+        JOptionPane.PLAIN_MESSAGE);
+      System.out.println(gameState);
+    }
   }
 
 
