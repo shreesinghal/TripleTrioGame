@@ -343,7 +343,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    */
   @Override
   public void placeCard(int xPos, int yPos, Card card) {
-    if (ensurePositionWithinBounds(new Posn(xPos, yPos))) {
+    if (this.grid.get(yPos).get(xPos).isEmpty() && ensurePositionWithinBounds(new Posn(xPos, yPos))) {
       this.grid.get(yPos).get(xPos).placeCard(card);
       this.notifyCardPlaced(xPos, yPos);
     } else {

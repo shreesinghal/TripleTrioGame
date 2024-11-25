@@ -57,20 +57,27 @@ public class TripleTrioHumanPlayerContr
    */
   public void handleCellClickForHand(int cardNum, CardColor color) {
     if (model.getPlayer().getColor() == color && ourPlayerCanPlay) {
-      selectedCard = model.getPlayer().getHand().get(cardNum);
-      System.out.println("[" + model.getPlayer().getHand() + "]");
-      System.out.println("selected card is " + selectedCard);
-      view.getHandView(player.getColor()).highlightHandCard(cardNum);
+      if (cardNum >= 0 && cardNum < model.getPlayer().getHand().size()) {
+        // if the cardnum is valid and color is correct
+        selectedCard = model.getPlayer().getHand().get(cardNum);
+        System.out.println("[" + model.getPlayer().getHand() + "]");
+        System.out.println("Selected card is " + selectedCard);
 
+        view.getHandView(player.getColor()).highlightHandCard(cardNum);
+
+        view.refresh();
+      } else {
+        view.printInvalidClickMessage("Invalid card number selected.");
+      }
     } else if (!ourPlayerCanPlay && model.getPlayer().getColor() != color) {
       view.printInvalidClickMessage("You're playing on the wrong view!");
     } else {
       view.printInvalidClickMessage("It's not your turn!");
     }
 
-    System.out.println("You clicked on the card at index " + cardNum + " in the "
-        + model.getPlayer().getColor() + " hand.");
+    System.out.println("You clicked on the card at index " + cardNum + " in the " + model.getPlayer().getColor() + " hand.");
   }
+
 
   /**
    * Returns the player of the controller.

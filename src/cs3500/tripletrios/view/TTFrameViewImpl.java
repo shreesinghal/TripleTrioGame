@@ -118,6 +118,9 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   @Override
   public void refresh() {
     this.repaint();
+    this.gridPanel.repaint();
+    this.redHand.repaint();
+    this.blueHand.repaint();
     this.setTitle("[" + this.player.getColor() + "'s View]"
             + " Current Player: " + this.model.getPlayer().getColor());
   }

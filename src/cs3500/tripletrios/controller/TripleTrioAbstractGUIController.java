@@ -62,31 +62,33 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
    * @param yPos yPos the y-coordinate where the card should be placed (1-indexed).
    */
   public void playMove(int xPos, int yPos) {
-    model.getPlayer().removeCardFromHand(selectedCard); // Remove card from hand
-    view.getHandView(this.model.getPlayer().getColor()).unHighlight(); // Unhighlight card
-    view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
-            xPos - 1,
-            yPos - 1,
-            view.getGridPanel().getWidth() / model.getGridWidth(),
-            view.getGridPanel().getHeight() / model.getGridHeight())); // Notify grid
+    try {
+      model.placeCard(xPos - 1, yPos - 1, selectedCard); // Place the card
+      model.getPlayer().removeCardFromHand(selectedCard); // Remove the card from the hand
+      view.getHandView(this.model.getPlayer().getColor()).removeCard(selectedCard); // Update hand view
+      view.getHandView(this.model.getPlayer().getColor()).repaint();
 
-    view.refresh(); // Refresh view to reflect changes
+      view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
+        xPos - 1,
+        yPos - 1,
+        view.getGridPanel().getWidth() / model.getGridWidth(),
+        view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
+      model.executeBattlePhase(xPos - 1, yPos - 1);
+      model.switchTurns();
+      view.refresh();
 
-    model.placeCard(xPos - 1, yPos - 1, selectedCard);
-    model.executeBattlePhase(xPos - 1, yPos - 1);
+      if (model.getFinalState() != WinningState.GameNotDone) {
+        view.displayGameOverMessage(model.getFinalState());
+      }
 
-    model.switchTurns();
-    view.refresh();
-    if (model.getFinalState() != WinningState.GameNotDone) {
-      view.displayGameOverMessage(model.getFinalState());
+      System.out.println("You have placed a "
+        + selectedCard.getColor()
+        + " card at " + xPos + " " + yPos);
+    } catch (Exception e) {
+      view.printInvalidClickMessage("You cannot place a card there.");
     }
-
-
-    System.out.println("You have placed a "
-            + selectedCard.getColor()
-            + " card at " + xPos + " " + yPos);
-
   }
+
 
 
 

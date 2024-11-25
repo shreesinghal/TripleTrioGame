@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
+import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
@@ -70,35 +71,39 @@ public class HandPanel extends JPanel {
 
     Graphics2D g2d = (Graphics2D) g;
 
-    for (int i = 0; i < this.player.getHand().size(); i++) {
-      //we are looping through the players hand to draw each card in hand as a cardView object
+    int cardsToDisplay = this.player.getHand().size();
 
-      CardView cardView = new CardView(this.player.getHand().get(i), 0,
-              i,
-              150,
-              this.getHeight() / this.model.getPlayer().getHand().size());
-      // ^^ make the card height dependent on the panel height (this.height) ^^
+    if (cardsToDisplay > 0) {
+      int cardHeight = this.getHeight() / cardsToDisplay;
+      // display each card in the hand
+      for (int i = 0; i < cardsToDisplay; i++) {
+        CardView cardView = new CardView(this.player.getHand().get(i), 0, i, 150, cardHeight);
 
-      if (player.getColor() == CardColor.RED) {
-        g2d.setColor(new Color(255,171,173,255));
-      } else {
-        g2d.setColor(new Color(72, 172, 255, 255));
+        // set the color
+        if (player.getColor() == CardColor.RED) {
+          g2d.setColor(new Color(255,171,173,255));
+        } else {
+          g2d.setColor(new Color(72, 172, 255, 255));
+        }
+        g2d.fill(cardView);
+
+        g2d.setColor(Color.BLACK);
+
+        // Highlight the selected card
+        if (i == highlightedCardNum) {
+          g2d.setStroke(new BasicStroke(10));
+        }
+
+        // Draw the card view
+        cardView.draw(g2d, 0, i * cardHeight);
+        g2d.draw(cardView);
+
+        g2d.setStroke(new BasicStroke(1));
+        cardViewsInHand.add(cardView);
       }
-      g2d.fill(cardView);
-
-      g2d.setColor(Color.BLACK);
-
-      if (i == highlightedCardNum) {
-        g2d.setStroke(new BasicStroke(10));
-      }
-      cardView.draw(g2d,0,i * this.getHeight() / model.getPlayer().getHand().size());
-      g2d.draw(cardView);
-
-      g2d.setStroke(new BasicStroke(1));
-      cardViewsInHand.add(cardView);
     }
-
   }
+
 
   /**
    * Gets the dimensions needed to make a hand on GUI view.
@@ -128,8 +133,18 @@ public class HandPanel extends JPanel {
     }
     System.out.println("Highlighted card index: " + highlightedCardNum);
     repaint();
+  }
 
-
+  public void removeCard(Card selectedCard) {
+    unHighlight();
+    CardView cardViewToRemove = new CardView(selectedCard, 0, 0, 0,0);
+    for (CardView cardView : cardViewsInHand) {
+      if (selectedCard.equals(cardView.getCard())) {
+        cardViewToRemove = cardView;
+      }
+    }
+    cardViewsInHand.remove(cardViewToRemove);
+    this.repaint();
   }
 
 
@@ -152,8 +167,9 @@ public class HandPanel extends JPanel {
 
 
     private int pixelToCell(int coordValue) {
-
-      return coordValue / cardViewsInHand.get(0).getLogicalSizeOfCard().height;
+      int cardsToDisplay = player.getHand().size();
+      int cardHeight = getHeight() / cardsToDisplay;
+      return coordValue / cardHeight;
     }
 
     /**
