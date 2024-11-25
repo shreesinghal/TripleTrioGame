@@ -1,12 +1,15 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configreaders.CardDatabaseReader;
-import cs3500.tripletrios.configreaders.GridConfigReader;
-import cs3500.tripletrios.model.*;
-import cs3500.tripletrios.view.TripleTrioTextView;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.view.TripleTrioView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -19,8 +22,6 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
 
   private TripleTrioModel model;
 
-
-  private Readable userInput;
 
   private Appendable output;
 
@@ -36,9 +37,9 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
       throw new IllegalArgumentException("User input or output cannot be null");
     }
 
-    this.userInput = userInput;
+    userInput = new BufferedReader(new InputStreamReader(System.in));
     this.output = output;
-    this.scanner = new Scanner(this.userInput);
+    this.scanner = new Scanner(userInput);
   }
 
   /**

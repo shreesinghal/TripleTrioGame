@@ -2,10 +2,7 @@ package cs3500.tripletrios.controller;
 
 
 import cs3500.tripletrios.model.CardColor;
-import cs3500.tripletrios.model.TripleTrioModel;
 
-
-import java.io.IOException;
 
 /**
  * Behaviors needed for the controller to delegate

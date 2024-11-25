@@ -47,8 +47,7 @@ public final class ThreeTriosHumanAI1 {
       viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioAIPlayerContr(model,
       AIPlayer2,
-      viewAIPlayer2,
-      cornerStrategy);
+      viewAIPlayer2);
     viewPlayer1.addListeners(controller1);
     viewAIPlayer2.addListeners(controller2);
 

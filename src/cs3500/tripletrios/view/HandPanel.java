@@ -137,6 +137,10 @@ public class HandPanel extends JPanel {
     repaint();
   }
 
+  /**
+   * Removes a card from hand.
+   * @param selectedCard card to be removed
+   */
   public void removeCard(Card selectedCard) {
     unHighlight();
     CardView cardViewToRemove = new CardView(selectedCard, 0, 0, 0,0);
@@ -150,8 +154,8 @@ public class HandPanel extends JPanel {
   }
 
   /**
-   * Adds
-   * @param listener
+   * Adds a lister for AI.
+   * @param listener listener for AI
    */
   public void addAIListener(TripleTrioAIPlayerContr listener) {
     this.features = listener;

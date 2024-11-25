@@ -1,12 +1,15 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.PlayerAIImpl;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.strategies.PlayerMove;
 import cs3500.tripletrios.strategies.TripleTrioStrategy;
 import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
-import java.io.IOException;
 
 /**
  * Controller implementation that represents the AI player.
@@ -17,7 +20,6 @@ public class TripleTrioAIPlayerContr
         extends TripleTrioAbstractGUIController
         implements TripleTrioModelListener {
   
-  private final TripleTrioStrategy strategy;
   private final PlayerAIImpl player;
   private boolean ourPlayerCanPlay = false;
 
@@ -26,17 +28,13 @@ public class TripleTrioAIPlayerContr
    * Constructor that instantiates a controller that takes in a GUI view
    * as well a strategy to use.
    * @param view a GUI view.
-   * @param strategy a strategy for the player
+
    */  
   public TripleTrioAIPlayerContr(TripleTrioModel model, PlayerAIImpl playerAI,
-                                 TTFrame view, TripleTrioStrategy strategy) {
+                                 TTFrame view) {
     super(view);
     this.model = model;
-    
-    if (strategy == null) {
-      throw new IllegalArgumentException("strategy cannot be null");
-    }
-    this.strategy = strategy;
+
 
     if (playerAI.getColor() == CardColor.RED) {
       ourPlayerCanPlay = true;
@@ -56,7 +54,8 @@ public class TripleTrioAIPlayerContr
     Card selectedCard = player.getHand().get(aiMove.getCardInd());
     model.placeCard(aiMove.getX(), aiMove.getY(), selectedCard); // Place the card
     player.removeCardFromHand(player.getHand().get(aiMove.getCardInd())); // Remove the card from the hand
-    view.getHandView(player.getColor()).removeCard(selectedCard); // Update hand view
+    view.getHandView(player.getColor())
+            .removeCard(selectedCard); // Update hand view
     view.getHandView(player.getColor()).repaint();
 
     view.getGridPanel().placeCardOnGrid(aiMove.getX() - 1,

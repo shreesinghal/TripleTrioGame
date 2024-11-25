@@ -1,6 +1,10 @@
 package cs3500.tripletrios.strategies;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Posn;
+import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
+import cs3500.tripletrios.model.TripleTrioModel;
 
 import java.util.ArrayList;
 import java.util.List;
