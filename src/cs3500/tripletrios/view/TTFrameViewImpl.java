@@ -4,7 +4,11 @@ import cs3500.tripletrios.controller.TripleTrioAIPlayerContr;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Player;
+import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -154,9 +158,9 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   public void displayGameOverMessage(WinningState gameState) {
     if (gameState != WinningState.GameNotDone) {
       JOptionPane.showMessageDialog(this,
-        gameState.toString(),
-        "Game Over",
-        JOptionPane.PLAIN_MESSAGE);
+          gameState.toString(),
+          "Game Over",
+          JOptionPane.PLAIN_MESSAGE);
       System.out.println(gameState);
     }
   }
@@ -173,7 +177,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   @Override
   public void addCardToGrid(int x, int y, Card card) {
     this.getGridPanel().placeCardOnGrid(x, y, new CardView(card, x, y,
-      this.getGridPanel().getWidth() / model.getGridWidth(),
-      this.getGridPanel().getHeight() / model.getGridHeight()));
+        this.getGridPanel().getWidth() / model.getGridWidth(),
+        this.getGridPanel().getHeight() / model.getGridHeight()));
   }
 }

@@ -1,16 +1,12 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.configreaders.CardDatabaseReader;
-import cs3500.tripletrios.configreaders.GridConfigReader;
+
 import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Abstract controller for handling TripleTrio game logic with a graphical user interface (GUI).
@@ -58,8 +54,8 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       view.getHandView(this.model.getPlayer().getColor()).repaint();
 
       view.getGridPanel().placeCardOnGrid(xPos - 1, yPos - 1, new CardView(selectedCard,
-        xPos - 1,
-        yPos - 1,
+          xPos - 1,
+          yPos - 1,
           view.getGridPanel().getWidth() / model.getGridWidth(),
               view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
       model.executeBattlePhase(xPos - 1, yPos - 1);

@@ -69,45 +69,44 @@ public class HandPanel extends JPanel {
    */
   @Override
   public void paintComponent(Graphics g) {
-  super.paintComponent(g);
-  Graphics2D g2d = (Graphics2D) g;
+    super.paintComponent(g);
+    Graphics2D g2d = (Graphics2D) g;
 
-  // Clear the existing card views before repainting
-  cardViewsInHand.clear();
+    // Clear the existing card views before repainting
+    cardViewsInHand.clear();
+    int cardsToDisplay = this.player.getHand().size();
 
-  int cardsToDisplay = this.player.getHand().size();
+    if (cardsToDisplay > 0) {
+      int cardHeight = this.getHeight() / cardsToDisplay;
+      // display each card in the hand
+      for (int i = 0; i < cardsToDisplay; i++) {
+        CardView cardView = new CardView(this.player.getHand().get(i), 0, i, 150, cardHeight);
 
-  if (cardsToDisplay > 0) {
-    int cardHeight = this.getHeight() / cardsToDisplay;
-    // display each card in the hand
-    for (int i = 0; i < cardsToDisplay; i++) {
-      CardView cardView = new CardView(this.player.getHand().get(i), 0, i, 150, cardHeight);
+        // set the color
+        if (player.getColor() == CardColor.RED) {
+          g2d.setColor(new Color(255,171,173,255));
+        } else {
+          g2d.setColor(new Color(72, 172, 255, 255));
+        }
+        g2d.fill(cardView);
 
-      // set the color
-      if (player.getColor() == CardColor.RED) {
-        g2d.setColor(new Color(255,171,173,255));
-      } else {
-        g2d.setColor(new Color(72, 172, 255, 255));
+        g2d.setColor(Color.BLACK);
+
+        // Highlight the selected card
+        if (i == highlightedCardNum) {
+          g2d.setStroke(new BasicStroke(10));
+        }
+
+        // Draw the card view
+        cardView.draw(g2d, 0, i * cardHeight);
+        g2d.draw(cardView);
+
+        g2d.setStroke(new BasicStroke(1));
+        cardViewsInHand.add(cardView);
       }
-      g2d.fill(cardView);
-
-      g2d.setColor(Color.BLACK);
-
-      // Highlight the selected card
-      if (i == highlightedCardNum) {
-        g2d.setStroke(new BasicStroke(10));
-      }
-
-      // Draw the card view
-      cardView.draw(g2d, 0, i * cardHeight);
-      g2d.draw(cardView);
-
-      g2d.setStroke(new BasicStroke(1));
-      cardViewsInHand.add(cardView);
     }
-  }
 
-}
+  }
 
 
   /**

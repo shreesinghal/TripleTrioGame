@@ -25,7 +25,7 @@ public interface TripleTrioModelListener {
    *
    * @param x    the x-coordinate of the placed card
    * @param y    the y-coordinate of the placed card
-   * @param card
+   * @param card card being placed
    */
   void onCardPlaced(int x, int y, Card card);
 

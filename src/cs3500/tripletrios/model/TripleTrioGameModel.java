@@ -1,7 +1,6 @@
 package cs3500.tripletrios.model;
 
 import cs3500.tripletrios.controller.TripleTrioModelListener;
-import cs3500.tripletrios.view.CardView;
 
 import java.util.ArrayList;
 import java.util.Collections;

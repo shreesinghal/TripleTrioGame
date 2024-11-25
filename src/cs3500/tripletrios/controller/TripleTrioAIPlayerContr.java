@@ -1,8 +1,11 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.model.*;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.PlayerAIImpl;
+import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.strategies.PlayerMove;
-import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
 
@@ -44,7 +47,7 @@ public class TripleTrioAIPlayerContr
   @Override
   protected void onTurnNotification() {
     if (model.getFinalState() == WinningState.GameNotDone
-      && model.getPlayer().getColor() == player.getColor()) {
+        && model.getPlayer().getColor() == player.getColor()) {
       System.out.println("AI is calculating its move.");
 
       PlayerMove aiMove = player.makeMove();
@@ -100,7 +103,7 @@ public class TripleTrioAIPlayerContr
    *
    * @param x    the x-coordinate of the placed card
    * @param y    the y-coordinate of the placed card
-   * @param card
+   * @param card card being placed
    */
   @Override
   public void onCardPlaced(int x, int y, Card card) {
