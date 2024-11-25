@@ -127,7 +127,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * @throws IllegalStateException if the game has not started
    */
   @Override
-  public boolean isGameOver() {
+  public WinningState getFinalState() {
     ensureGameStarted();
     boolean isGridFilled = true;
     for (ArrayList<Cell> row : this.grid) {
@@ -138,7 +138,11 @@ public class TripleTrioGameModel implements TripleTrioModel {
       }
     }
 
-    return isGridFilled;
+    if (isGridFilled) {
+      return this.determineWinner();
+    }
+
+    return WinningState.GameNotDone;
   }
 
   /**
@@ -165,9 +169,9 @@ public class TripleTrioGameModel implements TripleTrioModel {
 
     //checks the winner based on cards on grid and in hand
     if (currPlayerScore > opposingPlayerScore) {
-      return WinningState.RedWins;
-    } else if (opposingPlayerScore > currPlayerScore) {
       return WinningState.BlueWins;
+    } else if (opposingPlayerScore > currPlayerScore) {
+      return WinningState.RedWins;
     }
 
     return WinningState.Tie;
@@ -178,7 +182,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
    * @param player player whose score we want to check
    * @return the score at the current point of game
    */
-  public int getPlayerScore(Player player) {
+  private int getPlayerScore(Player player) {
     ArrayList<Card> cardsInGrid = new ArrayList<>();
     for (int i = 0; i < this.grid.size(); i++) {
       for (int j = 0; j < this.grid.get(i).size(); j++ ) {
@@ -199,7 +203,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
       }
     }
 
-    if (player == currPlayer) {
+    if (player.getColor() == currPlayer.getColor()) {
       return currPlayerCards;
     } else {
       return opposingPlayerCards;

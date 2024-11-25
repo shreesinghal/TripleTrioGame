@@ -2,6 +2,7 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.WinningState;
 
 /**
  * The `TTFrame` interface defines the basic requirements for any graphical frame
@@ -38,9 +39,24 @@ public interface TTFrame {
    */
   void refresh();
 
-  void printInvalidClickMessage(String s);
+  /**
+   * Creates a popup error message to tell the user something specific.
+   * @param message the message to be shown
+   */
+  void printInvalidClickMessage(String message);
+
+  /**
+   * Updates the display of the grid with the current cards after a player's turn.
+   */
 
   void updateTurn();
+
+  /**
+   * Displays the popup of who wins/tie.
+   * @param finalState final state of game
+   */
+  void displayGameOverMessage(WinningState finalState);
+
 }
 
 

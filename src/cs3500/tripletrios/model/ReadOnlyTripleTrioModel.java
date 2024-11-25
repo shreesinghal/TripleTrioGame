@@ -16,7 +16,7 @@ public interface ReadOnlyTripleTrioModel {
    * @return true if the game has ended and false otherwise
    * @throws IllegalStateException if the game has not started
    */
-  boolean isGameOver();
+  WinningState getFinalState();
 
   /**
    * Returns if the game started.

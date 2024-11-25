@@ -5,6 +5,7 @@ import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.view.TripleTrioTextView;
 import cs3500.tripletrios.view.TripleTrioView;
 
@@ -94,7 +95,7 @@ public class TripleTrioControllerImpl implements TripleTrioFeatureController {
       output.append(e.getMessage());
     }
 
-    while (!model.isGameOver()) {
+    while (model.getFinalState() == WinningState.GameNotDone) {
 
       view.render();
       String[] inputText = scanner.nextLine().split(" ");

@@ -126,9 +126,9 @@ public class MockModel implements TripleTrioModel {
   }
 
   @Override
-  public boolean isGameOver() {
+  public WinningState getFinalState() {
     // Return true if the grid is full
-    return grid.stream().allMatch(row -> row.stream().noneMatch(Cell::isEmpty));
+    return this.determineWinner();
   }
 
   @Override
@@ -271,10 +271,7 @@ public class MockModel implements TripleTrioModel {
     return deck;
   }
 
-  @Override
-  public int getPlayerScore(Player player) {
-    return player.equals(currentPlayer) ? currentPlayerScore : oppPlayerScore;
-  }
+
 
   @Override
   public void switchTurns() {

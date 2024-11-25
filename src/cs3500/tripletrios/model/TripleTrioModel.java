@@ -29,7 +29,7 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    * @return true if the game has ended and false otherwise
    * @throws IllegalStateException if the game has not started
    */
-  boolean isGameOver();
+  WinningState getFinalState();
 
   /**
    * Returns if the game started.
@@ -86,13 +86,7 @@ public interface TripleTrioModel extends ReadOnlyTripleTrioModel {
    */
   WinningState determineWinner();
 
-  /**
-   * Gets the current score of a player during the game.
-   *
-   * @param player player whose score we want to check
-   * @return the score at the current point of game
-   */
-  int getPlayerScore(Player player);
+
 
   /**
    * Switches the current player.

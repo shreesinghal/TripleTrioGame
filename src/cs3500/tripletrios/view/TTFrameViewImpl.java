@@ -5,12 +5,13 @@ import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.ReadOnlyTripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
+
 
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * Implements the GUI view for the Triple Trios game, displaying the main game board,
@@ -140,6 +141,18 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     this.gridPanel.updateCardsOnGrid();
   }
 
+  /**
+   * Displays the popup of who wins/tie.
+   * @param gameState final state of game
+   */
+  @Override
+  public void displayGameOverMessage(WinningState gameState) {
+    JOptionPane.showMessageDialog(this,
+            gameState.toString(),
+            "Game Over",
+            JOptionPane.PLAIN_MESSAGE);
+    System.out.println(gameState.toString());
+  }
 
 
 }

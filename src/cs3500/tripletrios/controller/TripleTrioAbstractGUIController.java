@@ -5,6 +5,7 @@ import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.TTFrame;
 
@@ -73,12 +74,18 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
 
     model.placeCard(xPos - 1, yPos - 1, selectedCard);
     model.executeBattlePhase(xPos - 1, yPos - 1);
+
     model.switchTurns();
     view.refresh();
+    if (model.getFinalState() != WinningState.GameNotDone) {
+      view.displayGameOverMessage(model.getFinalState());
+    }
+
 
     System.out.println("You have placed a "
             + selectedCard.getColor()
             + " card at " + xPos + " " + yPos);
+
   }
 
 
