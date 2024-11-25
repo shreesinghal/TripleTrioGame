@@ -35,20 +35,7 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   }
 
 
-  /**
-   * Play a game of Triple Trio by
-   * giving a deck and grid from configurations and calling.
-   * @param deckPath path for the deck of cards
-   * @param gridPath path for the grid
-   */
-  public void playGame(String deckPath,
-                       String gridPath) {
-    ArrayList<ArrayList<Cell>> grid = GridConfigReader.readGridConfiguration(gridPath);
-    Set<Card> deck = CardDatabaseReader.readDeckConfiguration(deckPath);
 
-    model.startGame(deck, grid);
-    view.makeVisible();
-  }
 
   /**
    * To be overridden by subclasses for handling their turn notifications.

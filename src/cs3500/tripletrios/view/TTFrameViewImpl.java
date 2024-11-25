@@ -164,6 +164,11 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
     }
   }
 
-
-
+  /**
+   * Updates the Grid with cards placed.
+   */
+  @Override
+  public void updateGrid() {
+    refresh();
+  }
 }

@@ -50,32 +50,11 @@ public class TripleTrioAIPlayerContr
   protected void onTurnNotification() {
     if (model.getFinalState() == WinningState.GameNotDone
       && model.getPlayer().getColor() == player.getColor()) {
-      System.out.println("AI is calculating its move...");
+      System.out.println("AI is calculating its move.");
 
       PlayerMove aiMove = player.makeMove();
-      Card selectedCard = player.getHand().get(aiMove.getCardInd());
-      model.placeCard(aiMove.getX(), aiMove.getY(), selectedCard); // Place the card
-      player.removeCardFromHand(player.getHand().get(aiMove.getCardInd())); // Remove the card from the hand
-
-      view.getHandView(player.getColor()).removeCard(selectedCard); // Update the HandPanel
-      view.refresh(); // Refresh the view to reflect the updates
-
-      view.getGridPanel().placeCardOnGrid(aiMove.getX(),
-        aiMove.getY(),
-        new CardView(selectedCard,
-          aiMove.getX(),
-          aiMove.getY(),
-          view.getGridPanel().getWidth() / model.getGridWidth(),
-          view.getGridPanel().getHeight() / model.getGridHeight())); // Update grid
-      model.executeBattlePhase(aiMove.getX(), aiMove.getY());
-      model.switchTurns();
-      view.refresh();
-
-      System.out.println("You have placed a "
-        + selectedCard.getColor()
-        + " card at " + aiMove.getX()
-        + " "
-        + aiMove.getY());
+      selectedCard = player.getHand().get(aiMove.getCardInd());
+      super.playMove(aiMove.getX() + 1, aiMove.getY() + 1);
     } else {
       view.displayGameOverMessage(model.getFinalState());
     }
@@ -129,7 +108,7 @@ public class TripleTrioAIPlayerContr
    */
   @Override
   public void onCardPlaced(int x, int y) {
-    //no implementation
+    view.updateGrid();
   }
 
   /**

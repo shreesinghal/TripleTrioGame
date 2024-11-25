@@ -56,6 +56,11 @@ public interface TTFrame {
    * @param finalState final state of game
    */
   void displayGameOverMessage(WinningState finalState);
+
+  /**
+   * Updates the Grid with cards placed.
+   */
+  void updateGrid();
 }
 
 
