@@ -104,6 +104,16 @@ public class TripleTrioGameModel implements TripleTrioModel {
     this.gameStarted = true;
   }
 
+  /**
+   * Creates a copy of the grid.
+   * @return grid as 2D arraylist of cells
+   * @throws IllegalStateException if the game has not started
+   */
+  @Override
+  public ArrayList<ArrayList<Cell>> createCopyOfGrid() {
+    return (ArrayList<ArrayList<Cell>>) this.grid.clone();
+  }
+
 
   /**
    * Starts the game with a given deck of cards. The deck is used
