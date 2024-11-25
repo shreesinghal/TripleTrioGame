@@ -83,4 +83,10 @@ public interface ReadOnlyTripleTrioModel {
    */
   Set<Card> getDeck();
 
+  /**
+   * Documents the path that the strategy takes.
+   * @param corner takes in the position from grid that is being checked
+   */
+  void documentCheckOnGrid(Posn corner);
+
 }

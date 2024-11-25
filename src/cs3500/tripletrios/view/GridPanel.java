@@ -37,10 +37,8 @@ public class GridPanel extends JPanel {
    * @param model a readonly model
    */
   public GridPanel(ReadOnlyTripleTrioModel model) {
-
     this.model = model;
     this.placedCards = new HashMap<>();
-
   }
 
   /**
@@ -134,7 +132,6 @@ public class GridPanel extends JPanel {
    * @return dimensions of the grid
    */
   public Dimension getDimensions() {
-
     return new Dimension(this.getWidth() / model.getGridWidth(),
       this.getHeight() / model.getGridHeight());
   }

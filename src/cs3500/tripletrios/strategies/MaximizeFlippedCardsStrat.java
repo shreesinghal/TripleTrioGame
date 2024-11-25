@@ -1,9 +1,6 @@
 package cs3500.tripletrios.strategies;
 
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Posn;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +16,7 @@ import java.util.Map;
  * opponent cards.
  */
 public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
-  private TripleTrioModel model;
+  private ReadOnlyTripleTrioModel model;
   private Map<Posn, Map<Integer, Integer>> flipCounts = new HashMap<>();
 
   /**

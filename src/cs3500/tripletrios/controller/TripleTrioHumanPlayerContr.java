@@ -158,6 +158,6 @@ public class TripleTrioHumanPlayerContr
    */
   @Override
   protected void onTurnNotification() {
-
+    //no implementation
   }
 }

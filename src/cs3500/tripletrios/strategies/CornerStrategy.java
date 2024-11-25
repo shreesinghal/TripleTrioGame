@@ -1,9 +1,6 @@
 package cs3500.tripletrios.strategies;
 
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.Posn;
-import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.List;
  *Only expose two of their four attack values, making them more challenging for opponents to flip.
  */
 public class CornerStrategy implements TripleTrioStrategy {
-  private final TripleTrioModel model;
+  private final ReadOnlyTripleTrioModel model;
   private final List<Posn> cornerPositions;
 
   public CornerStrategy(TripleTrioModel model) {
