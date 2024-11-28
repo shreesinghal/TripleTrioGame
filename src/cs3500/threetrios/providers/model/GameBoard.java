@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import model.card.Card;
 import model.cell.Cell;
+import model.PlayerType;
 
 /**
  * Represents a Board for the game triple triad.

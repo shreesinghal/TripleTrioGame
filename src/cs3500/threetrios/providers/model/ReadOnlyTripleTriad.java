@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import model.card.Card;
 import model.cell.Cell;
+import model.PlayerType;
 
 /**
  * Interface for Read Only Triple Triad.

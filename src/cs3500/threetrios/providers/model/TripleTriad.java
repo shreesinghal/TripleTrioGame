@@ -12,7 +12,7 @@ import model.rule.BattleRule;
  * To start a game, read the ConfigReader class to see
  * where to define configuration files.
  */
-public interface TripleTriad extends ReadOnlyTripleTriad {
+public interface TripleTriad extends model.ReadOnlyTripleTriad {
   /**
    *
    * @param listener

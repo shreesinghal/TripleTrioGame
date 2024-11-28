@@ -12,8 +12,8 @@ import model.ReadOnlyTripleTriad;
  * On their turn, users can click on a card in their hand, highlighting it,
  * and play it to a cell on the board.
  */
-public class ThreeTriosView extends JFrame implements TripleTriadView {
-  private final ThreeTriosPanel panel;
+public class ThreeTriosView extends JFrame implements view.tripletriadgui.TripleTriadView {
+  private final view.tripletriadgui.ThreeTriosPanel panel;
 
   /**
    * Creates a graphical ThreeTriosView, with a panel created
@@ -23,7 +23,7 @@ public class ThreeTriosView extends JFrame implements TripleTriadView {
   public ThreeTriosView(ReadOnlyTripleTriad model, String title) {
     super();
     this.setTitle(title);
-    this.panel = new ThreeTriosPanel(model);
+    this.panel = new view.tripletriadgui.ThreeTriosPanel(model);
     this.add(this.panel);
     this.setMinimumSize(this.panel.getPreferredSize());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

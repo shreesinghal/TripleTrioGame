@@ -31,11 +31,12 @@ public interface Card {
 
   /**
    * Returns the number of this card at the given direction.
+   *
    * @param direction the direction (North, East, South, West)
    * @return the card's number
    * @throws IllegalArgumentException if direction is null
    */
-  CardNumber fetchNumAtDirection(Direction direction);
+  model.card.CardNumber fetchNumAtDirection(Direction direction);
 
   /**
    * Returns true if this object is equal to given other.
