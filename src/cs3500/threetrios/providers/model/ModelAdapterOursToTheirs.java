@@ -19,6 +19,9 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
   private TripleTrioModel ourModel;
 
   public ModelAdapterOursToTheirs(TripleTrioModel ourModel) {
+    if (ourModel == null) {
+      throw new IllegalArgumentException("Model cannot be null");
+    }
     this.ourModel = ourModel;
   }
 
