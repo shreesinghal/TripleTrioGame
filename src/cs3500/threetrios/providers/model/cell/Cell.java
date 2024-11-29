@@ -1,7 +1,7 @@
 package cs3500.threetrios.providers.model.cell;
 
 import cs3500.threetrios.providers.model.card.Card;
-import model.PlayerType;
+import cs3500.threetrios.providers.model.PlayerType;
 
 /**
  * An interface for cells in a grid-layout board.

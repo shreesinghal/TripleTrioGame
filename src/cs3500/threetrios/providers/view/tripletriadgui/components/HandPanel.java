@@ -14,9 +14,9 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 import cs3500.threetrios.providers.model.Direction;
-import model.PlayerType;
+import cs3500.threetrios.providers.model.PlayerType;
 import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
-import model.card.Card;
+import cs3500.threetrios.providers.model.card.Card;
 import cs3500.threetrios.providers.controller.ViewFeatures;
 
 /**
