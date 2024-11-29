@@ -1,16 +1,20 @@
 package cs3500.threetrios.providers.model;
 
-import controller.ModelFeatures;
+import cs3500.threetrios.providers.controller.ModelFeatures;
+import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.TripleTrioModel;
-import model.PlayerType;
-import model.card.Card;
-import model.cell.Cell;
+import cs3500.tripletrios.model.WinningState;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.card.Card;
+import cs3500.threetrios.providers.model.cell.Cell;
 import model.rule.BattleRule;
+import cs3500.tripletrios.model.Cell.CellType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelAdapterOursToTheirs implements model.TripleTriad {
+public class ModelAdapterOursToTheirs implements TripleTriad {
 
   private TripleTrioModel ourModel;
 
@@ -41,7 +45,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public void startGame(Cell[][] grid, List<Card> allCards, BattleRule rule) {
-
+    ourModel.startGame();
   }
 
   /**
@@ -58,8 +62,12 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public void playToBoard(int handIdx, int row, int col) {
-
+    ourModel.placeCard(row, col, ourModel.getPlayer().getHand().get(handIdx));
   }
+
+
+
+
 
   /**
    * Returns the hand of the given player.
@@ -70,10 +78,10 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    * @throws IllegalStateException    if the game has not started
    */
   @Override
-  public List<Card> fetchHand(model.PlayerType playerType) {
+  public List<Card> fetchHand(PlayerType playerType) {
     return playerType.equals(PlayerType.PLAYER_A)
-      ? arrayListToList(ourModel.getPlayer().getHand())
-      : arrayListToList(ourModel.getOppPlayer().getHand());
+            ? arrayListToList(ourModel.getPlayer().getHand())
+            : arrayListToList(ourModel.getOppPlayer().getHand());
   }
 
   private List<model.card.Card> arrayListToList(ArrayList<cs3500.tripletrios.model.Card> ourHand) {
@@ -103,7 +111,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numBoardRows() {
-    return 0;
+    return ourModel.getGridHeight();
   }
 
   /**
@@ -113,7 +121,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numBoardColumns() {
-    return 0;
+    return ourModel.getGridWidth();
   }
 
   /**
@@ -125,7 +133,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int fetchPlayerScore(PlayerType player) {
-    return 0;
+    //cannot adapt this because our models getPlayerScore() method is private
   }
 
   /**
@@ -137,7 +145,13 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType ownerAtCoordinate(int row, int column) {
-    return null;
+    if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.RED) {
+      return PlayerType.PLAYER_A;
+    } else if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.BLUE) {
+      return PlayerType.PLAYER_B;
+    } else {
+      return PlayerType.NULL_PLAYER;
+    }
   }
 
   /**
@@ -152,7 +166,8 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numCardsPlayerCanFlip(int row, int column, Card card, PlayerType player) {
-    return 0;
+    //we cannot implement this because our executeBattlePhase() does this using private
+    //helper methods
   }
 
   /**
@@ -164,6 +179,11 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public boolean canPlayerPlayAtCoordinate(int row, int column) {
+    if (!ourModel.getCurrentGrid().get(row).get(column).getCellType().equals(CellType.HOLE)
+            && ourModel.getCurrentGrid().get(row).get(column).isEmpty()) {
+      return true;
+    }
+
     return false;
   }
 
@@ -176,7 +196,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public boolean isGameOver() {
-    return false;
+    return !ourModel.getFinalState().equals(WinningState.GameNotDone);
   }
 
   /**
@@ -187,7 +207,19 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType fetchWinner() {
-    return null;
+    if (!ourModel.isGameStarted()) {
+      throw new IllegalStateException("Game has not yet started");
+    }
+    if (ourModel.getFinalState().equals(WinningState.Tie)) {
+      return PlayerType.NULL_PLAYER;
+    } else if (ourModel.getFinalState().equals(WinningState.RedWins)) {
+      return PlayerType.PLAYER_A;
+    } else if (ourModel.getFinalState().equals(WinningState.BlueWins)) {
+      return  PlayerType.PLAYER_B;
+    }
+
+    return PlayerType.NULL_PLAYER;
+
   }
 
   /**
@@ -197,7 +229,11 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType fetchTurn() {
-    return null;
+    if (ourModel.getPlayer().getColor().equals(CardColor.RED)) {
+      return PlayerType.PLAYER_A;
+    } else {
+      return PlayerType.PLAYER_B;
+    }
   }
 
   /**
