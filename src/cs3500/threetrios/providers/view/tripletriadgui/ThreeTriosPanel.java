@@ -1,4 +1,4 @@
-package view.tripletriadgui;
+package cs3500.threetrios.providers.view.tripletriadgui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import view.tripletriadgui.components.HandPanel;
  * Establishes size of view and sub-panels sizes are dictated
  * by this size to ensure proper fitting.
  */
-public class ThreeTriosPanel extends JPanel implements TripleTriadPanel {
+public class ThreeTriosPanel extends JPanel implements view.tripletriadgui.TripleTriadPanel {
   private final BoardPanel boardPanel;
   private final HandPanel handPanelA;
   private final HandPanel handPanelB;

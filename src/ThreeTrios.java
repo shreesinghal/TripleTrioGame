@@ -1,3 +1,4 @@
+import cs3500.threetrios.providers.view.ViewAdapterTheirsToOurs;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.*;
@@ -50,18 +51,18 @@ public final class ThreeTrios {
     view.tripletriadgui.TripleTriadView providerView2 = new ThreeTriosView(theirModel, "Player 2 View");
 
     // make our view
-    TTFrame viewPlayer1 = new ViewAdapter(providerView1);
-    TTFrame viewPlayer2 = new ViewAdapter(providerView2);
+    TTFrame ourViewPlayer1 = new ViewAdapterTheirsToOurs(providerView1, theirModel);
+    TTFrame viewPlayer2 = new ViewAdapterTheirsToOurs(providerView2, theirModel);
 
     // make our controller
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(ourModel,
       player1,
-      viewPlayer1);
+      ourViewPlayer1);
 
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(ourModel,
             player2,
             viewPlayer2);
-    viewPlayer1.addListeners(controller1);
+    ourViewPlayer1.addListeners(controller1);
     viewPlayer2.addListeners(controller2);
   }
 }
