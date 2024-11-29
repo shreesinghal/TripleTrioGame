@@ -1,11 +1,10 @@
-package view.tripletriadgui;
+package cs3500.threetrios.providers.view.tripletriadgui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import controller.ViewFeatures;
 import model.PlayerType;
 import model.ReadOnlyTripleTriad;
-import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosPanel;
 
 /**
  * Represents a graphical user interface for a game of Three Trios.

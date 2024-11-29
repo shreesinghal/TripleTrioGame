@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Card Implementation to represent a singular card used in the game.
+ * Card Implementation to represent a singular card used in the game.git
  */
 public class CardImpl implements Card {
 

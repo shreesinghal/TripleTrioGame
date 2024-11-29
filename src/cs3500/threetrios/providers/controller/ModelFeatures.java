@@ -1,6 +1,6 @@
-package controller;
+package cs3500.threetrios.providers.controller;
 
-import model.PlayerType;
+import cs3500.threetrios.providers.model.PlayerType;
 
 /**
  * Features for Model to interact with

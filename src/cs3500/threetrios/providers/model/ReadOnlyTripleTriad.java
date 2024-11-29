@@ -1,9 +1,9 @@
-package model;
+package cs3500.threetrios.providers.model;
 
 import java.util.List;
-import model.card.Card;
-import model.cell.Cell;
-import model.PlayerType;
+import cs3500.threetrios.providers.model.card.Card;
+import cs3500.threetrios.providers.model.cell.Cell;
+import cs3500.threetrios.providers.model.PlayerType;
 
 /**
  * Interface for Read Only Triple Triad.

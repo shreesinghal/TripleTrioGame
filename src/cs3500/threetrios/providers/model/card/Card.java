@@ -1,6 +1,7 @@
-package model.card;
+package cs3500.threetrios.providers.model.card;
 
-import model.Direction;
+import cs3500.threetrios.providers.model.Direction;
+import cs3500.threetrios.providers.model.card.CardNumber;
 
 /**
  * An interface for cards that have a name
@@ -36,7 +37,7 @@ public interface Card {
    * @return the card's number
    * @throws IllegalArgumentException if direction is null
    */
-  model.card.CardNumber fetchNumAtDirection(Direction direction);
+  CardNumber fetchNumAtDirection(Direction direction);
 
   /**
    * Returns true if this object is equal to given other.

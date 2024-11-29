@@ -1,7 +1,7 @@
-package view.tripletriadgui;
+package cs3500.threetrios.providers.view.tripletriadgui;
 
-import controller.ViewFeatures;
-import model.PlayerType;
+import cs3500.threetrios.providers.controller.ViewFeatures;
+import cs3500.threetrios.providers.model.PlayerType;
 
 /**
  * Represents a panel in a TripleTriad view.
