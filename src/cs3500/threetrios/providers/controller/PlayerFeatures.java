@@ -1,4 +1,4 @@
-package controller;
+package cs3500.threetrios.providers.controller;
 
 /**
  * Features for player interface to interact

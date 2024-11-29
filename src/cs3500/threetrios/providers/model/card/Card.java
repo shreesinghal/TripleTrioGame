@@ -1,6 +1,6 @@
-package model.card;
+package cs3500.threetrios.providers.model.card;
 
-import model.Direction;
+import cs3500.threetrios.providers.model.Direction;
 
 /**
  * An interface for cards that have a name

@@ -1,4 +1,4 @@
-package view.tripletriadgui.components;
+package cs3500.threetrios.providers.view.tripletriadgui.components;
 
 import java.awt.Dimension;
 import java.awt.Color;
@@ -15,11 +15,14 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
-import model.Direction;
+
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.model.Direction;
 import model.PlayerType;
-import model.ReadOnlyTripleTriad;
+
 import model.card.Card;
-import controller.ViewFeatures;
+import cs3500.threetrios.providers.controller.ViewFeatures;
+
 
 /**
  * Represents the board panel for the game

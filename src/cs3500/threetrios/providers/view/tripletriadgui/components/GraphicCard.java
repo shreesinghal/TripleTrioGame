@@ -1,4 +1,4 @@
-package view.tripletriadgui.components;
+package cs3500.threetrios.providers.view.tripletriadgui.components;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Path2D;

@@ -1,4 +1,4 @@
-package model.card;
+package cs3500.threetrios.providers.model.card;
 
 /**
  * An enumeration of card numbers for cards in a game of Triple Triad.

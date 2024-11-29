@@ -1,4 +1,4 @@
-package model;
+package cs3500.threetrios.providers.model;
 
 /**
  * Represents a Cardinal Direction.

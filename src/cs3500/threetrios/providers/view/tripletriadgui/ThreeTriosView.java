@@ -1,10 +1,12 @@
-package view.tripletriadgui;
+package cs3500.threetrios.providers.view.tripletriadgui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import controller.ViewFeatures;
-import model.PlayerType;
-import model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.controller.ViewFeatures;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosPanel;
+import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadView;
 
 /**
  * Represents a graphical user interface for a game of Three Trios.
@@ -12,8 +14,8 @@ import model.ReadOnlyTripleTriad;
  * On their turn, users can click on a card in their hand, highlighting it,
  * and play it to a cell on the board.
  */
-public class ThreeTriosView extends JFrame implements view.tripletriadgui.TripleTriadView {
-  private final view.tripletriadgui.ThreeTriosPanel panel;
+public class ThreeTriosView extends JFrame implements TripleTriadView {
+  private final ThreeTriosPanel panel;
 
   /**
    * Creates a graphical ThreeTriosView, with a panel created
@@ -23,7 +25,7 @@ public class ThreeTriosView extends JFrame implements view.tripletriadgui.Triple
   public ThreeTriosView(ReadOnlyTripleTriad model, String title) {
     super();
     this.setTitle(title);
-    this.panel = new view.tripletriadgui.ThreeTriosPanel(model);
+    this.panel = new ThreeTriosPanel(model);
     this.add(this.panel);
     this.setMinimumSize(this.panel.getPreferredSize());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

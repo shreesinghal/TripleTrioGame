@@ -1,8 +1,8 @@
-package model;
+package cs3500.threetrios.providers.model;
 
 import java.util.ArrayList;
 
-import model.card.Card;
+import cs3500.threetrios.providers.model.card.Card;
 
 /**
  * Represents a player's hand for a game of Triple Triad.

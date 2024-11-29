@@ -1,6 +1,6 @@
-package model.cell;
+package cs3500.threetrios.providers.model.cell;
 
-import model.card.Card;
+import cs3500.threetrios.providers.model.card.Card;
 import model.PlayerType;
 
 /**

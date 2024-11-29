@@ -1,13 +1,14 @@
-package view.tripletriadgui;
+package cs3500.threetrios.providers.view.tripletriadgui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-import controller.ViewFeatures;
-import model.PlayerType;
-import model.ReadOnlyTripleTriad;
-import view.tripletriadgui.components.BoardPanel;
-import view.tripletriadgui.components.HandPanel;
+import cs3500.threetrios.providers.controller.ViewFeatures;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.view.tripletriadgui.components.BoardPanel;
+import cs3500.threetrios.providers.view.tripletriadgui.components.HandPanel;
+import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadPanel;
 
 /**
  * Container Panel for components in Three Trios Game.

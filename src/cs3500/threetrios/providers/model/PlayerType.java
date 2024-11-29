@@ -1,4 +1,4 @@
-package model;
+package cs3500.threetrios.providers.model;
 
 /**
  * Enumerations for player types of a game of Triple Triad.

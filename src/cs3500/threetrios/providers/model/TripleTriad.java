@@ -1,10 +1,10 @@
-package model;
+package cs3500.threetrios.providers.model;
 
 import java.util.List;
 
-import controller.ModelFeatures;
-import model.card.Card;
-import model.cell.Cell;
+import cs3500.threetrios.providers.controller.ModelFeatures;
+import cs3500.threetrios.providers.model.card.Card;
+import cs3500.threetrios.providers.model.cell.Cell;
 import model.rule.BattleRule;
 
 /**
@@ -12,7 +12,7 @@ import model.rule.BattleRule;
  * To start a game, read the ConfigReader class to see
  * where to define configuration files.
  */
-public interface TripleTriad extends model.ReadOnlyTripleTriad {
+public interface TripleTriad extends ReadOnlyTripleTriad {
   /**
    *
    * @param listener
