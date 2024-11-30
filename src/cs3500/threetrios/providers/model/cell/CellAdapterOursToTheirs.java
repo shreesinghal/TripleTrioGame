@@ -4,7 +4,13 @@ import cs3500.threetrios.providers.model.PlayerType;
 import cs3500.threetrios.providers.model.card.Card;
 import cs3500.threetrios.providers.model.card.CardAdapterOursToTheirs;
 import cs3500.tripletrios.model.CardColor;
+import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell.CellType;
+import cs3500.tripletrios.model.Direction;
+import cs3500.tripletrios.model.Player;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CellAdapterOursToTheirs implements Cell {
 
@@ -72,6 +78,22 @@ public class CellAdapterOursToTheirs implements Cell {
       throw new IllegalArgumentException("Card is null");
     }
 
+    Map<Direction, Integer> attackValues = new HashMap<>();
+
+    attackValues.put(Direction.NORTH,
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH).fetchNumber());
+    attackValues.put(Direction.SOUTH,
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH).fetchNumber());
+    attackValues.put(Direction.EAST,
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST).fetchNumber());
+    attackValues.put(Direction.WEST,
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST).fetchNumber());
+
+    CardImpl newCard = new CardImpl(card.fetchName(), attackValues);
+
+    newCard.setCardColor(card.fetchName().equals("PLAYER_A") ? CardColor.RED : CardColor.BLUE);
+
+    ourCell.placeCard(newCard);
 
   }
 
@@ -86,6 +108,22 @@ public class CellAdapterOursToTheirs implements Cell {
   public void changeOwner(PlayerType owner) {
     if (owner == null) {
       throw new IllegalArgumentException("Owner is null");
+    }
+
+    if (ourCell.isEmpty()) {
+      throw new IllegalStateException("Cannot change owner of an empty cell");
+    }
+
+
+    switch (owner) {
+      case PLAYER_A:
+        ourCell.getCard().setCardColor(CardColor.RED);
+        break;
+      case PLAYER_B:
+        ourCell.getCard().setCardColor(CardColor.BLUE);
+        break;
+      default:
+        throw new IllegalArgumentException("Invalid player type");
     }
 
 
@@ -111,5 +149,7 @@ public class CellAdapterOursToTheirs implements Cell {
   @Override
   public int cardCapacity() {
     return 0;
+    //The provided cell interface includes a cardCapacity() method,
+    // which is not implemented in our original cell implementation.
   }
 }
