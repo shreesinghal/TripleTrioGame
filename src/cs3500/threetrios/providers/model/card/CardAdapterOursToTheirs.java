@@ -28,7 +28,34 @@ public class CardAdapterOursToTheirs implements cs3500.threetrios.providers.mode
    */
   @Override
   public int compareTo(cs3500.threetrios.providers.model.card.Card other, Direction direction) {
-    return 0;
+    if (other == null || direction == null) {
+      throw new IllegalArgumentException("Card or direction cannot be null");
+    }
+
+    Direction ourDirection;
+    switch (direction) {
+      case NORTH:
+        ourDirection = Direction.NORTH;
+        break;
+      case SOUTH:
+        ourDirection = Direction.SOUTH;
+        break;
+      case EAST:
+        ourDirection = Direction.EAST;
+        break;
+      case WEST:
+        ourDirection = Direction.WEST;
+        break;
+      default:
+        throw new IllegalArgumentException("Unknown direction: " + direction);
+    }
+
+    int thisAttackValue = ourCard.getAttackValues().get(ourDirection);
+    int otherAttackValue = ((CardAdapterOursToTheirs) other).ourCard.getAttackValues().get(ourDirection);
+
+    // Compare the attack values
+    return Integer.compare(thisAttackValue, otherAttackValue);
+
   }
 
   /**
