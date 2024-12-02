@@ -5,7 +5,7 @@ import java.util.List;
 import cs3500.threetrios.providers.controller.ModelFeatures;
 import cs3500.threetrios.providers.model.card.Card;
 import cs3500.threetrios.providers.model.cell.Cell;
-import model.rule.BattleRule;
+import cs3500.threetrios.providers.model.rule.BattleRule;
 
 /**
  * Interface for Game Triple Triad.
@@ -32,6 +32,7 @@ public interface TripleTriad extends ReadOnlyTripleTriad {
    * @throws IllegalArgumentException if the names of cards are not unique
    */
   void startGame(Cell[][] grid, List<Card> allCards, BattleRule rule);
+
 
   /**
    * Plays a card to the game's board.

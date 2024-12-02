@@ -1,7 +1,7 @@
-package model.rule;
+package cs3500.threetrios.providers.model.rule;
 
-import model.Direction;
-import model.cell.Cell;
+import cs3500.threetrios.providers.model.Direction;
+import cs3500.threetrios.providers.model.cell.Cell;
 
 /**
  * Represents a Battle Rule. The way a game updates cells'

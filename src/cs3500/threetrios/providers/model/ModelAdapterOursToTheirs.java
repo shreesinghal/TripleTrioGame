@@ -1,24 +1,31 @@
 package cs3500.threetrios.providers.model;
 
-import controller.ModelFeatures;
+import cs3500.threetrios.providers.controller.ModelFeatures;
+import cs3500.threetrios.providers.model.card.CardAdapterOursToTheirs;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
-import model.PlayerType;
-import model.card.Card;
-import model.cell.Cell;
-import model.rule.BattleRule;
+import cs3500.tripletrios.model.WinningState;
+import cs3500.threetrios.providers.model.card.Card;
+import cs3500.threetrios.providers.model.cell.Cell;
+import cs3500.threetrios.providers.model.rule.BattleRule;
+import cs3500.tripletrios.model.Cell.CellType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelAdapterOursToTheirs implements model.TripleTriad {
+public class ModelAdapterOursToTheirs implements TripleTriad {
 
   private TripleTrioModel ourModel;
 
   public ModelAdapterOursToTheirs(TripleTrioModel ourModel) {
+    if (ourModel == null) {
+      throw new IllegalArgumentException("Model cannot be null");
+    }
     this.ourModel = ourModel;
   }
 
   /**
+   *
    * @param listener
    */
   @Override
@@ -26,22 +33,35 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
 
   }
 
-  /**
-   * Starts the game with the given list of types of players and the
-   * dimensions of the board. Starts with Player A as first player.
-   *
-   * @param grid     starting 2D array of cells configuration
-   * @param allCards all the cards to start the game with
-   * @param rule     the battling rule of the game
-   * @throws IllegalStateException    if the game has already started or the game is over
-   * @throws IllegalArgumentException if the board or deck configurations are null
-   * @throws IllegalArgumentException if the number of cards is not at least one greater than
-   *                                  the number of card cells in the board
-   * @throws IllegalArgumentException if the names of cards are not unique
-   */
   @Override
   public void startGame(Cell[][] grid, List<Card> allCards, BattleRule rule) {
+    //we need a way to set PlayerA as current player and PlayerB as opposing player
+    //ourModel.startGame(createGrid(), createDeck()   );
+    //we cannot implement this because our model implementation doesn't have a
+    //battle rule interface
+  }
 
+
+  private List<Card> createDeck() {
+    List<Card> allCards = new ArrayList<>();
+    for (cs3500.tripletrios.model.Card card : ourModel.getDeck()) {
+      allCards.add(new CardAdapterOursToTheirs(card));
+    }
+
+    return allCards;
+  }
+
+  private Cell[][] createGrid() {
+    ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> ourGrid = ourModel.getCurrentGrid();
+    Cell[][] theirGrid = new Cell[ourGrid.size()][ourGrid.get(0).size()];
+
+    for (int row = 0; row < ourGrid.size(); row++) {
+      for (int col = 0; col < ourGrid.get(0).size(); col++) {
+        cs3500.tripletrios.model.Cell originalCell = ourGrid.get(row).get(col);
+      }
+    }
+
+    return theirGrid;
   }
 
   /**
@@ -58,31 +78,34 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public void playToBoard(int handIdx, int row, int col) {
-
+    ourModel.placeCard(row, col, ourModel.getPlayer().getHand().get(handIdx));
   }
+
+
+
+
 
   /**
    * Returns the hand of the given player.
    *
-   * @param playerType
+   * @param playerType the player whose hand we want
    * @return the hand of the player of the playerType
    * @throws IllegalArgumentException if playerType is null
    * @throws IllegalStateException    if the game has not started
    */
   @Override
-  public List<Card> fetchHand(model.PlayerType playerType) {
-    return playerType.equals(PlayerType.PLAYER_A)
-      ? arrayListToList(ourModel.getPlayer().getHand())
-      : arrayListToList(ourModel.getOppPlayer().getHand());
+  public List<Card> fetchHand(PlayerType playerType) {
+    return playerType.equals(PlayerType.PLAYER_A) ?
+            arrayListToList(ourModel.getPlayer().getHand())
+            : arrayListToList(ourModel.getOppPlayer().getHand());
   }
 
-  private List<model.card.Card> arrayListToList(ArrayList<cs3500.tripletrios.model.Card> ourHand) {
-    List<model.card.Card> cards = new ArrayList<>();
+  private List<Card> arrayListToList(ArrayList<cs3500.tripletrios.model.Card> ourHand) {
+    List<Card> playerHand = new ArrayList<>();
     for (cs3500.tripletrios.model.Card ourCard : ourHand) {
-      Card theirCard = CardAdapterOursToTheirs(ourCard);
-      cards.add(theirCard);
+      playerHand.add(new CardAdapterOursToTheirs(ourCard));
     }
-    return cards;
+    return playerHand;
   }
 
   /**
@@ -103,7 +126,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numBoardRows() {
-    return 0;
+    return ourModel.getGridHeight();
   }
 
   /**
@@ -113,7 +136,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numBoardColumns() {
-    return 0;
+    return ourModel.getGridWidth();
   }
 
   /**
@@ -125,6 +148,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int fetchPlayerScore(PlayerType player) {
+    //cannot adapt this because our models getPlayerScore() method is private
     return 0;
   }
 
@@ -137,7 +161,13 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType ownerAtCoordinate(int row, int column) {
-    return null;
+    if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.RED) {
+      return PlayerType.PLAYER_A;
+    } else if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.BLUE) {
+      return PlayerType.PLAYER_B;
+    } else {
+      return PlayerType.NULL_PLAYER;
+    }
   }
 
   /**
@@ -152,6 +182,8 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public int numCardsPlayerCanFlip(int row, int column, Card card, PlayerType player) {
+    //we cannot implement this because our executeBattlePhase() does this using private
+    //helper methods
     return 0;
   }
 
@@ -164,6 +196,11 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public boolean canPlayerPlayAtCoordinate(int row, int column) {
+    if (!ourModel.getCurrentGrid().get(row).get(column).getCellType().equals(CellType.HOLE)
+            && ourModel.getCurrentGrid().get(row).get(column).isEmpty()) {
+      return true;
+    }
+
     return false;
   }
 
@@ -176,7 +213,7 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public boolean isGameOver() {
-    return false;
+    return !ourModel.getFinalState().equals(WinningState.GameNotDone);
   }
 
   /**
@@ -187,7 +224,19 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType fetchWinner() {
-    return null;
+    if (!ourModel.isGameStarted()) {
+      throw new IllegalStateException("Game has not yet started");
+    }
+    if (ourModel.getFinalState().equals(WinningState.Tie)) {
+      return PlayerType.NULL_PLAYER;
+    } else if (ourModel.getFinalState().equals(WinningState.RedWins)) {
+      return PlayerType.PLAYER_A;
+    } else if (ourModel.getFinalState().equals(WinningState.BlueWins)) {
+      return  PlayerType.PLAYER_B;
+    }
+
+    return PlayerType.NULL_PLAYER;
+
   }
 
   /**
@@ -197,7 +246,11 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public PlayerType fetchTurn() {
-    return null;
+    if (ourModel.getPlayer().getColor().equals(CardColor.RED)) {
+      return PlayerType.PLAYER_A;
+    } else {
+      return PlayerType.PLAYER_B;
+    }
   }
 
   /**
@@ -210,6 +263,6 @@ public class ModelAdapterOursToTheirs implements model.TripleTriad {
    */
   @Override
   public Card cardAtCoordinate(int row, int column) {
-    return null;
+    return new CardAdapterOursToTheirs(ourModel.getCurrentGrid().get(row).get(column).getCard());
   }
 }
