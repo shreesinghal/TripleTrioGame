@@ -8,14 +8,13 @@ import cs3500.threetrios.providers.model.PlayerType;
 import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
 import cs3500.threetrios.providers.view.tripletriadgui.components.BoardPanel;
 import cs3500.threetrios.providers.view.tripletriadgui.components.HandPanel;
-import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadPanel;
 
 /**
  * Container Panel for components in Three Trios Game.
  * Establishes size of view and sub-panels sizes are dictated
  * by this size to ensure proper fitting.
  */
-public class ThreeTriosPanel extends JPanel implements view.tripletriadgui.TripleTriadPanel {
+public class ThreeTriosPanel extends JPanel implements TripleTriadPanel {
   private final BoardPanel boardPanel;
   private final HandPanel handPanelA;
   private final HandPanel handPanelB;

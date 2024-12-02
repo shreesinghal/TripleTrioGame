@@ -1,10 +1,11 @@
 package cs3500.threetrios.providers.view.tripletriadgui;
 
+import cs3500.threetrios.providers.controller.ViewFeatures;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import controller.ViewFeatures;
-import model.PlayerType;
-import model.ReadOnlyTripleTriad;
 
 /**
  * Represents a graphical user interface for a game of Three Trios.
@@ -12,7 +13,7 @@ import model.ReadOnlyTripleTriad;
  * On their turn, users can click on a card in their hand, highlighting it,
  * and play it to a cell on the board.
  */
-public class ThreeTriosView extends JFrame implements view.tripletriadgui.TripleTriadView {
+public class ThreeTriosView extends JFrame implements TripleTriadView {
   private final ThreeTriosPanel panel;
 
   /**
@@ -34,9 +35,30 @@ public class ThreeTriosView extends JFrame implements view.tripletriadgui.Triple
     this.panel.addFeatures(features);
   }
 
+  /**
+   * Adds a ViewFeatures to components of this view.
+   *
+   * @param features the features of this game
+   */
+  @Override
+  public void addFeatureListener(ViewFeatures features) {
+
+  }
+
   @Override
   public void display(boolean show) {
     this.setVisible(show);
+  }
+
+  /**
+   * Repaints this component with the selected card highlighted.
+   *
+   * @param cardIdx    the card to highlight
+   * @param playerType the player whose card is selected
+   */
+  @Override
+  public void selectedCard(int cardIdx, PlayerType playerType) {
+
   }
 
   @Override

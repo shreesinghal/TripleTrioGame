@@ -1,5 +1,8 @@
 package cs3500.threetrios.providers.view;
 
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosView;
+import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadView;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
@@ -8,18 +11,15 @@ import cs3500.tripletrios.view.CardView;
 import cs3500.tripletrios.view.GridPanel;
 import cs3500.tripletrios.view.HandPanel;
 import cs3500.tripletrios.view.TTFrame;
-import model.ReadOnlyTripleTriad;
-import view.tripletriadgui.TripleTriadView;
-import view.tripletriadgui.TripleTriadPanel;
 
-import java.io.IOException;
-
-public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView implements TTFrame {
-  view.tripletriadgui.TripleTriadView theirView;
+public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
+  private final ReadOnlyTripleTriad theirModel;
+  private final TripleTriadView theirView;
 
   public ViewAdapterTheirsToOurs(TripleTriadView theirView, ReadOnlyTripleTriad theirModel) {
     super(theirModel, theirModel.fetchTurn().toString());
     this.theirView = theirView;
+    this.theirModel = theirModel;
   }
 
   /**
@@ -42,6 +42,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
     // cant be done because ThreeTriosView uses composition with ThreeTriosPanel.
     // this class cannot access threeTriosPanel, which would otherwise handle this
     // method function.
+    return null;
   }
 
   /**
@@ -49,7 +50,8 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public GridPanel getGridPanel() {
-    return ;
+    // no equivalent method
+    return null;
   }
 
   /**
@@ -60,7 +62,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void addListeners(TripleTrioFeatureController listener) {
-    theirView.addFeatureListener(listener);
+    theirView.addFeatureListener(new ListenerAdapterOursToTheirs(listener));
   }
 
   /**
@@ -68,6 +70,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void refresh() {
+    theirView.advance();
     theirView.display(true);
   }
 
@@ -78,7 +81,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void printInvalidClickMessage(String message) {
-    theirView;
+    theirView.popup(message);
   }
 
   /**
@@ -86,7 +89,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void updateTurn() {
-
+    // no equivalent method
   }
 
   /**
@@ -96,7 +99,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void displayGameOverMessage(WinningState finalState) {
-
+    theirView.popup(finalState.toString());
   }
 
   /**
@@ -116,7 +119,7 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public void addCardToGrid(int x, int y, Card card) {
-
+    // no equivalent method
   }
 
   /**
@@ -124,26 +127,8 @@ public class ViewAdapterTheirsToOurs extends view.tripletriadgui.ThreeTriosView 
    */
   @Override
   public String toString() {
-    return "";
+    return theirView.toString();
   }
 
-  /**
-   * Renders output to the screen.
-   *
-   * @throws IOException if output is improper.
-   */
-  @Override
-  public void render() throws IOException {
 
-  }
-
-  /**
-   * Displays the winner along with a final message.
-   *
-   * @param winner the winner of the game
-   */
-  @Override
-  public void displayFinalMessage(WinningState winner) throws IOException {
-
-  }
 }
