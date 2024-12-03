@@ -1,0 +1,24 @@
+Q: What do you wish you had done differently in your design/implementation? Did you learn any lessons from the code
+given to you, or the updates you had to make for your customers?
+A: Our clients code was designed really well. We liked how they abstracted anything that wasn't absolutely necessary in
+a class to be kept private. For example, their game panel cannot be reached by any other class. We constructed ours
+differently, but in their implementation it ensures that these panels can only be altered in the view.
+
+We did have to make some updates for our customers. Our customers realized that our view implementation casts some
+fields and concrete classes (like addListeners function) that they didn't have access to, which caused their code to
+not compile. Also, most of the features parts of the view depended on specific concrete classes (such as taking in a
+TripleTrioHumanPlayerContr rather than a TripleTrioFeatureController). We had to fix our code base and resend to our
+customers. This experience showed us firsthand why software design principles like dependency inversion, interface
+segregation, and programming to interfaces are so crucial in creating maintainable, extensible software systems.
+
+
+
+Q: What was your experience like with your providers?
+A: Our experience with the providers was very clean and simple. We only interacted with them when we received their
+code base. Other than that, their code was well written and documented to the point where we didn't have to ask them
+any questions.
+
+Some of the methods that the providers provided could not be adapted at our end(documented within our code and explained
+in our ReadMe) because in their view they have one private field for their game panel. This game panel contains both
+their hand panels and grid panels which cannot be accessed from the view. Therefore, methods such as getHandPanel and
+getGridPanel is our view cannot be translated to their view :(
