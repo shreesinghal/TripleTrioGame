@@ -1,8 +1,8 @@
-package strategy;
+package cs3500.threetrios.providers.strategy;
 
 import java.util.Optional;
-import model.PlayerType;
-import model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
 
 /**
  * A fallible strategy returns a move if one is possible,
@@ -15,5 +15,5 @@ public interface FallibleTripleTriadStrategy {
    * otherwise returns an empty Optional.
    * @throws IllegalArgumentException if model or player is null
    */
-  Optional<Move> move(ReadOnlyTripleTriad model, PlayerType player);
+  <Move> Optional<Move> move(ReadOnlyTripleTriad model, PlayerType player);
 }

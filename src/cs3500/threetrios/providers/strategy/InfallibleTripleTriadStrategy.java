@@ -1,7 +1,7 @@
-package strategy;
+package cs3500.threetrios.providers.strategy;
 
-import model.PlayerType;
-import model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.model.PlayerType;
+import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
 
 /**
  * An infallible strategy must return a move.

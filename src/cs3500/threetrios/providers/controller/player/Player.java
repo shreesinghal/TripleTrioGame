@@ -1,7 +1,7 @@
-package controller.player;
+package cs3500.threetrios.providers.controller.player;
 
-import controller.PlayerFeatures;
-import model.PlayerType;
+import cs3500.threetrios.providers.controller.PlayerFeatures;
+import cs3500.threetrios.providers.model.PlayerType;
 
 public interface Player {
   /**
