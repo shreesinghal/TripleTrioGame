@@ -39,9 +39,10 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
    */
   @Override
   public HandPanel getHandView(CardColor color) {
-    // cant be done because ThreeTriosView uses composition with ThreeTriosPanel.
-    // this class cannot access threeTriosPanel, which would otherwise handle this
-    // method function.
+    // no equivalent method
+    // Cant be done because ThreeTriosView uses composition with ThreeTriosPanel.
+    // ThreeTriosPanel contians their handView. This class cannot access threeTriosPanel,
+    // which would otherwise handle this method function.
     return null;
   }
 
@@ -51,6 +52,9 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   @Override
   public GridPanel getGridPanel() {
     // no equivalent method
+    // Cant be done because ThreeTriosView uses composition with ThreeTriosPanel.
+    // ThreeTriosPanel contians their gridPanel. This class cannot access threeTriosPanel,
+    // which would otherwise handle this method function.
     return null;
   }
 
@@ -90,6 +94,9 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   @Override
   public void updateTurn() {
     // no equivalent method
+    // eir implementation automatically updates the turn of
+    // the model after each move, so they don't have a concrete
+    // public updateTurn method.
   }
 
   /**

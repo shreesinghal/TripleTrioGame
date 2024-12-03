@@ -30,7 +30,8 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
    */
   @Override
   public void addListener(ModelFeatures listener) {
-
+    ourModel.addListener(new ListenerModelAdapterTheirsToOurs(listener, ourModel),
+      ourModel.getPlayer().getColor());
   }
 
   @Override
@@ -80,10 +81,6 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
   public void playToBoard(int handIdx, int row, int col) {
     ourModel.placeCard(row, col, ourModel.getPlayer().getHand().get(handIdx));
   }
-
-
-
-
 
   /**
    * Returns the hand of the given player.
