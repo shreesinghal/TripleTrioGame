@@ -13,13 +13,11 @@ import cs3500.tripletrios.view.HandPanel;
 import cs3500.tripletrios.view.TTFrame;
 
 public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
-  private final ReadOnlyTripleTriad theirModel;
   private final TripleTriadView theirView;
 
   public ViewAdapterTheirsToOurs(TripleTriadView theirView, ReadOnlyTripleTriad theirModel) {
     super(theirModel, theirModel.fetchTurn().toString());
     this.theirView = theirView;
-    this.theirModel = theirModel;
   }
 
   /**
@@ -127,6 +125,11 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   @Override
   public void addCardToGrid(int x, int y, Card card) {
     // no equivalent method
+    // This is because their view class has a private panel class that handles
+    // adding a card to the grid. This method cannot be accessed publicly.
+    // Therefore, this methods cannot be adapted in this manner.
+    // We cannot access their private game panel because it is created with
+    // in the constructor of the view class privately.
   }
 
   /**
