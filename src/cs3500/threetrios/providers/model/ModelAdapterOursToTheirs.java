@@ -2,6 +2,7 @@ package cs3500.threetrios.providers.model;
 
 import cs3500.threetrios.providers.controller.ModelFeatures;
 import cs3500.threetrios.providers.model.card.CardAdapterOursToTheirs;
+import cs3500.threetrios.providers.model.cell.CellAdapterOursToTheirs;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
@@ -62,13 +63,20 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
   }
 
   private ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> createGrid(Cell[][] grid) {
-    ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> ourGrid = ourModel.getCurrentGrid();
-    ArrayList<ArrayList<Cell>> ourGrid = new ArrayList<ArrayList<Cell>>();
+    ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> ourGrid = new ArrayList<>();
 
-    for (Cell cell : grid) {
-
+    for (int row = 0; row < grid.length; row++) {
+      ArrayList<cs3500.tripletrios.model.Cell> rowList = new ArrayList<>();
+      for (int col = 0; col < grid[row].length; col++) {
+        // Convert their Cell to our Cell using an adapter
+        rowList.add(new CellAdapterTheirsToOurs(grid[row][col]));
+      }
+      ourGrid.add(rowList);
     }
+
+    return ourGrid;
   }
+
 
   /**
    * Plays a card to the game's board.

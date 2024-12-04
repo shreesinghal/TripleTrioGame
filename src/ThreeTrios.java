@@ -16,6 +16,7 @@ import cs3500.tripletrios.view.TTFrame;
 import cs3500.threetrios.providers.model.ModelAdapterOursToTheirs;
 import cs3500.tripletrios.configreaders.CardDatabaseReader;
 import cs3500.tripletrios.configreaders.GridConfigReader;
+import cs3500.tripletrios.view.TTFrameViewImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,13 +36,30 @@ public final class ThreeTrios {
   public static void main(String[] args) {
 
     Set<Card> sampleDeck = CardDatabaseReader.readDeckConfiguration("Configurations"
-        + File.separator
-        + "20deckConfig.txt");
+      + File.separator
+      + "20deckConfig.txt");
 
     ArrayList<ArrayList<Cell>> sampleOrigGrid = GridConfigReader
-            .readGridConfiguration("Configurations"
+      .readGridConfiguration("Configurations"
         + File.separator
         + "3x3sqrGrid.txt");
+
+
+
+    TripleTrioModel model = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
+    model.startGUIGame();
+    Player player1 = new PlayerHumanImpl(model.getPlayer().getHand(), CardColor.RED);
+    Player player2 = new PlayerHumanImpl(model.getOppPlayer().getHand(), CardColor.BLUE);
+    TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
+    TTFrame viewPlayer2 = new TTFrameViewImpl(model, player2);
+    TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model,
+      player1,
+      viewPlayer1);
+    TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model,
+      player2,
+      viewPlayer2);
+    viewPlayer1.addListeners(controller1);
+    viewPlayer2.addListeners(controller2);
 
 
     // first make our model
@@ -50,26 +68,23 @@ public final class ThreeTrios {
     // make their model
     TripleTriad theirModel = new ModelAdapterOursToTheirs(ourModel);
 
-    Player player1 = new PlayerHumanImpl(ourModel.getPlayer().getHand(), CardColor.RED);
-    Player player2 = new PlayerHumanImpl(ourModel.getOppPlayer().getHand(), CardColor.BLUE);
-
     // make their view
     TripleTriadView providerView1 = new ThreeTriosView(theirModel, "Player 1 View");
     TripleTriadView providerView2 = new ThreeTriosView(theirModel, "Player 2 View");
 
     // make our view
     TTFrame ourViewPlayer1 = new ViewAdapterTheirsToOurs(providerView1, theirModel);
-    TTFrame viewPlayer2 = new ViewAdapterTheirsToOurs(providerView2, theirModel);
+    TTFrame ourviewPlayer2 = new ViewAdapterTheirsToOurs(providerView2, theirModel);
 
     // make our controller
-    TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(ourModel,
+    TripleTrioFeatureController controller1x = new TripleTrioHumanPlayerContr(ourModel,
       player1,
       ourViewPlayer1);
 
-    TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(ourModel,
+    TripleTrioFeatureController controller2x = new TripleTrioHumanPlayerContr(ourModel,
             player2,
-            viewPlayer2);
-    ourViewPlayer1.addListeners(controller1);
-    viewPlayer2.addListeners(controller2);
+      ourviewPlayer2);
+    ourViewPlayer1.addListeners(controller1x);
+    ourviewPlayer2.addListeners(controller2x);
   }
 }

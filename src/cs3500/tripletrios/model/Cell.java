@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
 * Cell class to represents cells in the game.
 */
-public final class Cell {
+public class Cell {
 
   private boolean hasCard;
   private Card card;

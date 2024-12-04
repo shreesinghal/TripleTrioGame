@@ -41,7 +41,7 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   public HandPanel getHandView(CardColor color) {
     // no equivalent method
     // Cant be done because ThreeTriosView uses composition with ThreeTriosPanel.
-    // ThreeTriosPanel contians their handView. This class cannot access threeTriosPanel,
+    // ThreeTriosPanel contains their handView. This class cannot access threeTriosPanel,
     // which would otherwise handle this method function.
     return null;
   }
