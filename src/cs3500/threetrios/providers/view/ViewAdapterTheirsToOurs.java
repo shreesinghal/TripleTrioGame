@@ -1,6 +1,6 @@
 package cs3500.threetrios.providers.view;
 
-import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.model.TripleTriad;
 import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosView;
 import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadView;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
@@ -14,10 +14,12 @@ import cs3500.tripletrios.view.TTFrame;
 
 public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   private final TripleTriadView theirView;
+  private final TripleTriad theirModel;
 
-  public ViewAdapterTheirsToOurs(TripleTriadView theirView, ReadOnlyTripleTriad theirModel) {
+  public ViewAdapterTheirsToOurs(TripleTriadView theirView, TripleTriad theirModel) {
     super(theirModel, theirModel.fetchTurn().toString());
     this.theirView = theirView;
+    this.theirModel = theirModel;
   }
 
   /**
@@ -92,9 +94,11 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   @Override
   public void updateTurn() {
     // no equivalent method
-    // eir implementation automatically updates the turn of
-    // the model after each move, so they don't have a concrete
+    // Their implementation automatically updates the turn of
+    // the model after each move in advance,
+    // so they don't have a concrete
     // public updateTurn method.
+    this.refresh();
   }
 
   /**
@@ -130,6 +134,11 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
     // Therefore, this methods cannot be adapted in this manner.
     // We cannot access their private game panel because it is created with
     // in the constructor of the view class privately.
+
+    // Update the model with the card placement
+    this.theirModel.playToBoard(0, x, y);
+
+    this.refresh();
   }
 
   /**

@@ -1,4 +1,5 @@
 import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
+import cs3500.threetrios.providers.model.TripleTriad;
 import cs3500.threetrios.providers.view.ViewAdapterTheirsToOurs;
 import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosView;
 import cs3500.threetrios.providers.view.tripletriadgui.TripleTriadView;
@@ -47,7 +48,7 @@ public final class ThreeTrios {
     TripleTrioModel ourModel = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
 
     // make their model
-    ReadOnlyTripleTriad theirModel = new ModelAdapterOursToTheirs(ourModel);
+    TripleTriad theirModel = new ModelAdapterOursToTheirs(ourModel);
 
     Player player1 = new PlayerHumanImpl(ourModel.getPlayer().getHand(), CardColor.RED);
     Player player2 = new PlayerHumanImpl(ourModel.getOppPlayer().getHand(), CardColor.BLUE);
