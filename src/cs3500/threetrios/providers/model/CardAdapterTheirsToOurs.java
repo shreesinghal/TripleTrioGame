@@ -4,11 +4,13 @@ import cs3500.threetrios.providers.model.card.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Direction;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
   private final Card card;
   public CardAdapterTheirsToOurs(Card card) {
+
     this.card = card;
   }
 
@@ -51,7 +53,12 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public Map<Direction, Integer> getAttackValues() {
-    return null;
+    Map<Direction, Integer> vals = new HashMap<>();
+    vals.put(Direction.NORTH, getNorth());
+    vals.put(Direction.SOUTH, getSouth());
+    vals.put(Direction.EAST, getEast());
+    vals.put(Direction.WEST, getWest());
+    return vals;
   }
 
   /**
@@ -61,7 +68,7 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public int getNorth() {
-    return 0;
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH).fetchNumber();
   }
 
   /**
@@ -71,7 +78,9 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public int getSouth() {
-    return 0;
+
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH).fetchNumber();
+
   }
 
   /**
@@ -81,7 +90,9 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public int getEast() {
-    return 0;
+
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST).fetchNumber();
+
   }
 
   /**
@@ -91,11 +102,15 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public int getWest() {
-    return 0;
+
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST).fetchNumber();
+
   }
 
   @Override
   public void setCardColor(CardColor color) {
-
+    // They do not store the color of the card
+    // in their card class. Instead the model handles this
+    // so there is no equivalent method.
   }
 }

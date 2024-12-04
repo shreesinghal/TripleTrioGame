@@ -43,6 +43,8 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
     //we are ignoring BattleRule rule because our models implementation of
     //startGame() accounts for battle rule
 
+
+
     // Convert the List<Card> to a Set<Card>
     ourModel.startGame(createDeck(allCards), createGrid(grid));
 
@@ -59,17 +61,13 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
     return totalCards;
   }
 
-  private Cell[][] createGrid(Cell[][] grid) {
+  private ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> createGrid(Cell[][] grid) {
     ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> ourGrid = ourModel.getCurrentGrid();
-    Cell[][] theirGrid = new Cell[ourGrid.size()][ourGrid.get(0).size()];
+    ArrayList<ArrayList<Cell>> ourGrid = new ArrayList<ArrayList<Cell>>();
 
-    for (int row = 0; row < ourGrid.size(); row++) {
-      for (int col = 0; col < ourGrid.get(0).size(); col++) {
-        cs3500.tripletrios.model.Cell originalCell = ourGrid.get(row).get(col);
-      }
+    for (Cell cell : grid) {
+
     }
-
-    return theirGrid;
   }
 
   /**
