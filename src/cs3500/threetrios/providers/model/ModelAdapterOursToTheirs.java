@@ -10,8 +10,7 @@ import cs3500.threetrios.providers.model.cell.Cell;
 import cs3500.threetrios.providers.model.rule.BattleRule;
 import cs3500.tripletrios.model.Cell.CellType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ModelAdapterOursToTheirs implements TripleTriad {
 
@@ -40,19 +39,27 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
     //ourModel.startGame(createGrid(), createDeck()   );
     //we cannot implement this because our model implementation doesn't have a
     //battle rule interface
+
+    //we are ignoring BattleRule rule because our models implementation of
+    //startGame() accounts for battle rule
+
+    // Convert the List<Card> to a Set<Card>
+    ourModel.startGame(createDeck(allCards), createGrid(grid));
+
   }
 
 
-  private List<Card> createDeck() {
-    List<Card> allCards = new ArrayList<>();
-    for (cs3500.tripletrios.model.Card card : ourModel.getDeck()) {
-      allCards.add(new CardAdapterOursToTheirs(card));
+  private Set<cs3500.tripletrios.model.Card> createDeck(List<Card> allCards) {
+    //go from list to set
+    Set<cs3500.tripletrios.model.Card> totalCards = new HashSet<>();
+    for (Card card : allCards) {
+      totalCards.add(new CardAdapterTheirsToOurs(card));
     }
 
-    return allCards;
+    return totalCards;
   }
 
-  private Cell[][] createGrid() {
+  private Cell[][] createGrid(Cell[][] grid) {
     ArrayList<ArrayList<cs3500.tripletrios.model.Cell>> ourGrid = ourModel.getCurrentGrid();
     Cell[][] theirGrid = new Cell[ourGrid.size()][ourGrid.get(0).size()];
 
