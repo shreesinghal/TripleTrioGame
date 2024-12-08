@@ -2,10 +2,15 @@ package cs3500.tripletrios.controller;
 
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
 import cs3500.tripletrios.view.CardView;
+import cs3500.tripletrios.view.GridPanelHintDecorator;
 import cs3500.tripletrios.view.TTFrame;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -18,6 +23,7 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
   protected TripleTrioModel model;
   protected TTFrame view;
   protected Card selectedCard = null; //card which is selected to place on grid
+  protected final Map<CardColor, Boolean> hintsEnabled = new HashMap<>();
 
   /**
    * Constructor that instantiates a controller that takes in a GUI view.
@@ -28,6 +34,35 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       throw new IllegalArgumentException("view cannot be null");
     }
     this.view = view;
+
+    GridPanelHintDecorator hintDecorator = new
+            GridPanelHintDecorator(view.getGridPanel(), model);
+    view.getGridPanel().addDecorator(hintDecorator);
+    hintsEnabled.put(CardColor.RED, false);
+    hintsEnabled.put(CardColor.BLUE, false);
+  }
+
+
+  @Override
+  public void toggleHints(CardColor color) {
+    hintsEnabled.put(color, !hintsEnabled.get(color));
+    if (!hintsEnabled.get(color)) {
+      view.getGridPanel().setHintDecorator(null);
+    } else if (selectedCard != null) {
+      GridPanelHintDecorator decorator = new GridPanelHintDecorator(
+              view.getGridPanel(),
+              model
+      );
+      decorator.setSelectedCard(selectedCard);
+      decorator.setEnabled(true);
+      view.getGridPanel().setHintDecorator(decorator);
+    }
+    view.refresh();
+  }
+
+  @Override
+  public boolean areHintsEnabled(CardColor color) {
+    return hintsEnabled.get(color);
   }
 
 
@@ -73,4 +108,10 @@ abstract public class TripleTrioAbstractGUIController implements TripleTrioFeatu
       view.printInvalidClickMessage("You cannot place a card there.");
     }
   }
+
+//  public void handleCardSelection(Card card) {
+//    hintDecorator.setSelectedCard(card);
+//    hintDecorator.setEnabled(true);
+//    gridPanel.repaint();
+//  }
 }

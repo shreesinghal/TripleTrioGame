@@ -5,25 +5,26 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
 
 /**
- * Adapter to convert a provider's Cell to our Cell.
+ * Adapter class that converts the provider's Cell implementation to our Cell model.
+ * This adapter allows the provider's Cell to be used where our Cell class is expected,
+ * bridging the gap between the two different implementations.
  */
 public class CellAdapterTheirsToOurs extends Cell {
   private final cs3500.threetrios.providers.model.cell.Cell Cell;
 
   /**
-   * Constructs an adapter wrapping their `Cell` implementation.
-   *
-   * @param Cell The instance of their `Cell` interface.
+   * Constructs an adapter wrapping their `cell` implementation.
+   * @param cell The instance of their `cell` interface.
    * @throws IllegalArgumentException if the cell is null.
    */
-  public CellAdapterTheirsToOurs(cs3500.threetrios.providers.model.cell.Cell Cell) {
-    super(Cell.cardCapacity() == 0 ? CellType.HOLE : CellType.CARDCELL);
-    if (Cell == null) {
-      throw new IllegalArgumentException("Cell cannot be null.");
+  public CellAdapterTheirsToOurs(cs3500.threetrios.providers.model.cell.Cell cell) {
+    super(cell.cardCapacity() == 0 ? CellType.HOLE : CellType.CARDCELL);
+    if (cell == null) {
+      throw new IllegalArgumentException("cell cannot be null.");
     }
-    this.Cell = Cell;
-    if (Cell.hasCard()) {
-      placeCard(new CardAdapterTheirsToOurs(Cell.fetchCard()));
+    this.Cell = cell;
+    if (cell.hasCard()) {
+      placeCard(new CardAdapterTheirsToOurs(cell.fetchCard()));
     }
   }
 

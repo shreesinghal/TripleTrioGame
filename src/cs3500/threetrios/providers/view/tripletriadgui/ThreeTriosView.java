@@ -49,6 +49,10 @@ public class ThreeTriosView extends JFrame implements TripleTriadView {
     this.panel.advance();
   }
 
+  /**
+   Displays a popup message dialog with the specified message.
+   @param message The text to be displayed in the popup window
+   */
   public void popup(String message) {
     JOptionPane.showMessageDialog(null,
             message, "Game Alert",

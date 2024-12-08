@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Implements the GUI view for the Triple Trios game, displaying the main game board,
@@ -27,6 +29,10 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
   private final HandPanel blueHand;
   private final ReadOnlyTripleTrioModel model;
   private final Player player;
+  private TripleTrioFeatureController features;
+
+
+
 
   /**
    * Creates a frame for the game in a GUI style.
@@ -52,6 +58,20 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
             (int) (getToolkit().getScreenSize().getHeight()
               + redHand.getPixelDimensions().getHeight()
               + blueHand.getPixelDimensions().getHeight())));
+
+    // Add keyboard listener for hint toggle
+    this.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_H) {
+          features.toggleHints(model.getPlayer().getColor());
+        }
+      }
+    });
+
+    this.setFocusable(true);
+    this.requestFocusInWindow();
+
 
     //allows us to set the size of the window
     this.setLocationRelativeTo(null); //allows us to center the window
@@ -105,6 +125,7 @@ public class TTFrameViewImpl extends JFrame implements TTFrame {
    */
   @Override
   public void addListeners(TripleTrioFeatureController listener) {
+    this.features = listener;
     if (listener.isHuman()) {
       this.blueHand.addClickListener((TripleTrioHumanPlayerContr) listener);
       this.redHand.addClickListener((TripleTrioHumanPlayerContr) listener);

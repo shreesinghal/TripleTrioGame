@@ -12,10 +12,23 @@ import cs3500.tripletrios.view.GridPanel;
 import cs3500.tripletrios.view.HandPanel;
 import cs3500.tripletrios.view.TTFrame;
 
+/**
+ * Adapter class that bridges the gap between the provider's view implementation
+ * and our view interface.
+ * This class extends the provider's ThreeTriosView and implements our TTFrame interface,
+ * allowing our controller to interact with the provider's view using our expected interface.
+ */
 public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
   private final TripleTriadView theirView;
   private final TripleTriad theirModel;
 
+
+  /**
+   * Constructs a new ViewAdapterTheirsToOurs, bridging the provider's view and model to our
+   * view interface.
+   * @param theirView The provider's TripleTriadView that will be adapted to our view interface
+   * @param theirModel The provider's TripleTriad model used to initialize the parent ThreeTriosView
+   */
   public ViewAdapterTheirsToOurs(TripleTriadView theirView, TripleTriad theirModel) {
     super(theirModel, theirModel.fetchTurn().toString());
     this.theirView = theirView;
@@ -31,12 +44,7 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
     theirView.display(true);
   }
 
-  /**
-   * Gets the handview of the player based on the color given.
-   *
-   * @param color
-   * @return the HandPanel for the specific player
-   */
+
   @Override
   public HandPanel getHandView(CardColor color) {
     // no equivalent method
@@ -46,9 +54,7 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
     return null;
   }
 
-  /**
-   * @return
-   */
+
   @Override
   public GridPanel getGridPanel() {
     // no equivalent method
@@ -78,11 +84,7 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
     theirView.display(true);
   }
 
-  /**
-   * Creates a popup error message to tell the user something specific.
-   *
-   * @param message the message to be shown
-   */
+
   @Override
   public void printInvalidClickMessage(String message) {
     theirView.popup(message);
@@ -93,48 +95,26 @@ public class ViewAdapterTheirsToOurs extends ThreeTriosView implements TTFrame {
    */
   @Override
   public void updateTurn() {
-    // no equivalent method
-    // Their implementation automatically updates the turn of
-    // the model after each move in advance,
-    // so they don't have a concrete
-    // public updateTurn method.
+    //Their code ensures the turn is updated everytime the game
+    //is refreshed.
     this.refresh();
   }
 
-  /**
-   * Displays the popup of who wins/tie.
-   *
-   * @param finalState final state of game
-   */
+
   @Override
   public void displayGameOverMessage(WinningState finalState) {
     theirView.popup(finalState.toString());
   }
 
-  /**
-   * Updates the Grid with cards placed.
-   *
-   * @param cardView
-   */
+
   @Override
   public void updateGrid(CardView cardView) {
-
+    this.refresh();
   }
 
-  /**
-   * @param x
-   * @param y
-   * @param card
-   */
+
   @Override
   public void addCardToGrid(int x, int y, Card card) {
-    // no equivalent method
-    // This is because their view class has a private panel class that handles
-    // adding a card to the grid. This method cannot be accessed publicly.
-    // Therefore, this methods cannot be adapted in this manner.
-    // We cannot access their private game panel because it is created with
-    // in the constructor of the view class privately.
-
     // Update the model with the card placement
     this.theirModel.playToBoard(0, x, y);
 

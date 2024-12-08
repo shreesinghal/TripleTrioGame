@@ -5,25 +5,39 @@ import cs3500.threetrios.providers.model.PlayerType;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.model.CardColor;
 
+/**
+ * Adapter class that converts our TripleTrioFeatureController to the provider's
+ * ViewFeatures interface.
+ * This adapter allows our controller implementation to be used where the provider's
+ * ViewFeatures interface is expected, bridging the gap between the two different
+ * implementations of view-controller interaction.
+ * The adapter handles the translation of method calls between the two systems,
+ * including differences in event handling, player representation, and game action execution.
+ */
 public class ListenerAdapterOursToTheirs implements ViewFeatures {
-  private TripleTrioFeatureController ourListener;
+  private final TripleTrioFeatureController ourListener;
 
+  /**
+   * Constructs a new ListenerAdapterOursToTheirs.
+   * This adapter wraps our TripleTrioFeatureController to make it compatible with
+   * the provider's ViewFeatures interface.
+   * @param ourlistener The TripleTrioFeatureController instance to be adapted.
+   * @throws IllegalArgumentException if the provided listener is null.
+   */
   public ListenerAdapterOursToTheirs(TripleTrioFeatureController ourlistener) {
+    if (ourlistener == null) {
+      throw new IllegalArgumentException("Listener cannot be null");
+    }
     this.ourListener = ourlistener;
   }
 
 
-  /**
-   * Selects the given card index as the card to play.
-   *
-   * @param cardIdx    the card index
-   * @param playerType
-   */
+
   @Override
   public void selectedCard(int cardIdx, PlayerType playerType) {
     ourListener.handleCellClickForHand(cardIdx, playerType == PlayerType.PLAYER_A
-      ? CardColor.RED
-      : CardColor.BLUE);
+        ? CardColor.RED
+        : CardColor.BLUE);
   }
 
   /**

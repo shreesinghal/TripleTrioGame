@@ -2,14 +2,24 @@ package cs3500.threetrios.providers.model.card;
 
 import cs3500.threetrios.providers.model.Direction;
 import cs3500.tripletrios.model.Card;
+
 /**
- * This is an adapter class to adapt our Card interface
- * to ur customers Card interface.
+ An adapter class that converts our Card implementation to the provider's Card interface.
+ This class bridges the gap between our card representation and the provider's card model,
+ allowing interoperability between different implementations of the Triple Triad game.
+ The adapter translates method calls and manages the conversion of card properties
+ such as name, attack values, and comparisons between the two different card implementations.
  */
 public class CardAdapterOursToTheirs implements cs3500.threetrios.providers.model.card.Card {
 
   private final Card ourCard;
 
+  /**
+   * Constructs a CardAdapterOursToTheirs by adapting our Card implementation to
+   * the provider's Card interface.
+   * @param ourCard The Card from our implementation to be adapted
+   * @throws IllegalArgumentException if the provided card is null
+   */
   public CardAdapterOursToTheirs(Card ourCard) {
     if (ourCard == null) {
       throw new IllegalArgumentException("Card cannot be null");
@@ -19,12 +29,9 @@ public class CardAdapterOursToTheirs implements cs3500.threetrios.providers.mode
 
   /**
    * Compares this card to the given card.
-   *
-   * @param other     Card to compare
+   * @param other Card to compare
    * @param direction which direction to compare numbers
-   * @return -1 if other is greater, 1 if this card is greater,
-   * and 0 if the cards are equal
-   * @throws IllegalArgumentException if other or direction is null
+   * @return val
    */
   @Override
   public int compareTo(cs3500.threetrios.providers.model.card.Card other, Direction direction) {
@@ -51,7 +58,8 @@ public class CardAdapterOursToTheirs implements cs3500.threetrios.providers.mode
     }
 
     int thisAttackValue = ourCard.getAttackValues().get(ourDirection);
-    int otherAttackValue = ((CardAdapterOursToTheirs) other).ourCard.getAttackValues().get(ourDirection);
+    int otherAttackValue = ((CardAdapterOursToTheirs) other).ourCard.getAttackValues()
+            .get(ourDirection);
 
     // Compare the attack values
     return Integer.compare(thisAttackValue, otherAttackValue);

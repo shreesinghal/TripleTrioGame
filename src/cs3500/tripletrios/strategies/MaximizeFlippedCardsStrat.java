@@ -83,8 +83,8 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
       for (int i = flippedCards.size() - 1; i >= 0; i--) {
         List<Posn> cardsToBeAdded = battleAdjacentCards(flippedCards.get(i).getX(),
                 flippedCards.get(i).getY(),
-            this.model.getCurrentGrid()
-                    .get(flippedCards.get(i).getY()).get(flippedCards.get(i).getX()).getCard());
+                this.model.getCurrentGrid()
+                        .get(flippedCards.get(i).getY()).get(flippedCards.get(i).getX()).getCard());
         flippedCards.addAll(cardsToBeAdded);
         i += cardsToBeAdded.size();
         numCardsFlipped += cardsToBeAdded.size();
@@ -110,7 +110,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
 
     // this South vs bottom
     if (cardCanBattle(southLoc)
-        && card.getSouth() > this.model.getCurrentGrid().get(yPos + 1)
+            && card.getSouth() > this.model.getCurrentGrid().get(yPos + 1)
             .get(xPos).getCard().getNorth()) {
       this.model.getCurrentGrid().get(yPos + 1).get(xPos).getCard().flipOwnership();
       flippedCards.add(new Posn(xPos, yPos + 1));
@@ -118,7 +118,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
 
     // this West vs right
     if (cardCanBattle(westLoc)
-        && card.getWest() > this.model
+            && card.getWest() > this.model
             .getCurrentGrid().get(yPos).get(xPos - 1).getCard().getEast()) {
       this.model.getCurrentGrid().get(yPos).get(xPos - 1).getCard().flipOwnership();
       flippedCards.add(new Posn(xPos - 1, yPos));
@@ -126,7 +126,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
 
     // this North vs top
     if (cardCanBattle(northLoc)
-        && card.getNorth() > this.model
+            && card.getNorth() > this.model
             .getCurrentGrid().get(yPos - 1).get(xPos).getCard().getSouth()) {
       this.model.getCurrentGrid().get(yPos - 1)
               .get(xPos).getCard().flipOwnership();
@@ -135,7 +135,7 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
 
     // this East vs right
     if (cardCanBattle(eastLoc)
-        && card.getEast() > this.model
+            && card.getEast() > this.model
             .getCurrentGrid().get(yPos).get(xPos + 1).getCard().getWest()) {
       this.model.getCurrentGrid().get(yPos).get(xPos + 1).getCard().flipOwnership();
       flippedCards.add(new Posn(xPos + 1, yPos));
@@ -146,18 +146,18 @@ public class MaximizeFlippedCardsStrat implements TripleTrioStrategy {
 
   private boolean cardCanBattle(Posn adjCardLoc) {
     return ensurePositionWithinBounds(new Posn(adjCardLoc.getX(), adjCardLoc.getY()))
-      && this.model.getCurrentGrid().get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard() != null
-      && this.model.getCurrentGrid()
+            && this.model.getCurrentGrid().get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard() != null
+            && this.model.getCurrentGrid()
             .get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard().getColor()
-      == this.model.getOppPlayer().getColor();
+            == this.model.getOppPlayer().getColor();
   }
 
   private boolean ensurePositionWithinBounds(Posn posn) {
     return posn.getX() >= 0
-      && posn.getX() < this.model.getCurrentGrid().get(0).size()
-      && posn.getY() >= 0
-      && posn.getY() < this.model.getCurrentGrid().size()
-      && this.model.getCurrentGrid().get(posn.getY())
+            && posn.getX() < this.model.getCurrentGrid().get(0).size()
+            && posn.getY() >= 0
+            && posn.getY() < this.model.getCurrentGrid().size()
+            && this.model.getCurrentGrid().get(posn.getY())
             .get(posn.getX()).getCellType() != Cell.CellType.HOLE;
   }
 

@@ -116,7 +116,7 @@ To facilitate these updates, we adopted the observer design pattern to ensure co
 and controllers. By doing so, we decoupled the components, improving the modularity and maintainability of our code.
 
 
-Homework 7 additions: 
+## Homework 7 additions: 
 I will now explain the new files that we added to our program. All classes in the view package remain the same. 
 We added two new classes in our model package, a PlayerHumanImpl and PlayerAIImpl, both which implement the Player
 interface we have had since homework 5. The purpose of creating these two classes were to have a way to keep track 
@@ -135,10 +135,73 @@ functions of the AI player is the same as a human. This was achieved through the
 both controllers use.
 
 
-Homework 8 Notes:
+## Homework 8 Notes:
 We created adapter classes for the View. Since the view takes in their model, we also created an adapter for the model.
 In the process of creating the model adapter, we had to create listener, card, cell, and player adapters as well.
 
-However, some methods could not be adapted. Therefore,
+However, some methods could not be adapted. Therefore, our adapted view does not work completely. We made a design
+decision to have our grid and hand panel accessible outside our view class. This is not how our providers designed 
+their code, so it cannot be implemented. This design flaw on our end was not caught until 12/4 when we asked the 
+Professor, and she pointed it out. Since this was not caught in HW6 grading and HW7 grading was not released by then, we 
+decided not to edit our code for this assignment but rather justify it in our README. 
 
-There were some 
+
+Here is a complete list of all methods that could not be adapted:
+
+## ViewAdapterTheirsToOurs:
+- getHandView(CardColor color)
+  Can not be done because ThreeTriosView uses composition with ThreeTriosPanel. ThreeTriosPanel contains their handView.
+  This class cannot access threeTriosPanel, which would otherwise handle this method function. Instead, our design 
+  should not have made the hand view accessible outside the view class. This way it abstracts the functionality of the 
+  view. 
+
+- getGridPanel()
+  Adapting could not be done because ThreeTriosView uses composition 
+  with ThreeTriosPanel. ThreeTriosPanel contains their gridPanel. This class cannot access threeTriosPanel, which would 
+  otherwise handle this method function.  Instead, our design should not have made the grid view accessible outside the 
+  grid class. This way it abstracts the functionality of the view.
+
+
+## ModelAdapterOurToTheirs:
+- numCardsPlayerCanFlip(int row, int column, Card card, PlayerType player)
+  We cannot implement this because our executeBattlePhase() does this using private helper methods. We abstract the 
+  score so that it is calculated only inside the executeBattlePhase method and not seen by other classes. Because of
+  that, there is no way to get the score outside of that class. To implement the requested method, we would need to 
+  refactor our TripleTrioGameModel class substantially, potentially breaking encapsulation and altering the core game 
+  logic. This would be a significant undertaking that goes beyond simple adaptation and could introduce new bugs or 
+  inconsistencies in our existing, working implementation
+
+- fetchPlayerScore(PlayerType player)
+  Our model's getPlayerScore() method is intentionally private. This design choice encapsulates the scoring logic within
+  the model, preventing external access or manipulation. The score depends on the current state of the game board and is 
+  recalculated during each battle phase. This makes it difficult to provide an up-to-date score without potentially 
+  exposing internal game state or triggering unintended side effects.
+
+  
+## CardAdapterTheirsToOurs:
+- getColor()
+  Their model keeps track of the color based on what player's hand the card is in, not within their card class. So it's
+  not possible to get the color now. Due to these design differences, there's no way for our adapter to determine the
+  color (ownership) of a card solely from the provider's Card object1.
+
+- setCardColor(CardColor color)
+  They do not store the color of the card in their card class. Instead, the model handles this so there is no 
+  equivalent method. Our implementation allows for changing card ownership directly on the card object4, while the 
+  provider's design seems to treat cards as immutable entities with ownership managed externally. These fundamental 
+  differences in design and implementation make it impossible to directly adapt these methods without significant 
+  changes to either our adapter or the provider's model structure
+
+## ListenerModelAdapterTheirsToOurs:
+- onCardPlaced(int x, int y, Card card)
+  This is because our implementation breaks a turn into two parts
+  (1) choosing a card and (2) placing it down their implementation combines the two in a single step, so there is no 
+  equivalent method because their implementation doesn't break their step into two publicly.
+
+
+## File Limit 
+In order to stay within the file limit for this assignment, we removed the View screenshots from last homework since 
+this homework doesn't require it. Also, we removed the strategies test because we are not using the AI player in this
+homework. 
+
+We also removed our Main.java, and mains that worked with AI. We deleted the hw8.iml, UI screenshot, README, all our 
+tests, and strategies folder that our providers provided to us since we didn't need that for our code to work. 

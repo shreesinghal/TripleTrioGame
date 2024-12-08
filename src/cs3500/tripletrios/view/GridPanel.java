@@ -32,6 +32,8 @@ public class GridPanel extends JPanel {
 
   private final Map<Point, CardView> placedCards; // Tracks cards placed on the grid
 
+  private HintDecorator hintDecorator;
+
 
   /**
    * Creating an instance of the grid panel.
@@ -40,6 +42,15 @@ public class GridPanel extends JPanel {
   public GridPanel(ReadOnlyTripleTrioModel model) {
     this.model = model;
     this.placedCards = new HashMap<>();
+  }
+
+  /**
+   * Adds a hint decorator to the panel
+   * @param decorator the hint decorator to use for displaying hints
+   */
+  public void setHintDecorator(HintDecorator decorator) {
+    this.hintDecorator = decorator;
+    repaint();
   }
 
   /**
@@ -90,6 +101,10 @@ public class GridPanel extends JPanel {
       CardView card = entry.getValue();
       card = new CardView(card.getCard(), point.x, point.y, cellWidth, cellHeight);
       card.draw(g2d, point.x * cellWidth, point.y * cellHeight);
+    }
+
+    if (hintDecorator != null && hintDecorator.isEnabled()) {
+      hintDecorator.drawHints(g2d);
     }
 
     g2d.dispose();
@@ -184,6 +199,16 @@ public class GridPanel extends JPanel {
    */
   public void addAIListener(TripleTrioAIPlayerContr controller2) {
     this.features = controller2;
+  }
+
+  /**
+   * Adds a hint decorator to the grid panel.
+   * The decorator will be called after normal painting to add hint overlays.
+   * @param decorator the hint decorator to add
+   */
+  public void addDecorator(HintDecorator decorator) {
+    this.hintDecorator = decorator;
+    addPropertyChangeListener(evt -> repaint());
   }
 
 

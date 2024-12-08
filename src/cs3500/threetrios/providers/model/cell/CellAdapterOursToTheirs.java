@@ -7,16 +7,27 @@ import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.CardImpl;
 import cs3500.tripletrios.model.Cell.CellType;
 import cs3500.tripletrios.model.Direction;
-import cs3500.tripletrios.model.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ An adapter class that converts our Cell implementation to the provider's Cell interface.
+ This class bridges the gap between our cell representation and the provider's cell model,
+ allowing interoperability between different implementations of the Triple Triad game.
+ The adapter translates method calls and manages the conversion of card and ownership
+ representations between the two different cell implementations.
+ */
 public class CellAdapterOursToTheirs implements Cell {
 
-  private cs3500.tripletrios.model.Cell ourCell;
+  private final cs3500.tripletrios.model.Cell ourCell;
 
-
+  /**
+   * Constructs a CellAdapterTheirsToOurs by adapting our Cell implementation
+   * to the provider's Cell interface.
+   * @param cell The Cell from our implementation to be adapted
+   * @throws IllegalArgumentException if the provided cell is null
+   */
   public CellAdapterOursToTheirs(cs3500.tripletrios.model.Cell cell) {
     if (cell == null) {
       throw new IllegalArgumentException("Cell cannot be null");
@@ -81,13 +92,17 @@ public class CellAdapterOursToTheirs implements Cell {
     Map<Direction, Integer> attackValues = new HashMap<>();
 
     attackValues.put(Direction.NORTH,
-            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH).fetchNumber());
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH)
+                    .fetchNumber());
     attackValues.put(Direction.SOUTH,
-            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH).fetchNumber());
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH)
+                    .fetchNumber());
     attackValues.put(Direction.EAST,
-            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST).fetchNumber());
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST)
+                    .fetchNumber());
     attackValues.put(Direction.WEST,
-            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST).fetchNumber());
+            card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST)
+                    .fetchNumber());
 
     CardImpl newCard = new CardImpl(card.fetchName(), attackValues);
 
@@ -148,8 +163,9 @@ public class CellAdapterOursToTheirs implements Cell {
    */
   @Override
   public int cardCapacity() {
-    return 0;
-    //The provided cell interface includes a cardCapacity() method,
-    // which is not implemented in our original cell implementation.
+    if (ourCell.getCellType() == CellType.HOLE || !ourCell.isEmpty()) {
+      return 0;
+    }
+    return 1;
   }
 }

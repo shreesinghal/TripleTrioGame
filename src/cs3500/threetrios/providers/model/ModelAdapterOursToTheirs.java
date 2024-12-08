@@ -2,7 +2,6 @@ package cs3500.threetrios.providers.model;
 
 import cs3500.threetrios.providers.controller.ModelFeatures;
 import cs3500.threetrios.providers.model.card.CardAdapterOursToTheirs;
-import cs3500.threetrios.providers.model.cell.CellAdapterOursToTheirs;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.TripleTrioModel;
 import cs3500.tripletrios.model.WinningState;
@@ -11,12 +10,28 @@ import cs3500.threetrios.providers.model.cell.Cell;
 import cs3500.threetrios.providers.model.rule.BattleRule;
 import cs3500.tripletrios.model.Cell.CellType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+/**
+ * Adapter class that converts our TripleTrioModel to the provider's TripleTriad interface.
+ * This adapter allows our model implementation to be used where the provider's
+ * TripleTriad interface is expected,bridging the gap between the two different
+ * implementations of the game model.
+ */
 public class ModelAdapterOursToTheirs implements TripleTriad {
 
   private TripleTrioModel ourModel;
 
+  /**
+   Constructs a new ModelAdapterOursToTheirs.
+   This adapter wraps our TripleTrioModel to make it compatible with the
+   provider's TripleTriad interface.
+   @param ourModel The TripleTrioModel instance to be adapted.
+   @throws IllegalArgumentException if the provided model is null.
+   */
   public ModelAdapterOursToTheirs(TripleTrioModel ourModel) {
     if (ourModel == null) {
       throw new IllegalArgumentException("Model cannot be null");
@@ -24,30 +39,21 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
     this.ourModel = ourModel;
   }
 
-  /**
-   *
-   * @param listener
-   */
+
   @Override
   public void addListener(ModelFeatures listener) {
     ourModel.addListener(new ListenerModelAdapterTheirsToOurs(listener, ourModel),
-      ourModel.getPlayer().getColor());
+        ourModel.getPlayer().getColor());
   }
 
   @Override
   public void startGame(Cell[][] grid, List<Card> allCards, BattleRule rule) {
-    //we need a way to set PlayerA as current player and PlayerB as opposing player
-    //ourModel.startGame(createGrid(), createDeck()   );
-    //we cannot implement this because our model implementation doesn't have a
-    //battle rule interface
-
     //we are ignoring BattleRule rule because our models implementation of
     //startGame() accounts for battle rule
 
-
-
     // Convert the List<Card> to a Set<Card>
     ourModel.startGame(createDeck(allCards), createGrid(grid));
+
 
   }
 
@@ -173,7 +179,8 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
   public PlayerType ownerAtCoordinate(int row, int column) {
     if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.RED) {
       return PlayerType.PLAYER_A;
-    } else if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor() == CardColor.BLUE) {
+    } else if (ourModel.getCurrentGrid().get(row).get(column).getCard().getColor()
+            == CardColor.BLUE) {
       return PlayerType.PLAYER_B;
     } else {
       return PlayerType.NULL_PLAYER;
@@ -206,12 +213,8 @@ public class ModelAdapterOursToTheirs implements TripleTriad {
    */
   @Override
   public boolean canPlayerPlayAtCoordinate(int row, int column) {
-    if (!ourModel.getCurrentGrid().get(row).get(column).getCellType().equals(CellType.HOLE)
-            && ourModel.getCurrentGrid().get(row).get(column).isEmpty()) {
-      return true;
-    }
-
-    return false;
+    return (!ourModel.getCurrentGrid().get(row).get(column).getCellType().equals(CellType.HOLE)
+            && ourModel.getCurrentGrid().get(row).get(column).isEmpty());
   }
 
   /**

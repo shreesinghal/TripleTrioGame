@@ -7,10 +7,25 @@ import cs3500.tripletrios.model.Direction;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An adapter class that converts the provider's Card implementation to our Card interface.
+ * It handles the translation of method calls and data structures between the two systems,
+ * including differences in naming conventions and how card properties are stored and accessed.
+ */
 public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
   private final Card card;
-  public CardAdapterTheirsToOurs(Card card) {
 
+  /**
+   * Constructs a new CardAdapterTheirsToOurs.
+   * This adapter wraps the provider's Card object to make it compatible with our Card interface.
+   *
+   * @param card The provider's Card object to be adapted.
+   * @throws IllegalArgumentException if the provided card is null.
+   */
+  public CardAdapterTheirsToOurs(Card card) {
+    if (card == null) {
+      throw new IllegalArgumentException("Provided card cannot be null");
+    }
     this.card = card;
   }
 
@@ -31,7 +46,7 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public CardColor getColor() {
-    // THere is no equivalent method because
+    // There is no equivalent method because
     // their model keeps track of the color based on
     // what player's hand the card is in, not within their
     // card class. So it's not possible to get the color now.
@@ -43,7 +58,9 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public void flipOwnership() {
-
+    //There is no equivalent method because
+    //their card does not store the owner. It
+    //is controlled externally through the model.
   }
 
   /**
@@ -68,7 +85,8 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
    */
   @Override
   public int getNorth() {
-    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH).fetchNumber();
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.NORTH)
+            .fetchNumber();
   }
 
   /**
@@ -79,7 +97,8 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
   @Override
   public int getSouth() {
 
-    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH).fetchNumber();
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.SOUTH)
+            .fetchNumber();
 
   }
 
@@ -91,7 +110,8 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
   @Override
   public int getEast() {
 
-    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST).fetchNumber();
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.EAST)
+            .fetchNumber();
 
   }
 
@@ -103,14 +123,15 @@ public class CardAdapterTheirsToOurs implements cs3500.tripletrios.model.Card {
   @Override
   public int getWest() {
 
-    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST).fetchNumber();
+    return card.fetchNumAtDirection(cs3500.threetrios.providers.model.Direction.WEST)
+            .fetchNumber();
 
   }
 
   @Override
   public void setCardColor(CardColor color) {
     // They do not store the color of the card
-    // in their card class. Instead the model handles this
+    // in their card class. Instead, the model handles this
     // so there is no equivalent method.
   }
 }

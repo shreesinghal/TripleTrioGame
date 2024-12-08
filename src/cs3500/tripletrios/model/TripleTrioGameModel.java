@@ -455,7 +455,7 @@ public class TripleTrioGameModel implements TripleTrioModel {
     return flippedCards;
   }
 
-  private boolean cardCanBattle(Posn adjCardLoc) {
+  boolean cardCanBattle(Posn adjCardLoc) {
     return ensurePositionWithinBounds(new Posn(adjCardLoc.getX(), adjCardLoc.getY()))
       && grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard() != null
       && this.grid.get(adjCardLoc.getY()).get(adjCardLoc.getX()).getCard().getColor()

@@ -1,4 +1,3 @@
-import cs3500.threetrios.providers.model.ReadOnlyTripleTriad;
 import cs3500.threetrios.providers.model.TripleTriad;
 import cs3500.threetrios.providers.view.ViewAdapterTheirsToOurs;
 import cs3500.threetrios.providers.view.tripletriadgui.ThreeTriosView;
@@ -36,13 +35,13 @@ public final class ThreeTrios {
   public static void main(String[] args) {
 
     Set<Card> sampleDeck = CardDatabaseReader.readDeckConfiguration("Configurations"
-      + File.separator
-      + "20deckConfig.txt");
+        + File.separator
+        + "20deckConfig.txt");
 
     ArrayList<ArrayList<Cell>> sampleOrigGrid = GridConfigReader
-      .readGridConfiguration("Configurations"
-        + File.separator
-        + "3x3sqrGrid.txt");
+        .readGridConfiguration("Configurations"
+          + File.separator
+          + "3x3sqrGrid.txt");
 
 
 
@@ -53,11 +52,11 @@ public final class ThreeTrios {
     TTFrame viewPlayer1 = new TTFrameViewImpl(model, player1);
     TTFrame viewPlayer2 = new TTFrameViewImpl(model, player2);
     TripleTrioFeatureController controller1 = new TripleTrioHumanPlayerContr(model,
-      player1,
-      viewPlayer1);
+        player1,
+        viewPlayer1);
     TripleTrioFeatureController controller2 = new TripleTrioHumanPlayerContr(model,
-      player2,
-      viewPlayer2);
+        player2,
+        viewPlayer2);
     viewPlayer1.addListeners(controller1);
     viewPlayer2.addListeners(controller2);
 
@@ -78,12 +77,12 @@ public final class ThreeTrios {
 
     // make our controller
     TripleTrioFeatureController controller1x = new TripleTrioHumanPlayerContr(ourModel,
-      player1,
-      ourViewPlayer1);
+        player1,
+        ourViewPlayer1);
 
     TripleTrioFeatureController controller2x = new TripleTrioHumanPlayerContr(ourModel,
             player2,
-      ourviewPlayer2);
+        ourviewPlayer2);
     ourViewPlayer1.addListeners(controller1x);
     ourviewPlayer2.addListeners(controller2x);
   }

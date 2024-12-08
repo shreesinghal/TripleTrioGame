@@ -29,4 +29,8 @@ public interface TripleTrioFeatureController {
    * @param color the color of the card that was clicked
    */
   void handleCellClickForHand(int i, CardColor color);
+
+  void toggleHints(CardColor color);
+
+  boolean areHintsEnabled(CardColor color);
 }

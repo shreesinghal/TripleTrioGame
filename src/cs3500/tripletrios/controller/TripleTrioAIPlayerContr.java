@@ -118,4 +118,14 @@ public class TripleTrioAIPlayerContr
     //no implementation
   }
 
+  @Override
+  public void toggleHints(CardColor color) {
+    // No implementation needed for AI
+  }
+
+  @Override
+  public boolean areHintsEnabled(CardColor color) {
+    return false; // AI never needs hints
+  }
+
 }

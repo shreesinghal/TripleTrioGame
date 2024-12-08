@@ -14,8 +14,8 @@ import cs3500.threetrios.providers.model.rule.BattleRule;
  */
 public interface TripleTriad extends ReadOnlyTripleTriad {
   /**
-   *
-   * @param listener
+   * Blah.
+   * @param listener blah
    */
   void addListener(ModelFeatures listener);
 

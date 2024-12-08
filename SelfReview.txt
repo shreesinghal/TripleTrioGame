@@ -7,9 +7,21 @@ differently, but in their implementation it ensures that these panels can only b
 We did have to make some updates for our customers. Our customers realized that our view implementation casts some
 fields and concrete classes (like addListeners function) that they didn't have access to, which caused their code to
 not compile. Also, most of the features parts of the view depended on specific concrete classes (such as taking in a
-TripleTrioHumanPlayerContr rather than a TripleTrioFeatureController). We had to fix our code base and resend to our
-customers. This experience showed us firsthand why software design principles like dependency inversion, interface
-segregation, and programming to interfaces are so crucial in creating maintainable, extensible software systems.
+TripleTrioHumanPlayerContr rather than a TripleTrioFeatureController). We carefully evaluated the requested changes and
+determined that implementing them would require significant architectural modifications that could potentially introduce
+instability into the existing codebase. After thorough consideration, we made a strategic decision to maintain the
+current implementation, which offers a stable and well-tested foundation. We made sure to let our customers know, and
+they were able to figure out a way to work over it. However,this experience showed us firsthand why software design
+principles like dependency inversion, interface segregation, and programming to interfaces are so crucial in creating
+maintainable, extensible software systems.
+
+
+Towards the very end of this homework assignment, we realized that in our code base, we had allowed our model to access
+the hand and grid panel rather than making it private. This caused us to not fully be able to adapt our implementation
+to our providers. Since we found this out so late, we were not able to fix it as it would have required us to change a
+majority of our code base which could have caused more issues in our code. We decided to just justify it in the README
+instead. We have learned that we must be very careful when it comes to accessibility and which parts of our code can
+access what.
 
 
 

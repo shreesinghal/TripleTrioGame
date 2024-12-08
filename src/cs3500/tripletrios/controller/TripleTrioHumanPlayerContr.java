@@ -4,6 +4,7 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardColor;
 import cs3500.tripletrios.model.Player;
 import cs3500.tripletrios.model.TripleTrioModel;
+import cs3500.tripletrios.view.GridPanelHintDecorator;
 import cs3500.tripletrios.view.TTFrame;
 
 
@@ -62,6 +63,17 @@ public class TripleTrioHumanPlayerContr
 
         view.getHandView(player.getColor()).highlightHandCard(cardNum);
 
+
+        // Add hint decoration if hints are enabled
+        if (hintsEnabled.get(color)) {
+          GridPanelHintDecorator decorator = new GridPanelHintDecorator(
+                  view.getGridPanel(),
+                  model
+          );
+          decorator.setSelectedCard(selectedCard);
+          decorator.setEnabled(true);
+          view.getGridPanel().setHintDecorator(decorator);
+        }
         view.refresh();
       } else {
         view.printInvalidClickMessage("Invalid card number selected.");
