@@ -6,3 +6,5 @@ public class ReverseBattleStrategy implements BattleStrategy {
     return attackerValue < defenderValue;
   }
 }
+
+
