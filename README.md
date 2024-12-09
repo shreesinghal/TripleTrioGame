@@ -209,6 +209,8 @@ tests, and strategies folder that our providers provided to us since we didn't n
 
 ## Homework 9 - Extra Credit:
 We implemented all four levels. 
+
+
 For level 0 : We created a decorator in order to wrap our GridPanel.java class so we could add the hints. We started by creating a HintDecorator interface, HintDecorator.java. We then created GridPanelHintDecorator.java which implements HintDecorator. This class decorates a GridPanel and adds the ability to display hints about the number of potential flips that can be made in a given cell on the grid, based on a selected card. These were added in in cs3500.tripletrios.view. The main class we used is just ThreeTrios. **In order to get the hints to show up, we press H and they will show up**
 
 
@@ -219,5 +221,3 @@ For level 2: For this, we created two more strategies, PlusBattleStrategy.java a
 For level 3: For this, we created TripleTrioCombinedModel in cs3500.tripletrios.model. The TripleTrioCombinedModel class is an extension of the TripleTrioGameModel that integrates two sets of battle strategies based on different game rules. It combines Set 1 strategies (such as reverse and fallen ace rules) and Set 2 strategies (same and plus rules) to determine how card battles are resolved, ensuring that the appropriate rules are applied during each battle phase. We also made a final main class called ThreeTriosLevel3 to run this. 
 
 We did not modify any of the existing code base from our previous projects. However, we did add onto classes like GridPanel.java and TTFrameViewImpl.java in cs3500.tripletrios.view. We added methods and fields to account for the wrapper class in GridPanel.java. We also added a keyListener in TTFrameViewImpl.java to account for finding the hints. **In order to get the hints to show up, we press H and they will show up**
-
-
