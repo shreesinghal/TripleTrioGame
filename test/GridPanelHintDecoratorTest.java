@@ -1,3 +1,5 @@
+import cs3500.tripletrios.configreaders.CardDatabaseReader;
+import cs3500.tripletrios.configreaders.GridConfigReader;
 import cs3500.tripletrios.controller.TripleTrioFeatureController;
 import cs3500.tripletrios.controller.TripleTrioHumanPlayerContr;
 import cs3500.tripletrios.model.*;
@@ -9,8 +11,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
+/**
+ * This class tests the hint decorator class that adds hints when h is pressed.
+ */
 public class GridPanelHintDecoratorTest {
   private TripleTrioModel model;
   private GridPanel gridPanel;
@@ -50,36 +59,19 @@ public class GridPanelHintDecoratorTest {
 
   @Test
   public void testControllerIntegration() {
-    Set<Card> deck = new HashSet<>();
-    ArrayList<ArrayList<Cell>> grid = new ArrayList<>();
 
-    // Create an odd-sized grid
-    for (int i = 0; i < 3; i++) {
-      ArrayList<Cell> row = new ArrayList<>();
-      for (int j = 0; j < 3; j++) {
-        row.add(new Cell(Cell.CellType.CARDCELL));
-      }
-      grid.add(row);
-    }
+    Set<Card> sampleDeck = CardDatabaseReader.readDeckConfiguration("Configurations"
+            + File.separator
+            + "20deckConfig.txt");
 
+    ArrayList<ArrayList<Cell>> sampleOrigGrid = GridConfigReader
+            .readGridConfiguration("Configurations"
+                    + File.separator
+                    + "3x3sqrGrid.txt");
 
-    Map<Direction, Integer> attackVals = new HashMap<>(Map.of());
-    attackVals.put(Direction.NORTH, 1);
-    attackVals.put(Direction.SOUTH, 2);
-    attackVals.put(Direction.EAST, 3);
-    attackVals.put(Direction.WEST, 4);
-    deck.add(new CardImpl("Birdie", attackVals));
-    model.startGame(deck, grid);
-
-    Map<Direction, Integer> aa = new HashMap<>(Map.of());
-    aa.put(Direction.NORTH, 1);
-    aa.put(Direction.SOUTH, 2);
-    aa.put(Direction.EAST, 3);
-    aa.put(Direction.WEST, 4);
-    ArrayList<Card> cards = new ArrayList<>();
-    cards.add(new CardImpl("card1", aa));
-    Player player = new PlayerHumanImpl(cards,
-            CardColor.RED);
+    TripleTrioModel model = new TripleTrioGameModel(sampleDeck, sampleOrigGrid);
+    model.startGUIGame();
+    Player player = model.getPlayer();
     TTFrame view = new TTFrameViewImpl(model, player);
     TripleTrioFeatureController controller = new TripleTrioHumanPlayerContr(model, player, view);
 
