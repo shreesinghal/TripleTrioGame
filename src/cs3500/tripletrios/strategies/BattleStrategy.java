@@ -7,4 +7,6 @@ public interface BattleStrategy {
    * @return true if capture is successful
    */
   boolean canCapture(int attackerValue, int defenderValue);
+
+
 }

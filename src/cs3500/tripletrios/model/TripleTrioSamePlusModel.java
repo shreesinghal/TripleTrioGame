@@ -2,6 +2,8 @@ package cs3500.tripletrios.model;
 
 import cs3500.tripletrios.strategies.BattleStrategy;
 import cs3500.tripletrios.strategies.BattleStrategyFactory;
+import cs3500.tripletrios.strategies.PlusBattleStrategy;
+import cs3500.tripletrios.strategies.SameBattleStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,161 +15,126 @@ import java.util.Set;
 /**
  * A variant of the Triple Trio game model that implements the Same and Plus rules.
  * This model extends the base game by adding two new battle rules that can be applied
- * before the normal battle phase:
- *
- * <p>Same Rule: If at least two adjacent cards share the same value in the opposing direction
- * of the placed card, then any of those same-value cards that belong to the opponent are flipped.
- * For example, if a card with North=5 is placed, and two adjacent cards both have South=5,
- * those cards would be flipped if they belong to the opponent.</p>
- *
- * <p>Plus Rule: If at least two adjacent cards sum to the same total when adding their values
- * with the placed card's value in opposing directions, then any of those cards that belong to
- * the opponent are flipped. For example, if a card with North=3 is placed, and one adjacent card
- * has South=7 while another has South=7, both would be flipped (as 3+7=10 in both cases) if they
- * belong to the opponent.</p>
- *
- * <p>Note: These variant rules only apply before the combo step. During the combo step,
- * only normal battle rules are used.</p>
+ * before the normal battle phase.
  */
 public class TripleTrioSamePlusModel extends TripleTrioGameModel {
   private final BattleStrategy battleStrategy;
-  private final boolean useSameRule;
-  private final boolean usePlusRule;
+  private final Map<Direction, Card> adjacentCards;
+  private final Map<Direction, Posn> positions;
 
   /**
-   * Creates a new model with the specified battle strategy.
+   * Creates a new Triple Trio game model with variant rules.
+   *
+   * @param deck the set of cards to be used in the game
+   * @param grid the initial game grid configuration
+   * @param sameRule whether to apply the Same rule
+   * @param plusRule whether to apply the Plus rule
+   * @throws IllegalArgumentException if both Same and Plus rules are enabled simultaneously
    */
-  public TripleTrioSamePlusModel(Set<Card> deckOfCards, ArrayList<ArrayList<Cell>> grid,
+  public TripleTrioSamePlusModel(Set<Card> deck, ArrayList<ArrayList<Cell>> grid,
                                  boolean sameRule, boolean plusRule) {
-    super(deckOfCards, grid);
+    super(deck, grid);
     if (sameRule && plusRule) {
-      throw new IllegalArgumentException("Cannot use Same and Plus rules simultaneously");
+      throw new IllegalArgumentException("Cannot apply both Same and Plus rules simultaneously");
     }
     this.battleStrategy = BattleStrategyFactory.createStrategy(sameRule, plusRule);
-    this.useSameRule = sameRule;
-    this.usePlusRule = plusRule;
+    this.adjacentCards = new HashMap<>();
+    this.positions = new HashMap<>();
   }
 
+
+  /**
+   * Executes the battle phase for a card placed at the specified position.
+   * Applies variant rules (Same or Plus) before executing the normal battle phase.
+   *
+   * @param xPos the x-coordinate of the placed card
+   * @param yPos the y-coordinate of the placed card
+   */
   @Override
   public void executeBattlePhase(int xPos, int yPos) {
-    List<Posn> flippedCards = new ArrayList<>();
-
-    // First handle special rules (Same or Plus)
-    if (useSameRule) {
-      flippedCards.addAll(handleSameRule(xPos, yPos));
-    } else if (usePlusRule) {
-      flippedCards.addAll(handlePlusRule(xPos, yPos));
+    Card placedCard = getCurrentGrid().get(yPos).get(xPos).getCard();
+    if (placedCard == null) {
+      return;
     }
 
+    // Clear previous state and gather adjacent cards
+    adjacentCards.clear();
+    positions.clear();
+    gatherAdjacentCards(xPos, yPos);
+
+    // Check for special rule captures first
+    List<Posn> cardsToFlip = new ArrayList<>();
+    if (battleStrategy instanceof SameBattleStrategy) {
+      cardsToFlip = ((SameBattleStrategy)battleStrategy)
+              .checkSameCaptures(adjacentCards, positions, placedCard);
+    } else if (battleStrategy instanceof PlusBattleStrategy) {
+      cardsToFlip = ((PlusBattleStrategy)battleStrategy)
+              .checkPlusCaptures(adjacentCards, positions, placedCard);
+    }
+
+    // Flip captured cards
+    for (Posn pos : cardsToFlip) {
+      getCurrentGrid().get(pos.getY()).get(pos.getX()).getCard().flipOwnership();
+    }
+
+    // Execute normal battle phase
     super.executeBattlePhase(xPos, yPos);
   }
 
-  private List<Posn> handleSameRule(int xPos, int yPos) {
-    List<Posn> flippedCards = new ArrayList<>();
-    Card placedCard = getCurrentGrid().get(yPos).get(xPos).getCard();
-    Map<Integer, List<Posn>> matchingValues = new HashMap<>();
-
-    // Check each direction
-    checkMatchingValue(placedCard.getSouth(), xPos, yPos + 1, Direction.NORTH, matchingValues);
-    checkMatchingValue(placedCard.getWest(), xPos - 1, yPos, Direction.EAST, matchingValues);
-    checkMatchingValue(placedCard.getNorth(), xPos, yPos - 1, Direction.SOUTH, matchingValues);
-    checkMatchingValue(placedCard.getEast(), xPos + 1, yPos, Direction.WEST, matchingValues);
-
-    // Flip matching cards belonging to opponent
-    for (List<Posn> matches : matchingValues.values()) {
-      if (matches.size() >= 2) {
-        for (Posn pos : matches) {
-          Card card = getCurrentGrid().get(pos.getY()).get(pos.getX()).getCard();
-          if (card != null && card.getColor() == getOppPlayer().getColor()) {
-            card.flipOwnership();
-            flippedCards.add(pos);
-          }
-        }
+  /**
+   * Gathers all adjacent cards and their positions for rule checking.
+   *
+   * @param xPos x-coordinate of the placed card
+   * @param yPos y-coordinate of the placed card
+   */
+  private void gatherAdjacentCards(int xPos, int yPos) {
+    // Check North
+    if (isValidPosition(xPos, yPos - 1)) {
+      Card northCard = getCurrentGrid().get(yPos - 1).get(xPos).getCard();
+      if (northCard != null) {
+        adjacentCards.put(Direction.NORTH, northCard);
+        positions.put(Direction.NORTH, new Posn(xPos, yPos - 1));
       }
     }
 
-    return flippedCards;
-  }
-
-  private void checkMatchingValue(int placedValue, int x, int y, Direction dir,
-                                  Map<Integer, List<Posn>> matchingValues) {
-    Posn pos = new Posn(x, y);
-    if (!isValidPosition(pos)) {
-      return;
-    }
-
-    Card adjCard = getCurrentGrid().get(y).get(x).getCard();
-    if (adjCard == null) {
-      return;
-    }
-
-    int adjValue = getDirectionValue(adjCard, dir);
-    if (placedValue == adjValue) {
-      matchingValues.computeIfAbsent(placedValue, k -> new ArrayList<>())
-              .add(pos);
-    }
-  }
-
-  private List<Posn> handlePlusRule(int xPos, int yPos) {
-    List<Posn> flippedCards = new ArrayList<>();
-    Card placedCard = getCurrentGrid().get(yPos).get(xPos).getCard();
-    Map<Integer, List<Posn>> matchingSums = new HashMap<>();
-
-    // Check each direction
-    checkMatchingSum(placedCard.getSouth(), xPos, yPos + 1, Direction.NORTH, matchingSums);
-    checkMatchingSum(placedCard.getWest(), xPos - 1, yPos, Direction.EAST, matchingSums);
-    checkMatchingSum(placedCard.getNorth(), xPos, yPos - 1, Direction.SOUTH, matchingSums);
-    checkMatchingSum(placedCard.getEast(), xPos + 1, yPos, Direction.WEST, matchingSums);
-
-    // Flip matching cards belonging to opponent
-    for (List<Posn> matches : matchingSums.values()) {
-      if (matches.size() >= 2) {
-        for (Posn pos : matches) {
-          Card card = getCurrentGrid().get(pos.getY()).get(pos.getX()).getCard();
-          if (card != null && card.getColor() == getOppPlayer().getColor()) {
-            card.flipOwnership();
-            flippedCards.add(pos);
-          }
-        }
+    // Check South
+    if (isValidPosition(xPos, yPos + 1)) {
+      Card southCard = getCurrentGrid().get(yPos + 1).get(xPos).getCard();
+      if (southCard != null) {
+        adjacentCards.put(Direction.SOUTH, southCard);
+        positions.put(Direction.SOUTH, new Posn(xPos, yPos + 1));
       }
     }
 
-    return flippedCards;
-  }
-
-  private void checkMatchingSum(int placedValue, int x, int y, Direction dir,
-                                Map<Integer, List<Posn>> matchingSums) {
-    Posn pos = new Posn(x, y);
-    if (!isValidPosition(pos)) {
-      return;
+    // Check East
+    if (isValidPosition(xPos + 1, yPos)) {
+      Card eastCard = getCurrentGrid().get(yPos).get(xPos + 1).getCard();
+      if (eastCard != null) {
+        adjacentCards.put(Direction.EAST, eastCard);
+        positions.put(Direction.EAST, new Posn(xPos + 1, yPos));
+      }
     }
 
-    Card adjCard = getCurrentGrid().get(y).get(x).getCard();
-    if (adjCard == null) {
-      return;
-    }
-
-    int adjValue = getDirectionValue(adjCard, dir);
-    int sum = placedValue + adjValue;
-
-    matchingSums.computeIfAbsent(sum, k -> new ArrayList<>())
-            .add(pos);
-  }
-
-  private int getDirectionValue(Card card, Direction dir) {
-    switch (dir) {
-      case NORTH: return card.getNorth();
-      case SOUTH: return card.getSouth();
-      case EAST: return card.getEast();
-      case WEST: return card.getWest();
-      default: throw new IllegalArgumentException("Invalid direction");
+    // Check West
+    if (isValidPosition(xPos - 1, yPos)) {
+      Card westCard = getCurrentGrid().get(yPos).get(xPos - 1).getCard();
+      if (westCard != null) {
+        adjacentCards.put(Direction.WEST, westCard);
+        positions.put(Direction.WEST, new Posn(xPos - 1, yPos));
+      }
     }
   }
 
-  private boolean isValidPosition(Posn pos) {
-    ArrayList<ArrayList<Cell>> grid = getCurrentGrid();
-    return pos.getY() >= 0 && pos.getY() < grid.size()
-            && pos.getX() >= 0 && pos.getX() < grid.get(0).size()
-            && grid.get(pos.getY()).get(pos.getX()).getCellType() != Cell.CellType.HOLE;
+  /**
+   * Checks if a position is valid on the game grid.
+   *
+   * @param x the x-coordinate to check
+   * @param y the y-coordinate to check
+   * @return true if the position is valid and not a hole, false otherwise
+   */
+  private boolean isValidPosition(int x, int y) {
+    return x >= 0 && x < getCurrentGrid().get(0).size()
+            && y >= 0 && y < getCurrentGrid().size()
+            && getCurrentGrid().get(y).get(x).getCellType() != Cell.CellType.HOLE;
   }
 }
