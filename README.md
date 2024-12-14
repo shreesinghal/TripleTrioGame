@@ -116,7 +116,7 @@ To facilitate these updates, we adopted the observer design pattern to ensure co
 and controllers. By doing so, we decoupled the components, improving the modularity and maintainability of our code.
 
 
-## Homework 7 additions: 
+## Adding AI Players: 
 I will now explain the new files that we added to our program. All classes in the view package remain the same. 
 We added two new classes in our model package, a PlayerHumanImpl and PlayerAIImpl, both which implement the Player
 interface we have had since homework 5. The purpose of creating these two classes were to have a way to keep track 
@@ -135,7 +135,7 @@ functions of the AI player is the same as a human. This was achieved through the
 both controllers use.
 
 
-## Homework 8 Notes:
+## Adapting Our Model and Controller to Work with Another View:
 We created adapter classes for the View. Since the view takes in their model, we also created an adapter for the model.
 In the process of creating the model adapter, we had to create listener, card, cell, and player adapters as well.
 
@@ -207,7 +207,7 @@ We also removed our Main.java, and mains that worked with AI. We deleted the hw8
 tests, and strategies folder that our providers provided to us since we didn't need that for our code to work. 
 
 
-## Homework 9 - Extra Credit:
+## Extra Game Features (Hints, Game Rule Variants, Combinations of Game Rule Variants):
 We implemented all four levels. 
 
 
